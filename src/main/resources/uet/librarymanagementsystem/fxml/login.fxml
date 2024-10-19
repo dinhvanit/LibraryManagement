@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.login_ctrl">
+   <children>
+      <AnchorPane layoutY="-7.0" prefHeight="123.0" prefWidth="730.0" style="-fx-background-color: #00FFFF;">
+         <children>
+            <Label layoutX="262.0" layoutY="22.0" prefHeight="78.0" prefWidth="254.0" text="Library Management">
+               <font>
+                  <Font name="KozMinPr6N-Heavy" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="389.0" fitWidth="311.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/library2.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="UserName" layoutX="413.0" layoutY="206.0" prefHeight="26.0" prefWidth="228.0" promptText="username" />
+      <Label layoutX="322.0" layoutY="219.0" text="USERNAME" />
+      <Label layoutX="321.0" layoutY="271.0" text="PASSWORD" />
+      <PasswordField fx:id="Password" layoutX="413.0" layoutY="258.0" prefHeight="26.0" prefWidth="228.0" promptText="password" />
+      <Button fx:id="LoginButton" layoutX="482.0" layoutY="386.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="63.0" text="Login" />
+      <Button fx:id="CancelButton" layoutX="484.0" layoutY="433.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #FF0000;" text="Cancel" />
+      <Label fx:id="LoginMessegeLabel" layoutX="362.0" layoutY="320.0" prefHeight="26.0" prefWidth="304.0" textFill="RED">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
