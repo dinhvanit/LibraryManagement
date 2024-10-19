@@ -2,15 +2,19 @@ package uet.librarymanagementsystem.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.AccessibleAction;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class login_ctrl {
+
+public class login_ctrl implements Initializable {
+    @FXML
+    private  ChoiceBox<String> AccSelector;
+
     @FXML
     private Button LoginButton;
 
@@ -23,22 +27,33 @@ public class login_ctrl {
     @FXML
     private PasswordField Password;
 
-    @FXML
-    private Button CancelButton;
+    private String myAccType;
 
-    public void cancelButtonOnAction(ActionEvent event) {
-        Stage stage = (Stage) LoginButton.getScene().getWindow();
-        stage.close();
-    }
 
     public void loginButtonOnAction(ActionEvent event) {
-        if (UserName.getText().equals("Dinhvandz") && Password.getText().equals("vandz")) {
-            LoginMessegeLabel.setText("Try to login");
+        if(myAccType == null){
+            LoginMessegeLabel.setText("Please choose your type account !");
         }
-        else{
-            LoginMessegeLabel.setText("Incorrect ! Try to login again");
+        else if(myAccType.equals("Admin")) {
+            if (UserName.getText().equals("admin1") && Password.getText().equals("admin1")) {
+                LoginMessegeLabel.setText("Try to login");
+            } else {
+                LoginMessegeLabel.setText("Incorrect ! Try to login again");
+            }
+        }
+        else if(myAccType.equals("Student")){
+            LoginMessegeLabel.setText("Uncomplete !");
         }
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        AccSelector.getItems().addAll("Student", "Admin");
+        AccSelector.setOnAction(this::getAccType);
+    }
+
+    public void getAccType(ActionEvent event) {
+        this.myAccType = AccSelector.getValue();
+    }
 }
