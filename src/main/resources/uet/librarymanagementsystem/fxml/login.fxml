@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.login_ctrl">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="688.0" styleClass="login-form" stylesheets="@../cssDesign/style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.login_ctrl">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #00FFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,13 +31,13 @@
       </VBox>
       <VBox alignment="CENTER" fillWidth="false" layoutX="221.0" layoutY="25.0" prefHeight="338.0" prefWidth="443.0" AnchorPane.bottomAnchor="36.80000000000001" AnchorPane.leftAnchor="220.8" AnchorPane.rightAnchor="23.80000000000001" AnchorPane.topAnchor="25.0">
          <children>
-            <Label text="Choose Your Account Type :">
+            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Choose Your Account Type :" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="AccSelector" prefWidth="150.0" />
-            <Label text="Username :">
+            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Username :" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,12 +45,12 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="UserName" prefHeight="26.0" prefWidth="280.0" promptText="username">
+            <TextField fx:id="UserName" prefHeight="26.0" prefWidth="280.0" promptText="username" stylesheets="@../cssDesign/style.css">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Password :">
+            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Password :" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -58,7 +58,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="Password" prefHeight="26.0" prefWidth="280.0" promptText="password">
+            <PasswordField fx:id="Password" prefHeight="26.0" prefWidth="280.0" promptText="password" stylesheets="@../cssDesign/style.css">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
@@ -71,7 +71,7 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="LoginButton" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Login">
+            <Button fx:id="LoginButton" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" styleClass="login-btn" stylesheets="@../cssDesign/style.css" text="Login">
                <font>
                   <Font size="14.0" />
                </font>

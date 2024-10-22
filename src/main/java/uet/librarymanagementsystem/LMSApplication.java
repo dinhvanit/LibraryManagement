@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,16 +21,20 @@ public class LMSApplication extends Application {
         launch(args);
     }
 
+    public static Parent currentParent;
+
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent loginPage = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
-            loginPage.setId("login_window");
-            Scene scene = new Scene(loginPage);
+            currentParent = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
+            Scene scene = new Scene(currentParent);
+
+            // primaryStage.initStyle(StageStyle.UNDECORATED);
+
             primaryStage.setScene(scene);
             primaryStage.show();
-        }catch (Exception e){
-            System.out.println("Can't run application. Error : " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Can't run application. Error: " + e.getMessage());
         }
     }
 }
