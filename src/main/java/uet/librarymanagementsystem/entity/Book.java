@@ -15,8 +15,8 @@ public class Book extends Document {
      * @param genre       the loai
      * @param isbn        ma vach
      */
-    public Book(String id, String title, String author, int quantity, boolean isAvailable, String genre, String isbn) {
-        super(id, title, author, quantity, isAvailable);
+    public Book(String id, String title, String author, String category, int quantity, boolean isAvailable, String genre, String isbn) {
+        super(id, title, author, category, quantity, isAvailable);
         this.genre = genre;
         this.isbn = isbn;
     }
