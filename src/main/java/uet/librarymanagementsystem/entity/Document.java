@@ -1,23 +1,18 @@
 package uet.librarymanagementsystem.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Document {
     private String id;
     private String title;
     private String author;
     private String category;
     private int quantity;
-    private boolean isAvailable;
 
-    public Document(String id, String title, String author, String category, int quantity, boolean isAvailable) {
+    public Document(String id, String title, String author, String category, int quantity) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
         this.quantity = quantity;
-        this.isAvailable = isAvailable;
     }
 
 
@@ -54,7 +49,7 @@ public class Document {
     }
 
     public boolean getAvailable() {
-        return isAvailable;
+        return this.quantity != 0;
     }
 
     public String getCategory() {
@@ -65,9 +60,6 @@ public class Document {
         this.category = category;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
 
     /**
      * In ra id, title, author, available.
@@ -78,7 +70,6 @@ public class Document {
         System.out.println("Author: " + author);
         System.out.println("Category: " + category);
         System.out.println("Quantity: " + quantity);
-        System.out.println("Available: " + isAvailable);
     }
 
     /*
