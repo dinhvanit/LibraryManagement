@@ -11,12 +11,11 @@ public class Book extends Document {
      * @param title       ten sach
      * @param author      tac gia
      * @param quantity    so luong
-     * @param isAvailable tinh trang
      * @param genre       the loai
      * @param isbn        ma vach
      */
-    public Book(String id, String title, String author, int quantity, boolean isAvailable, String genre, String isbn) {
-        super(id, title, author, quantity, isAvailable);
+    public Book(String id, String title, String author, String category, int quantity, String genre, String isbn) {
+        super(id, title, author, category, quantity);
         this.genre = genre;
         this.isbn = isbn;
     }

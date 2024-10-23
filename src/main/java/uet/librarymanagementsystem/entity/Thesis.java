@@ -12,13 +12,12 @@ public class Thesis extends Document {
      * @param title        ten tai lieu
      * @param author       tac gia
      * @param quantity     so luong
-     * @param isAvailable  tinh trang con hay khong
      * @param university   truong dai hoc
      * @param supervisor   nguoi huong dan
      * @param researchArea de tai nghien cuu
      */
-    public Thesis(String id, String title, String author, int quantity, boolean isAvailable, String university, String supervisor, String researchArea) {
-        super(id, title, author, quantity, isAvailable);
+    public Thesis(String id, String title, String author, String category, int quantity, String university, String supervisor, String researchArea) {
+        super(id, title, author, category, quantity);
         this.university = university;
         this.supervisor = supervisor;
         this.researchArea = researchArea;
@@ -60,7 +59,6 @@ public class Thesis extends Document {
         System.out.println("Supervisor: " + supervisor);
         System.out.println("Research Area: " + researchArea);
         System.out.println("Quantity: " + getQuantity());
-        System.out.println("Available: " + getAvailable());
     }
 }
 
