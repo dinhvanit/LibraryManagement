@@ -35,6 +35,9 @@ public class DocumentDO extends DatabaseManager{
 
     public static void createDocumentTable() throws SQLException {
         Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot create document, connection is closed or invalid.");
+        }
         Statement statement = con.createStatement();
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Document (" +
                 "id VARCHAR(10) PRIMARY KEY, " +
@@ -49,6 +52,9 @@ public class DocumentDO extends DatabaseManager{
 
     public static void insertDocument(Document document) throws SQLException {
         Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot insert document, connection is closed or invalid.");
+        }
         String insertSQL = "INSERT INTO Document (id, title, author, category, quantity) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
         preparedStatement.setString(1, document.getId());
@@ -60,9 +66,39 @@ public class DocumentDO extends DatabaseManager{
         con.close();
     }
 
+    public static Document getDocumentById(String documentId) throws SQLException {
+        Connection con = connect();
+        String selectSQL = "SELECT * FROM Document WHERE id = ?";
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot get document by ID, connection is closed or invalid.");
+        }
+        PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+        preparedStatement.setString(1, documentId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Document document = null;
+        if (resultSet.next()) {
+            document = new Document(
+                    resultSet.getString("id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("author"),
+                    resultSet.getString("category"),
+                    resultSet.getInt("quantity")
+            );
+        } else {
+            System.out.println("No document found with ID: " + documentId);
+        }
+
+        con.close();
+        return document;
+    }
+
     public static void deleteDocument(String documentId) throws SQLException {
         Connection con = connect();
         String deleteSQL = "DELETE FROM Document WHERE id = ?";
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot delete document, connection is closed or invalid.");
+        }
         PreparedStatement preparedStatement = con.prepareStatement(deleteSQL);
         preparedStatement.setString(1, documentId);
         int rowsAffected = preparedStatement.executeUpdate();
@@ -79,6 +115,7 @@ public class DocumentDO extends DatabaseManager{
     public static List<Document> getAllDocument() throws SQLException {
         List<Document> documentList = new ArrayList<>();
         Connection con = connect();
+        assert con != null;
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Document");
         while (resultSet.next()) {
@@ -97,17 +134,12 @@ public class DocumentDO extends DatabaseManager{
 
     // xoá table, sau sẽ cho thêm đầu vào để có thể xoá dữ liệu của cả các class khác.
     // truncate se xoa nhanh hon delete nhung khong backup duoc (tam thoi chua chay duoc)
-    public static void truncateDocumentTable() throws SQLException {
-        Connection con = connect();
-        Statement statement = con.createStatement();
-        String truncateSQL = "TRUNCATE TABLE Document";
-        statement.execute(truncateSQL);
-        System.out.println("All records from the Document table have been truncated.");
-        con.close();
-    }
     //hien tai dang dung ham xoa du lieu nay
     public static void deleteAllDocuments() throws SQLException {
         Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot delete all documents, connection is closed or invalid.");
+        }
         Statement statement = con.createStatement();
         String deleteSQL = "DELETE FROM Document";
         int rowsAffected = statement.executeUpdate(deleteSQL);
@@ -117,22 +149,22 @@ public class DocumentDO extends DatabaseManager{
 
     public static void main(String[] args) {
         try {
-            /*            DocumentDO.createDocumentTable();
-            Scanner scanner = new Scanner(System.in);
-            int soluot = scanner.nextInt();
-            System.out.println("Hay nhap vao thong tin cac quyen sach");
-            for (int i = 0; i < soluot; i++) {
-                Document newDocument = DocumentDO.inputDocumentFromKeyboard();
-                DocumentDO.insertDocument(newDocument);
-            }
-
-            List<Document> documents = DocumentDO.getAllDocument();
-            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
-            */
-            Scanner scanner = new Scanner(System.in);
-            DocumentDO.insertDocument(inputDocumentFromKeyboard());
+//            Scanner scanner = new Scanner(System.in);
+//            int soluot = scanner.nextInt();
+//            System.out.println("Hay nhap vao thong tin cac quyen sach");
+//            for (int i = 0; i < soluot; i++) {
+//                Document newDocument = DocumentDO.inputDocumentFromKeyboard();
+//                DocumentDO.insertDocument(newDocument);
+//            }
+//
+//            List<Document> documents = DocumentDO.getAllDocument();
+//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
+             DocumentDO.deleteDocument("Hoa 2");
+//            Scanner scanner = new Scanner(System.in);
+//            DocumentDO.insertDocument(inputDocumentFromKeyboard());
 //            System.out.println("Enter document ID to delete: ");
 //            String documentId = scanner.nextLine();
+
 //            DocumentDO.deleteDocument(documentId);
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "An exception occurred", e); // dung thay cho stack trace
