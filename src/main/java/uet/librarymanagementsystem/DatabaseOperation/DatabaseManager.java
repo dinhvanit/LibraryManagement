@@ -1,12 +1,14 @@
 package uet.librarymanagementsystem.DatabaseOperation;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DatabaseManager {
+    private static final String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\uet\\librarymanagementsystem\\Database\\library.db";
+    //private static final String url = "Database/library.db";
     public static Connection connect() {
         Connection conn = null;
         try {      // relative path
-            String url = "jdbc:sqlite:LibraryManagement/src/main/resources/uet/librarymanagementsystem/Database/library.db";
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
