@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.AccessibleAction;
 import javafx.scene.Parent;
 
 import javafx.scene.control.Button;
@@ -19,37 +18,37 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class login_ctrl implements Initializable {
+public class LoginController implements Initializable {
     @FXML
-    private ChoiceBox<String> AccSelector;
+    private ChoiceBox<String> accSelectorChoiceBox;
 
     @FXML
-    private Button LoginButton;
+    private Button loginButton;
 
     @FXML
-    private Label LoginMessegeLabel;
+    private Label loginMessegeLabel;
 
     @FXML
-    private TextField UserName;
+    private TextField credentialUserNameField;
 
     @FXML
-    private PasswordField Password;
+    private PasswordField credentialPasswordField;
 
     private String myAccType;
 
 
     public void loginButtonOnAction(ActionEvent event) {
         if(myAccType == null){
-            LoginMessegeLabel.setText("Please choose your type account !");
+            loginMessegeLabel.setText("Please choose your type account !");
         }
         else if(myAccType.equals("Admin")) {
-            if (UserName.getText().equals("admin1") && Password.getText().equals("admin1")) {
+            if (credentialUserNameField.getText().equals("admin1") && credentialPasswordField.getText().equals("admin1")) {
                 try {
                     // Tải AdminPage.fxml và cập nhật currentParent
                     Parent adminPage = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/adminPage.fxml"));
                     LMSApplication.currentParent = adminPage;
 
-                    Stage currentStage = (Stage) LoginButton.getScene().getWindow();
+                    Stage currentStage = (Stage) loginButton.getScene().getWindow();
                     currentStage.getScene().setRoot(adminPage);
 
                     currentStage.sizeToScene();
@@ -58,25 +57,25 @@ public class login_ctrl implements Initializable {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    LoginMessegeLabel.setText("Error loading admin page");
+                    loginMessegeLabel.setText("Error loading admin page");
                 }
             } else {
-                LoginMessegeLabel.setText("Incorrect ! Try to login again");
+                loginMessegeLabel.setText("Incorrect ! Try to login again");
             }
         }
         else if(myAccType.equals("Student")){
-            LoginMessegeLabel.setText("Incomplete !");
+            loginMessegeLabel.setText("Incomplete !");
         }
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        AccSelector.getItems().addAll("Student", "Admin");
-        AccSelector.setOnAction(this::getAccType);
+        accSelectorChoiceBox.getItems().addAll("Student", "Admin");
+        accSelectorChoiceBox.setOnAction(this::getAccType);
     }
 
     public void getAccType(ActionEvent event) {
-        this.myAccType = AccSelector.getValue();
+        this.myAccType = accSelectorChoiceBox.getValue();
     }
 }

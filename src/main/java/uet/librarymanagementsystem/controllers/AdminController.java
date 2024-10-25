@@ -11,10 +11,10 @@ import uet.librarymanagementsystem.LMSApplication;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class admin_ctrl implements Initializable {
+public class AdminController implements Initializable {
 
     @FXML
-    private Button sign_outButton;
+    private Button signOutButton;
 
     /*
     @FXML
@@ -25,12 +25,12 @@ public class admin_ctrl implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void logout() {
+    public void logOut() {
         try {
             Parent loginPage = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/login.fxml"));
             LMSApplication.currentParent = loginPage;
 
-            Stage currentStage = (Stage) sign_outButton.getScene().getWindow();
+            Stage currentStage = (Stage) signOutButton.getScene().getWindow();
             currentStage.getScene().setRoot(loginPage);
 
             currentStage.sizeToScene();
