@@ -22,7 +22,7 @@ public class WindowUtil {
     public static void initParents() throws IOException {
         loadedParents.put(Page.LOGIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/login.fxml")));
         loadedParents.put(Page.ADMIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/adminPage.fxml")));
-        // Load other pages as needed
+        // tạo xong gì thì thêm enum page và path fxml vào map
     }
 
     public static void setPage(Page page, String title) {

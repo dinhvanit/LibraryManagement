@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -29,56 +31,34 @@
             </Text>
          </children>
       </VBox>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="221.0" layoutY="25.0" prefHeight="338.0" prefWidth="443.0" AnchorPane.bottomAnchor="36.80000000000001" AnchorPane.leftAnchor="220.8" AnchorPane.rightAnchor="23.80000000000001" AnchorPane.topAnchor="25.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="230.0" layoutY="31.0" prefHeight="338.0" prefWidth="443.0" stylesheets="@../cssDesign/style.css" AnchorPane.bottomAnchor="30.600000000000023" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="14.799999999999955" AnchorPane.topAnchor="31.0">
          <children>
-            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Choose Your Account Type :" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="accSelectorChoiceBox" prefWidth="150.0" />
-            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Username :" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="credentialUserNameField" prefHeight="26.0" prefWidth="280.0" promptText="username" stylesheets="@../cssDesign/style.css">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <Label styleClass="textfield" stylesheets="@../cssDesign/style.css" text="Password :" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
-            <PasswordField fx:id="credentialPasswordField" prefHeight="26.0" prefWidth="280.0" promptText="password" stylesheets="@../cssDesign/style.css">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </PasswordField>
-            <Label fx:id="loginMessegeLabel" textFill="#fc0000">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-            <Button fx:id="loginButton" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" styleClass="login-btn" stylesheets="@../cssDesign/style.css" text="Login">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
+            <AnchorPane prefHeight="294.0" prefWidth="394.0" styleClass="card-form">
+               <children>
+                  <Label layoutX="24.0" layoutY="14.0" stylesheets="@../cssDesign/style.css" text="Choose Your Account Type :" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="accSelectorChoiceBox" layoutX="25.0" layoutY="43.0" prefWidth="150.0" stylesheets="@../cssDesign/style.css" />
+                  <TextField fx:id="credentialUserNameField" layoutX="46.0" layoutY="95.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="username" styleClass="textfield" stylesheets="@../cssDesign/style.css" />
+                  <TextField fx:id="visiblePasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/style.css" />
+                  <PasswordField fx:id="credentialPasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/style.css" />
+                  <Label fx:id="loginMessegeLabel" layoutX="24.0" layoutY="234.0" prefHeight="20.0" prefWidth="304.0" textFill="#fc0000">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="loginButton" layoutX="168.0" layoutY="254.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" styleClass="login-btn" stylesheets="@../cssDesign/style.css" text="Login">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="24.0" layoutY="115.0" size="20" text="" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="KEY" layoutX="21.0" layoutY="183.0" size="20" text="" />
+                  <CheckBox fx:id="showPasswordButton" layoutX="48.0" layoutY="200.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" textFill="WHITE" />
+               </children>
+            </AnchorPane>
          </children>
          <opaqueInsets>
             <Insets />

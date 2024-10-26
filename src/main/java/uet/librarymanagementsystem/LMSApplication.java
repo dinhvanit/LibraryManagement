@@ -1,23 +1,14 @@
 package uet.librarymanagementsystem;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-import java.io.IOException;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class LMSApplication extends Application {
 
-    private void initParents() throws IOException {
-    }
 
     public static void main(String[] args) {
         launch(args);
