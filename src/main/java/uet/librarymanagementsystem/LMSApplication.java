@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,14 +28,19 @@ public class LMSApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            currentParent = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
-            Scene scene = new Scene(currentParent);
+            // Set the Stage in WindowUtil
+            WindowUtil.setStage(primaryStage);
 
-            // primaryStage.initStyle(StageStyle.UNDECORATED);
+            // Initialize the pages
+            WindowUtil.initParents();
 
-            primaryStage.setScene(scene);
+            // Load the initial page
+            WindowUtil.setPage(Page.LOGIN, "Library Management System");
+
             primaryStage.show();
+
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Can't run application. Error: " + e.getMessage());
         }
     }

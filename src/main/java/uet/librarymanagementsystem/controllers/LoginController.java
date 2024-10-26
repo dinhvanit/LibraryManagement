@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.LMSApplication;
+import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,16 +46,7 @@ public class LoginController implements Initializable {
         else if(myAccType.equals("Admin")) {
             if (credentialUserNameField.getText().equals("admin1") && credentialPasswordField.getText().equals("admin1")) {
                 try {
-                    // Tải AdminPage.fxml và cập nhật currentParent
-                    Parent adminPage = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/adminPage.fxml"));
-                    LMSApplication.currentParent = adminPage;
-
-                    Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                    currentStage.getScene().setRoot(adminPage);
-
-                    currentStage.sizeToScene();
-
-                    currentStage.centerOnScreen();
+                    WindowUtil.setPage(Page.ADMIN, "Admin Dashboard");
 
                 } catch (Exception e) {
                     e.printStackTrace();
