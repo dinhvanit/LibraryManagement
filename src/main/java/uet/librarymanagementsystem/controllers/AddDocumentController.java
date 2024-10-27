@@ -6,7 +6,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+
 public class AddDocumentController {
+
 
     @FXML
     private HBox HBoxOfButton;
@@ -38,5 +40,4 @@ public class AddDocumentController {
     void cancelOfAddBook(MouseEvent event) {
 
     }
-
 }
