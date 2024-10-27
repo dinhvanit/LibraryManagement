@@ -26,7 +26,7 @@ public class LMSApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            currentParent = FXMLLoader.load(getClass().getResource("fxml/add_document.fxml"));
+            currentParent = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
             Scene scene = new Scene(currentParent);
 
             // primaryStage.initStyle(StageStyle.UNDECORATED);
