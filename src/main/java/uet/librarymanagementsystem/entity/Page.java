@@ -4,7 +4,8 @@ public enum Page {
     LOGIN,
     ADMIN,
     ADD_STUDENTS,
-    ADD_BOOKS;
+    ADD_BOOKS,
+    STUDENT;
 
     // Add more pages as needed
 }

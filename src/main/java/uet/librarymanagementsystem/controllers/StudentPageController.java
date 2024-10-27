@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class StudentPageController {
 
     @FXML
     void clickLogOut(MouseEvent event) {
-        System.out.println("logout");
+        WindowUtil.logoutSession();
     }
 
     @FXML
