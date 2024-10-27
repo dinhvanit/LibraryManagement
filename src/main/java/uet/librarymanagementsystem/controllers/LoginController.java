@@ -71,7 +71,17 @@ public class LoginController implements Initializable {
             }
         }
         else if(myAccType.equals("Student")){
-            loginMessegeLabel.setText("Incomplete !");
+            if (credentialUserNameField.getText().equals("student1") && credentialPasswordField.getText().equals("student1")) {
+                try {
+                    WindowUtil.setPage(Page.STUDENT, "Student Dashboard");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    loginMessegeLabel.setText("Error loading student page");
+                }
+            } else {
+                loginMessegeLabel.setText("Incorrect ! Try to login again");
+            }
         }
     }
 

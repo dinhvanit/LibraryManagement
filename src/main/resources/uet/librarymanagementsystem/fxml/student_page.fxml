@@ -25,7 +25,7 @@
    <left>
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#clickBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="Borrow Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#clickBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
