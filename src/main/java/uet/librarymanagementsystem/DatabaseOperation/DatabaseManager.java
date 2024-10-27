@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DatabaseManager {
+
     private static final String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\uet\\librarymanagementsystem\\Database\\library.db";
+
     //private static final String url = "Database/library.db";
     public static Connection connect() {
         Connection conn = null;

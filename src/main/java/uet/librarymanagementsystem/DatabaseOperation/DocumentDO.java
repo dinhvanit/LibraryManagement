@@ -149,17 +149,17 @@ public class DocumentDO extends DatabaseManager{
 
     public static void main(String[] args) {
         try {
-//            Scanner scanner = new Scanner(System.in);
-//            int soluot = scanner.nextInt();
-//            System.out.println("Hay nhap vao thong tin cac quyen sach");
-//            for (int i = 0; i < soluot; i++) {
-//                Document newDocument = DocumentDO.inputDocumentFromKeyboard();
-//                DocumentDO.insertDocument(newDocument);
-//            }
+            Scanner scanner = new Scanner(System.in);
+            int soluot = scanner.nextInt();
+            System.out.println("Hay nhap vao thong tin cac quyen sach");
+            for (int i = 0; i < soluot; i++) {
+                Document newDocument = DocumentDO.inputDocumentFromKeyboard();
+                DocumentDO.insertDocument(newDocument);
+            }
 //
-//            List<Document> documents = DocumentDO.getAllDocument();
-//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
-             DocumentDO.deleteDocument("Hoa 2");
+            List<Document> documents = DocumentDO.getAllDocument();
+            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
+
 //            Scanner scanner = new Scanner(System.in);
 //            DocumentDO.insertDocument(inputDocumentFromKeyboard());
 //            System.out.println("Enter document ID to delete: ");
