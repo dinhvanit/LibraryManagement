@@ -27,10 +27,13 @@ public class DocumentDO extends DatabaseManager{
         System.out.println("Enter document category: ");
         String category = scanner.nextLine();
 
+        System.out.println("Enter document material: ");
+        String material = scanner.nextLine();
+
         System.out.println("Enter document quantity: ");
         int quantity = scanner.nextInt();
 
-        return new Document(id, title, author, category, quantity);
+        return new Document(id, title, author, category, material, quantity);
     }
 
     public static void createDocumentTable() throws SQLException {
@@ -83,6 +86,7 @@ public class DocumentDO extends DatabaseManager{
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("category"),
+                    resultSet.getString("material"),
                     resultSet.getInt("quantity")
             );
         } else {
@@ -124,6 +128,7 @@ public class DocumentDO extends DatabaseManager{
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("category"),
+                    resultSet.getString("material"),
                     resultSet.getInt("quantity")
             );
             documentList.add(document);

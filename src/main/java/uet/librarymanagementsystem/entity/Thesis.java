@@ -16,8 +16,8 @@ public class Thesis extends Document {
      * @param supervisor   nguoi huong dan
      * @param researchArea de tai nghien cuu
      */
-    public Thesis(String id, String title, String author, String category, int quantity, String university, String supervisor, String researchArea) {
-        super(id, title, author, category, quantity);
+    public Thesis(String id, String title, String author, String material, String category, int quantity, String university, String supervisor, String researchArea) {
+        super(id, title, author, category, material, quantity);
         this.university = university;
         this.supervisor = supervisor;
         this.researchArea = researchArea;
