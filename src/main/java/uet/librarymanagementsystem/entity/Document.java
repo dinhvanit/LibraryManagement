@@ -4,17 +4,18 @@ public class Document {
     private String id;
     private String title;
     private String author;
+    private String material;
     private String category;
     private int quantity;
 
-    public Document(String id, String title, String author, String category, int quantity) {
+    public Document(String id, String title, String author, String material, String category, int quantity) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.material = material;
         this.category = category;
         this.quantity = quantity;
     }
-
 
     public String getId() {
         return id;
@@ -40,16 +41,12 @@ public class Document {
         this.author = author;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getMaterial() {
+        return material;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public boolean getAvailable() {
-        return this.quantity != 0;
+    public void setMaterial(String material) {
+        this.material = material;
     }
 
     public String getCategory() {
@@ -60,6 +57,13 @@ public class Document {
         this.category = category;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     /**
      * In ra id, title, author, available.
@@ -69,6 +73,7 @@ public class Document {
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
         System.out.println("Category: " + category);
+        System.out.println("Material: " + material);
         System.out.println("Quantity: " + quantity);
     }
 

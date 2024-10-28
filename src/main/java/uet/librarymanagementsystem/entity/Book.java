@@ -14,8 +14,8 @@ public class Book extends Document {
      * @param genre       the loai
      * @param isbn        ma vach
      */
-    public Book(String id, String title, String author, String category, int quantity, String genre, String isbn) {
-        super(id, title, author, category, quantity);
+    public Book(String id, String title, String author, String material, String category, int quantity, String genre, String isbn) {
+        super(id, title, author, category, material, quantity);
         this.genre = genre;
         this.isbn = isbn;
     }
@@ -44,8 +44,8 @@ public class Book extends Document {
         System.out.println("ID: " + getId());
         System.out.println("ISBN: " + isbn);
         System.out.println("Title: " + getTitle());
+        System.out.println("Available: " + getMaterial());
         System.out.println("Author: " + getAuthor());
         System.out.println("Quantity: " + getQuantity());
-        System.out.println("Available: " + getAvailable());
     }
 }
