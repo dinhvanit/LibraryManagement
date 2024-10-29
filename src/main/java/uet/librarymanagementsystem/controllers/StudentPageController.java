@@ -18,7 +18,7 @@ public class StudentPageController {
     @FXML
     void clickBorrowDocuments(MouseEvent event) throws IOException {
         try {
-            AnchorPane view = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/search_borrow_document.fxml"));
+            AnchorPane view = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/student/search_borrow_document.fxml"));
             borderPaneStudentPage.setCenter(view);
         } catch (IOException e) {
             e.printStackTrace();
