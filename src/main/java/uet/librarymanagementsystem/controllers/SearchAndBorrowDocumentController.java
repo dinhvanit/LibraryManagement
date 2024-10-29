@@ -10,15 +10,29 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import org.w3c.dom.ls.LSOutput;
+import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.Document;
 
 import java.net.URL;
+import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
     private ObservableList<Document> documentListSearchResult;
+
+    private Connection conn;
+
+    private String idDocument;
+
+    private String titleDocument;
+
+    private String authorDocument;
+
+    private String materialDocument;
+
+    private String categoryDocument;
 
     @FXML
     private TableView<Document> searchResultsTableView;
@@ -49,9 +63,10 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     private TextField fieldTitleDocument;
+    private Throwable e;
 
     @FXML
-    void addDocumentToBorrowButtonOnClick(MouseEvent event) {
+    void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
 
     }
 
@@ -71,27 +86,122 @@ public class SearchAndBorrowDocumentController implements Initializable {
     }
 
     @FXML
-    void findDocumentButtonOnClick(MouseEvent event) {
+    void findDocumentButtonOnClick(MouseEvent event) throws SQLException {
+        textFileTitleAuthor();
+        choice();
+        documentListSearchResult = getDocumentListSearchResult(titleDocument, authorDocument, categoryDocument);
+        searchResultsTableView.setItems(documentListSearchResult);
+    }
+
+    public ObservableList<Document> getDocumentListSearchResult(String title, String author, String category) throws SQLException {
+
+        documentListSearchResult.clear();
+        documentListSearchResult = FXCollections.observableArrayList();
+
+        StringBuilder query = new StringBuilder("SELECT id, title, author, category FROM Document WHERE 1=1");
+
+        if (title != null && !title.isEmpty()) {
+            query.append(" AND title = ?");
+        }
+
+        if (author != null && !author.isEmpty()) {
+            query.append(" AND author = ?");
+        }
+
+        if (category != null && !category.isEmpty()) {
+            System.out.println("HE");
+            System.out.println(category);
+            query.append(" AND category = ?");
+        }
+
+        PreparedStatement pstmt = conn.prepareStatement(query.toString());
+
+        int paramIndex = 1;
+
+        if (title != null && !title.isEmpty()) {
+            pstmt.setString(paramIndex++, title);
+        }
+
+        if (author != null && !author.isEmpty()) {
+            pstmt.setString(paramIndex++, author);
+        }
+
+        if (category != null && !category.isEmpty()) {
+            pstmt.setString(paramIndex++, category);
+        }
+
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                documentListSearchResult.add(new Document(
+                        rs.getString("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        "100",
+                        rs.getString("category"),
+                        10
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return documentListSearchResult;
+    }
+
+    void textFileTitleAuthor() {
+        fieldTitleDocument.textProperty().addListener((observable, oldValue, newValue) -> {
+            titleDocument = fieldTitleDocument.getText();
+            System.out.println(titleDocument);
+        });
+        fieldAuthorDocument.textProperty().addListener((observable, oldValue, newValue) -> {
+            authorDocument = fieldAuthorDocument.getText();
+        });
 
     }
+
+    void choice() {
+        choiceMaterialDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Selected material: " + newValue);
+            materialDocument = choiceMaterialDocument.getValue();
+
+            if (Objects.equals(materialDocument, "Book")) {
+                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "Mathematics", "Software Engineering", ""));
+            }
+            else if (Objects.equals(materialDocument, "Thesis")) {
+                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "Computer Science", ""));
+            }
+            else if (Objects.equals(materialDocument, "Newspaper")) {
+                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "NewTV", ""));
+            }
+        });
+
+        choiceCategoryDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            categoryDocument = newValue;
+            System.out.println("Selected category: " + categoryDocument);
+        });
+    }
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("INIT");
+
+        conn = DatabaseManager.connect();
+
         idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         titleColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         authorColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
 
-        System.out.println("NE");
+        documentListSearchResult = FXCollections.observableArrayList();
 
-        documentListSearchResult = FXCollections.observableArrayList(
-                new Document("D001", "Java Programming", "John Doe", "Book", "Programming", 10),
-                new Document("D002", "Data Structures", "Jane Smith", "Book", "Computer Science", 5),
-                new Document("D003", "Algorithms", "Robert Martin", "Journal", "Mathematics", 3)
-        );
-        System.out.println("INIT");
         searchResultsTableView.setItems(documentListSearchResult);
+
+        choiceMaterialDocument.setItems(FXCollections.observableArrayList("Book", "Thesis", "Newspaper", ""));
+        choiceMaterialDocument.setValue("");
+        choice();
+
     }
 }
