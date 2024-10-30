@@ -137,9 +137,6 @@ public class DocumentDO extends DatabaseManager{
         return documentList;
     }
 
-    // xoá table, sau sẽ cho thêm đầu vào để có thể xoá dữ liệu của cả các class khác.
-    // truncate se xoa nhanh hon delete nhung khong backup duoc (tam thoi chua chay duoc)
-    //hien tai dang dung ham xoa du lieu nay
     public static void deleteAllDocuments() throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -151,6 +148,8 @@ public class DocumentDO extends DatabaseManager{
         System.out.println(rowsAffected + " records have been deleted from the Document table.");
         con.close();
     }
+
+
 
     public static void main(String[] args) {
         try {
