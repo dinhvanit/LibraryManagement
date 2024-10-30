@@ -161,15 +161,15 @@ public class DocumentDO extends DatabaseManager{
 //                DocumentDO.insertDocument(newDocument);
 //            }
 //
-<<<<<<< HEAD
+
             List<Document> documents = DocumentDO.getAllDocument();
             documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
 
-=======
+
 //            List<Document> documents = DocumentDO.getAllDocument();
 //            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
             DocumentDO.deleteDocument("Hoa 2");
->>>>>>> 64e3f191768990374b4fe97306a6d15868d1bad9
+
 //            Scanner scanner = new Scanner(System.in);
 //            DocumentDO.insertDocument(inputDocumentFromKeyboard());
 //            System.out.println("Enter document ID to delete: ");
