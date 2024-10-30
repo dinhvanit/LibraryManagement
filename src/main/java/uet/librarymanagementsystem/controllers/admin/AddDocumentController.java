@@ -1,4 +1,4 @@
-package uet.librarymanagementsystem.controllers;
+package uet.librarymanagementsystem.controllers.admin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
