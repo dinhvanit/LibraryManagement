@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.admin.AdminController">
    <children>
       <BorderPane prefHeight="700.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -31,7 +31,7 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="140.0" layoutY="-86.0" prefHeight="39.0" prefWidth="966.0" styleClass="nav-form" stylesheets="@../cssDesign/adminPage.css" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="140.0" layoutY="-86.0" prefHeight="39.0" prefWidth="966.0" styleClass="nav-form" stylesheets="@../../cssDesign/adminPage.css" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="469.0" layoutY="11.0" prefHeight="39.2" prefWidth="966.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -50,7 +50,7 @@
          <left>
             <AnchorPane prefHeight="506.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutY="16.0" prefHeight="517.6" prefWidth="200.0" styleClass="nav-form" stylesheets="@../cssDesign/adminPage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutY="16.0" prefHeight="517.6" prefWidth="200.0" styleClass="nav-form" stylesheets="@../../cssDesign/adminPage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Circle fill="#1684ea" layoutX="100.0" layoutY="100.0" radius="86.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label layoutX="46.0" layoutY="198.0" text="Welcome librarian !" />
@@ -58,16 +58,16 @@
                         <Label layoutX="24.0" layoutY="250.0" text="ID:" />
                         <Text layoutX="66.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nguyen Dinh Van" wrappingWidth="105.18306159973145" />
                         <Text layoutX="46.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin1" />
-                        <Button layoutX="9.0" layoutY="278.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../cssDesign/adminPage.css" text="MANAGE DOCUMENT" AnchorPane.leftAnchor="9.0" />
-                        <Button layoutX="41.0" layoutY="42.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="116.0" styleClass="edit-btn" stylesheets="@../cssDesign/adminPage.css">
+                        <Button layoutX="9.0" layoutY="278.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../../cssDesign/adminPage.css" text="MANAGE DOCUMENT" AnchorPane.leftAnchor="9.0" />
+                        <Button layoutX="41.0" layoutY="42.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="116.0" styleClass="edit-btn" stylesheets="@../../cssDesign/adminPage.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="EDIT" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="9.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../cssDesign/adminPage.css" text="MANAGE STUDENT" AnchorPane.leftAnchor="9.0" />
-                        <Button layoutX="9.0" layoutY="356.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../cssDesign/adminPage.css" text="LIBRARY" AnchorPane.leftAnchor="9.0" />
-                        <Button layoutX="9.0" layoutY="394.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../cssDesign/adminPage.css" AnchorPane.leftAnchor="8.8" />
-                        <Button fx:id="signOutButton" layoutX="20.0" layoutY="472.0" mnemonicParsing="false" onAction="#logOut" styleClass="logout-btn" stylesheets="@../cssDesign/adminPage.css" text="Sign out" AnchorPane.bottomAnchor="21.6">
+                        <Button layoutX="9.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../../cssDesign/adminPage.css" text="MANAGE STUDENT" AnchorPane.leftAnchor="9.0" />
+                        <Button layoutX="9.0" layoutY="356.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../../cssDesign/adminPage.css" text="LIBRARY" AnchorPane.leftAnchor="9.0" />
+                        <Button layoutX="9.0" layoutY="394.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" styleClass="nav-btn" stylesheets="@../../cssDesign/adminPage.css" AnchorPane.leftAnchor="8.8" />
+                        <Button fx:id="signOutButton" layoutX="20.0" layoutY="472.0" mnemonicParsing="false" onAction="#logOut" styleClass="logout-btn" stylesheets="@../../cssDesign/adminPage.css" text="Sign out" AnchorPane.bottomAnchor="21.6">
                            <graphic>
                               <FontAwesomeIconView glyphName="SIGN_OUT" />
                            </graphic>

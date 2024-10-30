@@ -1,9 +1,8 @@
-package uet.librarymanagementsystem.controllers;
+package uet.librarymanagementsystem.controllers.admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;

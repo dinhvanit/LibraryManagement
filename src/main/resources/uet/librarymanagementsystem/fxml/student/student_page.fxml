@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.StudentPageController">
+<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
    <top>
       <HBox prefHeight="98.0" prefWidth="710.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,22 +25,22 @@
    <left>
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#clickBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#clickBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickReturnDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="Return Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#clickReturnDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Return Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickViewListOfBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="View List Of Borrow Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#clickViewListOfBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="View List Of Borrow Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickLogOut" prefHeight="70.0" prefWidth="150.0" stylesheets="@../cssDesign/studentPage.css" text="Log Out" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#clickLogOut" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Log Out" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

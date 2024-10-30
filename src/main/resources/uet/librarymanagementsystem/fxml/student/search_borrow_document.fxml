@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.SearchAndBorrowDocumentController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController">
    <children>
       <BorderPane layoutX="42.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -119,7 +119,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="142.0">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#findDocumentButtonOnClick" prefHeight="42.0" prefWidth="82.0" stylesheets="@../cssDesign/studentPage.css" text="Find">
+                              <Button mnemonicParsing="false" onMouseClicked="#findDocumentButtonOnClick" prefHeight="42.0" prefWidth="82.0" stylesheets="@../../cssDesign/studentPage.css" text="Find">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

@@ -161,13 +161,43 @@ public class DocumentDO extends DatabaseManager{
 //                DocumentDO.insertDocument(newDocument);
 //            }
 //
+<<<<<<< HEAD
             List<Document> documents = DocumentDO.getAllDocument();
             documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
 
+=======
+//            List<Document> documents = DocumentDO.getAllDocument();
+//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
+            DocumentDO.deleteDocument("Hoa 2");
+>>>>>>> 64e3f191768990374b4fe97306a6d15868d1bad9
 //            Scanner scanner = new Scanner(System.in);
 //            DocumentDO.insertDocument(inputDocumentFromKeyboard());
 //            System.out.println("Enter document ID to delete: ");
 //            String documentId = scanner.nextLine();
+            /*
+            Document d1 = new Document("D001", "Java Programming", "John Doe", "Book", "Programming", 10);
+            Document d2 = new Document("D002", "Data Structures", "Jane Smith", "Thesis", "Computer Science", 5);
+            Document d3 = new Document("D003", "Algorithms", "Robert Martin", "Book", "Mathematics", 3);
+            Document d4 = new Document("D004", "Clean Code", "Martin Fowler", "Book", "Software Engineering", 10);
+            Document d5 = new Document("D005", "The Pragmatic Programmer", "Andrew Hunt", "Newspaper", "Programming", 10);
+            Document d6 = new Document("D006", "Design Patterns", "Erich Gamma", "Book", "Software Engineering", 10);
+            Document d7 = new Document("D007", "Introduction to Java Programming", "Herbert Schildt", "Book", "Programming", 10);
+            Document d8 = new Document("D008", "Effective Java", "Joshua Bloch", "Joshua Bloch", "Programming", 10);
+            Document d9 = new Document("D009", "Head First Java", "Kathy Sierra", "Book", "Programming", 10);
+            Document d10 = new Document("D0010", "Python Crash Course", "Eric Matthes", "Newspaper", "Programming", 10);
+
+            insertDocument(d1);
+            insertDocument(d2);
+            insertDocument(d3);
+            insertDocument(d4);
+            insertDocument(d5);
+            insertDocument(d6);
+            insertDocument(d7);
+            insertDocument(d8);
+            insertDocument(d9);
+            insertDocument(d10);
+            */
+
 
 //            DocumentDO.deleteDocument(documentId);
         } catch (SQLException e) {
