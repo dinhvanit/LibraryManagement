@@ -137,9 +137,6 @@ public class DocumentDO extends DatabaseManager{
         return documentList;
     }
 
-    // xoá table, sau sẽ cho thêm đầu vào để có thể xoá dữ liệu của cả các class khác.
-    // truncate se xoa nhanh hon delete nhung khong backup duoc (tam thoi chua chay duoc)
-    //hien tai dang dung ham xoa du lieu nay
     public static void deleteAllDocuments() throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -152,6 +149,8 @@ public class DocumentDO extends DatabaseManager{
         con.close();
     }
 
+
+
     public static void main(String[] args) {
         try {
 //            Scanner scanner = new Scanner(System.in);
@@ -162,9 +161,15 @@ public class DocumentDO extends DatabaseManager{
 //                DocumentDO.insertDocument(newDocument);
 //            }
 //
+
+            List<Document> documents = DocumentDO.getAllDocument();
+            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
+
+
 //            List<Document> documents = DocumentDO.getAllDocument();
 //            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
             DocumentDO.deleteDocument("Hoa 2");
+
 //            Scanner scanner = new Scanner(System.in);
 //            DocumentDO.insertDocument(inputDocumentFromKeyboard());
 //            System.out.println("Enter document ID to delete: ");
