@@ -1,7 +1,8 @@
 
 package uet.librarymanagementsystem.DatabaseOperation;
 
-import uet.librarymanagementsystem.entity.Document;
+import uet.librarymanagementsystem.entity.documents.Document;
+import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,13 +11,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DocumentDO extends DatabaseManager{
+public class DocumentDO extends DatabaseManager {
     private static final Logger logger = Logger.getLogger(DocumentDO.class.getName());
+
     public static Document inputDocumentFromKeyboard() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter document ID: ");
-        String id = scanner.nextLine();
 
         System.out.println("Enter document title: ");
         String title = scanner.nextLine();
@@ -30,10 +29,7 @@ public class DocumentDO extends DatabaseManager{
         System.out.println("Enter document material: ");
         String material = scanner.nextLine();
 
-        System.out.println("Enter document quantity: ");
-        int quantity = scanner.nextInt();
-
-        return new Document(id, title, author, category, material, quantity);
+        return DocumentFactory.createDocument(title, author, material, category);
     }
 
     public static void createDocumentTable() throws SQLException {
@@ -46,8 +42,8 @@ public class DocumentDO extends DatabaseManager{
                 "id VARCHAR(10) PRIMARY KEY, " +
                 "title VARCHAR(50), " +
                 "author VARCHAR(50), " +
-                "category VARCHAR(50), " +
-                "quantity INT" +
+                "material VARCHAR(50), " +
+                "category VARCHAR(50) " +
                 ")";
         statement.execute(createTableSQL);
         con.close();
@@ -58,13 +54,13 @@ public class DocumentDO extends DatabaseManager{
         if (con == null || con.isClosed()) {
             throw new SQLException("Cannot insert document, connection is closed or invalid.");
         }
-        String insertSQL = "INSERT INTO Document (id, title, author, category, quantity) VALUES (?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
         preparedStatement.setString(1, document.getId());
         preparedStatement.setString(2, document.getTitle());
         preparedStatement.setString(3, document.getAuthor());
-        preparedStatement.setString(4, document.getCategory());
-        preparedStatement.setInt(5, document.getQuantity());
+        preparedStatement.setString(4, document.getMaterial());
+        preparedStatement.setString(5, document.getCategory());
         preparedStatement.executeUpdate();
         con.close();
     }
@@ -81,16 +77,14 @@ public class DocumentDO extends DatabaseManager{
         ResultSet resultSet = preparedStatement.executeQuery();
         Document document = null;
         if (resultSet.next()) {
-            document = new Document(
-                    resultSet.getString("id"),
+            document = DocumentFactory.createDocument(
                     resultSet.getString("title"),
                     resultSet.getString("author"),
-                    resultSet.getString("category"),
                     resultSet.getString("material"),
-                    resultSet.getInt("quantity")
+                    resultSet.getString("category")
             );
         } else {
-            System.out.println("No document found with ID: " + documentId);
+            System.out.println("not found");
         }
 
         con.close();
@@ -123,13 +117,11 @@ public class DocumentDO extends DatabaseManager{
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Document");
         while (resultSet.next()) {
-            Document document = new Document(
-                    resultSet.getString("id"),
+            Document document = DocumentFactory.createDocument(
                     resultSet.getString("title"),
                     resultSet.getString("author"),
-                    resultSet.getString("category"),
                     resultSet.getString("material"),
-                    resultSet.getInt("quantity")
+                    resultSet.getString("category")
             );
             documentList.add(document);
         }
@@ -150,7 +142,6 @@ public class DocumentDO extends DatabaseManager{
     }
 
 
-
     public static void main(String[] args) {
         try {
 //            Scanner scanner = new Scanner(System.in);
@@ -163,7 +154,7 @@ public class DocumentDO extends DatabaseManager{
 //
 
             List<Document> documents = DocumentDO.getAllDocument();
-            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
+            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory()));
 
 
 //            List<Document> documents = DocumentDO.getAllDocument();

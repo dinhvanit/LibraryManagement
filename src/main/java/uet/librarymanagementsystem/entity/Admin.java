@@ -1,5 +1,7 @@
 package uet.librarymanagementsystem.entity;
 
+import uet.librarymanagementsystem.entity.documents.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +13,6 @@ public class Admin extends User {
     public Admin(int id, String name, String dateOfBirth, String phoneNumber, String email, String password) {
         super(id, name, dateOfBirth, phoneNumber, email, password);
         this.students = new ArrayList<>();
-    }
-
-    // Chỉnh sửa tài liệu
-    public void editDocument(Document document, String newTitle, String newAuthor, String newCategory, int newQuantity) {
-        document.setTitle(newTitle);
-        document.setAuthor(newAuthor);
-        document.setCategory(newCategory);
-        document.setQuantity(newQuantity);
-        System.out.println("Document updated successfully.");
     }
 
     // Thêm tài liệu
