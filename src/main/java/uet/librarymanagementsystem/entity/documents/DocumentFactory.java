@@ -13,18 +13,19 @@ public class DocumentFactory {
         System.out.println("Author: " + author);
         System.out.println("Material: " + material);
         System.out.println("Category: " + category);
+        *
          */
 
 
-        material = material.trim().toLowerCase();
+        material = material.trim().toUpperCase();
         switch (material) {
-            case "book":
+            case "BOOK":
                 return new Book(title, author, Book.BookCategory.valueOf(category));
-            case "journal":
+            case "JOURNAL":
                 return new Journal(title, author, Journal.JournalCategory.valueOf(category));
-            case "newspaper":
+            case "NEWSPAPER":
                 return new Newspaper(title, author, Newspaper.NewspaperCategory.valueOf(category));
-            case "thesis":
+            case "THESIS":
                 return new Thesis(title, author, Thesis.ThesisCategory.valueOf(category));
             // Các loại tài liệu khác cũng tương tự
             default:

@@ -3,14 +3,13 @@ package uet.librarymanagementsystem.entity.documents;
 public abstract class Document {
     protected String title;
     protected String author;
-    protected String id;
+    protected String id; // ID sẽ được tạo từ hàm trong DatabaseDO
 
     public Document(String title, String author) {
         this.title = title;
         this.author = author;
+        this.id = ""; // Khởi tạo ID là chuỗi rỗng
     }
-
-    protected abstract String generateId();
 
     // Getters and setters
     public String getTitle() {
@@ -25,12 +24,13 @@ public abstract class Document {
         return id;
     }
 
-    // public abstract MaterialType getMaterial();
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    // public abstract Enum<?> getCategory();
-
-    // trả về chuỗi
+    // Phương thức trừu tượng để lấy loại tài liệu
     public abstract String getMaterial();
 
+    // Phương thức trừu tượng để lấy thể loại tài liệu
     public abstract String getCategory();
 }
