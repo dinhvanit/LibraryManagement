@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
             }
         }
         else if(myAccType.equals("Student")){
-            if (credentialUserNameField.getText().equals("student1") && credentialPasswordField.getText().equals("student1")) {
+            if (credentialUserNameField.getText().equals("") && credentialPasswordField.getText().equals("")) {
                 try {
                     WindowUtil.setPage(Page.STUDENT, "Student Dashboard");
 

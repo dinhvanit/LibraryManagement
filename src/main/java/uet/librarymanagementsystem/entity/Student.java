@@ -1,5 +1,7 @@
 package uet.librarymanagementsystem.entity;
 
+import uet.librarymanagementsystem.entity.documents.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,27 +24,5 @@ public class Student extends User {
             }
         }
         System.out.println("Document not found.");
-    }
-
-    // Mượn tài liệu
-    public void borrowDocument(Document document) {
-        if (document.getQuantity() > 0) {
-            borrowedDocuments.add(document);
-            document.setQuantity(document.getQuantity() - 1);
-            System.out.println("Document borrowed successfully.");
-        } else {
-            System.out.println("Document is not available.");
-        }
-    }
-
-    // Trả tài liệu
-    public void returnDocument(Document document) {
-        if (borrowedDocuments.contains(document)) {
-            borrowedDocuments.remove(document);
-            document.setQuantity(document.getQuantity() + 1);
-            System.out.println("Document returned successfully.");
-        } else {
-            System.out.println("You haven't borrowed this document.");
-        }
     }
 }

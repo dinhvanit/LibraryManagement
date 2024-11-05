@@ -1,4 +1,4 @@
-package uet.librarymanagementsystem.controllers;
+package uet.librarymanagementsystem.controllers.student;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
