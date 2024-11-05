@@ -56,9 +56,9 @@ public class BorrowedDocuments {
     public static void main(String[] args) throws SQLException {
         createBorrowedDocumentsTable(); // Tạo bảng BorrowedDocuments
 
-        // Thêm một vài giao dịch mượn tài liệu mẫu
-        insertBorrowedDocument(1, 101, "2024-12-01", "2024-15-1"); // Thí dụ: Sinh viên 1 mượn tài liệu 101, trả vào 1/12/2024
-        insertBorrowedDocument(2, 102, null, null); // Thí dụ: Sinh viên 2 mượn tài liệu 102 nhưng chưa có ngày trả
-        insertBorrowedDocument(1, 103, "2024-11-15", "2025-1-1"); // Thí dụ: Sinh viên 1 mượn tài liệu 103, trả vào 15/11/2024
+        // 1 vài giao dịch mẫu, sau sẽ thêm từ bảng student và doc
+        insertBorrowedDocument(1, 101, "2024-12-01", "2024-15-1");
+        insertBorrowedDocument(2, 102, null, null);
+        insertBorrowedDocument(1, 103, "2024-11-15", "2025-1-1");
     }
 }
