@@ -11,7 +11,7 @@ public class UserDO extends DatabaseManager{
         String createTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "name VARCHAR(255), " +
-                "dateOfBirth DATE, " +  // Assuming date of birth is a date
+                "dateOfBirth DATE, " +
                 "phoneNumber VARCHAR(20), " +
                 "email VARCHAR(255), " +
                 "password VARCHAR(255)" +
