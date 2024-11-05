@@ -1,8 +1,7 @@
 package uet.librarymanagementsystem.DatabaseOperation;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
 public class DatabaseManager {
 
     private static final String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\uet\\librarymanagementsystem\\Database\\library.db";
@@ -18,7 +17,105 @@ public class DatabaseManager {
         }
         return conn;
     }
-    public static void main(String[] args) {
+
+    // ham nay dung de in ra cac cot co trong 1 bang
+    public static void printTableColumns(String tableName) throws SQLException {
+        Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot retrieve columns, connection is closed or invalid.");
+        }
+
+        DatabaseMetaData metaData = con.getMetaData();
+
+        // Kiểm tra xem bảng có tồn tại không
+        ResultSet tables = metaData.getTables(null, null, tableName, null);
+        if (!tables.next()) {
+            System.out.println("Table " + tableName + " does not exist.");
+            tables.close();
+            con.close();
+            return;
+        }
+
+        // Lấy thông tin cột của bảng
+        ResultSet columns = metaData.getColumns(null, null, tableName, null);
+        System.out.println("Columns in table " + tableName + ":");
+        while (columns.next()) {
+            String columnName = columns.getString("COLUMN_NAME");
+            String columnType = columns.getString("TYPE_NAME");
+            int columnSize = columns.getInt("COLUMN_SIZE");
+
+            System.out.println("Column: " + columnName + " | Type: " + columnType + " | Size: " + columnSize);
+        }
+
+        columns.close();
+        con.close();
+    }
+
+    public static void dropTableMaterial() throws SQLException {
+        Connection con = connect();
+
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot drop table, connection is closed or invalid.");
+            }
+            String dropSQL = "DROP TABLE IF EXISTS Material";
+            statement.executeUpdate(dropSQL);
+            System.out.println("Table Material has been dropped successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error dropping table: " + e.getMessage());
+        }
+    }
+
+    public static void dropTableTitle() throws SQLException {
+        Connection con = connect();
+
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot drop table, connection is closed or invalid.");
+            }
+            String dropSQL = "DROP TABLE IF EXISTS Title";
+            statement.executeUpdate(dropSQL);
+            System.out.println("Table Title has been dropped successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error dropping table: " + e.getMessage());
+        }
+    }
+
+    public static void dropTableBorrowedDocuments() throws SQLException {
+        Connection con = connect();
+
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot drop table, connection is closed or invalid.");
+            }
+            String dropSQL = "DROP TABLE IF EXISTS BorrowedDocuments";
+            statement.executeUpdate(dropSQL);
+            System.out.println("Table BorrowedDocuments has been dropped successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error dropping table: " + e.getMessage());
+        }
+    }
+
+    public static void dropTableCategory() throws SQLException {
+        Connection con = connect();
+
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot drop table, connection is closed or invalid.");
+            }
+            String dropSQL = "DROP TABLE IF EXISTS Category";
+            statement.executeUpdate(dropSQL);
+            System.out.println("Table Category has been dropped successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error dropping table: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws SQLException {
         connect(); // Kết nối tới CSDL
+        dropTableMaterial();
+        dropTableTitle();
+        dropTableBorrowedDocuments();
+        dropTableCategory();
     }
 }
