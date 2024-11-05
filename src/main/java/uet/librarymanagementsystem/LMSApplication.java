@@ -14,8 +14,6 @@ public class LMSApplication extends Application {
         launch(args);
     }
 
-    public static Parent currentParent;
-
     @Override
     public void start(Stage primaryStage) {
         try {

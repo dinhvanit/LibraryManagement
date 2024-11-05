@@ -11,27 +11,31 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.entity.Document;
+import uet.librarymanagementsystem.entity.documents.Document;
+import uet.librarymanagementsystem.entity.documents.MaterialType;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.entity.documents.materials.Journal;
+import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
+import uet.librarymanagementsystem.entity.documents.materials.Thesis;
+import uet.librarymanagementsystem.services.documentServices.BorrowDocument;
+import uet.librarymanagementsystem.services.documentServices.SearchDocument;
 
 import java.net.URL;
-import java.sql.*;
-import java.util.Objects;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
-    private ObservableList<Document> documentListSearchResult;
-
     private Connection conn;
-
+    private SearchDocument searchDocumentService;
+    private ObservableList<Document> documentListSearchResult;
     private String idDocument;
-
     private String titleDocument;
-
     private String authorDocument;
-
     private String materialDocument;
-
     private String categoryDocument;
 
     @FXML
@@ -39,16 +43,12 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     private TableColumn<Document, String> authorColumnSearchResults;
-
     @FXML
     private TableColumn<Document, String> categoryColumnSearchResults;
-
     @FXML
     private TableColumn<Document, String> idColumnSearchResults;
-
     @FXML
     private TableColumn<Document, String> materialColumnSearchResults;
-
     @FXML
     private TableColumn<Document, String> titleColumnSearchResults;
 
@@ -56,18 +56,17 @@ public class SearchAndBorrowDocumentController implements Initializable {
     private ChoiceBox<String> choiceCategoryDocument;
 
     @FXML
-    private ChoiceBox<String> choiceMaterialDocument;
+    private ChoiceBox<MaterialType> choiceMaterialDocument;
 
     @FXML
     private TextField fieldAuthorDocument;
 
     @FXML
     private TextField fieldTitleDocument;
-    private Throwable e;
 
     @FXML
     void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
-
+        // Implementation here
     }
 
     @FXML
@@ -89,105 +88,96 @@ public class SearchAndBorrowDocumentController implements Initializable {
     void findDocumentButtonOnClick(MouseEvent event) throws SQLException {
         textFileTitleAuthor();
         choice();
-        documentListSearchResult = getDocumentListSearchResult(titleDocument, authorDocument, categoryDocument);
+        documentListSearchResult =  searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
         searchResultsTableView.setItems(documentListSearchResult);
     }
 
-    public ObservableList<Document> getDocumentListSearchResult(String title, String author, String category) throws SQLException {
-
-        documentListSearchResult.clear();
-        documentListSearchResult = FXCollections.observableArrayList();
-
-        StringBuilder query = new StringBuilder("SELECT id, title, author, category FROM Document WHERE 1=1");
-
-        if (title != null && !title.isEmpty()) {
-            query.append(" AND title = ?");
-        }
-
-        if (author != null && !author.isEmpty()) {
-            query.append(" AND author = ?");
-        }
-
-        if (category != null && !category.isEmpty()) {
-            System.out.println("HE");
-            System.out.println(category);
-            query.append(" AND category = ?");
-        }
-
-        PreparedStatement pstmt = conn.prepareStatement(query.toString());
-
-        int paramIndex = 1;
-
-        if (title != null && !title.isEmpty()) {
-            pstmt.setString(paramIndex++, title);
-        }
-
-        if (author != null && !author.isEmpty()) {
-            pstmt.setString(paramIndex++, author);
-        }
-
-        if (category != null && !category.isEmpty()) {
-            pstmt.setString(paramIndex++, category);
-        }
-
-        try (ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-                documentListSearchResult.add(new Document(
-                        rs.getString("id"),
-                        rs.getString("title"),
-                        rs.getString("author"),
-                        "100",
-                        rs.getString("category"),
-                        10
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return documentListSearchResult;
-    }
 
     void textFileTitleAuthor() {
         fieldTitleDocument.textProperty().addListener((observable, oldValue, newValue) -> {
             titleDocument = fieldTitleDocument.getText();
-            System.out.println(titleDocument);
         });
         fieldAuthorDocument.textProperty().addListener((observable, oldValue, newValue) -> {
             authorDocument = fieldAuthorDocument.getText();
         });
-
     }
 
     void choice() {
         choiceMaterialDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Selected material: " + newValue);
-            materialDocument = choiceMaterialDocument.getValue();
+            if (newValue != null) {
+                materialDocument = newValue.name();
 
-            if (Objects.equals(materialDocument, "Book")) {
-                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "Mathematics", "Software Engineering", ""));
-            }
-            else if (Objects.equals(materialDocument, "Thesis")) {
-                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "Computer Science", ""));
-            }
-            else if (Objects.equals(materialDocument, "Newspaper")) {
-                choiceCategoryDocument.setItems(FXCollections.observableArrayList("Programming", "NewTV", ""));
+                switch (newValue) {
+                    case BOOK:
+                        choiceCategoryDocument.setItems(FXCollections.observableArrayList(
+                                Arrays.stream(Book.BookCategory.values())
+                                        .map(Book.BookCategory::name)
+                                        .collect(Collectors.toList())
+                        ));
+                        break;
+                    case THESIS:
+                        choiceCategoryDocument.setItems(FXCollections.observableArrayList(
+                                Arrays.stream(Thesis.ThesisCategory.values())
+                                        .map(Thesis.ThesisCategory::name)
+                                        .collect(Collectors.toList())
+                        ));
+                        break;
+                    case NEWSPAPER:
+                        choiceCategoryDocument.setItems(FXCollections.observableArrayList(
+                                Arrays.stream(Newspaper.NewspaperCategory.values())
+                                        .map(Newspaper.NewspaperCategory::name)
+                                        .collect(Collectors.toList())
+                        ));
+                        break;
+                    case JOURNAL:
+                        choiceCategoryDocument.setItems(FXCollections.observableArrayList(
+                                Arrays.stream(Journal.JournalCategory.values())
+                                        .map(Journal.JournalCategory::name)
+                                        .collect(Collectors.toList())
+                        ));
+                        break;
+                    default:
+                        choiceCategoryDocument.setItems(FXCollections.observableArrayList());
+                        break;
+                }
+
+                try {
+                    System.out.println("kiem tra viec lua chon : " );
+                    System.out.println("title : " + titleDocument);
+                    System.out.println(("title : ") + authorDocument);
+                    System.out.println("title : " + materialDocument);
+                    System.out.println(("title : ") + categoryDocument);
+
+                    documentListSearchResult = searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
+                    searchResultsTableView.setItems(documentListSearchResult);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         choiceCategoryDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             categoryDocument = newValue;
-            System.out.println("Selected category: " + categoryDocument);
+
+            try {
+                System.out.println("kiem tra viec lua chon dghfgsdhfgdhsgfh: " );
+                System.out.println("title : " + titleDocument);
+                System.out.println(("title : ") + authorDocument);
+                System.out.println("title : " + materialDocument);
+                System.out.println(("title : ") + categoryDocument);
+
+                documentListSearchResult = searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
+                searchResultsTableView.setItems(documentListSearchResult);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("INIT");
-
         conn = DatabaseManager.connect();
+        searchDocumentService = new SearchDocument(); // Khởi tạo searchDocumentService
 
         idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         titleColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -196,12 +186,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
 
         documentListSearchResult = FXCollections.observableArrayList();
-
         searchResultsTableView.setItems(documentListSearchResult);
 
-        choiceMaterialDocument.setItems(FXCollections.observableArrayList("Book", "Thesis", "Newspaper", ""));
-        choiceMaterialDocument.setValue("");
+        choiceMaterialDocument.setItems(FXCollections.observableArrayList(MaterialType.values()));
+        materialDocument = ""; // Đặt mặc định là rỗng
+        categoryDocument = "";
         choice();
-
     }
 }
