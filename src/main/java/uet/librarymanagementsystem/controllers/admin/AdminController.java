@@ -1,39 +1,55 @@
 package uet.librarymanagementsystem.controllers.admin;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class AdminController implements Initializable {
+public class AdminController {
 
     @FXML
-    private Button signOutButton;
+    private BorderPane borderPaneAdminPage;
 
-    /*
     @FXML
-    private Button edit_avatarButton;
-    */
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
-
-    public void logOut() {
+    void clickManageStudents(MouseEvent event) throws IOException {
         try {
-            WindowUtil.logoutSession(); // Sử dụng phương thức logoutSession
-        } catch (Exception e) {
+            AnchorPane view = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/admin/addStudent.fxml"));
+            borderPaneAdminPage.setCenter(view);
+        } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading login page");
         }
+        System.out.println("manage Students");
     }
 
-    /*
-    public void editavatar(){
-
+    @FXML
+    void clickManageDocuments(MouseEvent event) {
+        try {
+            AnchorPane view = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/admin/add_document.fxml"));
+            borderPaneAdminPage.setCenter(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("manage Documents");
     }
-    */
+
+    @FXML
+    void clickListOfStudents(MouseEvent event) {
+        System.out.println("view");
+    }
+
+    @FXML
+    void clickListOfDocuments(MouseEvent event) {
+        System.out.println("view");
+    }
+
+    @FXML
+    void clickLogOut(MouseEvent event) {
+        WindowUtil.logoutSession();
+    }
+
+
 }
