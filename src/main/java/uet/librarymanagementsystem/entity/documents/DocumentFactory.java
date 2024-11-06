@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class DocumentFactory {
 
-    public static Document createDocument(String title, String author, String material, String category) {
+    public static Document createDocument(String id, String title, String author, String material, String category) {
 
         /*
         System.out.println("khoi tao cac thanh phan ");
@@ -20,7 +20,7 @@ public class DocumentFactory {
         material = material.trim().toUpperCase();
         switch (material) {
             case "BOOK":
-                return new Book(title, author, Book.BookCategory.valueOf(category));
+                return new Book(id, title, author, Book.BookCategory.valueOf(category));
             case "JOURNAL":
                 return new Journal(title, author, Journal.JournalCategory.valueOf(category));
             case "NEWSPAPER":
