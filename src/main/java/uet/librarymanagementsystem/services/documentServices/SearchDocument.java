@@ -60,17 +60,20 @@ public class SearchDocument {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    String retrievedId = rs.getString("id");
                     String retrievedTitle = rs.getString("title");
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
 
+                    System.out.println("ID: " + retrievedId);
                     System.out.println("Title: " + retrievedTitle);
                     System.out.println("Author: " + retrievedAuthor);
                     System.out.println("Material: " + retrievedMaterial);
                     System.out.println("Category: " + retrievedCategory);
 
                     Document document = DocumentFactory.createDocument(
+                            retrievedId,
                             retrievedTitle,
                             retrievedAuthor,
                             retrievedMaterial,
