@@ -29,7 +29,7 @@ public class DocumentDO extends DatabaseManager {
         System.out.println("Enter document material: ");
         String material = scanner.nextLine();
 
-        return DocumentFactory.createDocument(title, author, material, category);
+        return DocumentFactory.createDocument("1", title, author, material, category);
     }
 
     public static void createDocumentTable() throws SQLException {
@@ -77,7 +77,7 @@ public class DocumentDO extends DatabaseManager {
         ResultSet resultSet = preparedStatement.executeQuery();
         Document document = null;
         if (resultSet.next()) {
-            document = DocumentFactory.createDocument(
+            document = DocumentFactory.createDocument("1",
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
@@ -117,7 +117,7 @@ public class DocumentDO extends DatabaseManager {
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Document");
         while (resultSet.next()) {
-            Document document = DocumentFactory.createDocument(
+            Document document = DocumentFactory.createDocument("1",
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
