@@ -77,6 +77,7 @@ public class Book extends Document {
         PHILOSOPHY("10"),
         RELIGION("11"),
         SELF_HELP("12");
+
         //khoi tao cac loai category cua tung material, khoi tao ca id dua vao category cho document o day
 
         //OTHERS;

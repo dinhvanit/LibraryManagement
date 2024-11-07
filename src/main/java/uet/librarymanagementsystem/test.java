@@ -1,4 +1,4 @@
-/*package uet.librarymanagementsystem;
+package uet.librarymanagementsystem;
 
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 
@@ -9,4 +9,4 @@ public class test {
         book.setId();
         System.out.println(book.getId());
     }
-}*/
+}
