@@ -1,4 +1,4 @@
 package uet.librarymanagementsystem.services.userServices;
 
-public class CheckLogin {
+public class CheckLoginService {
 }

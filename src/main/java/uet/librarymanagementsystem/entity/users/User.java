@@ -1,7 +1,7 @@
 package uet.librarymanagementsystem.entity.users;
 
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String dateOfBirth;
     private String phoneNumber;
@@ -11,7 +11,7 @@ public class User {
     // Constructor
 
 
-    public User(int id, String name, String dateOfBirth, String phoneNumber, String email, String password) {
+    public User(String id, String name, String dateOfBirth, String phoneNumber, String email, String password) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -21,11 +21,11 @@ public class User {
     }
 
     // Getters and Setters
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
