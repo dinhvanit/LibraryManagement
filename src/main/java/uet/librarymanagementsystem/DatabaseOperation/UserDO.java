@@ -14,10 +14,10 @@ public class UserDO extends DatabaseManager {
         Statement statement = con.createStatement();
 
         String createTableSQL = "CREATE TABLE IF NOT EXISTS User (" +
-                "id VARCHAR(50) PRIMARY KEY, " +
+                "id VARCHAR(255) PRIMARY KEY, " +
                 "name VARCHAR(255), " +
                 "dateOfBirth DATE, " +
-                "phoneNumber VARCHAR(20), " +
+                "phoneNumber VARCHAR(255), " +
                 "email VARCHAR(255), " +
                 "password VARCHAR(255)" +
                 ")";
@@ -79,7 +79,7 @@ public class UserDO extends DatabaseManager {
         }
     }
 
-    // Lấy thông tin sinh viên theo ID
+    // Lấy thông tin sinh viên theo id
     public static void getStudentById(String id) {
         Connection con = connect();
         String query = "SELECT * FROM User WHERE id = ?";
@@ -89,14 +89,14 @@ public class UserDO extends DatabaseManager {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("ID: " + rs.getString("id"));
+                System.out.println("id: " + rs.getString("id"));
                 System.out.println("Name: " + rs.getString("name"));
                 System.out.println("Date of Birth: " + rs.getDate("dateOfBirth"));
                 System.out.println("Phone Number: " + rs.getString("phoneNumber"));
                 System.out.println("Email: " + rs.getString("email"));
                 System.out.println("Password: " + rs.getString("password"));
             } else {
-                System.out.println("Student with ID " + id + " not found.");
+                System.out.println("Student with id " + id + " not found.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,7 +118,7 @@ public class UserDO extends DatabaseManager {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getString("id"));
+                System.out.println("id: " + rs.getString("id"));
                 System.out.println("Name: " + rs.getString("name"));
                 System.out.println("Date of Birth: " + rs.getDate("dateOfBirth"));
                 System.out.println("Phone Number: " + rs.getString("phoneNumber"));
@@ -146,9 +146,9 @@ public class UserDO extends DatabaseManager {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Student with ID " + id + " deleted successfully.");
+                System.out.println("Student with id " + id + " deleted successfully.");
             } else {
-                System.out.println("Student with ID " + id + " not found.");
+                System.out.println("Student with id " + id + " not found.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

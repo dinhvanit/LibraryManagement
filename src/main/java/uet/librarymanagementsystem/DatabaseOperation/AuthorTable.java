@@ -14,7 +14,7 @@ public class AuthorTable {
 
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Author (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name VARCHAR(50) NOT NULL" +
+                "name VARCHAR(255) NOT NULL" +
                 ")";
 
         statement.execute(createTableSQL);

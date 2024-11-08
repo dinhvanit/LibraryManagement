@@ -111,11 +111,26 @@ public class DatabaseManager {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        connect(); // Kết nối tới CSDL
-//        dropTableMaterial();
-        dropTableTitle();
+    public static void doitencot() {
+        Connection con = connect();
 
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot change column in table, connection is closed or invalid.");
+            }
+            String changeSQL = "ALTER TABLE Author RENAME COLUMN ID TO id";
+            statement.executeUpdate(changeSQL);
+            System.out.println("Table Author has been changed name successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error changing table: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws SQLException {
+//        connect(); // Kết nối tới CSDL
+////        dropTableMaterial();
+//        dropTableTitle();
+            doitencot();
 //        dropTableBorrowedDocuments();
 //        dropTableCategory();
     }
