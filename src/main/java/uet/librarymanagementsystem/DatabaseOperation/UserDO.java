@@ -1,6 +1,10 @@
 package uet.librarymanagementsystem.DatabaseOperation;
 
+import uet.librarymanagementsystem.entity.documents.Document;
+
 import java.sql.*;
+import java.util.List;
+import java.util.logging.Level;
 
 public class UserDO extends DatabaseManager {
 
@@ -156,4 +160,10 @@ public class UserDO extends DatabaseManager {
             }
         }
     }
+
+    public static void main(String[] args) throws SQLException {
+//        createUserTable();
+         insertStudent("23020675", "Dang Dinh Khang", "2005/02/18","0962552005", "23020675@vnu.edu.vn", "khangdz1802");
+    }
+
 }

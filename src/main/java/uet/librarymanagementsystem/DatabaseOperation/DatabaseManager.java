@@ -113,9 +113,10 @@ public class DatabaseManager {
 
     public static void main(String[] args) throws SQLException {
         connect(); // Kết nối tới CSDL
-        dropTableMaterial();
+//        dropTableMaterial();
         dropTableTitle();
-        dropTableBorrowedDocuments();
-        dropTableCategory();
+
+//        dropTableBorrowedDocuments();
+//        dropTableCategory();
     }
 }
