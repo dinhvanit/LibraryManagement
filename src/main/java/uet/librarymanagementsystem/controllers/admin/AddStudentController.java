@@ -1,8 +1,6 @@
 package uet.librarymanagementsystem.controllers.admin;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -10,19 +8,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.DatabaseOperation.UserDO;
-import uet.librarymanagementsystem.entity.Student;
-import uet.librarymanagementsystem.services.documentServices.SearchDocument;
+import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
 import java.net.URL;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddStudentController implements Initializable{
 
-    private SearchDocument searchStudent;
+    private SearchDocumentService searchStudent;
 
     private Connection conn;
     private String idStudent;
@@ -96,7 +91,7 @@ public class AddStudentController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         conn = DatabaseManager.connect();
-        searchStudent = new SearchDocument(); // Khởi tạo searchDocumentService cho adminPage
+        searchStudent = new SearchDocumentService(); // Khởi tạo searchDocumentService cho adminPage
 
         // Cấu hình các cột của bảng kết quả tìm kiếm trong adminPage
         //idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));

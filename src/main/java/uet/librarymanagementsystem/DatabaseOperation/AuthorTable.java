@@ -53,6 +53,32 @@ public class AuthorTable {
         con.close();
     }
 
+    public static void insertAuthor(String authorName) throws SQLException {
+        Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot insert author, connection is closed or invalid.");
+        }
+
+        String checkSQL = "SELECT COUNT(*) FROM Author WHERE name = ?";
+        try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
+            checkStmt.setString(1, authorName);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Author already exists in the database.");
+                con.close();
+                return;
+            }
+        }
+
+        String insertSQL = "INSERT INTO Author (name) VALUES (?)";
+        try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
+            insertStmt.setString(1, authorName);
+            insertStmt.executeUpdate();
+            System.out.println("Author inserted successfully.");
+        }
+        con.close();
+    }
+
     public static void main(String []args) throws SQLException {
         try {
             for (int i = 1; i <= 5; i++) {

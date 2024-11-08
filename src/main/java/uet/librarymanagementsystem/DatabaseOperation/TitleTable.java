@@ -13,7 +13,7 @@ public class TitleTable {
         }
         Statement statement = con.createStatement();
 
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS Title (" +
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS TITLE (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name VARCHAR(50) NOT NULL" +
                 ")";
@@ -34,38 +34,61 @@ public class TitleTable {
         }
 
         // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
-        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
+        String checkSQL = "SELECT COUNT(*) FROM TITLE WHERE name = ?";
         try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
             checkStmt.setString(1, titleName);
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                System.out.println("Title already exists in the database.");
+                System.out.println("TITLE already exists in the database.");
                 con.close();
                 return;
             }
         }
 
         // Thêm tiêu đề mới nếu nó chưa tồn tại
-        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
+        String insertSQL = "INSERT INTO TITLE (name) VALUES (?)";
         try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
             insertStmt.setString(1, titleName);
             insertStmt.executeUpdate();
-            System.out.println("Title inserted successfully.");
+            System.out.println("TITLE inserted successfully.");
         }
 
         con.close();
     }
 
-    public static void main(String []args) throws SQLException {
-        createTitleTable();
-        try {
-            for (int i = 1; i <= 5; i++) {
-                System.out.println("Enter details for title " + i + ":");
-                TitleTable.insertTitleFromKeyboard();
-            }
-            System.out.println("Successfully inserted 5 title.");
-        } catch (SQLException e) {
-            System.err.println("Error inserting titlee: " + e.getMessage());
+    public static void insertTitle(String titleName) throws SQLException {
+        Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot insert title, connection is closed or invalid.");
         }
+
+        // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
+        String checkSQL = "SELECT COUNT(*) FROM TITLE WHERE name = ?";
+        try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
+            checkStmt.setString(1, titleName);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("TITLE already exists in the database.");
+                con.close();
+                return;
+            }
+        }
+
+        // Thêm tiêu đề mới nếu nó chưa tồn tại
+        String insertSQL = "INSERT INTO TITLE (name) VALUES (?)";
+        try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
+            insertStmt.setString(1, titleName);
+            insertStmt.executeUpdate();
+            System.out.println("TITLE inserted successfully.");
+        }
+
+        con.close();
+    }
+
+
+
+    public static void main(String []args) throws SQLException {
+//        createTitleTable();
+        insertTitle("Hawaii: An Uncommon History");
     }
 }

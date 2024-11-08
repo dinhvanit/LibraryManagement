@@ -49,20 +49,63 @@ public class DocumentDO extends DatabaseManager {
         con.close();
     }
 
+//    public static void insertDocument(Document document) throws SQLException {
+//        Connection con = connect();
+//        if (con == null || con.isClosed()) {
+//            throw new SQLException("Cannot insert document, connection is closed or invalid.");
+//        }
+//        String insertSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
+//        PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
+//        preparedStatement.setString(1, document.getId());
+//        preparedStatement.setString(2, document.getTitle());
+//        preparedStatement.setString(3, document.getAuthor());
+//        preparedStatement.setString(4, document.getMaterial());
+//        preparedStatement.setString(5, document.getCategory());
+//        preparedStatement.executeUpdate();
+//        con.close();
+//    }
+
     public static void insertDocument(Document document) throws SQLException {
         Connection con = connect();
+
         if (con == null || con.isClosed()) {
             throw new SQLException("Cannot insert document, connection is closed or invalid.");
         }
-        String insertSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
-        preparedStatement.setString(1, document.getId());
-        preparedStatement.setString(2, document.getTitle());
-        preparedStatement.setString(3, document.getAuthor());
-        preparedStatement.setString(4, document.getMaterial());
-        preparedStatement.setString(5, document.getCategory());
-        preparedStatement.executeUpdate();
-        con.close();
+
+        try {
+            // Chèn tài liệu vào bảng Document
+            String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement documentStmt = con.prepareStatement(insertDocumentSQL);
+            documentStmt.setString(1, document.getId());
+            documentStmt.setString(2, document.getTitle());
+            documentStmt.setString(3, document.getAuthor());
+            documentStmt.setString(4, document.getMaterial());
+            documentStmt.setString(5, document.getCategory());
+            documentStmt.executeUpdate();
+
+            // Chèn thông tin title vào bảng Title với các cột id và name
+            String insertTitleSQL = "INSERT OR IGNORE INTO Title (id, name) VALUES (?, ?)";
+            PreparedStatement titleStmt = con.prepareStatement(insertTitleSQL);
+            titleStmt.setString(1, document.getId()); // Sử dụng id của Document làm id cho Title
+            titleStmt.setString(2, document.getTitle());
+            titleStmt.executeUpdate();
+
+            // Chèn thông tin author vào bảng Author với các cột id và name
+            String insertAuthorSQL = "INSERT OR IGNORE INTO Author (id, name) VALUES (?, ?)";
+            PreparedStatement authorStmt = con.prepareStatement(insertAuthorSQL);
+            authorStmt.setString(1, document.getId()); // Sử dụng id của Document làm id cho Author
+            authorStmt.setString(2, document.getAuthor());
+            authorStmt.executeUpdate();
+
+            System.out.println("Document, Title, and Author added successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Ném ngoại lệ để xử lý bên ngoài nếu cần
+        } finally {
+            // Đảm bảo đóng kết nối sau khi hoàn thành
+            con.close();
+        }
     }
 
     public static Document getDocumentById(String documentId) throws SQLException {
@@ -144,53 +187,12 @@ public class DocumentDO extends DatabaseManager {
 
     public static void main(String[] args) {
         try {
-//            Scanner scanner = new Scanner(System.in);
-//            int soluot = scanner.nextInt();
-//            System.out.println("Hay nhap vao thong tin cac quyen sach");
-//            for (int i = 0; i < soluot; i++) {
-//                Document newDocument = DocumentDO.inputDocumentFromKeyboard();
-//                DocumentDO.insertDocument(newDocument);
-//            }
-//
 
             List<Document> documents = DocumentDO.getAllDocument();
             documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory()));
 
 
-//            List<Document> documents = DocumentDO.getAllDocument();
-//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getCategory() + " - " + document.getQuantity()));
-            DocumentDO.deleteDocument("Hoa 2");
-
-//            Scanner scanner = new Scanner(System.in);
-//            DocumentDO.insertDocument(inputDocumentFromKeyboard());
-//            System.out.println("Enter document ID to delete: ");
-//            String documentId = scanner.nextLine();
-            /*
-            Document d1 = new Document("D001", "Java Programming", "John Doe", "Book", "Programming", 10);
-            Document d2 = new Document("D002", "Data Structures", "Jane Smith", "Thesis", "Computer Science", 5);
-            Document d3 = new Document("D003", "Algorithms", "Robert Martin", "Book", "Mathematics", 3);
-            Document d4 = new Document("D004", "Clean Code", "Martin Fowler", "Book", "Software Engineering", 10);
-            Document d5 = new Document("D005", "The Pragmatic Programmer", "Andrew Hunt", "Newspaper", "Programming", 10);
-            Document d6 = new Document("D006", "Design Patterns", "Erich Gamma", "Book", "Software Engineering", 10);
-            Document d7 = new Document("D007", "Introduction to Java Programming", "Herbert Schildt", "Book", "Programming", 10);
-            Document d8 = new Document("D008", "Effective Java", "Joshua Bloch", "Joshua Bloch", "Programming", 10);
-            Document d9 = new Document("D009", "Head First Java", "Kathy Sierra", "Book", "Programming", 10);
-            Document d10 = new Document("D0010", "Python Crash Course", "Eric Matthes", "Newspaper", "Programming", 10);
-
-            insertDocument(d1);
-            insertDocument(d2);
-            insertDocument(d3);
-            insertDocument(d4);
-            insertDocument(d5);
-            insertDocument(d6);
-            insertDocument(d7);
-            insertDocument(d8);
-            insertDocument(d9);
-            insertDocument(d10);
-            */
-
-
-//            DocumentDO.deleteDocument(documentId);
+//
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "An exception occurred", e); // dung thay cho stack trace
 
