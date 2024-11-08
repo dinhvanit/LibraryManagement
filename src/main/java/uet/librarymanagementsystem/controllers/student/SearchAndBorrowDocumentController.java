@@ -16,7 +16,7 @@ import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.entity.documents.materials.Journal;
 import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
 import uet.librarymanagementsystem.entity.documents.materials.Thesis;
-import uet.librarymanagementsystem.services.documentServices.SearchDocument;
+import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,9 +26,9 @@ import java.util.stream.Collectors;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
-    private SearchDocument searchDocumentService;
+    private SearchDocumentService searchDocumentService;
     private ObservableList<Document> documentListSearchResult;
-//    private String idDocument = "";
+    //    private String idDocument = "";
     private String titleDocument = "";
     private String authorDocument = "";
     private String materialDocument = "";
@@ -158,7 +158,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        searchDocumentService = new SearchDocument();
+        searchDocumentService = new SearchDocumentService();
 
         idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         titleColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));

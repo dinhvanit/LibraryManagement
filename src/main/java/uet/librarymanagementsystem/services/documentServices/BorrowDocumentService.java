@@ -6,11 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class BorrowDocument {
+public class BorrowDocumentService {
 
     private Connection conn;
 
-    public BorrowDocument(Connection connection) {
+    public BorrowDocumentService(Connection connection) {
         this.conn = connection;
     }
 

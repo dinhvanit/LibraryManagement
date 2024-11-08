@@ -1,8 +1,6 @@
 package uet.librarymanagementsystem.entity.documents;
 
-import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.services.documentServices.SearchDocument;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

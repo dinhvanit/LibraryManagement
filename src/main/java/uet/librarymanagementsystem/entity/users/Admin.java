@@ -10,7 +10,7 @@ public class Admin extends User {
     private List<Student> students;
 
     // Constructor
-    public Admin(int id, String name, String dateOfBirth, String phoneNumber, String email, String password) {
+    public Admin(String id, String name, String dateOfBirth, String phoneNumber, String email, String password) {
         super(id, name, dateOfBirth, phoneNumber, email, password);
         this.students = new ArrayList<>();
     }

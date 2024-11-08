@@ -3,7 +3,6 @@ package uet.librarymanagementsystem.services.documentServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.DatabaseOperation.DocumentDO;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 
@@ -12,11 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SearchDocument {
+public class SearchDocumentService {
 
     private Connection conn;
 
-    public SearchDocument() {
+    public SearchDocumentService() {
         conn = DatabaseManager.connect();
     }
 
