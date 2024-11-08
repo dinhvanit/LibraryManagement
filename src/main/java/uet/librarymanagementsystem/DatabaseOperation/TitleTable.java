@@ -56,6 +56,37 @@ public class TitleTable {
         con.close();
     }
 
+    public static void insertTitle(String titleName) throws SQLException {
+        Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot insert title, connection is closed or invalid.");
+        }
+
+        // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
+        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
+        try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
+            checkStmt.setString(1, titleName);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Title already exists in the database.");
+                con.close();
+                return;
+            }
+        }
+
+        // Thêm tiêu đề mới nếu nó chưa tồn tại
+        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
+        try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
+            insertStmt.setString(1, titleName);
+            insertStmt.executeUpdate();
+            System.out.println("Title inserted successfully.");
+        }
+
+        con.close();
+    }
+
+
+
     public static void main(String []args) throws SQLException {
         createTitleTable();
         try {

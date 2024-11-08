@@ -3,7 +3,7 @@ package uet.librarymanagementsystem.entity.documents.materials;
 import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
-import uet.librarymanagementsystem.services.documentServices.SearchDocument;
+import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
 import java.sql.SQLException;
 
@@ -34,9 +34,9 @@ public class Newspaper extends Document {
     @Override
     public String getQuantityCode() {
         String quantityCode = null;
-        SearchDocument searchDocument = new SearchDocument();
+        SearchDocumentService searchDocumentService = new SearchDocumentService();
         try {
-            ObservableList<Document> listDocument = searchDocument.search(
+            ObservableList<Document> listDocument = searchDocumentService.search(
                     title, author, getMaterial(), getCategory());
             int len = listDocument.size();
             for (int i = 0; i < len; i++) {
