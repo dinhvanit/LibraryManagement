@@ -1,4 +1,4 @@
-package uet.librarymanagementsystem.entity;
+package uet.librarymanagementsystem.entity.users;
 
 public class User {
     private int id;

@@ -1,4 +1,4 @@
-package uet.librarymanagementsystem.entity;
+package uet.librarymanagementsystem.entity.users;
 
 import uet.librarymanagementsystem.entity.documents.Document;
 

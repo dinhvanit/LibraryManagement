@@ -1,8 +1,6 @@
 package uet.librarymanagementsystem.controllers.admin;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -10,14 +8,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.DatabaseOperation.UserDO;
-import uet.librarymanagementsystem.entity.Student;
+import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.SearchDocument;
 
 import java.net.URL;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddStudentController implements Initializable{

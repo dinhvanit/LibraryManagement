@@ -21,10 +21,6 @@ public class SearchDocument {
     }
 
     public ObservableList<Document> search(String title, String author, String material, String category) throws SQLException {
-        System.out.println("lan luot cac chi so can tim là " + title);
-        System.out.println(author);
-        System.out.println(material);
-        System.out.println(category);
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
         StringBuilder query = new StringBuilder("SELECT id, title, author, material, category FROM Document WHERE 1=1");
@@ -65,12 +61,6 @@ public class SearchDocument {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
-
-                    System.out.println("ID: " + retrievedId);
-                    System.out.println("Title: " + retrievedTitle);
-                    System.out.println("Author: " + retrievedAuthor);
-                    System.out.println("Material: " + retrievedMaterial);
-                    System.out.println("Category: " + retrievedCategory);
 
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
