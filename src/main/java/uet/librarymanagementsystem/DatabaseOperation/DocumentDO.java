@@ -39,31 +39,15 @@ public class DocumentDO extends DatabaseManager {
         }
         Statement statement = con.createStatement();
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Document (" +
-                "id VARCHAR(10) PRIMARY KEY, " +
-                "title VARCHAR(50), " +
-                "author VARCHAR(50), " +
-                "material VARCHAR(50), " +
-                "category VARCHAR(50) " +
+                "id VARCHAR(255) PRIMARY KEY, " +
+                "title VARCHAR(255), " +
+                "author VARCHAR(255), " +
+                "material VARCHAR(255), " +
+                "category VARCHAR(255) " +
                 ")";
         statement.execute(createTableSQL);
         con.close();
     }
-
-//    public static void insertDocument(Document document) throws SQLException {
-//        Connection con = connect();
-//        if (con == null || con.isClosed()) {
-//            throw new SQLException("Cannot insert document, connection is closed or invalid.");
-//        }
-//        String insertSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
-//        PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
-//        preparedStatement.setString(1, document.getId());
-//        preparedStatement.setString(2, document.getTitle());
-//        preparedStatement.setString(3, document.getAuthor());
-//        preparedStatement.setString(4, document.getMaterial());
-//        preparedStatement.setString(5, document.getCategory());
-//        preparedStatement.executeUpdate();
-//        con.close();
-//    }
 
     public static void insertDocument(Document document) throws SQLException {
         Connection con = connect();
@@ -73,7 +57,20 @@ public class DocumentDO extends DatabaseManager {
         }
 
         try {
-            // Chèn tài liệu vào bảng Document
+            // Kiểm tra nếu id của document đã tồn tại trong bảng Document
+            String checkDocumentSQL = "SELECT COUNT(*) FROM Document WHERE id = ?";
+            PreparedStatement checkStmt = con.prepareStatement(checkDocumentSQL);
+            checkStmt.setString(1, document.getId());
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+
+            // Nếu tài liệu đã tồn tại, không thực hiện thêm
+            if (rs.getInt(1) > 0) {
+                System.out.println("Document with id " + document.getId() + " already exists. Skipping insertion.");
+                return;
+            }
+
+            // Chèn tài liệu vào bảng Document nếu chưa tồn tại
             String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement documentStmt = con.prepareStatement(insertDocumentSQL);
             documentStmt.setString(1, document.getId());
@@ -83,27 +80,12 @@ public class DocumentDO extends DatabaseManager {
             documentStmt.setString(5, document.getCategory());
             documentStmt.executeUpdate();
 
-            // Chèn thông tin title vào bảng Title với các cột id và name
-            String insertTitleSQL = "INSERT OR IGNORE INTO Title (id, name) VALUES (?, ?)";
-            PreparedStatement titleStmt = con.prepareStatement(insertTitleSQL);
-            titleStmt.setString(1, document.getId()); // Sử dụng id của Document làm id cho Title
-            titleStmt.setString(2, document.getTitle());
-            titleStmt.executeUpdate();
-
-            // Chèn thông tin author vào bảng Author với các cột id và name
-            String insertAuthorSQL = "INSERT OR IGNORE INTO Author (id, name) VALUES (?, ?)";
-            PreparedStatement authorStmt = con.prepareStatement(insertAuthorSQL);
-            authorStmt.setString(1, document.getId()); // Sử dụng id của Document làm id cho Author
-            authorStmt.setString(2, document.getAuthor());
-            authorStmt.executeUpdate();
-
-            System.out.println("Document, Title, and Author added successfully.");
+            System.out.println("Document added successfully!");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e; // Ném ngoại lệ để xử lý bên ngoài nếu cần
+            throw e;
         } finally {
-            // Đảm bảo đóng kết nối sau khi hoàn thành
             con.close();
         }
     }
@@ -112,7 +94,7 @@ public class DocumentDO extends DatabaseManager {
         Connection con = connect();
         String selectSQL = "SELECT * FROM Document WHERE id = ?";
         if (con == null || con.isClosed()) {
-            throw new SQLException("Cannot get document by ID, connection is closed or invalid.");
+            throw new SQLException("Cannot get document by id, connection is closed or invalid.");
         }
         PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
         preparedStatement.setString(1, documentId);
@@ -145,9 +127,9 @@ public class DocumentDO extends DatabaseManager {
         int rowsAffected = preparedStatement.executeUpdate();
 
         if (rowsAffected > 0) {
-            System.out.println("Document with ID " + documentId + " has been deleted.");
+            System.out.println("Document with id " + documentId + " has been deleted.");
         } else {
-            System.out.println("No document found with ID " + documentId);
+            System.out.println("No document found with id " + documentId);
         }
 
         con.close();
@@ -188,9 +170,10 @@ public class DocumentDO extends DatabaseManager {
     public static void main(String[] args) {
         try {
 
-            List<Document> documents = DocumentDO.getAllDocument();
-            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory()));
+//            List<Document> documents = DocumentDO.getAllDocument();
+//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory()));
 
+            createDocumentTable();
 
 //
         } catch (SQLException e) {

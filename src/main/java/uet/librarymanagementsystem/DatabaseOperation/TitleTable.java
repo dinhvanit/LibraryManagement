@@ -13,9 +13,9 @@ public class TitleTable {
         }
         Statement statement = con.createStatement();
 
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS TITLE (" +
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS Title (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name VARCHAR(50) NOT NULL" +
+                "name VARCHAR(255) NOT NULL" +
                 ")";
 
         statement.execute(createTableSQL);
@@ -34,7 +34,7 @@ public class TitleTable {
         }
 
         // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
-        String checkSQL = "SELECT COUNT(*) FROM TITLE WHERE name = ?";
+        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
         try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
             checkStmt.setString(1, titleName);
             ResultSet rs = checkStmt.executeQuery();
@@ -46,7 +46,7 @@ public class TitleTable {
         }
 
         // Thêm tiêu đề mới nếu nó chưa tồn tại
-        String insertSQL = "INSERT INTO TITLE (name) VALUES (?)";
+        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
         try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
             insertStmt.setString(1, titleName);
             insertStmt.executeUpdate();
@@ -63,7 +63,7 @@ public class TitleTable {
         }
 
         // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
-        String checkSQL = "SELECT COUNT(*) FROM TITLE WHERE name = ?";
+        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
         try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
             checkStmt.setString(1, titleName);
             ResultSet rs = checkStmt.executeQuery();
@@ -75,7 +75,7 @@ public class TitleTable {
         }
 
         // Thêm tiêu đề mới nếu nó chưa tồn tại
-        String insertSQL = "INSERT INTO TITLE (name) VALUES (?)";
+        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
         try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
             insertStmt.setString(1, titleName);
             insertStmt.executeUpdate();
