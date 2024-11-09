@@ -16,8 +16,8 @@ public class Journal extends Document {
         this.category = category;
     }
 
-    public Journal(String id, String title, String author, JournalCategory category, String dueDate) {
-        super(id, title, author, dueDate);
+    public Journal(String id, String title, String author, JournalCategory category) {
+        super(id, title, author);
         this.category = category;
     }
 

@@ -21,7 +21,7 @@ public class SearchDocumentService {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
         StringBuilder query = new StringBuilder(
-                "SELECT id, title, author, material, category, due_date FROM Document WHERE 1=1");
+                "SELECT id, title, author, material, category FROM Document WHERE 1=1");
 
         if (title != null && !title.isEmpty()) {
             query.append(" AND title LIKE ?");
@@ -59,14 +59,12 @@ public class SearchDocumentService {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
-                    String retrievedDueDate = rs.getString("due_date");
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
                             retrievedTitle,
                             retrievedAuthor,
                             retrievedMaterial,
-                            retrievedCategory,
-                            retrievedDueDate
+                            retrievedCategory
                     );
                     documentListSearchResult.add(document);
                 }

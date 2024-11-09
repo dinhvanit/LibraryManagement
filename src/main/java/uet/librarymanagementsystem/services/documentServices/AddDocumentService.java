@@ -16,7 +16,7 @@ public class AddDocumentService {
     public void addDocument(String title, String author, String material, String category) {
         try {
             // Khởi tạo đối tượng Document từ DocumentFactory
-            Document document = DocumentFactory.createDocument(null, title, author, material, category, null);
+            Document document = DocumentFactory.createDocument(null, title, author, material, category);
 
             // Kiểm tra và thêm Title nếu chưa có
             TitleTable titleTable = new TitleTable();

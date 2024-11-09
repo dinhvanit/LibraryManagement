@@ -16,8 +16,8 @@ public class Thesis extends Document {
         this.category = category;
     }
 
-    public Thesis(String id, String title, String author, ThesisCategory category, String dueDate) {
-        super(id, title, author, dueDate);
+    public Thesis(String id, String title, String author, ThesisCategory category) {
+        super(id, title, author);
         this.category = category;
     }
 
