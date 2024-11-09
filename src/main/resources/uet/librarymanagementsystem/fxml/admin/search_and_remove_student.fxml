@@ -155,7 +155,7 @@
                     <children>
                         <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
-                                <Label text="Search student">
+                                <Label text="List Of Students">
                                     <font>
                                         <Font size="25.0" />
                                     </font>

@@ -14,6 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.admin.AddStudentController">
     <children>
+        <Label fx:id="statusLabel" layoutX="50" layoutY="300" text="" />
         <BorderPane prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
                 <VBox prefHeight="500.0" prefWidth="420.0" BorderPane.alignment="CENTER">
@@ -180,7 +181,7 @@
                     <children>
                         <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
-                                <Label text="Search student">
+                                <Label text="List Of Add Students">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
