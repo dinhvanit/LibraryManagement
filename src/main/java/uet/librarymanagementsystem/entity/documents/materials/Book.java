@@ -16,8 +16,8 @@ public class Book extends Document {
         this.category = category;
     }
 
-    public Book(String id, String title, String author, BookCategory category, String dueDate) {
-        super(id, title, author, dueDate);
+    public Book(String id, String title, String author, BookCategory category) {
+        super(id, title, author);
         this.category = category;
     }
 
