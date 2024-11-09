@@ -130,11 +130,37 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="482.0">
                      <children>
-                        <Label text="Documents To Borrow">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="274.0">
+                           <children>
+                              <Label prefHeight="36.0" prefWidth="253.0" text="Documents To Borrow">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="60.0" prefWidth="74.0">
+                                 <children>
+                                    <Label text="Due date: ">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="60.0" prefWidth="75.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="dueDateLabel">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -143,14 +169,13 @@
                         <Insets left="10.0" />
                      </padding>
                   </HBox>
-                  <TableView prefHeight="215.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="documentsToBorrowTableView" prefHeight="215.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn editable="false" prefWidth="75.0" text="ID" />
-                      <TableColumn editable="false" prefWidth="75.0" text="TITLE" />
-                        <TableColumn editable="false" prefWidth="75.0" text="AUTHOR" />
-                        <TableColumn editable="false" prefWidth="75.0" text="MATERIAL" />
-                        <TableColumn editable="false" prefWidth="75.0" text="CATEGORY" />
-                        <TableColumn prefWidth="75.0" text="DUE DATE" />
+                      <TableColumn fx:id="idColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="titleColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="TITLE" />
+                        <TableColumn fx:id="authorColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="AUTHOR" />
+                        <TableColumn fx:id="materialColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="MATERIAL" />
+                        <TableColumn fx:id="categoryColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="CATEGORY" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

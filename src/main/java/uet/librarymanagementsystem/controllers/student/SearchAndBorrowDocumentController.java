@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
@@ -19,15 +16,21 @@ import uet.librarymanagementsystem.entity.documents.materials.Thesis;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
+    private final int borrowingPeriod = 6;
     private SearchDocumentService searchDocumentService;
-    private ObservableList<Document> documentListSearchResult;
+    private ObservableList<Document> documentsListSearchResult;
+    private ObservableList<Document> documentsListToBorrow;
     //    private String idDocument = "";
     private String titleDocument = "";
     private String authorDocument = "";
@@ -39,14 +42,36 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     private TableColumn<Document, String> authorColumnSearchResults;
+
     @FXML
     private TableColumn<Document, String> categoryColumnSearchResults;
+
     @FXML
     private TableColumn<Document, String> idColumnSearchResults;
+
     @FXML
     private TableColumn<Document, String> materialColumnSearchResults;
+
     @FXML
     private TableColumn<Document, String> titleColumnSearchResults;
+
+    @FXML
+    private TableView<Document> documentsToBorrowTableView;
+
+    @FXML
+    private TableColumn<Document, String> authorColumnDocumentsToBorrow;
+
+    @FXML
+    private TableColumn<Document, String> categoryColumnDocumentsToBorrow;
+
+    @FXML
+    private TableColumn<Document, String> idColumnDocumentsToBorrow;
+
+    @FXML
+    private TableColumn<Document, String> materialColumnDocumentsToBorrow;
+
+    @FXML
+    private TableColumn<Document, String> titleColumnDocumentsToBorrow;
 
     @FXML
     private ChoiceBox<String> choiceCategoryDocument;
@@ -61,8 +86,25 @@ public class SearchAndBorrowDocumentController implements Initializable {
     private TextField fieldTitleDocument;
 
     @FXML
-    void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
-        // Implementation here
+    private Label dueDateLabel;
+
+    @FXML
+    private void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
+        performAdd();
+    }
+
+    private void performAdd() {
+        dueDateLabel.setText(setDueDate());
+
+        Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null) {
+            documentsListToBorrow.add(selectedDocument);
+            documentsToBorrowTableView.setItems(documentsListToBorrow);
+        }
+    }
+
+    private String setDueDate() {
+        return LocalDate.now().plusMonths(borrowingPeriod).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @FXML
@@ -77,7 +119,15 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     void deleteDocumentButtonOnClick(MouseEvent event) {
+        performDelete();
+    }
 
+    private void performDelete() {
+        Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null) {
+            documentsListToBorrow.remove(selectedDocument);
+            documentsToBorrowTableView.setItems(documentsListToBorrow);
+        }
     }
 
     @FXML
@@ -86,8 +136,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
     }
 
     private void performSearch() throws SQLException {
-        documentListSearchResult = searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
-        searchResultsTableView.setItems(documentListSearchResult);
+        documentsListSearchResult = searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
+        searchResultsTableView.setItems(documentsListSearchResult);
     }
 
     private void setupTextFieldsListeners() {
@@ -158,6 +208,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         searchDocumentService = new SearchDocumentService();
 
         idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
@@ -166,8 +217,17 @@ public class SearchAndBorrowDocumentController implements Initializable {
         materialColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
 
-        documentListSearchResult = FXCollections.observableArrayList();
-        searchResultsTableView.setItems(documentListSearchResult);
+        documentsListSearchResult = FXCollections.observableArrayList();
+        searchResultsTableView.setItems(documentsListSearchResult);
+
+        idColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        titleColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        authorColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
+        materialColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
+        categoryColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
+
+        documentsListToBorrow = FXCollections.observableArrayList();
+        documentsToBorrowTableView.setItems(documentsListToBorrow);
 
         setupTextFieldsListeners();
         setupChoiceBoxes();

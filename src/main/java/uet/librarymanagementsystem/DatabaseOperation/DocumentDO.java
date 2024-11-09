@@ -29,7 +29,7 @@ public class DocumentDO extends DatabaseManager {
         System.out.println("Enter document material: ");
         String material = scanner.nextLine();
 
-        return DocumentFactory.createDocument("1", title, author, material, category);
+        return DocumentFactory.createDocument("1", title, author, material, category, null);
     }
 
     public static void createDocumentTable() throws SQLException {
@@ -106,7 +106,8 @@ public class DocumentDO extends DatabaseManager {
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
-                    resultSet.getString("category")
+                    resultSet.getString("category"),
+                    resultSet.getString("due_date")
             );
         } else {
             System.out.println("not found");
@@ -146,7 +147,8 @@ public class DocumentDO extends DatabaseManager {
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
-                    resultSet.getString("category")
+                    resultSet.getString("category"),
+                    resultSet.getString("due_date")
             );
             documentList.add(document);
         }
