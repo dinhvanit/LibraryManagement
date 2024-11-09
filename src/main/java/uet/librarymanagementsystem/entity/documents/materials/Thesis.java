@@ -5,6 +5,7 @@ import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class Thesis extends Document {
@@ -15,8 +16,8 @@ public class Thesis extends Document {
         this.category = category;
     }
 
-    public Thesis(String id, String title, String author, ThesisCategory category) {
-        super(id, title, author);
+    public Thesis(String id, String title, String author, ThesisCategory category, String dueDate) {
+        super(id, title, author, dueDate);
         this.category = category;
     }
 

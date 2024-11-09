@@ -6,10 +6,7 @@ import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SearchDocumentService {
 
@@ -19,10 +16,12 @@ public class SearchDocumentService {
         conn = DatabaseManager.connect();
     }
 
-    public ObservableList<Document> search(String title, String author, String material, String category) throws SQLException {
+    public ObservableList<Document> search(
+            String title, String author, String material, String category) throws SQLException {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
-        StringBuilder query = new StringBuilder("SELECT id, title, author, material, category FROM Document WHERE 1=1");
+        StringBuilder query = new StringBuilder(
+                "SELECT id, title, author, material, category, due_date FROM Document WHERE 1=1");
 
         if (title != null && !title.isEmpty()) {
             query.append(" AND title LIKE ?");
@@ -60,13 +59,14 @@ public class SearchDocumentService {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
-
+                    String retrievedDueDate = rs.getString("due_date");
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
                             retrievedTitle,
                             retrievedAuthor,
                             retrievedMaterial,
-                            retrievedCategory
+                            retrievedCategory,
+                            retrievedDueDate
                     );
                     documentListSearchResult.add(document);
                 }
