@@ -21,7 +21,7 @@ public class WindowUtil {
 
     public static void initParents() throws IOException {
         loadedParents.put(Page.LOGIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/login.fxml")));
-        loadedParents.put(Page.ADMIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/admin/adminPage.fxml")));
+        loadedParents.put(Page.ADMIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/admin/admin_page.fxml")));
         loadedParents.put(Page.STUDENT, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/student/student_page.fxml")));
         // tạo xong gì thì thêm enum page và path fxml vào map
     }
