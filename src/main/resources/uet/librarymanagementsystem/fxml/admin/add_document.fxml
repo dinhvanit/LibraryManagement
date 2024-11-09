@@ -40,105 +40,105 @@
                         <HBox prefHeight="50.0" prefWidth="290.0">
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <children>
-                                        <Label alignment="CENTER" text="ID">
-                                            <font>
-                                                <Font size="15.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
                                     <HBox.margin>
                                         <Insets left="10.0" />
                                     </HBox.margin>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <TextField fx:id="fieldIDAdmin" prefHeight="26.0" prefWidth="200.0" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </HBox>
-                        <HBox prefHeight="50.0" prefWidth="290.0">
-                            <children>
-                                <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <children>
+                           <children>
                                         <Label alignment="CENTER" text="TITLE">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
                                         </Label>
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin>
+                           </children>
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
+                           <children>
                                         <TextField fx:id="fieldTitleAdmin" prefHeight="26.0" prefWidth="200.0" />
-                                    </children>
+                           </children>
                                 </HBox>
                             </children>
                         </HBox>
                         <HBox prefHeight="50.0" prefWidth="290.0">
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                           <children>
                                         <Label alignment="CENTER" text="AUTHOR">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
                                         </Label>
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin>
+                           </children>
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
+                           <children>
                                         <TextField fx:id="fieldAuthorAdmin" prefHeight="26.0" prefWidth="200.0" />
-                                    </children>
+                           </children>
                                 </HBox>
                             </children>
                         </HBox>
                         <HBox prefHeight="50.0" prefWidth="290.0">
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" text="QUANTITY">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                                </HBox>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="fieldQuantityAdmin" prefHeight="26.0" prefWidth="200.0" />
+                           </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="290.0">
+                            <children>
+                                <HBox prefHeight="50.0" prefWidth="120.0">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                           <children>
                                         <Label alignment="CENTER" text="MATERIAL">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
                                         </Label>
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin>
+                           </children>
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
+                           <children>
                                         <ChoiceBox fx:id="choiceMaterialAdmin" prefHeight="26.0" prefWidth="200.0" />
-                                    </children>
+                           </children>
                                 </HBox>
                             </children>
                         </HBox>
                         <HBox prefHeight="50.0" prefWidth="290.0">
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                           <children>
                                         <Label alignment="CENTER" text="CATEGORY">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
                                         </Label>
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin>
+                           </children>
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
+                           <children>
                                         <ChoiceBox fx:id="choiceCategoryAdmin" prefHeight="26.0" prefWidth="200.0" />
-                                    </children>
+                           </children>
                                 </HBox>
                             </children>
                         </HBox>
@@ -166,6 +166,11 @@
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#removeAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE ALL">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
                                 <Button mnemonicParsing="false" onMouseClicked="#saveAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SAVE ALL" />
                             </children></HBox>
                     </children>
@@ -174,9 +179,9 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox prefHeight="60.0" prefWidth="480.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
-                                <Label text="Search document">
+                                <Label text="List Of Add Documents">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -198,14 +203,6 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="480.0">
-                            <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#searchDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SEARCH">
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </Button>
-                            </children></HBox>
                     </children>
                 </VBox>
             </center>

@@ -77,15 +77,14 @@ public class AddStudentController implements Initializable{
     }
 
     @FXML
-    void saveAllStudentButtonOnClick(MouseEvent event) {
+    void removeAllStudentButtonOnClick(MouseEvent event) {
 
     }
 
     @FXML
-    void searchStudentButtonOnClick(MouseEvent event) {
+    void saveAllStudentButtonOnClick(MouseEvent event) {
 
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

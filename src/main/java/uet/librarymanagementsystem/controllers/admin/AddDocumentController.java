@@ -6,41 +6,44 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import uet.librarymanagementsystem.entity.documents.Document;
+
+import javax.print.Doc;
 
 public class AddDocumentController {
 
     @FXML
-    private TableColumn<?, ?> authorColumnSearchResults;
+    private TableColumn<Document, String> authorColumnSearchResults;
 
     @FXML
-    private TableColumn<?, ?> categoryColumnSearchResults;
+    private TableColumn<Document, String> categoryColumnSearchResults;
 
     @FXML
-    private ChoiceBox<?> choiceCategoryAdmin;
+    private ChoiceBox<Document> choiceCategoryAdmin;
 
     @FXML
-    private ChoiceBox<?> choiceMaterialAdmin;
+    private ChoiceBox<Document> choiceMaterialAdmin;
 
     @FXML
     private TextField fieldAuthorAdmin;
 
     @FXML
-    private TextField fieldIDAdmin;
+    private TextField fieldQuantityAdmin;
 
     @FXML
     private TextField fieldTitleAdmin;
 
     @FXML
-    private TableColumn<?, ?> idColumnSearchResults;
+    private TableColumn<Document, String> idColumnSearchResults;
 
     @FXML
-    private TableColumn<?, ?> materialColumnSearchResults;
+    private TableColumn<Document, String> materialColumnSearchResults;
 
     @FXML
-    private TableView<?> searchDocumentTableView;
+    private TableView<Document> searchDocumentTableView;
 
     @FXML
-    private TableColumn<?, ?> titleColumnSearchResults;
+    private TableColumn<Document, String> titleColumnSearchResults;
 
     @FXML
     void addDocumentButtonOnClick(MouseEvent event) {
@@ -53,14 +56,15 @@ public class AddDocumentController {
     }
 
     @FXML
-    void saveAllDocumentButtonOnClick(MouseEvent event) {
+    void removeAllDocumentButtonOnClick(MouseEvent event) {
 
     }
 
     @FXML
-    void searchDocumentButtonOnClick(MouseEvent event) {
+    void saveAllDocumentButtonOnClick(MouseEvent event) {
 
     }
+
 
 
 
