@@ -21,7 +21,6 @@ public class LMSApplication extends Application {
             WindowUtil.setStage(primaryStage);
 
             // Initialize the pages
-            WindowUtil.initParents();
 
             // Load the initial page
             WindowUtil.setPage(Page.LOGIN, "Library Management System");
