@@ -4,6 +4,7 @@ import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.users.Student;
 
 public class Transaction {
+    private String id;
     private Document document;
     private Student student;
     private TypeTransaction typeTransaction;
@@ -14,6 +15,14 @@ public class Transaction {
         this.student = student;
         this.typeTransaction = typeTransaction;
         this.dateTransaction = dateTransaction;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Document getDocument() {

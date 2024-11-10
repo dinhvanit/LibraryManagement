@@ -19,15 +19,41 @@ public class TransactionsTable {
         }
 
         try {
-            String insertTransactionSQL = "INSERT INTO TransactionDocument (id_document, title_document, id_student, type, date) VALUES (?, ?, ?, ?, ?)";
+            String insertTransactionSQL = "INSERT INTO TransactionDocument " +
+                    "(id_student, name_student, date_of_birth, phone_number, " +
+                    "email, password, id_document, title_document, author, " +
+                    "material, category, type, date_transaction, due_date) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             PreparedStatement transactionStmt = conn.prepareStatement(insertTransactionSQL);
-            transactionStmt.setString(1, transaction.getDocument().getId());
-            transactionStmt.setString(2, transaction.getDocument().getTitle());
-            transactionStmt.setString(3, transaction.getStudent().getId());
-            transactionStmt.setString(4, transaction.getTypeTransaction());
-            transactionStmt.setString(5, transaction.getDateTransaction());
+
+            transactionStmt.setString(1, transaction.getStudent().getId());
+            transactionStmt.setString(2, transaction.getStudent().getName());
+            transactionStmt.setString(3, transaction.getStudent().getDateOfBirth());
+            transactionStmt.setString(4, transaction.getStudent().getPhoneNumber());
+            transactionStmt.setString(5, transaction.getStudent().getEmail());
+            transactionStmt.setString(6, transaction.getStudent().getPassword());
+
+            transactionStmt.setString(7, transaction.getDocument().getId());
+            transactionStmt.setString(8, transaction.getDocument().getTitle());
+            transactionStmt.setString(9, transaction.getDocument().getAuthor());
+            transactionStmt.setString(10, transaction.getDocument().getMaterial());
+            transactionStmt.setString(11, transaction.getDocument().getCategory());
+
+            transactionStmt.setString(12, transaction.getTypeTransaction());
+            transactionStmt.setString(13, transaction.getDateTransaction());
+            transactionStmt.setString(14, transaction.getDocument().getDueDate());
 
             transactionStmt.executeUpdate();
+
+            String generatedIdSQL = "SELECT last_insert_rowid()";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(generatedIdSQL);
+
+            if (rs.next()) {
+                String generatedId = rs.getString(1); // Lấy giá trị id tự động sinh ra
+                transaction.setId(generatedId);  // Cập nhật ID cho transaction
+            }
 
             System.out.println("Transaction added successfully!");
 
@@ -52,7 +78,7 @@ public class TransactionsTable {
 
         Transaction transaction = new Transaction(book, student, Transaction.TypeTransaction.BORROW, "11-12-2025");
         insertTransaction(transaction);
-
+        System.out.println(transaction.getId());
 
     }
 }

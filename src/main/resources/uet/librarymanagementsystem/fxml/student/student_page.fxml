@@ -25,22 +25,22 @@
    <left>
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#clickBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickReturnDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Return Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#returnButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Return Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickViewListOfBorrowDocuments" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="View List Of Borrow Documents" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#transactionButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Transaction Documents" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clickLogOut" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Log Out" wrapText="true">
+            <Button mnemonicParsing="false" onMouseClicked="#logOutButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Log Out" wrapText="true">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

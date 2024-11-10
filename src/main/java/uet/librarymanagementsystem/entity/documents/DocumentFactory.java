@@ -34,5 +34,23 @@ public class DocumentFactory {
                 throw new IllegalArgumentException("Unknown material type: " + material);
         }
     }
+
+    public static Document createDocument(String id, String title, String author, String material, String category, String dueDate) {
+
+        material = material.trim().toUpperCase();
+        switch (material) {
+            case "BOOK":
+                return new Book(id, title, author, Book.BookCategory.valueOf(category), dueDate);
+            case "JOURNAL":
+                return new Journal(id, title, author, Journal.JournalCategory.valueOf(category), dueDate);
+            case "NEWSPAPER":
+                return new Newspaper(id, title, author, Newspaper.NewspaperCategory.valueOf(category), dueDate);
+            case "THESIS":
+                return new Thesis(id, title, author, Thesis.ThesisCategory.valueOf(category), dueDate);
+            // Các loại tài liệu khác cũng tương tự
+            default:
+                throw new IllegalArgumentException("Unknown material type: " + material);
+        }
+    }
 }
 

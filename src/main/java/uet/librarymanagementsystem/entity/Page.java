@@ -8,8 +8,10 @@ public enum Page {
     ADD_STUDENT("/uet/librarymanagementsystem/fxml/admin/add_student.fxml"),
     ADD_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/add_document.fxml"),
     SEARCH_AND_REMOVE_STUDENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_student.fxml"),
-    SEARCH_AND_REMOVE_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_document.fxml");
-
+    SEARCH_AND_REMOVE_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_document.fxml"),
+    SEARCH_AND_BORROW_DOCUMENT("/uet/librarymanagementsystem/fxml/student/search_borrow_document.fxml"),
+    TRANSACTION_DOCUMENT("/uet/librarymanagementsystem/fxml/student/transaction_documents.fxml"),
+    RETURN_DOCUMENT("/uet/librarymanagementsystem/fxml/student/borrowed_documents.fxml");
     private final String fxmlPath;
 
     Page(String fxmlPath) {
