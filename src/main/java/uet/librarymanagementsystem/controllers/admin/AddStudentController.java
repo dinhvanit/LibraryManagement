@@ -3,6 +3,7 @@ package uet.librarymanagementsystem.controllers.admin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.userServices.AddStudentService;
+import uet.librarymanagementsystem.util.ValidationLabelUtil;
 
 import java.net.URL;
 import java.sql.*;
@@ -71,42 +73,32 @@ public class AddStudentController implements Initializable{
     private Label statusLabel;  // Label để hiển thị thông báo
 
     @FXML
+    private Label idValidLabel;
+
+    @FXML
+    private Label nameValidLabel;
+
+    @FXML
+    private Label birthValidLabel;
+
+    @FXML
+    private Label phoneValidLabel;
+
+    @FXML
+    private Label emailValidLabel;
+
+    @FXML
     private TableView<Student> studentListTableView;
     private ObservableList<Student> studentList;
 
     @FXML
     void addStudentButtonOnClick(MouseEvent event) {
-        // Lấy dữ liệu từ các TextField
-        String id = fieldIDStudent.getText();
-        String name = fieldNameStudent.getText();
-        String birthday = fieldBirthdayStudent.getText();
-        String phone = fieldPhoneStudent.getText();
-        String email = fieldEmailStudent.getText();
-
-        // Kiểm tra các trường có rỗng không
-        if (id.isEmpty() || name.isEmpty() || birthday.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-            //statusLabel.setText("Vui lòng điền đầy đủ thông tin");
-            return;
-        }
-
-        // Tạo đối tượng Student từ dữ liệu đã nhập
-        Student student = new Student(id, name, birthday, phone, email, id);
-
-        // Tạo một đối tượng của AddStudentService
-        AddStudentService addStudentService = new AddStudentService();
-
-        // Gọi phương thức addStudent trong AddStudentService để thêm vào cơ sở dữ liệu
-        boolean success = addStudentService.addStudent(id, name, birthday, phone, email);
-
-        // Kiểm tra kết quả và cập nhật giao diện
-        if (success) {
+        if (checkInput()) {
+            // Thực hiện logic thêm sinh viên ở đây nếu tất cả các trường hợp lệ
             statusLabel.setText("Thêm sinh viên thành công");
-            studentList.add(student); // Cập nhật TableView với sinh viên mới
-
-            clearFields(); // Xóa các trường sau khi thêm thành công
+            clearFields();
         } else {
-            statusLabel.setText("Lỗi khi thêm sinh viên");
-            System.out.println("Them that bai");
+            statusLabel.setText("Vui lòng điền đúng thông tin vào tất cả các trường.");
         }
     }
 
@@ -117,6 +109,34 @@ public class AddStudentController implements Initializable{
         fieldBirthdayStudent.clear();
         fieldPhoneStudent.clear();
         fieldEmailStudent.clear();
+
+    }
+
+    private boolean checkInput() {
+        boolean isValid = true;
+
+        // Check for empty fields and return false immediately if any are empty
+        if (!ValidationLabelUtil.validateEmptyField(fieldIDStudent.getText(), idValidLabel)) isValid = false;
+        if (!ValidationLabelUtil.validateEmptyField(fieldNameStudent.getText(), nameValidLabel)) isValid = false;
+        if (!ValidationLabelUtil.validateEmptyField(fieldBirthdayStudent.getText(), birthValidLabel)) isValid = false;
+        if (!ValidationLabelUtil.validateEmptyField(fieldPhoneStudent.getText(), phoneValidLabel)) isValid = false;
+        if (!ValidationLabelUtil.validateEmptyField(fieldEmailStudent.getText(), emailValidLabel)) isValid = false;
+
+        // Perform additional format checks and return false if any format is incorrect
+        if (!fieldEmailStudent.getText().isEmpty()) {
+            ValidationLabelUtil.validateEmailFormat(fieldEmailStudent.getText(), emailValidLabel);
+            if (!emailValidLabel.getText().isEmpty()) isValid = false;
+        }
+        if (!fieldPhoneStudent.getText().isEmpty()) {
+            ValidationLabelUtil.validatePhoneFormat(fieldPhoneStudent.getText(), phoneValidLabel);
+            if (!phoneValidLabel.getText().isEmpty()) isValid = false;
+        }
+        if (!fieldBirthdayStudent.getText().isEmpty()) {
+            ValidationLabelUtil.validateBirthdayFormat(fieldBirthdayStudent.getText(), birthValidLabel);
+            if (!birthValidLabel.getText().isEmpty()) isValid = false;
+        }
+
+        return isValid;
     }
 
     @FXML
@@ -138,15 +158,16 @@ public class AddStudentController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         conn = DatabaseManager.connect();
-        searchStudent = new SearchDocumentService(); // Khởi tạo searchDocumentService cho adminPage
+        ValidationLabelUtil validationLabelUtil = new ValidationLabelUtil();
+        // Thêm các sự kiện kiểm tra định dạng khi nhập liệu
+        fieldEmailStudent.textProperty().addListener((observable, oldValue, newValue) ->
+                ValidationLabelUtil.validateEmailFormat(newValue, emailValidLabel));
 
-        // Cấu hình các cột của bảng kết quả tìm kiếm trong adminPage
-        idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
-        nameColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        birthdayColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateOfBirth()));
-        phoneColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
-        emailColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        passwordColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+        fieldPhoneStudent.textProperty().addListener((observable, oldValue, newValue) ->
+                ValidationLabelUtil.validatePhoneFormat(newValue, phoneValidLabel));
+
+        fieldBirthdayStudent.textProperty().addListener((observable, oldValue, newValue) ->
+                ValidationLabelUtil.validateBirthdayFormat(newValue, birthValidLabel));
 
     }
 }

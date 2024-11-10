@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
             loginMessegeLabel.setText("Please choose your type account !");
         }
         else if(myAccType.equals("Admin")) {
-            if (credentialUserNameField.getText().equals("admin1") && credentialPasswordField.getText().equals("admin1")) {
+            if (credentialUserNameField.getText().equals("") && credentialPasswordField.getText().equals("")) {
                 try {
                     WindowUtil.setPage(Page.ADMIN, "Admin Dashboard");
 
