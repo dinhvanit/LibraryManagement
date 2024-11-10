@@ -3,6 +3,7 @@ package uet.librarymanagementsystem.util;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.entity.Page;
 
@@ -19,35 +20,44 @@ public class WindowUtil {
         stage = primaryStage;
     }
 
-    public static void initParents() throws IOException {
-        loadedParents.put(Page.LOGIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/login.fxml")));
-        loadedParents.put(Page.ADMIN, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/admin/admin_page.fxml")));
-        loadedParents.put(Page.STUDENT, FXMLLoader.load(WindowUtil.class.getResource("/uet/librarymanagementsystem/fxml/student/student_page.fxml")));
-        // tạo xong gì thì thêm enum page và path fxml vào map
+    public static void setPage(Page page, String title) {
+        try {
+            // Tải FXML chỉ khi cần thiết
+            Parent parent = loadedParents.computeIfAbsent(page, p -> {
+                try {
+                    return FXMLLoader.load(WindowUtil.class.getResource(p.getFXMLPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Unable to load FXML for page: " + page, e);
+                }
+            });
+
+            if (stage != null) {
+                // Đặt Scene và tiêu đề vào Stage
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+                stage.setTitle(title);
+                stage.sizeToScene();
+                stage.centerOnScreen();
+                stage.show();
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Error setting page: " + e.getMessage());
+        }
     }
 
-    public static void setPage(Page page, String title) {
-        Parent parent = loadedParents.get(page);
-        if (parent != null && stage != null) {
-            // Kiểm tra xem Parent đã có Scene chưa
-            Scene scene = parent.getScene();
-            if (scene == null) {
-                // Nếu không có Scene, tạo Scene mới
-                scene = new Scene(parent);
-            }
-            // Đặt Scene vào Stage
-            stage.setScene(scene);
-            stage.setTitle(title);
-            stage.sizeToScene();
-            stage.centerOnScreen();
-            stage.show();
-        } else {
-            System.out.println("Error setting page: Page not found or Stage is null.");
+    public static void loadCenterPane(Page page, BorderPane borderPane) {
+        try {
+            Parent view = FXMLLoader.load(WindowUtil.class.getResource(page.getFXMLPath()));
+            borderPane.setCenter(view);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public static void logoutSession() {
-
+        // Xóa bộ nhớ các trang đã tải và quay lại trang đăng nhập
+        loadedParents.clear();
         setPage(Page.LOGIN, "Library Management System");
     }
 }

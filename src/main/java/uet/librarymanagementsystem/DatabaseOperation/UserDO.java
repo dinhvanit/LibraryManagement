@@ -161,6 +161,23 @@ public class UserDO extends DatabaseManager {
         }
     }
 
+    public static String getPasswordById(String id) throws SQLException {
+        Connection con = connect();
+        String query = "SELECT password FROM User WHERE id = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("password");
+            } else {
+                return null; // Người dùng không tồn tại
+            }
+        } finally {
+            if (con != null) con.close();
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
 //        createUserTable();
          insertStudent("23020675", "Dang Dinh Khang", "2005/02/18","0962552005", "23020675@vnu.edu.vn", "khangdz1802");
