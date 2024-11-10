@@ -21,6 +21,11 @@ public class Newspaper extends Document {
         this.category = category;
     }
 
+    public Newspaper(String id, String title, String author, NewspaperCategory category, String dueDate) {
+        super(id, title, author, dueDate);
+        this.category = category;
+    }
+
 
     @Override
     public String getMaterial() {

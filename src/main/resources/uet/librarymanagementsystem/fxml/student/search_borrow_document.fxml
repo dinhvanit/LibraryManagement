@@ -21,7 +21,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="418.0">
                      <children>
-                        <Label text="Search">
+                        <Label prefHeight="36.0" prefWidth="78.0" text="Search">
                            <font>
                               <Font size="25.0" />
                            </font>

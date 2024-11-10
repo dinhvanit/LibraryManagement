@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.LMSApplication;
 import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.services.userServices.CheckLoginService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
@@ -42,6 +43,8 @@ public class LoginController implements Initializable {
 
     private String myAccType;
 
+    private static String idCurrentStudent;
+
     @FXML
     public void loginButtonOnAction(ActionEvent event) {
         performLogin();
@@ -54,11 +57,13 @@ public class LoginController implements Initializable {
     }
 
     public void performLogin() {
+        String userId = credentialUserNameField.getText();
+        String password = credentialPasswordField.getText();
         if(myAccType == null){
             loginMessegeLabel.setText("Please choose your type account !");
         }
         else if(myAccType.equals("Admin")) {
-            if (credentialUserNameField.getText().equals("admin1") && credentialPasswordField.getText().equals("admin1")) {
+            if (CheckLoginService.checkLogin(userId, password)) {
                 try {
                     WindowUtil.setPage(Page.ADMIN, "Admin Dashboard");
 
@@ -71,8 +76,9 @@ public class LoginController implements Initializable {
             }
         }
         else if(myAccType.equals("Student")){
-            if (credentialUserNameField.getText().equals("") && credentialPasswordField.getText().equals("")) {
+            if (CheckLoginService.checkLogin(userId, password)) {
                 try {
+                    idCurrentStudent = userId;
                     WindowUtil.setPage(Page.STUDENT, "Student Dashboard");
 
                 } catch (Exception e) {
@@ -112,5 +118,9 @@ public class LoginController implements Initializable {
 
     public void getAccType(ActionEvent event) {
         this.myAccType = accSelectorChoiceBox.getValue();
+    }
+
+    public static String getIdCurrentStudent() {
+        return idCurrentStudent;
     }
 }

@@ -21,6 +21,11 @@ public class Thesis extends Document {
         this.category = category;
     }
 
+    public Thesis(String id, String title, String author, ThesisCategory category, String dueDate) {
+        super(id, title, author, dueDate);
+        this.category = category;
+    }
+
     @Override
     public String getMaterial() {
         return MaterialType.THESIS.name(); // Trả về tên enum
