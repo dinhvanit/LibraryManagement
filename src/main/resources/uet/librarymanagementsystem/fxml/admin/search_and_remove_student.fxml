@@ -87,7 +87,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                                      <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SEARCH">
+                                      <Button mnemonicParsing="false" onMouseClicked="#searchStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SEARCH">
                                           <HBox.margin>
                                               <Insets right="20.0" />
                                           </HBox.margin>
