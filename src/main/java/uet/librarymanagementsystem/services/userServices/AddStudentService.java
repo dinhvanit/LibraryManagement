@@ -6,36 +6,19 @@ import java.sql.SQLException;
 
 public class AddStudentService {
 
-    // Phương thức thêm sinh viên mới vào cơ sở dữ liệu
-    public static boolean addStudent(String id, String name, String dateOfBirth, String phoneNumber, String email) {
-        // khởi tạo password = id (giống mã sinh viên, sinh viên lần đầu đăng nhập có thể đổi mật khẩu)
+    public static String addStudent(String id, String name, String dateOfBirth, String phoneNumber, String email) {
         String password = id;
 
-        // kiểm tra tính hợp lệ của email
-        if (!isEmailValid(email)) {
-            System.out.println("Email không hợp lệ.");
-            return false;
-        }
-
-        // Kiểm tra xem sinh viên đã tồn tại chưa
         if (UserDO.isUserExists(id)) {
-            System.out.println("Sinh viên với ID " + id + " đã tồn tại.");
-            return false;
+            return "Sinh viên với ID " + id + " đã tồn tại.";
         }
 
-        // Thêm sinh viên vào cơ sở dữ liệu
         try {
+            // Thêm sinh viên vào cơ sở dữ liệu
             UserDO.insertStudent(id, name, dateOfBirth, phoneNumber, email, password);
-            System.out.println("Sinh viên được thêm thành công.");
-            return true;
+            return "Sinh viên được thêm thành công.";
         } catch (SQLException e) {
-            System.err.println("Lỗi khi thêm sinh viên: " + e.getMessage());
-            return false;
+            return "Lỗi khi thêm sinh viên: " + e.getMessage();
         }
-    }
-
-    // Phương thức kiểm tra tính hợp lệ của email
-    private static boolean isEmailValid(String email) {
-        return email != null && email.contains("@") && email.contains(".");
     }
 }

@@ -12,13 +12,13 @@ public class test {
         String phone = "123456789";
         String email = "nguyendinhvanefto@gmail.com";
 
-        boolean success = AddStudentService.addStudent(id, name, birthday, phone, email);
+        /*//boolean success = AddStudentService.addStudent(id, name, birthday, phone, email);
 
         if (success) {
             System.out.println("Sinh viên đã được thêm thành công!");
         } else {
             System.out.println("Thêm sinh viên thất bại.");
-        }
+        }*/
 
         /*// Kiểm tra thêm sinh viên với các thông tin thiếu
         String nameInvalid = "";
