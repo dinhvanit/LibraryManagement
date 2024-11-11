@@ -115,13 +115,13 @@ public class SearchTransactionService {
 //            System.err.println("An error occurred while searching transactions: " + e.getMessage());
 //        }
         SearchTransactionService searchTransactionService = new SearchTransactionService();
-        ObservableList<Transaction> transactions = searchTransactionService.searchTransaction("23020675");
+        ObservableList<Transaction> transactions = searchTransactionService.searchTransaction("23020714");
 
         // Check if the list is empty or contains transactions
         if (transactions.isEmpty()) {
-            System.out.println("No transactions found for Student ID: 23020675");
+            System.out.println("No transactions found for Student ID: 23020714");
         } else {
-            System.out.println("Transactions found for Student ID: 23020675");
+            System.out.println("Transactions found for Student ID: 23020714");
             for (Transaction transaction : transactions) {
                 System.out.println("Transaction ID: " + transaction.getId());
                 System.out.println("Student ID: " + transaction.getStudent().getId());
