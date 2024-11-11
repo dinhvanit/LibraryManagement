@@ -80,6 +80,7 @@ public class TransactionDocumentsController implements Initializable {
             System.out.println("Loi");
             throw new RuntimeException(e);
         }
+
         transactionTableView.setItems(transactionList);
     }
 }

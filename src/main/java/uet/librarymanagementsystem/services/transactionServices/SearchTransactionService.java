@@ -37,19 +37,8 @@ public class SearchTransactionService {
 
                     String retrievedIdStudent = rs.getString("id_student");
                     String retrievedNameStudent = rs.getString("name_student");
-                    //String retrievedDateOfBirth = String.valueOf(rs.getDate("date_of_birth"));
-                    //Date sqlDate = rs.getDate("date_of_birth");
 
-                    Date dateOfBirth = rs.getDate("date_of_birth");
-                    String retrievedDateOfBirth = "";
-
-                    if (dateOfBirth != null) {
-                        LocalDate localDate = dateOfBirth.toLocalDate();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                        retrievedDateOfBirth = localDate.format(formatter);
-                    } else {
-                        System.out.println("Date of birth is null.");
-                    }
+                    String retrievedDateOfBirth = rs.getString("date_of_birth");
 
                     String retrievedPhoneNumber = rs.getString("phone_number");
                     String retrievedEmail = rs.getString("email");
