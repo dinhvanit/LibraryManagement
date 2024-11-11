@@ -9,6 +9,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,28 +30,17 @@ public class SearchTransactionService {
         String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, "23020714");
+            // Use the actual id_student parameter instead of hardcoding it
+            pstmt.setString(1, id_student);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    // Retrieve transaction fields from the ResultSet
                     String retrievedIdTransaction = rs.getString("id_transaction");
-
                     String retrievedIdStudent = rs.getString("id_student");
                     String retrievedNameStudent = rs.getString("name_student");
-                    //String retrievedDateOfBirth = String.valueOf(rs.getDate("date_of_birth"));
-                    //Date sqlDate = rs.getDate("date_of_birth");
 
-                    Date dateOfBirth = rs.getDate("date_of_birth");
-                    String retrievedDateOfBirth = "";
-
-                    if (dateOfBirth != null) {
-                        LocalDate localDate = dateOfBirth.toLocalDate();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                        retrievedDateOfBirth = localDate.format(formatter);
-                    } else {
-                        System.out.println("Date of birth is null.");
-                    }
-
+                    String retrievedDateOfBirth = rs.getString("date_of_birth") != null ? rs.getString("date_of_birth") : "N/A";
                     String retrievedPhoneNumber = rs.getString("phone_number");
                     String retrievedEmail = rs.getString("email");
                     String retrievedPassword = rs.getString("password");
@@ -65,6 +55,7 @@ public class SearchTransactionService {
                     String retrievedDateTransaction = rs.getString("date_transaction");
                     String retrievedDueDate = rs.getString("due_date");
 
+                    // Create Student and Document objects
                     Student student = new Student(
                             retrievedIdStudent,
                             retrievedNameStudent,
@@ -83,7 +74,7 @@ public class SearchTransactionService {
                             retrievedDueDate
                     );
 
-
+                    // Add transaction to list based on type
                     if (Objects.equals(retrievedType, "Borrow")) {
                         Transaction transaction = new Transaction(document, student, TypeTransaction.BORROW, retrievedDateTransaction);
                         transaction.setId(retrievedIdTransaction);
@@ -95,7 +86,32 @@ public class SearchTransactionService {
                     }
                 }
             }
+        } catch (SQLException e) {
+            System.err.println("An error occurred while searching transactions: " + e.getMessage());
         }
         return transactionSearchList;
     }
+
+
+    public static void main(String[] args) {
+        SearchTransactionService searchService = new SearchTransactionService();
+
+        try {
+            // Testing with the specific student ID "23020714"
+            ObservableList<Transaction> transactions = searchService.searchTransaction("23020714");
+
+            if (transactions.isEmpty()) {
+                System.out.println("No transactions found for student ID: 23020714");
+            } else {
+                System.out.println("Transactions found:");
+                for (Transaction transaction : transactions) {
+                    System.out.println(transaction);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("An error occurred while searching transactions: " + e.getMessage());
+        }
+    }
+
+
 }

@@ -30,6 +30,7 @@ public class TransactionsTable {
             transactionStmt.setString(1, transaction.getStudent().getId());
             transactionStmt.setString(2, transaction.getStudent().getName());
             transactionStmt.setString(3, transaction.getStudent().getDateOfBirth());
+
             transactionStmt.setString(4, transaction.getStudent().getPhoneNumber());
             transactionStmt.setString(5, transaction.getStudent().getEmail());
             transactionStmt.setString(6, transaction.getStudent().getPassword());
@@ -67,11 +68,11 @@ public class TransactionsTable {
     }
 
     public static void main(String[] args) throws SQLException {
-        String id = "23020714";
-        String name = "Nguyen Dinh Van";
-        String birthday = "03-11-2005";
+        String id = "23020675";
+        String name = "Dang Dinh Khang";
+        String birthday = "2005-03-27";
         String phone = "123456789";
-        String email = "nguyendinhvanefto@gmail.com";
+        String email = "lhang18022005@gmail.com";
         Student student = new Student(id, name, birthday, phone, email, id);
 
         Book book = new Book("0101000200310001", "Hungary 56", "Andy Anderson", Book.BookCategory.FICTION);
