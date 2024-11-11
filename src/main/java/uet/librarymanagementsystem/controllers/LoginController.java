@@ -43,6 +43,8 @@ public class LoginController implements Initializable {
 
     private String myAccType;
 
+    private static String idCurrentStudent;
+
     @FXML
     public void loginButtonOnAction(ActionEvent event) {
         performLogin();
@@ -76,6 +78,7 @@ public class LoginController implements Initializable {
         else if(myAccType.equals("Student")){
             if (CheckLoginService.checkLogin(userId, password)) {
                 try {
+                    idCurrentStudent = userId;
                     WindowUtil.setPage(Page.STUDENT, "Student Dashboard");
 
                 } catch (Exception e) {
@@ -115,5 +118,9 @@ public class LoginController implements Initializable {
 
     public void getAccType(ActionEvent event) {
         this.myAccType = accSelectorChoiceBox.getValue();
+    }
+
+    public static String getIdCurrentStudent() {
+        return idCurrentStudent;
     }
 }

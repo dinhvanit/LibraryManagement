@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.BorrowedDocumentsController">
+   <children>
+      <BorderPane layoutX="273.0" layoutY="77.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="497.0">
+                     <children>
+                        <Label prefHeight="36.0" prefWidth="245.0" text="Borrowed Documents">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="borrowedDocumentsTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="idColumnBorrowedDocuments" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="titleColumnBorrowedDocuments" prefWidth="75.0" text="TITLE" />
+                              <TableColumn fx:id="authorColumnBorrowedDocuments" prefWidth="75.0" text="AUTHOR" />
+                              <TableColumn fx:id="materialColumnBorrowedDocuments" prefWidth="75.0" text="MATERIAL" />
+                              <TableColumn fx:id="categoryColumnBorrowedDocuments" prefWidth="75.0" text="CATEGORY" />
+                              <TableColumn fx:id="borrowDateColumnBorrowedDocuments" prefWidth="75.0" text="BORROW DATE" />
+                              <TableColumn fx:id="dueDateColumnBorrowedDocuments" prefWidth="75.0" text="DUE DATE" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#returnDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="RETURN">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#returnAllDocumentsButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="RETURN ALL">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="INFO">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

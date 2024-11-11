@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.io.IOException;
@@ -16,29 +17,23 @@ public class StudentPageController {
     private BorderPane borderPaneStudentPage;
 
     @FXML
-    void clickBorrowDocuments(MouseEvent event) throws IOException {
-        try {
-            AnchorPane view = FXMLLoader.load(getClass().getResource("/uet/librarymanagementsystem/fxml/student/search_borrow_document.fxml"));
-            borderPaneStudentPage.setCenter(view);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("borrow");
+    void searchAndBorrowButtonClick(MouseEvent event) {
+        WindowUtil.loadCenterPane(Page.SEARCH_AND_BORROW_DOCUMENT, borderPaneStudentPage);
     }
 
     @FXML
-    void clickLogOut(MouseEvent event) {
+    void logOutButtonClick(MouseEvent event) {
         WindowUtil.logoutSession();
     }
 
     @FXML
-    void clickReturnDocuments(MouseEvent event) {
-        System.out.println("return");
+    void returnButtonClick(MouseEvent event) {
+        WindowUtil.loadCenterPane(Page.RETURN_DOCUMENT, borderPaneStudentPage);
     }
 
     @FXML
-    void clickViewListOfBorrowDocuments(MouseEvent event) {
-        System.out.println("view");
+    void transactionButtonClick(MouseEvent event) {
+        WindowUtil.loadCenterPane(Page.TRANSACTION_DOCUMENT, borderPaneStudentPage);
     }
 
 }
