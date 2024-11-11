@@ -130,8 +130,9 @@ public class DatabaseManager {
 //        connect(); // Kết nối tới CSDL
 ////        dropTableMaterial();
 //        dropTableTitle();
-            doitencot();
-//        dropTableBorrowedDocuments();
+//            doitencot();
+        dropTableBorrowedDocuments();
+
 //        dropTableCategory();
     }
 }
