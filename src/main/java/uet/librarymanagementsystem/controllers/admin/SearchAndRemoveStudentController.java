@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
@@ -43,9 +44,43 @@ public class SearchAndRemoveStudentController implements Initializable {
     private TableColumn<Student, String> phoneColumnSearchResults;
 
     @FXML
+    private TableColumn<Student, String> idColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> nameColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> passwordColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> phoneColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> birthdayColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> emailColumnStudentsToDelete;
+
+    @FXML
     private TableView<Student> searchStudentTableView;
 
     private SearchStudentService searchStudentService;
+
+    @FXML
+    private void addStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            deleteStudentTableView.getItems().add(selectedStudent);
+
+            searchStudentTableView.getItems().remove(selectedStudent);
+
+            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+        }
+    }
+
 
     @FXML
     void deleteAllStudentButtonOnClick(MouseEvent event) {
@@ -59,8 +94,19 @@ public class SearchAndRemoveStudentController implements Initializable {
 
     @FXML
     void removeStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
 
+        if (selectedStudent != null) {
+            deleteStudentTableView.getItems().remove(selectedStudent);
+
+            searchStudentTableView.getItems().add(selectedStudent);
+
+            System.out.println("Sinh viên đã được xóa khỏi bảng Students to Delete và chuyển lại vào bảng List Of Students.");
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên từ bảng Students to Delete để xóa.");
+        }
     }
+
 
     @FXML
     void searchStudentButtonOnClick(MouseEvent event) {
@@ -88,5 +134,15 @@ public class SearchAndRemoveStudentController implements Initializable {
         phoneColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
         emailColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         passwordColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+
+
+        idColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        nameColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        birthdayColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateOfBirth()));
+        phoneColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
+        emailColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        passwordColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+
+
     }
 }
