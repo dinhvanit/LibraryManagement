@@ -21,11 +21,6 @@ public class Book extends Document {
         this.category = category;
     }
 
-    public Book(String id, String title, String author, BookCategory category, String dueDate) {
-        super(id, title, author, dueDate);
-        this.category = category;
-    }
-
     @Override
     public String getMaterial() {
         return MaterialType.BOOK.name(); // Trả về tên enum

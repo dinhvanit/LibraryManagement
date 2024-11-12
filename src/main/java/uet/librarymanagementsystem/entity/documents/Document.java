@@ -12,7 +12,6 @@ public abstract class Document {
     protected String title;
     protected String author;
     protected String id; // ID sẽ được tạo từ hàm trong DatabaseDO
-    protected String dueDate;
     protected Connection conn = DatabaseManager.connect();
 
     public Document(String title, String author) {
@@ -27,13 +26,6 @@ public abstract class Document {
         this.author = author;
     }
 
-    public Document(String id, String title, String author, String dueDate) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.dueDate = dueDate;
-    }
-
     // Getters and setters
     public String getTitle() {
         return title;
@@ -45,10 +37,6 @@ public abstract class Document {
 
     public String getId() {
         return id;
-    }
-
-    public String getDueDate() {
-        return dueDate;
     }
 
     public String getTitleCode() {
