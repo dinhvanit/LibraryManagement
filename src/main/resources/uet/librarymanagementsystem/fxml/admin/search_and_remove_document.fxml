@@ -139,7 +139,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <TableView fx:id="deleteResultsTableView" prefHeight="215.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn editable="false" prefWidth="75.0" text="ID" />
                                 <TableColumn editable="false" prefWidth="75.0" text="TITLE" />
@@ -152,7 +152,7 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <HBox alignment="CENTER" prefHeight="66.0" prefWidth="482.0">
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="482.0">
                             <children>
                         <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="REMOVE">
                            <HBox.margin>
@@ -183,7 +183,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <TableView fx:id="searchResultsTableView" prefHeight="380.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="searchResultsTableView" prefHeight="470.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnSearchResults" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="titleColumnSearchResults" prefWidth="75.0" text="TITLE" />
@@ -195,6 +195,11 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="ADD" />
+                     </children>
+                  </HBox>
                     </children>
                 </VBox>
             </center>

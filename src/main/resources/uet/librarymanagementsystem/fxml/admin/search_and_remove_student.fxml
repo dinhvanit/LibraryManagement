@@ -16,9 +16,9 @@
     <children>
         <BorderPane prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
-                <VBox prefHeight="500.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                <VBox prefHeight="500.0" prefWidth="430.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox prefHeight="60.0" prefWidth="418.0">
+                        <HBox prefHeight="60.0" prefWidth="430.0">
                             <children>
                                 <Label alignment="CENTER" text="Student Information">
                                     <font>
@@ -120,20 +120,21 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="85.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="deleteStudentTableView" prefHeight="200.0" prefWidth="420.0">
+                        <TableView fx:id="deleteStudentTableView" prefHeight="200.0" prefWidth="430.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="ID" />
-                            <TableColumn prefWidth="75.0" text="NAME" />
-                              <TableColumn prefWidth="75.0" text="BIRTHDAY" />
-                              <TableColumn prefWidth="75.0" text="DOCUMENT" />
-                              <TableColumn prefWidth="75.0" text="DUE DATE" />
+                            <TableColumn fx:id="idColumnStudentsToDelete" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="nameColumnStudentsToDelete" prefWidth="75.0" text="NAME" />
+                              <TableColumn fx:id="birthdayColumnStudentsToDelete" prefWidth="75.0" text="BIRTHDAY" />
+                              <TableColumn fx:id="phoneColumnStudentsToDelete" prefWidth="75.0" text="PHONE" />
+                              <TableColumn fx:id="emailColumnStudentsToDelete" prefWidth="75.0" text="EMAIL" />
+                              <TableColumn fx:id="passwordColumnStudentsToDelete" prefWidth="75.0" text="PASSWORD" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
                      </children></HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="420.0">
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="430.0">
                             <children>
                                 <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE">
                                     <HBox.margin>
@@ -178,6 +179,11 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
+                  <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD" />
+                     </children>
+                  </HBox>
                     </children>
                 </VBox>
             </center>

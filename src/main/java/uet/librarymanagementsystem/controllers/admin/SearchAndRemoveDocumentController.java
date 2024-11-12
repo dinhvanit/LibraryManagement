@@ -41,6 +41,11 @@ public class SearchAndRemoveDocumentController {
     private TableColumn<Document, String> titleColumnSearchResults;
 
     @FXML
+    void addDocumentButtonOnClick(MouseEvent event) {
+
+    }
+
+    @FXML
     void deleteAllDocumentButtonOnClick(MouseEvent event) {
 
     }
