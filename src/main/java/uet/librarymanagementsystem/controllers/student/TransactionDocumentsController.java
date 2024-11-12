@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -31,12 +32,6 @@ public class TransactionDocumentsController implements Initializable {
     private TableColumn<Transaction, String> categoryColumnTransaction;
 
     @FXML
-    private TableColumn<Transaction, String> dateTransactionColumnTransaction;
-
-    @FXML
-    private TableColumn<Transaction, String> dueDateColumnTransaction;
-
-    @FXML
     private TableColumn<Transaction, String> idDocumentColumnTransaction;
 
     @FXML
@@ -49,7 +44,13 @@ public class TransactionDocumentsController implements Initializable {
     private TableColumn<Transaction, String> titleColumnTransaction;
 
     @FXML
-    private TableColumn<Transaction, String> typeColumnTransaction;
+    private TableColumn<Transaction, String> borrow_dateColumnTransaction;
+
+    @FXML
+    private TableColumn<Transaction, String> return_dateTransactionColumnTransaction;
+
+    @FXML
+    private TableColumn<Transaction, String> dueDateColumnTransaction;
 
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
@@ -68,9 +69,9 @@ public class TransactionDocumentsController implements Initializable {
         authorColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
         materialColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getMaterial()));
         categoryColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getCategory()));
-        typeColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeTransaction()));
-        dateTransactionColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateTransaction()));
-        dueDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getDueDate()));
+        borrow_dateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBorrowDate()));
+        return_dateTransactionColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReturnDate()));
+        dueDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         transactionList = FXCollections.observableArrayList();
         try {

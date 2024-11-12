@@ -111,6 +111,21 @@ public class DatabaseManager {
         }
     }
 
+    public static void dropTableTransaction() throws SQLException {
+        Connection con = connect();
+
+        try (con; Statement statement = con.createStatement()) {
+            if (con == null || con.isClosed()) {
+                throw new SQLException("Cannot drop table, connection is closed or invalid.");
+            }
+            String dropSQL = "DROP TABLE IF EXISTS TransactionDocument";
+            statement.executeUpdate(dropSQL);
+            System.out.println("Table Transaction has been dropped successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error dropping table: " + e.getMessage());
+        }
+    }
+
     public static void doitencot() {
         Connection con = connect();
 
@@ -131,8 +146,8 @@ public class DatabaseManager {
 ////        dropTableMaterial();
 //        dropTableTitle();
 //            doitencot();
-        dropTableBorrowedDocuments();
-
+//        dropTableBorrowedDocuments();
+            dropTableTransaction();
 //        dropTableCategory();
     }
 }

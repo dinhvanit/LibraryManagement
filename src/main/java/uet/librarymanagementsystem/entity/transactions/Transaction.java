@@ -7,14 +7,16 @@ public class Transaction {
     private String id;
     private Document document;
     private Student student;
-    private TypeTransaction typeTransaction;
-    private String dateTransaction;
+    private String borrowDate;
+    private String returnDate;
+    private String dueDate;
 
-    public Transaction(Document document, Student student, TypeTransaction typeTransaction, String dateTransaction) {
+    public Transaction(Document document, Student student, String borrowDate, String returnDate, String dueDate) {
         this.document = document;
         this.student = student;
-        this.typeTransaction = typeTransaction;
-        this.dateTransaction = dateTransaction;
+        this.borrowDate = borrowDate;
+        this.returnDate = returnDate;
+        this.dueDate= dueDate;
     }
 
     public String getId() {
@@ -41,25 +43,27 @@ public class Transaction {
         this.student = student;
     }
 
-    public String getTypeTransaction() {
-        return typeTransaction.name();
+    public void setBorrowDate(String borrowDate) {
+        this.borrowDate = borrowDate;
     }
 
-    public void setTypeTransaction(TypeTransaction typeTransaction) {
-        this.typeTransaction = typeTransaction;
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
     }
 
-    public String getDateTransaction() {
-        return dateTransaction;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public void setDateTransaction(String dateTransaction) {
-        this.dateTransaction = dateTransaction;
+    public String getBorrowDate() {
+        return borrowDate;
     }
 
-    public enum TypeTransaction {
-        BORROW,
-        RETURN;
+    public String getReturnDate() {
+        return returnDate;
     }
 
+    public String getDueDate() {
+        return dueDate;
+    }
 }

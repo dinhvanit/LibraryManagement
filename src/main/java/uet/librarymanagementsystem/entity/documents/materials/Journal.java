@@ -21,11 +21,6 @@ public class Journal extends Document {
         this.category = category;
     }
 
-    public Journal(String id, String title, String author, JournalCategory category, String dueDate) {
-        super(id, title, author, dueDate);
-        this.category = category;
-    }
-
     @Override
     public String getMaterial() {
         return MaterialType.JOURNAL.name(); // Trả về tên enum
