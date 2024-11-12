@@ -8,8 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.userServices.DeleteStudentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
 import java.net.URL;
@@ -83,13 +83,35 @@ public class SearchAndRemoveStudentController implements Initializable {
 
 
     @FXML
-    void deleteAllStudentButtonOnClick(MouseEvent event) {
+    private void deleteAllStudentButtonOnClick(MouseEvent event) {
+        // Iterate over each student in the TableView
+        for (Student student : deleteStudentTableView.getItems()) {
+            // Delete each student from the database using deleteStudentByID method
+            deleteStudentService.deleteStudentByID(student.getId());
+            System.out.println("Student with ID " + student.getId() + " deleted from database.");
+        }
 
+        // Clear all students from the TableView
+        deleteStudentTableView.getItems().clear();
+        System.out.println("All students removed from the 'Students to Delete' table.");
     }
 
-    @FXML
-    void deleteStudentButtonOnClick(MouseEvent event) {
+    private DeleteStudentService deleteStudentService = new DeleteStudentService();
 
+    @FXML
+    private void deleteStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            // Delete student from the database using deleteStudentByID method
+            deleteStudentService.deleteStudentByID(selectedStudent.getId());
+
+            // Remove student from the TableView
+            deleteStudentTableView.getItems().remove(selectedStudent);
+            System.out.println("Student with ID " + selectedStudent.getId() + " removed from UI.");
+        } else {
+            System.out.println("No student selected for deletion.");
+        }
     }
 
     @FXML
