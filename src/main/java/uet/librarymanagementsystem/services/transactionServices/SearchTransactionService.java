@@ -28,54 +28,6 @@ public class SearchTransactionService {
     public ObservableList<Transaction> searchTransaction(String id_student) throws SQLException {
            return TransactionsTable.searchTransByStudent_id(id_student);
 
-<<<<<<< HEAD
-        ObservableList<Transaction> transactionSearchList = FXCollections.observableArrayList();
-        String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, "23020714");
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String retrievedIdTransaction = rs.getString("id_transaction");
-
-                    String retrievedIdStudent = rs.getString("id_student");
-                    String retrievedNameStudent = rs.getString("name_student");
-
-                    String retrievedDateOfBirth = rs.getString("date_of_birth");
-
-                    String retrievedPhoneNumber = rs.getString("phone_number");
-                    String retrievedEmail = rs.getString("email");
-                    String retrievedPassword = rs.getString("password");
-
-                    String retrievedIdDocument = rs.getString("id_document");
-                    String retrievedTitleDocument = rs.getString("title_document");
-                    String retrievedAuthor = rs.getString("author");
-                    String retrievedMaterial = rs.getString("material");
-                    String retrievedCategory = rs.getString("category");
-
-                    String retrievedType = rs.getString("type");
-                    String retrievedDateTransaction = rs.getString("date_transaction");
-                    String retrievedDueDate = rs.getString("due_date");
-
-                    Student student = new Student(
-                            retrievedIdStudent,
-                            retrievedNameStudent,
-                            retrievedDateOfBirth,
-                            retrievedPhoneNumber,
-                            retrievedEmail,
-                            retrievedPassword
-                    );
-
-                    Document document = DocumentFactory.createDocument(
-                            retrievedIdDocument,
-                            retrievedTitleDocument,
-                            retrievedAuthor,
-                            retrievedMaterial,
-                            retrievedCategory,
-                            retrievedDueDate
-                    );
-=======
            // code cua tran
 //        ObservableList<Transaction> transactionSearchList = FXCollections.observableArrayList();
 //        String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
@@ -142,7 +94,6 @@ public class SearchTransactionService {
 //        }
 //        return transactionSearchList;
     }
->>>>>>> 6aca376fdb74f33cb43b42bf749b317924cc4fa1
 
 
     public static void main(String[] args) throws SQLException {
