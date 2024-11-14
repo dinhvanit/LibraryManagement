@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.TransactionDocumentsController">
    <children>
       <BorderPane layoutX="250.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -45,8 +44,8 @@
                               <TableColumn fx:id="authorColumnTransaction" prefWidth="75.0" text="AUTHOR" />
                               <TableColumn fx:id="materialColumnTransaction" prefWidth="75.0" text="MATERIAL" />
                               <TableColumn fx:id="categoryColumnTransaction" prefWidth="75.0" text="CATEGORY" />
-                              <TableColumn fx:id="typeColumnTransaction" prefWidth="75.0" text="TYPE" />
-                              <TableColumn fx:id="dateTransactionColumnTransaction" prefWidth="75.0" text="DATE_TRANSACTION" />
+                              <TableColumn fx:id="borrow_dateColumnTransaction" prefWidth="75.0" text="BORROW_DATE" />
+                              <TableColumn fx:id="return_dateTransactionColumnTransaction" prefWidth="75.0" text="RETURN_DATE" />
                               <TableColumn fx:id="dueDateColumnTransaction" prefWidth="75.0" text="DUE_DATE" />
                           </columns>
                            <columnResizePolicy>

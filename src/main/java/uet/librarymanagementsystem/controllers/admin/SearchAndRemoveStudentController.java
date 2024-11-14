@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.userServices.DeleteStudentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
 import java.net.URL;
@@ -43,24 +44,91 @@ public class SearchAndRemoveStudentController implements Initializable {
     private TableColumn<Student, String> phoneColumnSearchResults;
 
     @FXML
+    private TableColumn<Student, String> idColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> nameColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> passwordColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> phoneColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> birthdayColumnStudentsToDelete;
+
+    @FXML
+    private TableColumn<Student, String> emailColumnStudentsToDelete;
+
+    @FXML
     private TableView<Student> searchStudentTableView;
 
     private SearchStudentService searchStudentService;
 
     @FXML
-    void deleteAllStudentButtonOnClick(MouseEvent event) {
+    private void addStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
 
+        if (selectedStudent != null) {
+            deleteStudentTableView.getItems().add(selectedStudent);
+
+            searchStudentTableView.getItems().remove(selectedStudent);
+
+            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+        }
     }
 
-    @FXML
-    void deleteStudentButtonOnClick(MouseEvent event) {
 
+    @FXML
+    private void deleteAllStudentButtonOnClick(MouseEvent event) {
+        // Iterate over each student in the TableView
+        for (Student student : deleteStudentTableView.getItems()) {
+            // Delete each student from the database using deleteStudentByID method
+            deleteStudentService.deleteStudentByID(student.getId());
+            System.out.println("Student with ID " + student.getId() + " deleted from database.");
+        }
+
+        // Clear all students from the TableView
+        deleteStudentTableView.getItems().clear();
+        System.out.println("All students removed from the 'Students to Delete' table.");
+    }
+
+    private DeleteStudentService deleteStudentService = new DeleteStudentService();
+
+    @FXML
+    private void deleteStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            // Delete student from the database using deleteStudentByID method
+            deleteStudentService.deleteStudentByID(selectedStudent.getId());
+
+            // Remove student from the TableView
+            deleteStudentTableView.getItems().remove(selectedStudent);
+            System.out.println("Student with ID " + selectedStudent.getId() + " removed from UI.");
+        } else {
+            System.out.println("No student selected for deletion.");
+        }
     }
 
     @FXML
     void removeStudentButtonOnClick(MouseEvent event) {
+        Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
 
+        if (selectedStudent != null) {
+            deleteStudentTableView.getItems().remove(selectedStudent);
+
+            searchStudentTableView.getItems().add(selectedStudent);
+
+            System.out.println("Sinh viên đã được xóa khỏi bảng Students to Delete và chuyển lại vào bảng List Of Students.");
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên từ bảng Students to Delete để xóa.");
+        }
     }
+
 
     @FXML
     void searchStudentButtonOnClick(MouseEvent event) {
@@ -88,5 +156,15 @@ public class SearchAndRemoveStudentController implements Initializable {
         phoneColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
         emailColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         passwordColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+
+
+        idColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        nameColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        birthdayColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateOfBirth()));
+        phoneColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
+        emailColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        passwordColumnStudentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+
+
     }
 }

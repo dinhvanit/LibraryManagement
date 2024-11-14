@@ -28,6 +28,7 @@ public class BorrowedDocumentsController implements Initializable {
     @FXML
     private TableColumn<Transaction, String> borrowDateColumnBorrowedDocuments;
 
+
     @FXML
     private TableColumn<Transaction, String> categoryColumnBorrowedDocuments;
 
@@ -66,8 +67,8 @@ public class BorrowedDocumentsController implements Initializable {
         authorColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
         materialColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getMaterial()));
         categoryColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getCategory()));
-        borrowDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateTransaction()));
-        dueDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getDueDate()));
+        borrowDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBorrowDate()));
+        dueDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         borrowedDocumentsList = FXCollections.observableArrayList();
         borrowedDocumentsTableView.setItems(borrowedDocumentsList);
