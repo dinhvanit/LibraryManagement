@@ -44,8 +44,8 @@
                               <TableColumn fx:id="authorColumnTransaction" prefWidth="75.0" text="AUTHOR" />
                               <TableColumn fx:id="materialColumnTransaction" prefWidth="75.0" text="MATERIAL" />
                               <TableColumn fx:id="categoryColumnTransaction" prefWidth="75.0" text="CATEGORY" />
-                              <TableColumn fx:id="borrow_dateColumnTransaction" prefWidth="75.0" text="BORROW_DATE" />
-                              <TableColumn fx:id="return_dateTransactionColumnTransaction" prefWidth="75.0" text="RETURN_DATE" />
+                              <TableColumn fx:id="borrowDateColumnTransaction" prefWidth="75.0" text="BORROW_DATE" />
+                              <TableColumn fx:id="returnDateColumnTransaction" prefWidth="75.0" text="RETURN_DATE" />
                               <TableColumn fx:id="dueDateColumnTransaction" prefWidth="75.0" text="DUE_DATE" />
                           </columns>
                            <columnResizePolicy>

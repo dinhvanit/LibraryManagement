@@ -1,7 +1,12 @@
 package uet.librarymanagementsystem.services.documentServices;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.BorrowedDocuments;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
+import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
+import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,15 +22,22 @@ public class AddBorrowDocumentService {
         this.conn = DatabaseManager.connect();
     }
 
-    public void addBorrowDocument() throws SQLException {
-        // ae nao ket hop voi scenebuilder thi lay dau vao tu ban phim
-        BorrowedDocuments.insertBorrowedDocument("23020677", "0101000200310001", "2024/11/10", "2024/11/11");
+    public static ObservableList<Transaction> addBorrowDocument() throws SQLException {
+        String id_student = LoginController.getIdCurrentStudent();
+        ObservableList<Transaction> transactionList = TransactionsTable.searchTransByStudent_id(id_student);
+
+        ObservableList<Transaction> transactionBorrow = FXCollections.observableArrayList();
+        for (Transaction transaction : transactionList) {
+            if (transaction.getReturnDate() == null) {
+                transactionBorrow.add(transaction);
+            }
+        }
+        return transactionBorrow;
     }
 
     public static void main(String[] args) throws SQLException {
         AddBorrowDocumentService addBorrowDocumentService = new AddBorrowDocumentService();
-        addBorrowDocumentService.addBorrowDocument();
-
+        addBorrowDocument();
     }
 
 }
