@@ -5,6 +5,7 @@ module uet.librarymanagementsystem {
     requires org.xerial.sqlitejdbc;
     requires org.slf4j;
     requires java.desktop;
+    requires org.json;
 
     opens uet.librarymanagementsystem.controllers to javafx.fxml;
     exports uet.librarymanagementsystem;
