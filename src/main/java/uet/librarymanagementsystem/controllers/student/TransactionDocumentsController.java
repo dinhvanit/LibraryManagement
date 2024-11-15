@@ -44,10 +44,10 @@ public class TransactionDocumentsController implements Initializable {
     private TableColumn<Transaction, String> titleColumnTransaction;
 
     @FXML
-    private TableColumn<Transaction, String> borrow_dateColumnTransaction;
+    private TableColumn<Transaction, String> borrowDateColumnTransaction;
 
     @FXML
-    private TableColumn<Transaction, String> return_dateTransactionColumnTransaction;
+    private TableColumn<Transaction, String> returnDateColumnTransaction;
 
     @FXML
     private TableColumn<Transaction, String> dueDateColumnTransaction;
@@ -69,8 +69,8 @@ public class TransactionDocumentsController implements Initializable {
         authorColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
         materialColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getMaterial()));
         categoryColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getCategory()));
-        borrow_dateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBorrowDate()));
-        return_dateTransactionColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReturnDate()));
+        borrowDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBorrowDate()));
+        returnDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReturnDate()));
         dueDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         transactionList = FXCollections.observableArrayList();
@@ -81,6 +81,7 @@ public class TransactionDocumentsController implements Initializable {
             System.out.println("Loi");
             throw new RuntimeException(e);
         }
+
         transactionTableView.setItems(transactionList);
     }
 }

@@ -115,6 +115,40 @@ public class TransactionsTable {
         }
     }
 
+    public static void updateReturnDate(String transactionId, String returnDate) throws SQLException {
+        Connection conn = connect();
+
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Cannot update return_date, connection is closed or invalid.");
+        }
+
+        try {
+            // Cập nhật giá trị return_date cho giao dịch có id_transaction cụ thể
+            String updateReturnDateSQL = "UPDATE TransactionDocument " +
+                    "SET return_date = ? " +
+                    "WHERE id_transaction = ? AND return_date IS NULL";
+
+            PreparedStatement pstmt = conn.prepareStatement(updateReturnDateSQL);
+
+            pstmt.setString(1, returnDate);
+            pstmt.setString(2, transactionId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected == 1) {
+                System.out.println("Return date updated successfully.");
+            } else {
+                System.out.println("No transaction found with the given ID or return_date is already set.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating return_date.");
+            throw e;
+        } finally {
+            conn.close();
+        }
+    }
 
     public static ObservableList<Transaction> searchTransByStudent_id(String id_student) {
         String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
@@ -203,5 +237,7 @@ public class TransactionsTable {
 //          searchTransByStudent_id("23020675")
             createTransactionTable();
             insertTransaction(transaction);
+            updateReturnDate("7", "15-11-2025");
+
     }
 }

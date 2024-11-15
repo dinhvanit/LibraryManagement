@@ -1,3 +1,6 @@
 .button {
     -fx-cursor: hand;
 }
+.table-row-yellow {
+     -fx-background-color: yellow;
+}

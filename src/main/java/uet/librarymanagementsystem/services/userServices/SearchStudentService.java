@@ -56,4 +56,35 @@ public class SearchStudentService {
 
         return studentListSearchResult;
     }
+
+    public Student searchID(String id) throws SQLException {
+        Student student = null;
+        StringBuilder query = new StringBuilder("SELECT id, name, dateOfBirth, phoneNumber, email, password FROM User WHERE 1=1");
+
+        if (id != null && !id.isEmpty()) {
+            query.append(" AND id LIKE ?");
+        }
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            int paramIndex = 1;
+
+            if (id != null && !id.isEmpty()) {
+                pstmt.setString(paramIndex++, "%" + id + "%");
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    String retrievedId = rs.getString("id");
+                    String retrievedName = rs.getString("name");
+                    String retrievedDateOfBirth = rs.getString("dateOfBirth");
+                    String retrievedPhoneNumber = rs.getString("phoneNumber");
+                    String retrievedEmail = rs.getString("email");
+                    String retrievedPassword = rs.getString("password");
+
+                    student = new Student(retrievedId, retrievedName, retrievedDateOfBirth, retrievedPhoneNumber, retrievedEmail, retrievedPassword);
+                }
+            }
+        }
+        return student;
+    }
 }

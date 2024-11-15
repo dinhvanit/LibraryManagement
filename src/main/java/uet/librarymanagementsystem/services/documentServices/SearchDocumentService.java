@@ -73,4 +73,68 @@ public class SearchDocumentService {
 
         return documentListSearchResult;
     }
+
+    public ObservableList<Document> searchByNotNull(
+            String title, String author, String material, String category) throws SQLException {
+
+        ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
+        StringBuilder query = new StringBuilder(
+                "SELECT document.id, document.title, document.author, document.material, document.category " +
+                        "FROM Document document " +
+                        "LEFT JOIN TransactionDocument t ON document.id = t.id_document " +
+                        "WHERE 1=1");
+
+        if (title != null && !title.isEmpty()) {
+            query.append(" AND document.title LIKE ?");
+        }
+        if (author != null && !author.isEmpty()) {
+            query.append(" AND document.author LIKE ?");
+        }
+        if (material != null && !material.isEmpty()) {
+            query.append(" AND document.material = ?");
+        }
+        if (category != null && !category.isEmpty()) {
+            query.append(" AND document.category = ?");
+        }
+
+        query.append(" AND (t.return_date IS NOT NULL OR t.id_document IS NULL)");
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            int paramIndex = 1;
+
+            if (title != null && !title.isEmpty()) {
+                pstmt.setString(paramIndex++, "%" + title + "%");
+            }
+            if (author != null && !author.isEmpty()) {
+                pstmt.setString(paramIndex++, "%" + author + "%");
+            }
+            if (material != null && !material.isEmpty()) {
+                pstmt.setString(paramIndex++, material);
+            }
+            if (category != null && !category.isEmpty()) {
+                pstmt.setString(paramIndex++, category);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    String retrievedId = rs.getString("id");
+                    String retrievedTitle = rs.getString("title");
+                    String retrievedAuthor = rs.getString("author");
+                    String retrievedMaterial = rs.getString("material");
+                    String retrievedCategory = rs.getString("category");
+                    Document document = DocumentFactory.createDocument(
+                            retrievedId,
+                            retrievedTitle,
+                            retrievedAuthor,
+                            retrievedMaterial,
+                            retrievedCategory
+                    );
+                    documentListSearchResult.add(document);
+                }
+            }
+        }
+
+        return documentListSearchResult;
+    }
+
 }

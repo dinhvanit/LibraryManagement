@@ -15,4 +15,7 @@ public class Student extends User {
         this.borrowedDocuments = new ArrayList<>();
     }
 
+    public Student() {
+        super();
+    }
 }

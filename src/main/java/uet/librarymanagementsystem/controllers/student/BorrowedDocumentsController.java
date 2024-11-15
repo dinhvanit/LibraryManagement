@@ -8,11 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class BorrowedDocumentsController implements Initializable {
@@ -50,13 +55,24 @@ public class BorrowedDocumentsController implements Initializable {
     }
 
     @FXML
-    void returnAllDocumentsButtonOnClick(MouseEvent event) {
-
+    void returnAllDocumentsButtonOnClick(MouseEvent event) throws SQLException{
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        for (Transaction transaction : borrowedDocumentsList) {
+            TransactionsTable.updateReturnDate(transaction.getId(), today);
+        }
+        borrowedDocumentsList.clear();
+        borrowedDocumentsTableView.setItems(borrowedDocumentsList);
     }
 
     @FXML
-    void returnDocumentButtonOnClick(MouseEvent event) {
-
+    void returnDocumentButtonOnClick(MouseEvent event) throws SQLException {
+        Transaction selectedTransaction = borrowedDocumentsTableView.getSelectionModel().getSelectedItem();
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        if (selectedTransaction != null) {
+            TransactionsTable.updateReturnDate(selectedTransaction.getId(), today);
+            borrowedDocumentsList.remove(selectedTransaction);
+            borrowedDocumentsTableView.setItems(borrowedDocumentsList);
+        }
     }
 
     @Override
@@ -71,6 +87,11 @@ public class BorrowedDocumentsController implements Initializable {
         dueDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         borrowedDocumentsList = FXCollections.observableArrayList();
+        try {
+            borrowedDocumentsList = AddBorrowDocumentService.addBorrowDocument();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         borrowedDocumentsTableView.setItems(borrowedDocumentsList);
 
     }

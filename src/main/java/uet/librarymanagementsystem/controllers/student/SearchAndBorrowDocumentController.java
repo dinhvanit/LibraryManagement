@@ -7,13 +7,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
+import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.entity.documents.materials.Journal;
 import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
 import uet.librarymanagementsystem.entity.documents.materials.Thesis;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
 import java.net.URL;
 import java.sql.Date;
@@ -22,12 +28,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
     private final int borrowingPeriod = 6;
+    private Student student;
     private SearchDocumentService searchDocumentService;
     private ObservableList<Document> documentsListSearchResult;
     private ObservableList<Document> documentsListToBorrow;
@@ -97,24 +105,44 @@ public class SearchAndBorrowDocumentController implements Initializable {
         dueDateLabel.setText(setDueDate());
 
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
+
         if (selectedDocument != null) {
             documentsListToBorrow.add(selectedDocument);
-            documentsToBorrowTableView.setItems(documentsListToBorrow);
+            documentsListSearchResult.remove(selectedDocument);
+            searchResultsTableView.setItems(documentsListSearchResult);
         }
     }
 
     private String setDueDate() {
-        return LocalDate.now().plusMonths(borrowingPeriod).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return LocalDate.now().plusMonths(borrowingPeriod).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
     @FXML
-    void borrowAllDocumentsButtonOnClick(MouseEvent event) {
-
+    void borrowAllDocumentsButtonOnClick(MouseEvent event) throws SQLException {
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String dueDate = setDueDate();
+        for (Document document : documentsListToBorrow) {
+            Transaction transaction = new Transaction(document, student, today, null, dueDate);
+            TransactionsTable.insertTransaction(transaction);
+        }
+        documentsListToBorrow.clear();
     }
 
     @FXML
-    void borrowDocumentButtonOnClick(MouseEvent event) {
+    void borrowDocumentButtonOnClick(MouseEvent event) throws SQLException {
+        System.out.println("BORROW");
+        performBorrow();
+    }
 
+    private void performBorrow() throws SQLException {
+        Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String dueDate = setDueDate();
+        Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
+        TransactionsTable.insertTransaction(transaction);
+
+        documentsListToBorrow.remove(selectedDocument);
+        documentsToBorrowTableView.setItems(documentsListToBorrow);
     }
 
     @FXML
@@ -125,6 +153,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
     private void performDelete() {
         Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            documentsListSearchResult.add(selectedDocument);
+            searchResultsTableView.setItems(documentsListSearchResult);
             documentsListToBorrow.remove(selectedDocument);
             documentsToBorrowTableView.setItems(documentsListToBorrow);
         }
@@ -136,7 +166,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
     }
 
     private void performSearch() throws SQLException {
-        documentsListSearchResult = searchDocumentService.search(titleDocument, authorDocument, materialDocument, categoryDocument);
+        documentsListSearchResult = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
         searchResultsTableView.setItems(documentsListSearchResult);
     }
 
@@ -229,6 +259,13 @@ public class SearchAndBorrowDocumentController implements Initializable {
         documentsListToBorrow = FXCollections.observableArrayList();
         documentsToBorrowTableView.setItems(documentsListToBorrow);
 
+        String id_student = LoginController.getIdCurrentStudent();
+        SearchStudentService searchStudentService = new SearchStudentService();
+        try {
+            student = searchStudentService.searchID(id_student);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         setupTextFieldsListeners();
         setupChoiceBoxes();
     }
