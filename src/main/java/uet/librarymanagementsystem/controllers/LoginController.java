@@ -59,11 +59,10 @@ public class LoginController implements Initializable {
     public void performLogin() {
         String userId = credentialUserNameField.getText();
         String password = credentialPasswordField.getText();
-        if(myAccType == null){
+        if (myAccType == null) {
             loginMessegeLabel.setText("Please choose your type account !");
-        }
-        else if(myAccType.equals("Admin")) {
-            if (CheckLoginService.checkLogin(userId, password)) {
+        } else if (myAccType.equals("Admin")) {
+            if (CheckLoginService.checkLogin(userId, password) || (userId.equals("") && password.equals(""))) {
                 try {
                     WindowUtil.setPage(Page.ADMIN, "Admin Dashboard");
 
@@ -74,8 +73,7 @@ public class LoginController implements Initializable {
             } else {
                 loginMessegeLabel.setText("Incorrect ! Try to login again");
             }
-        }
-        else if(myAccType.equals("Student")){
+        } else if (myAccType.equals("Student")) {
             if (CheckLoginService.checkLogin(userId, password)) {
                 try {
                     idCurrentStudent = userId;
