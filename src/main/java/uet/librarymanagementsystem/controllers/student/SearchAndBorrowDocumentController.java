@@ -11,10 +11,6 @@ import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
-import uet.librarymanagementsystem.entity.documents.materials.Book;
-import uet.librarymanagementsystem.entity.documents.materials.Journal;
-import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
-import uet.librarymanagementsystem.entity.documents.materials.Thesis;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
@@ -27,10 +23,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class SearchAndBorrowDocumentController implements Initializable {
 
@@ -202,16 +195,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
             ObservableList<String> categories = FXCollections.observableArrayList("");
             if (newValue != null) {
-                switch (newValue) {
-                    case BOOK -> categories.addAll(
-                            Arrays.stream(Book.BookCategory.values()).map(Enum::name).collect(Collectors.toList()));
-                    case THESIS -> categories.addAll(
-                            Arrays.stream(Thesis.ThesisCategory.values()).map(Enum::name).collect(Collectors.toList()));
-                    case NEWSPAPER -> categories.addAll(
-                            Arrays.stream(Newspaper.NewspaperCategory.values()).map(Enum::name).collect(Collectors.toList()));
-                    case JOURNAL -> categories.addAll(
-                            Arrays.stream(Journal.JournalCategory.values()).map(Enum::name).collect(Collectors.toList()));
-                }
+                // Use getCategoriesForMaterial to fetch categories dynamically
+                categories.addAll(MaterialType.getCategoriesForMaterial(newValue));
             }
             choiceCategoryDocument.setItems(categories);
             categoryDocument = "";
