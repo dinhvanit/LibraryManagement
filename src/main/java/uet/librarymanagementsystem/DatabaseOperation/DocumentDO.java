@@ -3,6 +3,7 @@ package uet.librarymanagementsystem.DatabaseOperation;
 
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,24 +14,6 @@ import java.util.logging.Logger;
 
 public class DocumentDO extends DatabaseManager {
     private static final Logger logger = Logger.getLogger(DocumentDO.class.getName());
-
-    public static Document inputDocumentFromKeyboard() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter document title: ");
-        String title = scanner.nextLine();
-
-        System.out.println("Enter document author: ");
-        String author = scanner.nextLine();
-
-        System.out.println("Enter document category: ");
-        String category = scanner.nextLine();
-
-        System.out.println("Enter document material: ");
-        String material = scanner.nextLine();
-
-        return DocumentFactory.createDocument("1", title, author, material, category);
-    }
 
     public static void createDocumentTable() throws SQLException {
         Connection con = connect();
@@ -43,7 +26,8 @@ public class DocumentDO extends DatabaseManager {
                 "title VARCHAR(255), " +
                 "author VARCHAR(255), " +
                 "material VARCHAR(255), " +
-                "category VARCHAR(255) " +
+                "category VARCHAR(255), " +
+                "isbn VARCHAR(255) " +
                 ")";
         statement.execute(createTableSQL);
         con.close();
@@ -71,13 +55,20 @@ public class DocumentDO extends DatabaseManager {
             }
 
             // Chèn tài liệu vào bảng Document nếu chưa tồn tại
-            String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category) VALUES (?, ?, ?, ?, ?)";
+            String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category, isbn) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement documentStmt = con.prepareStatement(insertDocumentSQL);
             documentStmt.setString(1, document.getId());
             documentStmt.setString(2, document.getTitle());
             documentStmt.setString(3, document.getAuthor());
             documentStmt.setString(4, document.getMaterial());
             documentStmt.setString(5, document.getCategory());
+
+            if (document instanceof Book) {
+                documentStmt.setString(6, ((Book) document).getIsbn());
+            } else {
+                documentStmt.setNull(6, Types.VARCHAR);
+            }
+
             documentStmt.executeUpdate();
 
             System.out.println("Document added successfully!");
@@ -106,7 +97,8 @@ public class DocumentDO extends DatabaseManager {
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
-                    resultSet.getString("category")
+                    resultSet.getString("category"),
+                    resultSet.getString("isbn")
             );
         } else {
             System.out.println("not found");
@@ -146,7 +138,8 @@ public class DocumentDO extends DatabaseManager {
                     resultSet.getString("title"),
                     resultSet.getString("author"),
                     resultSet.getString("material"),
-                    resultSet.getString("category")
+                    resultSet.getString("category"),
+                    resultSet.getString("isbn")
             );
             documentList.add(document);
         }
@@ -170,8 +163,18 @@ public class DocumentDO extends DatabaseManager {
     public static void main(String[] args) {
         try {
 
-//            List<Document> documents = DocumentDO.getAllDocument();
-//            documents.forEach(document -> System.out.println(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory()));
+            List<Document> documents = DocumentDO.getAllDocument();
+            documents.forEach(document -> {
+                System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
+
+                // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
+                if (document instanceof Book) {
+                    Book book = (Book) document;
+                    System.out.println(" - ISBN: " + book.getIsbn());
+                } else {
+                    System.out.println();
+                }
+            });
 
             createDocumentTable();
 

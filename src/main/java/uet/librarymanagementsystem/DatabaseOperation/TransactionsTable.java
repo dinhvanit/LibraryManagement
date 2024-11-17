@@ -6,11 +6,8 @@ import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
-import uet.librarymanagementsystem.services.userServices.AddStudentService;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.Objects;
 
 import static uet.librarymanagementsystem.DatabaseOperation.DatabaseManager.connect;
 import javafx.collections.ObservableList;
@@ -41,6 +38,7 @@ public class TransactionsTable {
                 borrow_date DATE,
                 return_date DATE,
                 due_date DATE,
+                isbn VARCHAR(255),
                 FOREIGN KEY (id_student) REFERENCES Student(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
                 FOREIGN KEY (id_document) REFERENCES Document(document_id) ON DELETE CASCADE ON UPDATE CASCADE
             );
@@ -71,8 +69,8 @@ public class TransactionsTable {
             String insertTransactionSQL = "INSERT INTO TransactionDocument " +
                     "(id_student, name_student, date_of_birth, phone_number, " +
                     "email, password, id_document, title_document, author, " +
-                    "material, category, borrow_date, return_date, due_date) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "material, category, borrow_date, return_date, due_date, isbn) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement transactionStmt = conn.prepareStatement(insertTransactionSQL);
 
@@ -92,6 +90,11 @@ public class TransactionsTable {
             transactionStmt.setString(12, transaction.getBorrowDate());
             transactionStmt.setString(13, transaction.getReturnDate());
             transactionStmt.setString(14, transaction.getDueDate());
+            if (transaction.getDocument() instanceof Book) {
+                transactionStmt.setString(15,  ((Book) transaction.getDocument()).getIsbn());
+            } else {
+                transactionStmt.setNull(15, Types.VARCHAR);
+            }
 
             transactionStmt.executeUpdate();
 
@@ -177,6 +180,7 @@ public class TransactionsTable {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
+                    String retrievedISBN = rs.getString("isbn");
 
                     String retrievedBorrowDate = rs.getString("borrow_date");
                     String retrievedReturnDate = rs.getString("return_date");
@@ -198,7 +202,7 @@ public class TransactionsTable {
                             retrievedAuthor,
                             retrievedMaterial,
                             retrievedCategory,
-                            retrievedDueDate
+                            retrievedISBN
                     );
 
                     // Create Transaction object based on the type

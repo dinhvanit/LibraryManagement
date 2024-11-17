@@ -11,16 +11,14 @@ import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
-import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -96,9 +94,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     private void performAdd() {
         dueDateLabel.setText(setDueDate());
-
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
-
         if (selectedDocument != null) {
             documentsListToBorrow.add(selectedDocument);
             documentsListSearchResult.remove(selectedDocument);
@@ -123,7 +119,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     void borrowDocumentButtonOnClick(MouseEvent event) throws SQLException {
-        System.out.println("BORROW");
         performBorrow();
     }
 
@@ -133,7 +128,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
         String dueDate = setDueDate();
         Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
         TransactionsTable.insertTransaction(transaction);
-
         documentsListToBorrow.remove(selectedDocument);
         documentsToBorrowTableView.setItems(documentsListToBorrow);
     }
@@ -156,6 +150,21 @@ public class SearchAndBorrowDocumentController implements Initializable {
     @FXML
     void findDocumentButtonOnClick(MouseEvent event) throws SQLException {
         performSearch();
+
+        // cai nay de test thu phat, ty lay ra isbn thi lay kieu nay
+        ObservableList<Document> documents = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
+        documents.forEach(document -> {
+            System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
+
+            // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
+            if (document instanceof Book) {
+                Book book = (Book) document;
+                System.out.println(" - ISBN: " + book.getIsbn());
+            } else {
+                System.out.println();
+            }
+        });
+        // het
     }
 
     private void performSearch() throws SQLException {
@@ -184,7 +193,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
     }
 
     private void setupChoiceBoxes() {
-        // Thêm lựa chọn trống cho Material
         ObservableList<MaterialType> materialTypesWithEmptyOption = FXCollections.observableArrayList();
         materialTypesWithEmptyOption.add(null); // Thêm tùy chọn trống
         materialTypesWithEmptyOption.addAll(MaterialType.values());
@@ -192,10 +200,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
         choiceMaterialDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             materialDocument = (newValue == null) ? "" : newValue.name();
-
             ObservableList<String> categories = FXCollections.observableArrayList("");
             if (newValue != null) {
-                // Use getCategoriesForMaterial to fetch categories dynamically
                 categories.addAll(MaterialType.getCategoriesForMaterial(newValue));
             }
             choiceCategoryDocument.setItems(categories);
@@ -208,8 +214,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
             }
         });
 
-        // Thêm lựa chọn trống cho Category
-        choiceCategoryDocument.getItems().add(null); // Thêm lựa chọn trống cho Category
         choiceCategoryDocument.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             categoryDocument = (newValue == null || newValue.isEmpty()) ? "" : newValue;
             try {
@@ -220,10 +224,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
         });
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         searchDocumentService = new SearchDocumentService();
 
         idColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
@@ -231,6 +233,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
         authorColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
+        //isbnColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListSearchResult = FXCollections.observableArrayList();
         searchResultsTableView.setItems(documentsListSearchResult);
@@ -240,6 +243,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
         authorColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
+        //isbnColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListToBorrow = FXCollections.observableArrayList();
         documentsToBorrowTableView.setItems(documentsListToBorrow);

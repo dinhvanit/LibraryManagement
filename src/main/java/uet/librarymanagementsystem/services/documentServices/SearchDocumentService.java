@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 import java.sql.*;
 
@@ -21,7 +22,7 @@ public class SearchDocumentService {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
         StringBuilder query = new StringBuilder(
-                "SELECT id, title, author, material, category FROM Document WHERE 1=1");
+                "SELECT id, title, author, material, category, isbn FROM Document WHERE 1=1");
 
         if (title != null && !title.isEmpty()) {
             query.append(" AND title LIKE ?");
@@ -59,27 +60,28 @@ public class SearchDocumentService {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
+                    String retrievedISBN = rs.getString("isbn");
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
                             retrievedTitle,
                             retrievedAuthor,
                             retrievedMaterial,
-                            retrievedCategory
+                            retrievedCategory,
+                            retrievedISBN
                     );
-                    documentListSearchResult.add(document);
                 }
             }
         }
-
         return documentListSearchResult;
     }
 
+    // search nhung sach chua muon
     public ObservableList<Document> searchByNotNull(
             String title, String author, String material, String category) throws SQLException {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
         StringBuilder query = new StringBuilder(
-                "SELECT document.id, document.title, document.author, document.material, document.category " +
+                "SELECT document.id, document.title, document.author, document.material, document.category, document.isbn " +
                         "FROM Document document " +
                         "LEFT JOIN TransactionDocument t ON document.id = t.id_document " +
                         "WHERE 1=1");
@@ -122,12 +124,16 @@ public class SearchDocumentService {
                     String retrievedAuthor = rs.getString("author");
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
+                    String retrievedISBN = rs.getString("isbn");
+
+                    // Tạo `Document` không bao gồm ISBN
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
                             retrievedTitle,
                             retrievedAuthor,
                             retrievedMaterial,
-                            retrievedCategory
+                            retrievedCategory,
+                            retrievedISBN
                     );
                     documentListSearchResult.add(document);
                 }
@@ -136,5 +142,4 @@ public class SearchDocumentService {
 
         return documentListSearchResult;
     }
-
 }
