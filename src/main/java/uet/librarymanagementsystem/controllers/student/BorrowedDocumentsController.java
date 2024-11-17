@@ -9,10 +9,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -51,7 +53,7 @@ public class BorrowedDocumentsController implements Initializable {
 
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
-
+        WindowUtil.setPage(Page.SHOW_INFO_DOCUMENT, "Information Document");
     }
 
     @FXML

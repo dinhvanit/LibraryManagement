@@ -11,7 +11,9 @@ public enum Page {
     SEARCH_AND_REMOVE_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_document.fxml"),
     SEARCH_AND_BORROW_DOCUMENT("/uet/librarymanagementsystem/fxml/student/search_borrow_document.fxml"),
     TRANSACTION_DOCUMENT("/uet/librarymanagementsystem/fxml/student/transaction_documents.fxml"),
-    RETURN_DOCUMENT("/uet/librarymanagementsystem/fxml/student/borrowed_documents.fxml");
+    RETURN_DOCUMENT("/uet/librarymanagementsystem/fxml/student/borrowed_documents.fxml"),
+    SHOW_INFO_DOCUMENT("/uet/librarymanagementsystem/fxml/info_document/get_info_document.fxml");
+
     private final String fxmlPath;
 
     Page(String fxmlPath) {
