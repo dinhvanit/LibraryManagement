@@ -13,10 +13,10 @@ import java.util.logging.Logger;
 public class AddDocumentService {
     private static final Logger logger = Logger.getLogger(AddDocumentService.class.getName());
 
-    public void addDocument(String title, String author, String material, String category) {
+    public void addDocument(String title, String author, String material, String category, String isbn) {
         try {
             // Khởi tạo đối tượng Document từ DocumentFactory
-            Document document = DocumentFactory.createDocument(null, title, author, material, category);
+            Document document = DocumentFactory.createDocument(null, title, author, material, category, isbn);
 
             // Kiểm tra và thêm Title nếu chưa có
             TitleTable titleTable = new TitleTable();
