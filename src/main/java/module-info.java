@@ -11,4 +11,5 @@ module uet.librarymanagementsystem {
     exports uet.librarymanagementsystem;
     opens uet.librarymanagementsystem.controllers.admin to javafx.fxml;
     opens uet.librarymanagementsystem.controllers.student to javafx.fxml;
+    opens uet.librarymanagementsystem.controllers.info_document to javafx.fxml;
 }

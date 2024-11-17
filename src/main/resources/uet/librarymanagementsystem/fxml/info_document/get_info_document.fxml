@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.info_document.GetInfoDocumentController">
+   <children>
+      <BorderPane layoutX="186.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox prefHeight="69.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="69.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="INFORMATION">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="333.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="334.0" prefWidth="218.0">
+                                 <children>
+                                    <ImageView fx:id="imageInformation" fitHeight="497.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="530.0" prefWidth="238.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox prefHeight="406.0" prefWidth="682.0">
+                                       <children>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="ID: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="idLabel" text="N/A" HBox.hgrow="ALWAYS">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="ISBN: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="isbnLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Title: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="titleLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                      <Label prefWidth="100.0" text="Author: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="authorLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Material: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="materialLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Category: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="categoryLabel" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label prefWidth="100.0" text="Pulisher: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="pulisherLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Language: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="languageLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="256.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Borrow date: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="borrowDateLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label prefWidth="100.0" text="Return date:">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="returnDateLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="327.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label prefWidth="100.0" text="Due date: ">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="dueDateLabel" text="N/A">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="100.0">
+                                                   <children>
+                                                      <Label text="Preview: ">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <Hyperlink fx:id="previewHyperlink" layoutY="14.0" onMouseClicked="#previewLinkClick" text="Go to preview">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Hyperlink>
+                                                            <Label fx:id="previewLabel" layoutY="17.0" text="N/A" visible="false">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefWidth="100.0">
+                                             <children>
+                                                <Label prefWidth="100.0" text="Description: ">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </HBox>
+                                          <HBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="descriptionLabel" text="N/A">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox layoutX="10.0" layoutY="440.0" prefHeight="55.0">
+                                       <children>
+                                          <Label text="Rating and Review">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font></Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="426.0" prefHeight="150.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label fx:id="starLabel" text="Label">
+                                                         <font>
+                                                            <Font size="35.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <ImageView fx:id="starImage1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                      <ImageView fx:id="starImage2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                      <ImageView fx:id="starImage3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                      <ImageView fx:id="starImage4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                      <ImageView fx:id="starImage5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="43.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label fx:id="totalRatingsLabel" text="Label">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="40.0">
+                                                         <children>
+                                                            <Label text="5" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ProgressBar fx:id="progressBar5" prefHeight="9.0" prefWidth="191.0" progress="0.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ProgressBar>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="40.0">
+                                                         <children>
+                                                            <Label text="4" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ProgressBar fx:id="progressBar4" prefHeight="9.0" prefWidth="191.0" progress="0.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ProgressBar>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox layoutX="10.0" layoutY="85.0" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="40.0">
+                                                         <children>
+                                                            <Label text="3" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ProgressBar fx:id="progressBar3" prefHeight="9.0" prefWidth="191.0" progress="0.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ProgressBar>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox layoutX="10.0" layoutY="111.0" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="40.0">
+                                                         <children>
+                                                            <Label text="2" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ProgressBar fx:id="progressBar2" prefHeight="9.0" prefWidth="191.0" progress="0.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ProgressBar>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox layoutX="10.0" layoutY="123.0" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="40.0">
+                                                         <children>
+                                                            <Label text="1" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <ProgressBar fx:id="progressBar1" prefHeight="9.0" prefWidth="191.0" progress="0.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ProgressBar>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="412.0" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
