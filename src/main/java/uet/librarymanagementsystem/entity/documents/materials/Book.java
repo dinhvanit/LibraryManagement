@@ -5,20 +5,35 @@ import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class Book extends Document {
     private final BookCategory category;
+    private String isbn;
 
     public Book(String title, String author, BookCategory category) {
         super(title, author);
         this.category = category;
     }
 
+    public Book(String id, String title, String author, BookCategory category, String isbn) {
+        super(id, title, author);
+        this.category = category;
+        this.isbn = isbn;
+    }
+
+    // Constructor không nhận ISBN (nếu cần thiết)
     public Book(String id, String title, String author, BookCategory category) {
         super(id, title, author);
         this.category = category;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     @Override
