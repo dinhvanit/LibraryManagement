@@ -12,9 +12,16 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController;
+import uet.librarymanagementsystem.entity.documents.Document;
+import uet.librarymanagementsystem.entity.documents.ImagesOfMaterial;
+import uet.librarymanagementsystem.entity.documents.MaterialType;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
+import javax.print.Doc;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
@@ -38,7 +45,7 @@ public class GetInfoDocumentController implements Initializable {
     private Label authorLabel;
 
     @FXML
-    private HBox categoryLabel;
+    private Label categoryLabel;
 
     @FXML
     private Label descriptionLabel;
@@ -61,23 +68,16 @@ public class GetInfoDocumentController implements Initializable {
     @FXML
     private Hyperlink previewHyperlink;
 
+    private String linkURL;
+
     @FXML
     private Label previewLabel;
 
     @FXML
-    private Label pulisherLabel;
+    private Label publisherLabel;
 
     @FXML
     private Label titleLabel;
-
-    @FXML
-    private Label borrowDateLabel;
-
-    @FXML
-    private Label dueDateLabel;
-
-    @FXML
-    private Label returnDateLabel;
 
     @FXML
     private ImageView starImage1;
@@ -117,7 +117,7 @@ public class GetInfoDocumentController implements Initializable {
 
     @FXML
     void previewLinkClick(MouseEvent event) {
-        String url = "https://google.com";
+        String url = linkURL;
         openWebPage(url);
     }
 
@@ -147,6 +147,70 @@ public class GetInfoDocumentController implements Initializable {
         progressBar1.setProgress((double) ratingCounts[4] / totalRatings);  // 1 sao
     }
 
+
+    private void setFieldLabelByISBN(Book book) {
+        BookLookupService bookLookupService = new BookLookupService(book.getIsbn());
+        if (bookLookupService.checkBookInfoByISBN()) {
+            idLabel.setText(book.getId());
+            isbnLabel.setText(book.getIsbn());
+            titleLabel.setText(bookLookupService.getTitleBook());
+            authorLabel.setText(bookLookupService.getAllAuthors());
+            materialLabel.setText("BOOK");
+            categoryLabel.setText(bookLookupService.getAllCategories());
+            publisherLabel.setText(bookLookupService.getPublisher());
+            languageLabel.setText(bookLookupService.getLanguage());
+            if (Objects.equals(bookLookupService.getPreviewLink(), "N/A")) {
+                previewLabel.setText(bookLookupService.getPreviewLink());
+                previewLabel.setVisible(true);
+                previewHyperlink.setVisible(false);
+            } else {
+                linkURL = bookLookupService.getPreviewLink();
+                previewLabel.setVisible(false);
+                previewHyperlink.setVisible(true);
+            }
+            descriptionLabel.setText(bookLookupService.getDescription());
+
+            if (!Objects.equals(bookLookupService.getThumbnailUrl(), "N/A")) {
+                Image image = new Image(Objects.requireNonNull(
+                        getClass().getResourceAsStream(bookLookupService.getThumbnailUrl())));
+                imageInformation.setImage(image);
+            } else {
+                Image image = new Image(Objects.requireNonNull(
+                        getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
+                imageInformation.setImage(image);
+            }
+        } else {
+            setFieldLabelNotByISBN(book);
+        }
+    }
+
+    private void setFieldLabelNotByISBN(Document document) {
+        idLabel.setText(document.getId());
+        titleLabel.setText(document.getTitle());
+        authorLabel.setText(document.getAuthor());
+        materialLabel.setText(document.getMaterial());
+        categoryLabel.setText(document.getCategory());
+        previewLabel.setVisible(true);
+        previewHyperlink.setVisible(false);
+        if (Objects.equals(document.getMaterial(), MaterialType.BOOK.name())) {
+            Image image = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
+            imageInformation.setImage(image);
+        } else if (Objects.equals(document.getMaterial(), MaterialType.JOURNAL.name())) {
+            Image image = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream(ImagesOfMaterial.JOURNAL.getPath())));
+            imageInformation.setImage(image);
+        } else if (Objects.equals(document.getMaterial(), MaterialType.NEWSPAPER.name())) {
+            Image image = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream(ImagesOfMaterial.NEWSPAPER.getPath())));
+            imageInformation.setImage(image);
+        } else if (Objects.equals(document.getMaterial(), MaterialType.THESIS.name())) {
+            Image image = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream(ImagesOfMaterial.THESIS.getPath())));
+            imageInformation.setImage(image);
+        }
+    }
+
     private void openWebPage(String url) {
         try {
             // Sử dụng Desktop API để mở trình duyệt
@@ -170,6 +234,17 @@ public class GetInfoDocumentController implements Initializable {
         starLabel.setText(String.valueOf(averageRating));
         updateRatingBar();
         updateStars(averageRating);  // Cập nhật các sao
+
+        Document document = SearchAndBorrowDocumentController.getDocumentInSearch();
+        if (document instanceof Book book) {
+            if (book.getIsbn() != null) {
+                setFieldLabelByISBN(book);
+            } else {
+                setFieldLabelNotByISBN(document);
+            }
+        } else {
+            setFieldLabelNotByISBN(document);
+        }
     }
 }
 

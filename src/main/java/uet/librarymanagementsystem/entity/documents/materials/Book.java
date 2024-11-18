@@ -51,7 +51,7 @@ public class Book extends Document {
         String quantityCode = null;
         SearchDocumentService searchDocumentService = new SearchDocumentService();
         try {
-            ObservableList<Document> listDocument = searchDocumentService.search(
+            ObservableList<Document> listDocument = searchDocumentService.searchAll(
                     title, author, getMaterial(), getCategory());
             int len = listDocument.size();
             for (int i = 0; i < len; i++) {
