@@ -171,15 +171,18 @@ public class GetInfoDocumentController implements Initializable {
             descriptionLabel.setText(bookLookupService.getDescription());
 
             if (!Objects.equals(bookLookupService.getThumbnailUrl(), "N/A")) {
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(bookLookupService.getThumbnailUrl())));
+                System.out.println("333333");
+                System.out.println(bookLookupService.getThumbnailUrl());
+                Image image = new Image(bookLookupService.getThumbnailUrl());
                 imageInformation.setImage(image);
             } else {
+                System.out.println("44444");
                 Image image = new Image(Objects.requireNonNull(
                         getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
                 imageInformation.setImage(image);
             }
         } else {
+            System.out.println("NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             setFieldLabelNotByISBN(book);
         }
     }
@@ -201,6 +204,7 @@ public class GetInfoDocumentController implements Initializable {
                     getClass().getResourceAsStream(ImagesOfMaterial.JOURNAL.getPath())));
             imageInformation.setImage(image);
         } else if (Objects.equals(document.getMaterial(), MaterialType.NEWSPAPER.name())) {
+            System.out.println("BAOooooooooooooooooooooo");
             Image image = new Image(Objects.requireNonNull(
                     getClass().getResourceAsStream(ImagesOfMaterial.NEWSPAPER.getPath())));
             imageInformation.setImage(image);
@@ -237,12 +241,15 @@ public class GetInfoDocumentController implements Initializable {
 
         Document document = SearchAndBorrowDocumentController.getDocumentInSearch();
         if (document instanceof Book book) {
+            System.out.println("11111");
             if (book.getIsbn() != null) {
+                System.out.println("22222");
                 setFieldLabelByISBN(book);
             } else {
                 setFieldLabelNotByISBN(document);
             }
         } else {
+            System.out.println("KO CO");
             setFieldLabelNotByISBN(document);
         }
     }
