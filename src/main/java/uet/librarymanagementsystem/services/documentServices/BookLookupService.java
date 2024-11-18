@@ -120,6 +120,8 @@ public class BookLookupService {
 
         if (imageLinks != null) {
             thumbnailUrl = imageLinks.optString("thumbnail", "N/A");
+        } else {
+            System.out.println("No imageLinks found.");
         }
         return thumbnailUrl;
     }
