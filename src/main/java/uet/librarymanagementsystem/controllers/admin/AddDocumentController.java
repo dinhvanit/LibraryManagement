@@ -1,39 +1,36 @@
 package uet.librarymanagementsystem.controllers.admin;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import uet.librarymanagementsystem.entity.documents.Document;
+import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.services.documentServices.AddDocumentService;
 
+import java.sql.SQLException;
 
 public class AddDocumentController {
 
     @FXML
-    private TableColumn<Document, String> authorColumnSearchResults;
+    private ChoiceBox<MaterialType> choiceMaterialAddDoc;
 
     @FXML
-    private TableColumn<Document, String> categoryColumnSearchResults;
+    private ChoiceBox<String> choiceCategoryAddDoc;
 
     @FXML
-    private ChoiceBox<String> choiceCategoryAdmin;
+    private TextField fieldAuthorAddDoc;
 
     @FXML
-    private ChoiceBox<MaterialType> choiceMaterialAdmin;
+    private Spinner<Integer> spinerQuantityAddDoc;
 
     @FXML
-    private TextField fieldAuthorAdmin;
+    private TextField fieldTitleAddDoc;
 
-    @FXML
-    private TextField fieldQuantityAdmin;
-
-    @FXML
-    private TextField fieldTitleAdmin;
-
-    //api document
     @FXML
     private HBox isbnHbox;
 
@@ -44,60 +41,144 @@ public class AddDocumentController {
     private Label isbnValidLabel;
 
     @FXML
-    private TableColumn<Document, String> idColumnSearchResults;
+    private TableView<Document> addDocumentTableView;
 
     @FXML
-    private TableColumn<Document, String> materialColumnSearchResults;
+    private TableColumn<Document, String> idColumnAddResults;
 
     @FXML
-    private TableView<Document> searchDocumentTableView;
+    private TableColumn<Document, String> titleColumnAddResults;
 
     @FXML
-    private TableColumn<Document, String> titleColumnSearchResults;
+    private TableColumn<Document, String> authorColumnAddResults;
 
     @FXML
-    void addDocumentButtonOnClick(MouseEvent event) {
+    private TableColumn<Document, String> materialColumnAddResults;
 
+    @FXML
+    private TableColumn<Document, String> categoryColumnAddResults;
+
+    @FXML
+    private Label statusLabel;
+
+    private final ObservableList<Document> documents = FXCollections.observableArrayList();
+    private final AddDocumentService addDocumentService = new AddDocumentService();
+
+    @FXML
+    private void addDocumentButtonOnClick() throws SQLException {
+        MaterialType materialType = choiceMaterialAddDoc.getValue();
+        String category = choiceCategoryAddDoc.getValue();
+        String title = fieldTitleAddDoc.getText().trim();
+        String author = fieldAuthorAddDoc.getText().trim();
+        String isbn = fieldISBN.getText().trim();
+        Integer quantity = spinerQuantityAddDoc.getValue();
+
+        // Kiểm tra dữ liệu đầu vào
+        if (materialType == null || category == null || title.isEmpty() || author.isEmpty() || (materialType == MaterialType.BOOK && isbn.isEmpty())) {
+            statusLabel.setText("Please fill in all required fields.");
+            return;
+        }
+
+        addDocumentService.addTitleAndAuthor(title, author);
+        // Tạo các tài liệu theo số lượng
+        for (int i = 0; i < quantity; i++) {
+            try {
+                Document document = DocumentFactory.createDocument(null, title, author, materialType.name(), category, isbn);
+                document.setId();
+                documents.add(document);
+            } catch (IllegalArgumentException e) {
+                statusLabel.setText("Invalid category for selected material type.");
+                return;
+            }
+        }
+
+        // Cập nhật giao diện TableView
+        addDocumentTableView.setItems(documents);
+        statusLabel.setText("Document(s) added to the list!");
+        clearFields();
+    }
+
+    private void clearFields() {
+        choiceMaterialAddDoc.getSelectionModel().clearSelection();
+        choiceCategoryAddDoc.getSelectionModel().clearSelection();
+        fieldTitleAddDoc.clear();
+        fieldAuthorAddDoc.clear();
+        fieldISBN.clear();
+        isbnHbox.setVisible(false);
     }
 
     @FXML
-    void removeDocumentButtonOnClick(MouseEvent event) {
-
+    private void removeDocumentButtonOnClick() {
+        Document selectedDocument = addDocumentTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null) {
+            documents.remove(selectedDocument);
+            addDocumentTableView.setItems(documents);
+            statusLabel.setText("Selected document removed from the list.");
+        } else {
+            statusLabel.setText("Please select a document to remove.");
+        }
     }
 
     @FXML
-    void removeAllDocumentButtonOnClick(MouseEvent event) {
-
+    private void removeAllDocumentButtonOnClick() {
+        documents.clear();
+        addDocumentTableView.setItems(documents);
+        statusLabel.setText("All documents removed from the list.");
     }
 
     @FXML
-    void saveAllDocumentButtonOnClick(MouseEvent event) {
+    private void saveAllDocumentButtonOnClick() {
+        if (documents.isEmpty()) {
+            statusLabel.setText("No documents to save.");
+            return;
+        }
 
+        try {
+            for (Document document : documents) {
+                String isbn = (document instanceof Book) ? ((Book) document).getIsbn() : null;
+                addDocumentService.addDocument(
+                        document.getTitle(),
+                        document.getAuthor(),
+                        document.getMaterial(),
+                        document.getCategory(),
+                        isbn
+                );
+            }
+
+            // Sau khi lưu, xóa danh sách và cập nhật giao diện
+            documents.clear();
+            addDocumentTableView.setItems(documents);
+            statusLabel.setText("All documents have been saved to the database.");
+        } catch (Exception e) {
+            statusLabel.setText("Error occurred while saving documents.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void initialize() {
-        // cập nhập choice box
-        ObservableList<MaterialType> materialTypesWithEmptyOption = FXCollections.observableArrayList();
-        materialTypesWithEmptyOption.addAll(MaterialType.values());
-        choiceMaterialAdmin.setItems(materialTypesWithEmptyOption);
+        // Khởi tạo các lựa chọn MaterialType
+        choiceMaterialAddDoc.setItems(FXCollections.observableArrayList(MaterialType.values()));
 
-        // nhận sự thay đổi trong ChoiceBox Material
-        choiceMaterialAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        // Cập nhật khi chọn MaterialType
+        choiceMaterialAddDoc.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // cập nhật các thể loại tương ứng với loại tài liệu
-                ObservableList<String> categories = MaterialType.getCategoriesForMaterial(newValue);
-                choiceCategoryAdmin.setItems(categories);
-
-                // hiển thị trường ISBN nếu chọn "BOOK"
-                isbnValidLabel.setVisible(newValue == MaterialType.BOOK);// hiển thị thông báo
-                isbnHbox.setVisible(newValue == MaterialType.BOOK);  // hiển thị HBox ISBN khi chọn BOOK
+                choiceCategoryAddDoc.setItems(MaterialType.getCategoriesForMaterial(newValue));
+                boolean isBook = newValue == MaterialType.BOOK;
+                isbnHbox.setVisible(isBook);
+                isbnValidLabel.setVisible(isBook);
             }
         });
 
-        /*// Lắng nghe sự thay đổi trong lựa chọn thể loại
-        choiceCategoryAdmin.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            // Xử lý khi chọn thể loại (nếu cần)
-        });*/
+        // Thiết lập Spinner cho số lượng
+        spinerQuantityAddDoc.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+        spinerQuantityAddDoc.setEditable(true);
+
+        // Gán dữ liệu cho các cột trong TableView
+        idColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        titleColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        authorColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
+        materialColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
+        categoryColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
     }
 }

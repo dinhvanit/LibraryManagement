@@ -69,6 +69,7 @@ public class SearchDocumentService {
                             retrievedCategory,
                             retrievedISBN
                     );
+                    documentListSearchResult.add(document);
                 }
             }
         }

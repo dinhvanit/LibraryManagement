@@ -150,21 +150,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
     @FXML
     void findDocumentButtonOnClick(MouseEvent event) throws SQLException {
         performSearch();
-
-        // cai nay de test thu phat, ty lay ra isbn thi lay kieu nay
-        ObservableList<Document> documents = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
-        documents.forEach(document -> {
-            System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
-
-            // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
-            if (document instanceof Book) {
-                Book book = (Book) document;
-                System.out.println(" - ISBN: " + book.getIsbn());
-            } else {
-                System.out.println();
-            }
-        });
-        // het
     }
 
     private void performSearch() throws SQLException {
