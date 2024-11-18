@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
-import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 import java.sql.*;
 
@@ -17,7 +16,7 @@ public class SearchDocumentService {
         conn = DatabaseManager.connect();
     }
 
-    public ObservableList<Document> search(
+    public ObservableList<Document> searchAll(
             String title, String author, String material, String category) throws SQLException {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
@@ -81,26 +80,29 @@ public class SearchDocumentService {
             String title, String author, String material, String category) throws SQLException {
 
         ObservableList<Document> documentListSearchResult = FXCollections.observableArrayList();
+        // Câu truy vấn SQL
         StringBuilder query = new StringBuilder(
-                "SELECT document.id, document.title, document.author, document.material, document.category, document.isbn " +
+                "SELECT DISTINCT document.id, document.title, document.author, document.material, document.category, document.isbn " +
                         "FROM Document document " +
                         "LEFT JOIN TransactionDocument t ON document.id = t.id_document " +
                         "WHERE 1=1");
 
+        // Điều kiện loại bỏ tài liệu đã được mượn
+        query.append(" AND (NOT EXISTS (" +
+                "SELECT 1 FROM TransactionDocument t2 " +
+                "WHERE t2.id_document = document.id AND t2.return_date IS NULL))");
         if (title != null && !title.isEmpty()) {
-            query.append(" AND document.title LIKE ?");
+            query.append(" AND title LIKE ?");
         }
         if (author != null && !author.isEmpty()) {
-            query.append(" AND document.author LIKE ?");
+            query.append(" AND author LIKE ?");
         }
         if (material != null && !material.isEmpty()) {
-            query.append(" AND document.material = ?");
+            query.append(" AND material = ?");
         }
         if (category != null && !category.isEmpty()) {
-            query.append(" AND document.category = ?");
+            query.append(" AND category = ?");
         }
-
-        query.append(" AND (t.return_date IS NOT NULL OR t.id_document IS NULL)");
 
         try (PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
             int paramIndex = 1;
@@ -126,8 +128,6 @@ public class SearchDocumentService {
                     String retrievedMaterial = rs.getString("material");
                     String retrievedCategory = rs.getString("category");
                     String retrievedISBN = rs.getString("isbn");
-
-                    // Tạo `Document` không bao gồm ISBN
                     Document document = DocumentFactory.createDocument(
                             retrievedId,
                             retrievedTitle,
@@ -140,7 +140,6 @@ public class SearchDocumentService {
                 }
             }
         }
-
         return documentListSearchResult;
     }
 }

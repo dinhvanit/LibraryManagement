@@ -5,7 +5,6 @@ import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class Thesis extends Document {
@@ -36,7 +35,7 @@ public class Thesis extends Document {
         String quantityCode = null;
         SearchDocumentService searchDocumentService = new SearchDocumentService();
         try {
-            ObservableList<Document> listDocument = searchDocumentService.search(
+            ObservableList<Document> listDocument = searchDocumentService.searchAll(
                     title, author, getMaterial(), getCategory());
             int len = listDocument.size();
             for (int i = 0; i < len; i++) {
