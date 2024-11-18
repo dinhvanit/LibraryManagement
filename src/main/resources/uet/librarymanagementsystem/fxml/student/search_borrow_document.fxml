@@ -229,6 +229,7 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" text="INFO" />
                      </children>
                   </HBox>
                </children>
