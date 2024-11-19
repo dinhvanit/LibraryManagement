@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import uet.librarymanagementsystem.controllers.info_document.GetInfoDocumentController;
 import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.entity.documents.Document;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -71,9 +73,15 @@ public class WindowUtil {
         }
     }
 
-    public static void showSecondaryWindowWithShowInfo(Page page, String title, Stage ownerStage, boolean Visibility) {
+    public static void showSecondaryWindowWithShowInfo(
+            Page page, String title, Stage ownerStage, boolean isVisibility) {
         try {
-            Parent layout = FXMLLoader.load(requireNonNull(WindowUtil.class.getResource(page.getFXMLPath())));
+            FXMLLoader loader = new FXMLLoader(requireNonNull(WindowUtil.class.getResource(page.getFXMLPath())));
+            Parent layout = loader.load();
+            Object controller = loader.getController();
+            if (controller instanceof GetInfoDocumentController) {
+                ((GetInfoDocumentController) controller).setButtonWriteRatingAndReviewVisibility(isVisibility);
+            }
 
             Scene secondScene = new Scene(layout);
             Stage newWindow = new Stage();
