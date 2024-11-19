@@ -92,19 +92,20 @@ public class SearchDocumentService {
                 "SELECT 1 FROM TransactionDocument t2 " +
                 "WHERE t2.id_document = document.id AND t2.return_date IS NULL))");
         if (title != null && !title.isEmpty()) {
-            query.append(" AND title LIKE ?");
+            query.append(" AND document.title LIKE ?");
         }
         if (author != null && !author.isEmpty()) {
-            query.append(" AND author LIKE ?");
+            query.append(" AND document.author LIKE ?");
         }
         if (material != null && !material.isEmpty()) {
-            query.append(" AND material = ?");
+            query.append(" AND document.material = ?");
         }
         if (category != null && !category.isEmpty()) {
-            query.append(" AND category = ?");
+            query.append(" AND document.category = ?");
         }
 
         try (PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            System.out.println(query);
             int paramIndex = 1;
 
             if (title != null && !title.isEmpty()) {
