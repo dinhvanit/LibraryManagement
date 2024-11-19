@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.entity.Page;
 
@@ -43,6 +44,30 @@ public class WindowUtil {
             }
         } catch (RuntimeException e) {
             System.out.println("Error setting page: " + e.getMessage());
+        }
+    }
+
+    public static void showSecondaryWindow(Page page, String title, Stage ownerStage) {
+        try {
+            Parent layout = FXMLLoader.load(requireNonNull(WindowUtil.class.getResource(page.getFXMLPath())));
+
+            Scene secondScene = new Scene(layout);
+            Stage newWindow = new Stage();
+            newWindow.setScene(secondScene);
+            newWindow.setTitle(title);
+
+            // Set modality and owner stage
+            newWindow.initModality(Modality.WINDOW_MODAL);
+            newWindow.initOwner(ownerStage);
+
+            // set center on screen
+            if (ownerStage != null) {
+                newWindow.centerOnScreen();
+            }
+
+            newWindow.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
