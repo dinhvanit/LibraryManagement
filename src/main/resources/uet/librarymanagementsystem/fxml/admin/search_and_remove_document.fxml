@@ -47,7 +47,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldTitleDocument" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldTitleDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
                                     </children>
                                 </HBox>
                             </children>
@@ -71,7 +71,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldAuthorDocument" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldAuthorDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
                                     </children>
                                 </HBox>
                             </children>
@@ -94,7 +94,7 @@
                                 </HBox>
                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceMaterialDocument" prefHeight="26.0" prefWidth="200.0" />
+                                        <ChoiceBox fx:id="choiceMaterialDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
                                     </children>
                                 </HBox>
                             </children>
@@ -114,7 +114,7 @@
                                 </HBox>
                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceCategoryDocument" prefHeight="26.0" prefWidth="206.0" />
+                                        <ChoiceBox fx:id="choiceCategoryDocumentAdmin" prefHeight="26.0" prefWidth="206.0" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="142.0">
@@ -141,12 +141,11 @@
                         </HBox>
                         <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn editable="false" prefWidth="75.0" text="ID" />
-                                <TableColumn editable="false" prefWidth="75.0" text="TITLE" />
-                                <TableColumn editable="false" prefWidth="75.0" text="AUTHOR" />
-                                <TableColumn editable="false" prefWidth="75.0" text="MATERIAL" />
-                                <TableColumn editable="false" prefWidth="75.0" text="CATEGORY" />
-                                <TableColumn prefWidth="75.0" text="DUE DATE" />
+                                <TableColumn fx:id="idColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="ID" />
+                                <TableColumn fx:id="titleColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="TITLE" />
+                                <TableColumn fx:id="authorColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="AUTHOR" />
+                                <TableColumn fx:id="materialColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="MATERIAL" />
+                                <TableColumn fx:id="categoryColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="CATEGORY" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
