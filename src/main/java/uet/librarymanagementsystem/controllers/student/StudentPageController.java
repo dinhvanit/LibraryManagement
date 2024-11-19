@@ -36,4 +36,14 @@ public class StudentPageController {
         WindowUtil.loadCenterPane(Page.TRANSACTION_DOCUMENT, borderPaneStudentPage);
     }
 
+    @FXML
+    void updatePasswordMenuClick() {
+        WindowUtil.loadCenterPane(Page.CHANGE_PASSWORD, borderPaneStudentPage);
+    }
+
+    @FXML
+    void logoutMenuClick() {
+        // Gọi hàm logout
+        WindowUtil.logoutSession();
+    }
 }

@@ -78,6 +78,22 @@ public class ValidationLabelUtil {
         return "";
     }
 
+    public String validatePasswordFormat(String field) {
+        if (field.length() < 6) {
+            return "Mật khẩu phải có ít nhất 6 ký tự";
+        }
+        if (!field.matches(".*[A-Z].*")) {
+            return "Mật khẩu cần ít nhất một ký tự viết hoa";
+        }
+        if (!field.matches(".*\\d.*")) {
+            return "Mật khẩu cần ít nhất một chữ số";
+        }
+        if (!field.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
+            return "Mật khẩu cần ít nhất một ký tự đặc biệt (!@#$%^&*)";
+        }
+        return "";
+    }
+
     // Cập nhật phương thức validateField để hỗ trợ kiểm tra ngày tháng
     public String validateField(String field, ValidationType validationType) {
         switch (validationType) {
@@ -91,6 +107,8 @@ public class ValidationLabelUtil {
                 return validateNumericField(field, "Trường này phải là số");
             case DATE:
                 return validateDateFormat(field);
+            case PASSWORD:
+                return validatePasswordFormat(field);
             default:
                 return "";
         }
@@ -98,6 +116,6 @@ public class ValidationLabelUtil {
 
     // Enum định nghĩa các loại kiểm tra
     public enum ValidationType {
-        EMPTY, EMAIL, PHONE, NUMERIC, DATE
+        EMPTY, EMAIL, PHONE, NUMERIC, DATE, PASSWORD
     }
 }
