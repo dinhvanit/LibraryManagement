@@ -185,6 +185,9 @@ public class TransactionsTable {
                     String retrievedBorrowDate = rs.getString("borrow_date");
                     String retrievedReturnDate = rs.getString("return_date");
                     String retrievedDueDate = rs.getString("due_date");
+                    String retrievedReviewDate = rs.getString("review_date");
+                    String retrievedRating = rs.getString("rating");
+                    String retrievedReview = rs.getString("review");
 
                     // Create Student and Document objects
                     Student student = new Student(
@@ -206,9 +209,10 @@ public class TransactionsTable {
                     );
 
                     // Create Transaction object based on the type
-                    Transaction transaction = new Transaction(document, student, retrievedBorrowDate, retrievedReturnDate, retrievedDueDate);
-
-                    transaction.setId(retrievedIdTransaction);
+                    Transaction transaction = new Transaction(
+                            retrievedIdTransaction, document, student, retrievedBorrowDate,
+                            retrievedReturnDate, retrievedDueDate, retrievedReviewDate,
+                            retrievedRating, retrievedReview);
 
                     // Add transaction to list
                     transactionList.add(transaction);

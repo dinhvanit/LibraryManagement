@@ -4,15 +4,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.ImagesOfMaterial;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
@@ -20,6 +26,7 @@ import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import javax.print.Doc;
 import java.awt.*;
@@ -116,6 +123,24 @@ public class GetInfoDocumentController implements Initializable {
     private Label totalRatingsLabel;
 
     @FXML
+    private TableColumn<?, ?> dateRatingColumn;
+
+    @FXML
+    private TableColumn<?, ?> nameUserRatingColumn;
+
+    @FXML
+    private TableView<?> ratingTableView;
+
+    @FXML
+    private TableColumn<?, ?> reviewColumn;
+
+    @FXML
+    private TableColumn<?, ?> starRatingColumn;
+
+    @FXML
+    private Button writeRatingAndReviewButton;
+
+    @FXML
     void previewLinkClick(MouseEvent event) {
         String url = linkURL;
         openWebPage(url);
@@ -171,18 +196,15 @@ public class GetInfoDocumentController implements Initializable {
             descriptionLabel.setText(bookLookupService.getDescription());
 
             if (!Objects.equals(bookLookupService.getThumbnailUrl(), "N/A")) {
-                System.out.println("333333");
                 System.out.println(bookLookupService.getThumbnailUrl());
                 Image image = new Image(bookLookupService.getThumbnailUrl());
                 imageInformation.setImage(image);
             } else {
-                System.out.println("44444");
                 Image image = new Image(Objects.requireNonNull(
                         getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
                 imageInformation.setImage(image);
             }
         } else {
-            System.out.println("NEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             setFieldLabelNotByISBN(book);
         }
     }
@@ -204,7 +226,6 @@ public class GetInfoDocumentController implements Initializable {
                     getClass().getResourceAsStream(ImagesOfMaterial.JOURNAL.getPath())));
             imageInformation.setImage(image);
         } else if (Objects.equals(document.getMaterial(), MaterialType.NEWSPAPER.name())) {
-            System.out.println("BAOooooooooooooooooooooo");
             Image image = new Image(Objects.requireNonNull(
                     getClass().getResourceAsStream(ImagesOfMaterial.NEWSPAPER.getPath())));
             imageInformation.setImage(image);
@@ -226,6 +247,12 @@ public class GetInfoDocumentController implements Initializable {
         }
     }
 
+    @FXML
+    void writeRatingAndReviewClick(MouseEvent event) {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        WindowUtil.showSecondaryWindow(Page.SHOW_WRITE_RATING_AND_REVIEW, "Write rating and review", currentStage);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fullStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_full.png")));
@@ -241,15 +268,12 @@ public class GetInfoDocumentController implements Initializable {
 
         Document document = SearchAndBorrowDocumentController.getDocumentInSearch();
         if (document instanceof Book book) {
-            System.out.println("11111");
             if (book.getIsbn() != null) {
-                System.out.println("22222");
                 setFieldLabelByISBN(book);
             } else {
                 setFieldLabelNotByISBN(document);
             }
         } else {
-            System.out.println("KO CO");
             setFieldLabelNotByISBN(document);
         }
     }
