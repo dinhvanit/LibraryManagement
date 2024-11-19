@@ -18,7 +18,6 @@ import java.util.ResourceBundle;
 public class RatingAndReviewController implements Initializable {
 
     private Image fullStar;
-    private Image halfStar;
     private Image emptyStar;
 
     @FXML
@@ -92,7 +91,6 @@ public class RatingAndReviewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fullStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_full.png")));
-        halfStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_half.png")));
         emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_empty.png")));
 
     }

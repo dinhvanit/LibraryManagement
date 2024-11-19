@@ -71,6 +71,30 @@ public class WindowUtil {
         }
     }
 
+    public static void showSecondaryWindowWithShowInfo(Page page, String title, Stage ownerStage, boolean Visibility) {
+        try {
+            Parent layout = FXMLLoader.load(requireNonNull(WindowUtil.class.getResource(page.getFXMLPath())));
+
+            Scene secondScene = new Scene(layout);
+            Stage newWindow = new Stage();
+            newWindow.setScene(secondScene);
+            newWindow.setTitle(title);
+
+            // Set modality and owner stage
+            newWindow.initModality(Modality.WINDOW_MODAL);
+            newWindow.initOwner(ownerStage);
+
+            // set center on screen
+            if (ownerStage != null) {
+                newWindow.centerOnScreen();
+            }
+
+            newWindow.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void loadCenterPane(Page page, BorderPane borderPane) {
         try {
             Parent view = FXMLLoader.load(WindowUtil.class.getResource(page.getFXMLPath()));
