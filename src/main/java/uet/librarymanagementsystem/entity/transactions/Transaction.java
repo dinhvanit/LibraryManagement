@@ -10,13 +10,31 @@ public class Transaction {
     private String borrowDate;
     private String returnDate;
     private String dueDate;
+    private String reviewDate;
+    private String rating;
+    private String review;
 
-    public Transaction(Document document, Student student, String borrowDate, String returnDate, String dueDate) {
+    public Transaction(Document document, Student student,
+                       String borrowDate, String returnDate, String dueDate) {
         this.document = document;
         this.student = student;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
         this.dueDate= dueDate;
+    }
+
+    public Transaction(String id, Document document, Student student,
+                       String borrowDate, String returnDate, String dueDate,
+                       String reviewDate, String rating, String review) {
+        this.id = id;
+        this.document = document;
+        this.student = student;
+        this.borrowDate = borrowDate;
+        this.returnDate = returnDate;
+        this.dueDate = dueDate;
+        this.reviewDate = reviewDate;
+        this.rating = rating;
+        this.review = review;
     }
 
     public String getId() {
@@ -65,5 +83,29 @@ public class Transaction {
 
     public String getDueDate() {
         return dueDate;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public String getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

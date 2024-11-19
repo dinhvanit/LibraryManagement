@@ -47,6 +47,9 @@
                               <TableColumn fx:id="borrowDateColumnTransaction" prefWidth="75.0" text="BORROW_DATE" />
                               <TableColumn fx:id="returnDateColumnTransaction" prefWidth="75.0" text="RETURN_DATE" />
                               <TableColumn fx:id="dueDateColumnTransaction" prefWidth="75.0" text="DUE_DATE" />
+                              <TableColumn fx:id="reviewDateColumnTransaction" prefWidth="75.0" text="REVIEW_DATE" />
+                              <TableColumn fx:id="ratingColumnTransaction" prefWidth="75.0" text="RATING" />
+                              <TableColumn fx:id="reviewColumnTransaction" prefWidth="75.0" text="REVIEW" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

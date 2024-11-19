@@ -1,6 +1,7 @@
 
 package uet.librarymanagementsystem.controllers.student;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,6 +54,15 @@ public class TransactionDocumentsController implements Initializable {
     private TableColumn<Transaction, String> dueDateColumnTransaction;
 
     @FXML
+    private TableColumn<Transaction, String> ratingColumnTransaction;
+
+    @FXML
+    private TableColumn<Transaction, String> reviewColumnTransaction;
+
+    @FXML
+    private TableColumn<Transaction, String> reviewDateColumnTransaction;
+
+    @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
 
     }
@@ -72,6 +82,9 @@ public class TransactionDocumentsController implements Initializable {
         borrowDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBorrowDate()));
         returnDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReturnDate()));
         dueDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
+        returnDateColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReviewDate()));
+        reviewColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReview()));
+        ratingColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRating()));
 
         transactionList = FXCollections.observableArrayList();
         try {
