@@ -22,6 +22,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -161,36 +162,8 @@ public class SearchAndBorrowDocumentController implements Initializable {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
             documentInSearch = selectedDocument;
-            try {
-                // Lấy Stage hiện tại
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                // Tải giao diện từ tệp FXML
-                System.out.println(Page.SHOW_INFO_DOCUMENT.getFXMLPath());
-                Parent secondaryLayout = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Page.SHOW_INFO_DOCUMENT.getFXMLPath())));
-
-                Scene secondScene = new Scene(secondaryLayout);
-
-                // Một cửa sổ mới (Stage)
-                Stage newWindow = new Stage();
-                newWindow.setTitle("Information Document");
-                newWindow.setScene(secondScene);
-
-                // Chỉ định modality (thể thức) cho cửa sổ mới
-                newWindow.initModality(Modality.WINDOW_MODAL);
-
-                // Chỉ định cửa sổ cha
-                newWindow.initOwner(currentStage);
-
-                // Sét đặt vị trí cửa sổ mới
-                newWindow.setX(currentStage.getX() + 200);
-                newWindow.setY(currentStage.getY() + 100);
-
-                newWindow.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindow(Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage);
         }
     }
 
