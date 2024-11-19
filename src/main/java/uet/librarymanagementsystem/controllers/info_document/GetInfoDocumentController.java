@@ -17,14 +17,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.controllers.student.BorrowedDocumentsController;
 import uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController;
+import uet.librarymanagementsystem.controllers.student.TransactionDocumentsController;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.ImagesOfMaterial;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.shareData.ShareData;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -40,9 +44,11 @@ import java.util.ResourceBundle;
 
 public class GetInfoDocumentController implements Initializable {
 
+    private Page pageOwner;
     private double averageRating;
     private int[] ratingCounts;
     private int totalRatings;
+    private Document documentInfo;
 
     private Image fullStar;
     private Image halfStar;
@@ -123,19 +129,19 @@ public class GetInfoDocumentController implements Initializable {
     private Label totalRatingsLabel;
 
     @FXML
-    private TableColumn<?, ?> dateRatingColumn;
+    private TableColumn<Transaction, String> dateRatingColumn;
 
     @FXML
-    private TableColumn<?, ?> nameUserRatingColumn;
+    private TableColumn<Transaction, String> nameUserRatingColumn;
 
     @FXML
-    private TableView<?> ratingTableView;
+    private TableView<Transaction> ratingTableView;
 
     @FXML
-    private TableColumn<?, ?> reviewColumn;
+    private TableColumn<Transaction, String> reviewColumn;
 
     @FXML
-    private TableColumn<?, ?> starRatingColumn;
+    private TableColumn<Transaction, String> starRatingColumn;
 
     @FXML
     private Button writeRatingAndReviewButton;
@@ -146,6 +152,14 @@ public class GetInfoDocumentController implements Initializable {
         openWebPage(url);
     }
 
+    public void setButtonWriteRatingAndReviewVisibility(boolean isVisible) {
+        writeRatingAndReviewButton.setVisible(isVisible);
+    }
+
+    public void setPageOwner(Page page) {
+        System.out.println(page.name());
+        pageOwner = page;
+    }
     private void updateStars(double rating) {
         updateStar(starImage1, 1, rating);
         updateStar(starImage2, 2, rating);
@@ -171,7 +185,6 @@ public class GetInfoDocumentController implements Initializable {
         progressBar2.setProgress((double) ratingCounts[3] / totalRatings);  // 2 sao
         progressBar1.setProgress((double) ratingCounts[4] / totalRatings);  // 1 sao
     }
-
 
     private void setFieldLabelByISBN(Book book) {
         BookLookupService bookLookupService = new BookLookupService(book.getIsbn());
@@ -266,15 +279,20 @@ public class GetInfoDocumentController implements Initializable {
         updateRatingBar();
         updateStars(averageRating);  // Cập nhật các sao
 
-        Document document = SearchAndBorrowDocumentController.getDocumentInSearch();
-        if (document instanceof Book book) {
+        documentInfo = ShareData.getDocumentShare();
+        //setDocumentInfo();
+        System.out.println("T ne" + pageOwner);
+
+        if (documentInfo instanceof Book book) {
+            System.out.println("BOOOOOOOOOOOK");
             if (book.getIsbn() != null) {
                 setFieldLabelByISBN(book);
             } else {
-                setFieldLabelNotByISBN(document);
+                setFieldLabelNotByISBN(documentInfo);
             }
         } else {
-            setFieldLabelNotByISBN(document);
+            System.out.println("111111");
+            setFieldLabelNotByISBN(documentInfo);
         }
     }
 }
