@@ -5,15 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
-import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.shareData.ShareData;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
@@ -23,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class BorrowedDocumentsController implements Initializable {
-
     @FXML
     private TableView<Transaction> borrowedDocumentsTableView;
 
@@ -53,7 +54,13 @@ public class BorrowedDocumentsController implements Initializable {
 
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
-        WindowUtil.setPage(Page.SHOW_INFO_DOCUMENT, "Information Document");
+        Document selectedDocument = borrowedDocumentsTableView.getSelectionModel().getSelectedItem().getDocument();
+        if (selectedDocument != null) {
+            ShareData.setDocumentShare(selectedDocument);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindowWithShowInfo(
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false);
+        }
     }
 
     @FXML

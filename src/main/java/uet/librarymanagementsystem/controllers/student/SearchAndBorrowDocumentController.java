@@ -21,6 +21,7 @@ import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.shareData.ShareData;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -33,9 +34,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SearchAndBorrowDocumentController implements Initializable {
-
     private final int borrowingPeriod = 6;
-    private static Document documentInSearch;
     private Student student;
     private SearchDocumentService searchDocumentService;
     private ObservableList<Document> documentsListSearchResult;
@@ -161,14 +160,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
     void infoDocumentClick(MouseEvent event) {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
-            documentInSearch = selectedDocument;
+            ShareData.setDocumentShare(selectedDocument);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindow(Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage);
+            WindowUtil.showSecondaryWindowWithShowInfo(
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false);
         }
-    }
-
-    public static Document getDocumentInSearch() {
-        return documentInSearch;
     }
 
     @FXML
