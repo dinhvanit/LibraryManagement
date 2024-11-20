@@ -1,14 +1,12 @@
 
 package uet.librarymanagementsystem.controllers.student;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -108,7 +106,7 @@ public class TransactionDocumentsController implements Initializable {
 
         transactionList = FXCollections.observableArrayList();
         try {
-            transactionList = searchTransactionService.searchTransaction(LoginController.getIdCurrentStudent());
+            transactionList = searchTransactionService.searchTransactionByIdStudent(LoginController.getIdCurrentStudent());
             System.out.println("size = " + transactionList.size());
         } catch (SQLException e) {
             System.out.println("Loi");
