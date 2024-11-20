@@ -163,7 +163,7 @@ public class SearchAndBorrowDocumentController implements Initializable {
             ShareData.setDocumentShare(selectedDocument);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindowWithShowInfo(
-                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false);
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
         }
     }
 

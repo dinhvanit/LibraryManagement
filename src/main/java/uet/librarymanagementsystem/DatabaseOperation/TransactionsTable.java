@@ -153,6 +153,43 @@ public class TransactionsTable {
         }
     }
 
+    public static void updateRatingReviewDateReview(String transactionId, String rating, String review, String dateReview) throws SQLException {
+        Connection conn = connect();
+
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Cannot update rating, review, date review, connection is closed or invalid.");
+        }
+
+        try {
+            String updateRatingReviewDateReviewSQL = "UPDATE TransactionDocument " +
+                    "SET rating = ?, review = ?, review_date = ? " +
+                    "WHERE id_transaction = ? AND rating IS NULL AND review IS NULL AND review_date IS NULL";
+
+            PreparedStatement pstmt = conn.prepareStatement(updateRatingReviewDateReviewSQL);
+
+            pstmt.setString(1, rating);
+            pstmt.setString(2, review);
+            pstmt.setString(3, dateReview);
+            pstmt.setString(4, transactionId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected == 1) {
+                System.out.println("Rating, review, and date review updated successfully.");
+            } else {
+                System.out.println("No transaction found with the given ID or return_date is already set.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating rating, review, or date review.");
+            throw e;
+        } finally {
+            conn.close();
+        }
+    }
+
+
     public static ObservableList<Transaction> searchTransByStudent_id(String id_student) {
         String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();

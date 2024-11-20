@@ -71,11 +71,21 @@ public class TransactionDocumentsController implements Initializable {
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
         Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
-        if (selectedDocument != null) {
+        Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null && selectedTransaction != null) {
             ShareData.setDocumentShare(selectedDocument);
+            ShareData.setTransactionShare(selectedTransaction);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindowWithShowInfo(
-                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true);
+            if (selectedTransaction.getReturnDate() == null) {
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+            } else if (selectedTransaction.getRating() == null){
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true, false);
+            } else {
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, true);
+            }
         }
     }
 

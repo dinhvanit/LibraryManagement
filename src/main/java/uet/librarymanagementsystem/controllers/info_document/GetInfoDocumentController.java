@@ -147,6 +147,9 @@ public class GetInfoDocumentController implements Initializable {
     private Button writeRatingAndReviewButton;
 
     @FXML
+    private Button viewYourReviewButton;
+
+    @FXML
     void previewLinkClick(MouseEvent event) {
         String url = linkURL;
         openWebPage(url);
@@ -154,6 +157,10 @@ public class GetInfoDocumentController implements Initializable {
 
     public void setButtonWriteRatingAndReviewVisibility(boolean isVisible) {
         writeRatingAndReviewButton.setVisible(isVisible);
+    }
+
+    public void setButtonViewYourReviewVisibility(Boolean isVisible){
+        viewYourReviewButton.setVisible(isVisible);
     }
 
     public void setPageOwner(Page page) {
@@ -264,6 +271,12 @@ public class GetInfoDocumentController implements Initializable {
     void writeRatingAndReviewClick(MouseEvent event) {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         WindowUtil.showSecondaryWindow(Page.SHOW_WRITE_RATING_AND_REVIEW, "Write rating and review", currentStage);
+    }
+
+    @FXML
+    void viewYourReviewClick(MouseEvent event) {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        WindowUtil.showSecondaryWindow(Page.SHOW_VIEW_YOUR_REVIEW, "View your review", currentStage);
     }
 
     @Override

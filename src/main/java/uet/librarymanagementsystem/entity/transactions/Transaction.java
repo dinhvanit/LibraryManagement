@@ -108,4 +108,5 @@ public class Transaction {
     public void setRating(String rating) {
         this.rating = rating;
     }
+
 }
