@@ -11,6 +11,7 @@ import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.AddDocumentService;
+import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 
 import java.sql.SQLException;
 
@@ -98,6 +99,7 @@ public class AddDocumentController {
         fieldTitleAddDoc.clear();
         fieldAuthorAddDoc.clear();
         fieldISBN.clear();
+        isbnValidLabel.setText("");
         isbnHbox.setVisible(false);
     }
 
@@ -164,6 +166,13 @@ public class AddDocumentController {
             }
         });
 
+        // Thêm lắng nghe sự kiện cho ISBN
+        fieldISBN.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.trim().isEmpty()) {
+                lookupBookInfo(newValue.trim());
+            }
+        });
+
         // Thiết lập Spinner cho số lượng
         spinerQuantityAddDoc.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
         spinerQuantityAddDoc.setEditable(true);
@@ -173,5 +182,23 @@ public class AddDocumentController {
         authorColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
+    }
+
+    private void lookupBookInfo(String isbn) {
+        BookLookupService lookupService = new BookLookupService(isbn);
+
+        if (lookupService.checkBookInfoByISBN()) {
+            // Tự động cập nhật các trường từ API
+            fieldTitleAddDoc.setText(lookupService.getTitleBook());
+            fieldAuthorAddDoc.setText(lookupService.getTheFirstAuthor());
+            choiceCategoryAddDoc.setValue(lookupService.getTheFirstCategory());
+            isbnValidLabel.setText("ISBN found!");
+        } else {
+            // Nếu không tìm thấy sách
+            fieldTitleAddDoc.clear();
+            fieldAuthorAddDoc.clear();
+            choiceCategoryAddDoc.getSelectionModel().clearSelection();
+            isbnValidLabel.setText("ISBN not found or invalid.");
+        }
     }
 }

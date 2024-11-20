@@ -110,6 +110,7 @@ public class BookLookupService {
             String fullCategory = categoriesArray.optString(0, "N/A"); // Lấy phần tử đầu tiên
             if (!"N/A".equals(fullCategory)) {
                 firstCategory = fullCategory.split("\\s+")[0]; // Tách từ đầu tiên
+                firstCategory = firstCategory.toUpperCase();
             }
         }
         return firstCategory;
