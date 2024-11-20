@@ -30,7 +30,6 @@ public class Journal extends Document {
         return category.name();
     }
 
-    @Override
     public String getQuantityCode() {
         String quantityCode = null;
         SearchDocumentService searchDocumentService = new SearchDocumentService();
@@ -56,15 +55,15 @@ public class Journal extends Document {
     @Override
     public void setId() {
         this.id = MaterialType.JOURNAL.getCode()
-                + Book.BookCategory.valueOf(String.valueOf(category)).getCode()
+                + Journal.JournalCategory.valueOf(String.valueOf(category)).getCode()
                 + getTitleCode() + getAuthorCode() + getQuantityCode();
     }
 
     public enum JournalCategory {
         RESEARCH("01"),
         REVIEW("02"),
-        CASE_STUDY("03");
-        //OTHERS; // Thêm các loại category cho tạp chí
+        CASE_STUDY("03"), // tại sao cái này bị lỗi substring
+        OTHERS ("04"); // Thêm các loại category cho tạp chí
 
         private final String code;
 

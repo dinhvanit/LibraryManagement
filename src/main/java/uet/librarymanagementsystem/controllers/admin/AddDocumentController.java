@@ -44,9 +44,6 @@ public class AddDocumentController {
     private TableView<Document> addDocumentTableView;
 
     @FXML
-    private TableColumn<Document, String> idColumnAddResults;
-
-    @FXML
     private TableColumn<Document, String> titleColumnAddResults;
 
     @FXML
@@ -78,13 +75,10 @@ public class AddDocumentController {
             statusLabel.setText("Please fill in all required fields.");
             return;
         }
-
-        addDocumentService.addTitleAndAuthor(title, author);
         // Tạo các tài liệu theo số lượng
         for (int i = 0; i < quantity; i++) {
             try {
                 Document document = DocumentFactory.createDocument(null, title, author, materialType.name(), category, isbn);
-                document.setId();
                 documents.add(document);
             } catch (IllegalArgumentException e) {
                 statusLabel.setText("Invalid category for selected material type.");
@@ -175,7 +169,6 @@ public class AddDocumentController {
         spinerQuantityAddDoc.setEditable(true);
 
         // Gán dữ liệu cho các cột trong TableView
-        idColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         titleColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         authorColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));

@@ -3,7 +3,9 @@ package uet.librarymanagementsystem.controllers.student;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import uet.librarymanagementsystem.services.userServices.ChangePasswordService;
+import uet.librarymanagementsystem.services.userServices.CheckLoginService;
 import uet.librarymanagementsystem.util.ValidationLabelUtil;
+import uet.librarymanagementsystem.controllers.LoginController;
 
 public class ChangePasswordController {
 
@@ -52,7 +54,9 @@ public class ChangePasswordController {
     @FXML
     public void initialize() {
         resetErrorMessages();
-
+        currentPassField.textProperty().bindBidirectional(visibleCurrentPassField.textProperty());
+        newPassField.textProperty().bindBidirectional(visibleNewPassField.textProperty());
+        repeatPassField.textProperty().bindBidirectional(visibleRepeatPassField.textProperty());
         currentPassField.textProperty().addListener((observable, oldValue, newValue) -> validatePasswordField(currentPassField, currentPassErrorLabel, ValidationLabelUtil.ValidationType.EMPTY));
         newPassField.textProperty().addListener((observable, oldValue, newValue) -> validateNewPassword());
         repeatPassField.textProperty().addListener((observable, oldValue, newValue) -> validateRepeatPassword());
@@ -100,6 +104,17 @@ public class ChangePasswordController {
         String newPassword = newPassField.getText();
         String repeatPassword = repeatPassField.getText();
 
+        // Kiểm tra mật khẩu hiện tại có đúng không
+        String userId = LoginController.getIdCurrentStudent(); // Lấy ID người dùng hiện tại
+        boolean isCurrentPasswordCorrect = CheckLoginService.checkLogin(userId, currentPassword);
+
+        if (!isCurrentPasswordCorrect) {
+            // Nếu mật khẩu hiện tại sai, hiển thị thông báo lỗi
+            currentPassErrorLabel.setText("Mật khẩu hiện tại không đúng.");
+            currentPassErrorLabel.setVisible(true);
+            return;
+        }
+
         boolean isValid = validateFields(currentPassword, newPassword, repeatPassword);
 
         if (!isValid) {
@@ -107,7 +122,7 @@ public class ChangePasswordController {
             return;
         }
 
-        String userId = "admin"; // Thay bằng ID người dùng hiện tại (truy xuất từ session hoặc context)
+        // Nếu tất cả các kiểm tra hợp lệ, thay đổi mật khẩu
         String resultMessage = changePasswordService.changePassword(userId, newPassword);
 
         successLabel.setText(resultMessage);
