@@ -240,7 +240,6 @@
                         </HBox>
                         <TableView fx:id="addDocumentTableView" prefHeight="470.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="idColumnAddResults" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="titleColumnAddResults" prefWidth="75.0" text="TITLE" />
                                 <TableColumn fx:id="authorColumnAddResults" prefWidth="85.60003662109375" text="AUTHOR" />
                                 <TableColumn fx:id="materialColumnAddResults" prefWidth="64.7999267578125" text="MATERIAL" />

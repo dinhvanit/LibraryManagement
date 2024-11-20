@@ -56,7 +56,7 @@ public class Newspaper extends Document {
     @Override
     public void setId() {
         this.id = MaterialType.NEWSPAPER.getCode()
-                + Book.BookCategory.valueOf(String.valueOf(category)).getCode()
+                + Newspaper.NewspaperCategory.valueOf(String.valueOf(category)).getCode()
                 + getTitleCode() + getAuthorCode() + getQuantityCode();
     }
 

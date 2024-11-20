@@ -41,6 +41,7 @@ public class DocumentDO extends DatabaseManager {
         }
 
         try {
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory() + "in add DO");
             // Kiểm tra nếu id của document đã tồn tại trong bảng Document
             String checkDocumentSQL = "SELECT COUNT(*) FROM Document WHERE id = ?";
             PreparedStatement checkStmt = con.prepareStatement(checkDocumentSQL);
@@ -57,14 +58,22 @@ public class DocumentDO extends DatabaseManager {
             // Chèn tài liệu vào bảng Document nếu chưa tồn tại
             String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category, isbn) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement documentStmt = con.prepareStatement(insertDocumentSQL);
+
+            // Set giá trị cho các trường
             documentStmt.setString(1, document.getId());
             documentStmt.setString(2, document.getTitle());
             documentStmt.setString(3, document.getAuthor());
-            documentStmt.setString(4, document.getMaterial());
-            documentStmt.setString(5, document.getCategory());
 
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory());
+            // Set material và category (enum)
+            documentStmt.setString(4, document.getMaterial()); // Giả sử material là enum
+            documentStmt.setString(5, document.getCategory()); // Giả sử category là enum
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory());
+
+            // Set ISBN nếu là Book, nếu không thì set null
             if (document instanceof Book) {
-                documentStmt.setString(6, ((Book) document).getIsbn());
+                Book book = (Book) document;
+                documentStmt.setString(6, book.getIsbn());
             } else {
                 documentStmt.setNull(6, Types.VARCHAR);
             }
