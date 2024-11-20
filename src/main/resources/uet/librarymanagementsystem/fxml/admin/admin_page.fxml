@@ -28,6 +28,7 @@
             <Button mnemonicParsing="false" onMouseClicked="#clickManageDocuments" prefHeight="70.0" prefWidth="150.0" text="Manage Documents" wrapText="true" />
             <Button mnemonicParsing="false" onMouseClicked="#clickListOfStudents" prefHeight="70.0" prefWidth="150.0" text="List Of Students" wrapText="true" />
             <Button mnemonicParsing="false" onMouseClicked="#clickListOfDocuments" prefHeight="70.0" prefWidth="150.0" text="List Of Documents" wrapText="true" />
+            <Button mnemonicParsing="false" onMouseClicked="#clickListOfTransactions" prefHeight="70.0" prefWidth="150.0" text="List Of Transactions" wrapText="true" />
             <Button mnemonicParsing="false" onMouseClicked="#clickLogOut" prefHeight="30.0" prefWidth="60.0" text="Logout" wrapText="true" />
          </children>
       </VBox>

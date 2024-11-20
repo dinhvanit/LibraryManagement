@@ -18,11 +18,15 @@ public class SearchTransactionService {
     }
 
     public ObservableList<Transaction> searchTransactionByIdStudent(String id_student) throws SQLException {
-           return TransactionsTable.searchTransByField(id_student, null, null, null, false);
+        return TransactionsTable.searchTransByField(id_student, null, null, null, false);
     }
 
     public ObservableList<Transaction> searchTransactionByIdDocumentAndReviewed(String id_document) throws SQLException {
-        return TransactionsTable.searchTransByField(null, id_document, null, null, true);
+        return TransactionsTable.searchTransByField(null, id_document, null, null, false);
+    }
+
+    public ObservableList<Transaction> getAllTransactions() throws SQLException {
+        return TransactionsTable.searchTransByField(null, null, null, null, false);
     }
 
     public int[] ratingOfIdDocument(String id_document) throws SQLException {

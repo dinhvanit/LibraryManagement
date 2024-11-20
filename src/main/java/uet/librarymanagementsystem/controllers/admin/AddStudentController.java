@@ -140,6 +140,8 @@ public class AddStudentController implements Initializable {
         checkInforPassword.setText("chưa có thông tin gì");
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupValidationListeners();
@@ -156,4 +158,65 @@ public class AddStudentController implements Initializable {
         fieldPhoneStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldPhoneStudent, phoneValidLabel, ValidationLabelUtil.ValidationType.PHONE));
         fieldEmailStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL));
     }
+
+    /*private boolean validateDocumentInput() {
+        boolean isValid = true;
+
+        // Kiểm tra trường Title
+        if (fieldTitleAddDoc.getText().trim().isEmpty()) {
+            titleValidLabel.setText("Title cannot be empty.");
+            titleValidLabel.setVisible(true);
+            isValid = false;
+        } else {
+            titleValidLabel.setVisible(false);
+        }
+
+        // Kiểm tra trường Author
+        if (fieldAuthorAddDoc.getText().trim().isEmpty()) {
+            authorValidLabel.setText("Author cannot be empty.");
+            authorValidLabel.setVisible(true);
+            isValid = false;
+        } else {
+            authorValidLabel.setVisible(false);
+        }
+
+        // Kiểm tra trường MaterialType
+        if (choiceMaterialAddDoc.getValue() == null) {
+            statusLabel.setText("Material Type must be selected.");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            isValid = false;
+        } else {
+            statusLabel.setText("");
+        }
+
+        // Kiểm tra trường Category
+        if (choiceCategoryAddDoc.getValue() == null) {
+            statusLabel.setText("Category must be selected.");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            isValid = false;
+        } else {
+            statusLabel.setText("");
+        }
+
+        // Kiểm tra ISBN nếu MaterialType là BOOK
+        if (choiceMaterialAddDoc.getValue() == MaterialType.BOOK && fieldISBN.getText().trim().isEmpty()) {
+            isbnValidLabel.setText("ISBN is required for books.");
+            isbnValidLabel.setVisible(true);
+            isValid = false;
+        } else {
+            isbnValidLabel.setVisible(false);
+        }
+
+        // Kiểm tra trường Quantity
+        if (spinerQuantityAddDoc.getValue() == null || spinerQuantityAddDoc.getValue() <= 0) {
+            quantityValidLabel.setText("Quantity must be greater than 0.");
+            quantityValidLabel.setVisible(true);
+            isValid = false;
+        } else {
+            quantityValidLabel.setVisible(false);
+        }
+
+        return isValid;
+    }*/
+
 }
