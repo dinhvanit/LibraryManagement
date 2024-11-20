@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.info_document.RatingAndReviewController">
    <children>
       <BorderPane layoutX="193.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -74,6 +73,20 @@
                               </ImageView>
                            </children>
                         </HBox>
+                        <VBox prefHeight="66.0" prefWidth="193.0">
+                           <children>
+                              <Label fx:id="ratingLabel" text="Please rate." textFill="#ef0707" visible="false">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="reviewLabel" text="Please review." textFill="#ec0d0d" visible="false">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

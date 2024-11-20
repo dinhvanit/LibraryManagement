@@ -153,6 +153,43 @@ public class TransactionsTable {
         }
     }
 
+    public static void updateRatingReviewDateReview(String transactionId, String rating, String review, String dateReview) throws SQLException {
+        Connection conn = connect();
+
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Cannot update rating, review, date review, connection is closed or invalid.");
+        }
+
+        try {
+            String updateRatingReviewDateReviewSQL = "UPDATE TransactionDocument " +
+                    "SET rating = ?, review = ?, review_date = ? " +
+                    "WHERE id_transaction = ? AND rating IS NULL AND review IS NULL AND review_date IS NULL";
+
+            PreparedStatement pstmt = conn.prepareStatement(updateRatingReviewDateReviewSQL);
+
+            pstmt.setString(1, rating);
+            pstmt.setString(2, review);
+            pstmt.setString(3, dateReview);
+            pstmt.setString(4, transactionId);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected == 1) {
+                System.out.println("Rating, review, and date review updated successfully.");
+            } else {
+                System.out.println("No transaction found with the given ID or return_date is already set.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating rating, review, or date review.");
+            throw e;
+        } finally {
+            conn.close();
+        }
+    }
+
+
     public static ObservableList<Transaction> searchTransByStudent_id(String id_student) {
         String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
@@ -220,6 +257,113 @@ public class TransactionsTable {
 
                 if (transactionList.isEmpty()) {
                     System.out.println("No transactions found for Student ID: " + id_student);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("An error occurred while searching transactions by Student ID: " + e.getMessage());
+        }
+
+        return transactionList;
+    }
+
+    public static ObservableList<Transaction> searchTransByField(
+            String idStudent, String idDocument, String returnDate, String starRating, boolean reviewed) {
+        StringBuilder query = new StringBuilder(
+                "SELECT * FROM TransactionDocument WHERE 1=1");
+        ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+
+        if (idStudent != null && !idStudent.isEmpty()) {
+            query.append(" AND id_student = ?");
+        }
+        if (idDocument != null && !idDocument.isEmpty()) {
+            query.append(" AND id_document = ?");
+        }
+        if (returnDate != null && !returnDate.isEmpty()) {
+            query.append(" AND return_date = ?");
+        }
+        if (starRating != null && !starRating.isEmpty()) {
+            query.append(" AND rating = ?");
+        }
+
+        if (reviewed) {
+            query.append(" AND review IS NOT NULL");
+        }
+
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+
+            int paramIndex = 1;
+
+            if (idStudent != null && !idStudent.isEmpty()) {
+                pstmt.setString(paramIndex++, idStudent);
+            }
+            if (idDocument != null && !idDocument.isEmpty()) {
+                pstmt.setString(paramIndex++, idDocument);
+            }
+            if (returnDate != null && !returnDate.isEmpty()) {
+                pstmt.setString(paramIndex++, returnDate);
+            }
+            if (starRating != null && !starRating.isEmpty()) {
+                pstmt.setString(paramIndex++, starRating);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    // Retrieve transaction fields from ResultSet
+                    String retrievedIdTransaction = rs.getString("id_transaction");
+
+                    String retrievedIdStudent = rs.getString("id_student");
+                    String retrievedNameStudent = rs.getString("name_student");
+                    String retrievedDateOfBirth = rs.getString("date_of_birth");
+                    String retrievedPhoneNumber = rs.getString("phone_number");
+                    String retrievedEmail = rs.getString("email");
+                    String retrievedPassword = rs.getString("password");
+
+                    String retrievedIdDocument = rs.getString("id_document");
+                    String retrievedTitleDocument = rs.getString("title_document");
+                    String retrievedAuthor = rs.getString("author");
+                    String retrievedMaterial = rs.getString("material");
+                    String retrievedCategory = rs.getString("category");
+                    String retrievedISBN = rs.getString("isbn");
+
+                    String retrievedBorrowDate = rs.getString("borrow_date");
+                    String retrievedReturnDate = rs.getString("return_date");
+                    String retrievedDueDate = rs.getString("due_date");
+                    String retrievedReviewDate = rs.getString("review_date");
+                    String retrievedRating = rs.getString("rating");
+                    String retrievedReview = rs.getString("review");
+
+                    // Create Student and Document objects
+                    Student student = new Student(
+                            retrievedIdStudent,
+                            retrievedNameStudent,
+                            retrievedDateOfBirth,
+                            retrievedPhoneNumber,
+                            retrievedEmail,
+                            retrievedPassword
+                    );
+
+                    Document document = DocumentFactory.createDocument(
+                            retrievedIdDocument,
+                            retrievedTitleDocument,
+                            retrievedAuthor,
+                            retrievedMaterial,
+                            retrievedCategory,
+                            retrievedISBN
+                    );
+
+                    // Create Transaction object based on the type
+                    Transaction transaction = new Transaction(
+                            retrievedIdTransaction, document, student, retrievedBorrowDate,
+                            retrievedReturnDate, retrievedDueDate, retrievedReviewDate,
+                            retrievedRating, retrievedReview);
+
+                    // Add transaction to list
+                    transactionList.add(transaction);
+                }
+
+                if (transactionList.isEmpty()) {
+                    System.out.println("No transactions found ");
                 }
             }
         } catch (SQLException e) {

@@ -74,13 +74,14 @@ public class WindowUtil {
     }
 
     public static void showSecondaryWindowWithShowInfo(
-            Page page, String title, Stage ownerStage, boolean isVisibility) {
+            Page page, String title, Stage ownerStage, boolean isVisibilityWrite, boolean isVisibilityView) {
         try {
             FXMLLoader loader = new FXMLLoader(requireNonNull(WindowUtil.class.getResource(page.getFXMLPath())));
             Parent layout = loader.load();
             Object controller = loader.getController();
             if (controller instanceof GetInfoDocumentController) {
-                ((GetInfoDocumentController) controller).setButtonWriteRatingAndReviewVisibility(isVisibility);
+                ((GetInfoDocumentController) controller).setButtonWriteRatingAndReviewVisibility(isVisibilityWrite);
+                ((GetInfoDocumentController) controller).setButtonViewYourReviewVisibility(isVisibilityView);
             }
 
             Scene secondScene = new Scene(layout);
