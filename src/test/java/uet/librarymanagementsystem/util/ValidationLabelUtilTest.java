@@ -69,4 +69,26 @@ class ValidationLabelUtilTest {
         assertEquals("", validator.validateField("123", ValidationLabelUtil.ValidationType.NUMERIC));
         assertEquals("Định dạng ngày tháng không hợp lệ (dd/MM/yyyy)", validator.validateField("2024/05/12", ValidationLabelUtil.ValidationType.DATE));
     }
+
+    // Thêm test kiểm tra mật khẩu mạnh
+    @Test
+    void testValidatePasswordFormat() {
+        // mật khẩu hợp lệ
+        assertEquals("", validator.validatePasswordFormat("vanDinh1@"));
+        assertEquals("", validator.validatePasswordFormat("Dinhvan123!"));
+
+        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu chữ hoa
+        assertEquals("Mật khẩu cần ít nhất một ký tự viết hoa", validator.validatePasswordFormat("dinhvan1@"));
+
+        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu số
+        assertEquals("Mật khẩu cần ít nhất một chữ số", validator.validatePasswordFormat("DinhVan@"));
+
+        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu ký tự đặc biệt
+        assertEquals("Mật khẩu cần ít nhất một ký tự đặc biệt (!@#$%^&*)", validator.validatePasswordFormat("DinhVan123"));
+
+        // Kiểm tra mật khẩu quá ngắn
+        assertEquals("Mật khẩu phải có ít nhất 6 ký tự", validator.validatePasswordFormat("Dv1!"));
+
+        // Có thể viết thêm test nếu thích
+    }
 }

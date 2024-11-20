@@ -5,21 +5,19 @@ import java.sql.SQLException;
 
 public class ChangePasswordService {
 
-    public static boolean changePassword(String id, String newPassword) {
+    public String changePassword(String id, String newPassword) {
         try {
             // Kiểm tra xem sinh viên có tồn tại không
             if (!UserDO.isUserExists(id)) {
-                System.out.println("Sinh viên với ID " + id + " không tồn tại.");
-                return false;
+                return "Sinh viên với ID " + id + " không tồn tại.";
             }
 
             // Thực hiện thay đổi mật khẩu
             UserDO.updatePassword(id, newPassword);
-            System.out.println("Mật khẩu đã được thay đổi thành công.");
-            return true;
+            return "Mật khẩu đã được thay đổi thành công.";
         } catch (SQLException e) {
             System.err.println("Lỗi khi thay đổi mật khẩu: " + e.getMessage());
-            return false;
+            return "Thay đổi mật khẩu thất bại. Vui lòng thử lại.";
         }
     }
 }

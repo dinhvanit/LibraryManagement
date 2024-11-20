@@ -266,23 +266,49 @@ public class TransactionsTable {
         return transactionList;
     }
 
+    public static void clearTransactionTable() throws SQLException {
+        Connection conn = connect();
+
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("Cannot clear transaction table, connection is closed or invalid.");
+        }
+
+        try {
+
+            String clearTableSQL = "DELETE FROM TransactionDocument";
+
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(clearTableSQL);
+
+            System.out.println("All data in the TransactionDocument table has been cleared successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred while clearing the TransactionDocument table.");
+            throw e;
+        } finally {
+            conn.close(); // Đóng kết nối sau khi thực hiện
+        }
+    }
+
+
     public static void main(String[] args) throws SQLException {
-        String id = "23020714";
-        String name = "Nguyen Dinh Van";
-        String birthday = "2005-11-03";
-        String phone = "123456789";
-        String email = "vanit@gmail.com";
-        Student student = new Student(id, name, birthday, phone, email, id);
-
-        Book book = new Book("0101000200310002", "After Long Silence", "Helen Fremont", Book.BookCategory.FICTION);
-
-        Transaction transaction = new Transaction(book, student, "2024-11-12", null, "2024-12-12");
-//        insertTransaction(transaction);
-//        System.out.println(transaction.getId());
-//          searchTransByStudent_id("23020675")
-            createTransactionTable();
-            insertTransaction(transaction);
-            updateReturnDate("7", "15-11-2025");
+//        String id = "23020714";
+//        String name = "Nguyen Dinh Van";
+//        String birthday = "2005-11-03";
+//        String phone = "123456789";
+//        String email = "vanit@gmail.com";
+//        Student student = new Student(id, name, birthday, phone, email, id);
+//
+//        Book book = new Book("0101000200310002", "After Long Silence", "Helen Fremont", Book.BookCategory.FICTION);
+//
+//        Transaction transaction = new Transaction(book, student, "2024-11-12", null, "2024-12-12");
+////        insertTransaction(transaction);
+////        System.out.println(transaction.getId());
+////          searchTransByStudent_id("23020675")
+//            createTransactionTable();
+//            insertTransaction(transaction);
+//            updateReturnDate("7", "15-11-2025");
+        clearTransactionTable();
 
     }
 }

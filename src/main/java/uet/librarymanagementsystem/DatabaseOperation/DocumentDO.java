@@ -41,6 +41,7 @@ public class DocumentDO extends DatabaseManager {
         }
 
         try {
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory() + "in add DO");
             // Kiểm tra nếu id của document đã tồn tại trong bảng Document
             String checkDocumentSQL = "SELECT COUNT(*) FROM Document WHERE id = ?";
             PreparedStatement checkStmt = con.prepareStatement(checkDocumentSQL);
@@ -57,14 +58,22 @@ public class DocumentDO extends DatabaseManager {
             // Chèn tài liệu vào bảng Document nếu chưa tồn tại
             String insertDocumentSQL = "INSERT INTO Document (id, title, author, material, category, isbn) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement documentStmt = con.prepareStatement(insertDocumentSQL);
+
+            // Set giá trị cho các trường
             documentStmt.setString(1, document.getId());
             documentStmt.setString(2, document.getTitle());
             documentStmt.setString(3, document.getAuthor());
-            documentStmt.setString(4, document.getMaterial());
-            documentStmt.setString(5, document.getCategory());
 
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory());
+            // Set material và category (enum)
+            documentStmt.setString(4, document.getMaterial()); // Giả sử material là enum
+            documentStmt.setString(5, document.getCategory()); // Giả sử category là enum
+            System.out.println(document.getMaterial() + " ===== " + document.getCategory());
+
+            // Set ISBN nếu là Book, nếu không thì set null
             if (document instanceof Book) {
-                documentStmt.setString(6, ((Book) document).getIsbn());
+                Book book = (Book) document;
+                documentStmt.setString(6, book.getIsbn());
             } else {
                 documentStmt.setNull(6, Types.VARCHAR);
             }
@@ -159,26 +168,83 @@ public class DocumentDO extends DatabaseManager {
         con.close();
     }
 
+    public static void clearDocumentTable() throws SQLException {
+        Connection con = DatabaseManager.connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot clear document table, connection is closed or invalid.");
+        }
+
+        Statement statement = con.createStatement();
+        String deleteDataSQL = "DELETE FROM Document";
+        statement.executeUpdate(deleteDataSQL);
+
+        System.out.println("All data in Document table has been deleted successfully.");
+
+        con.close(); // Đóng kết nối
+    }
+
+    public static void addIdColumnSQLite() throws SQLException {
+        Connection con = connect();
+        String sql = "ALTER TABLE database_2 ADD COLUMN id TEXT";
+        try (Statement statement = con.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Column 'id' added successfully.");
+        }
+    }
+
+    public static void createNewDocumentTableSQLite() throws SQLException {
+        Connection con = connect();
+        String createTableSQL = "CREATE TABLE Document_New (" +
+                "id TEXT PRIMARY KEY, " +
+                "title TEXT, " +
+                "author TEXT, " +
+                "material TEXT, " +
+                "category TEXT, " +
+                "isbn TEXT, " +
+                "desc TEXT, " +
+                "img TEXT, " +
+                "link TEXT, " +
+                "pages INTEGER, " +
+                "quantity INTEGER)";
+        try (Statement statement = con.createStatement()) {
+            statement.execute(createTableSQL);
+            System.out.println("New table 'Document_New' created successfully.");
+        }
+    }
+
+    public static void migrateDataToNewTableSQLite() throws SQLException {
+        Connection con = connect();
+        String migrateDataSQL = "INSERT INTO Document_New (id, title, author, material, category, isbn, desc, img, link, pages, quantity) " +
+                "SELECT null, title, author, bookformat, genre, isbn, desc, img, link, pages, quantity FROM database_2";
+        try (Statement statement = con.createStatement()) {
+            statement.execute(migrateDataSQL);
+            System.out.println("Data migrated to 'Document_New' successfully.");
+        }
+    }
+
 
     public static void main(String[] args) {
         try {
 
-            List<Document> documents = DocumentDO.getAllDocument();
-            documents.forEach(document -> {
-                System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
-
-                // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
-                if (document instanceof Book) {
-                    Book book = (Book) document;
-                    System.out.println(" - ISBN: " + book.getIsbn());
-                } else {
-                    System.out.println();
-                }
-            });
-
-            createDocumentTable();
-
+//            List<Document> documents = DocumentDO.getAllDocument();
+//            documents.forEach(document -> {
+//                System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
 //
+//                // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
+//                if (document instanceof Book) {
+//                    Book book = (Book) document;
+//                    System.out.println(" - ISBN: " + book.getIsbn());
+//                } else {
+//                    System.out.println();
+//                }
+//            });
+//
+//             createDocumentTable();
+//             addIdColumnSQLite();
+//             createNewDocumentTableSQLite();
+//             migrateDataToNewTableSQLite();
+                deleteAllDocuments();
+
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "An exception occurred", e); // dung thay cho stack trace
 

@@ -56,7 +56,7 @@ public class Thesis extends Document {
     @Override
     public void setId() {
         this.id = MaterialType.THESIS.getCode()
-                + Book.BookCategory.valueOf(String.valueOf(category)).getCode()
+                + Thesis.ThesisCategory.valueOf(String.valueOf(category)).getCode()
                 + getTitleCode() + getAuthorCode() + getQuantityCode();
     }
 

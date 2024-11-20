@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class BookLookupService {
     private static final String API_KEY = "AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8";
 
-    private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:%s&key=" + API_KEY;
+    private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
     private final String isbn;
     private final JSONObject bookInfo;
@@ -23,7 +23,8 @@ public class BookLookupService {
     }
 
     public JSONObject fetchBookInfoByISBN() {
-        String urlString = String.format(GOOGLE_BOOKS_API_URL, isbn);
+        String urlString = GOOGLE_BOOKS_API_URL + isbn + "&key" + API_KEY;
+        System.out.println(urlString);
         try {
             // Tạo URL và mở kết nối
             URL url = new URL(urlString);

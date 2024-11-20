@@ -79,17 +79,31 @@ public class AuthorTable {
         con.close();
     }
 
-    public static void main(String []args) throws SQLException {
-        try {
-            for (int i = 1; i <= 5; i++) {
-                System.out.println("Enter details for author " + i + ":");
-                AuthorTable.insertAuthorFromKeyboard();
-            }
-            System.out.println("Successfully inserted 5 authors.");
-        } catch (SQLException e) {
-            System.err.println("Error inserting author: " + e.getMessage());
+    public static void clearAuthorTable() throws SQLException {
+        Connection con = connect();
+
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot clear author table, connection is closed or invalid.");
         }
 
-//        DatabaseManager.printTableColumns("Author");
+        try {
+            String clearTableSQL = "DELETE FROM Author";
+
+            Statement statement = con.createStatement();
+            statement.executeUpdate(clearTableSQL);
+
+            System.out.println("All data in the Author table has been cleared successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred while clearing the Author table.");
+            throw e;
+        } finally {
+            con.close();
+        }
+    }
+
+
+    public static void main(String []args) throws SQLException {
+        clearAuthorTable();
     }
 }
