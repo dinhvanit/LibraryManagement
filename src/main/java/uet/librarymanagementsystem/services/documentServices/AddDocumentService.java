@@ -30,8 +30,8 @@ public class AddDocumentService {
             // Khởi tạo đối tượng Document từ DocumentFactory
             Document document = DocumentFactory.createDocument(null, title, author, material, category, isbn);
 
-            // Tự động khởi tạo ID và thêm Document vào bảng Document
-            addTitleAndAuthor(title, author);// thêm title và author nếu chưa có*/
+
+            addTitleAndAuthor(title, author);
 
             document.setId(); // Giả sử phương thức setId() tạo ID mới cho tài liệu dựa trên loại tài liệu và tiêu đề
             System.out.println(document.getId());
