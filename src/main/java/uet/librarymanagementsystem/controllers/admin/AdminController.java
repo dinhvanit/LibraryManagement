@@ -36,6 +36,11 @@ public class AdminController {
     }
 
     @FXML
+    void clickListOfTransactions(MouseEvent event) {
+        WindowUtil.loadCenterPane(Page.TRANSACTION_MANAGE, borderPaneAdminPage);
+    }
+
+    @FXML
     void clickLogOut(MouseEvent event) {
         WindowUtil.logoutSession();
     }
