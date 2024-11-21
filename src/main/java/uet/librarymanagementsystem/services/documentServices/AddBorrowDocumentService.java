@@ -24,7 +24,7 @@ public class AddBorrowDocumentService {
 
     public static ObservableList<Transaction> addBorrowDocument() throws SQLException {
         String id_student = LoginController.getIdCurrentStudent();
-        ObservableList<Transaction> transactionList = TransactionsTable.searchTransByStudent_id(id_student);
+        ObservableList<Transaction> transactionList = TransactionsTable.searchTransByField(id_student, null, null, null, false);
 
         ObservableList<Transaction> transactionBorrow = FXCollections.observableArrayList();
         for (Transaction transaction : transactionList) {

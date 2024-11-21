@@ -1,22 +1,14 @@
 package uet.librarymanagementsystem.services.transactionServices;
 
-import javafx.collections.FXCollections;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
-import uet.librarymanagementsystem.entity.documents.Document;
-import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
-import uet.librarymanagementsystem.entity.users.Student;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Objects;
-
-import static uet.librarymanagementsystem.entity.transactions.Transaction.*;
 
 public class SearchTransactionService {
     private Connection conn;
@@ -25,14 +17,40 @@ public class SearchTransactionService {
         conn = DatabaseManager.connect();
     }
 
-    public ObservableList<Transaction> searchTransaction(String id_student) throws SQLException {
-           return TransactionsTable.searchTransByStudent_id(id_student);
+    public ObservableList<Transaction> searchTransactionByIdStudent(String id_student) throws SQLException {
+        return TransactionsTable.searchTransByField(id_student, null, null, null, false);
     }
 
+    public ObservableList<Transaction> searchTransactionByIdDocumentAndReviewed(String id_document) throws SQLException {
+        return TransactionsTable.searchTransByField(null, id_document, null, null, false);
+    }
+
+    public ObservableList<Transaction> getAllTransactions() throws SQLException {
+        return TransactionsTable.searchTransByField(null, null, null, null, false);
+    }
+
+    public int[] ratingOfIdDocument(String id_document) throws SQLException {
+        ObservableList<Transaction> transactionByIdDocument = searchTransactionByIdDocumentAndReviewed(id_document);
+        int[] resultOfRating = new int[]{0, 0, 0, 0, 0 ,0};
+        for (Transaction transaction : transactionByIdDocument) {
+            if (Objects.equals(transaction.getRating(), "1")) {
+                resultOfRating[1]++;
+            } else if (Objects.equals(transaction.getRating(), "2")) {
+                resultOfRating[2]++;
+            } else if (Objects.equals(transaction.getRating(), "3")) {
+                resultOfRating[3]++;
+            } else if (Objects.equals(transaction.getRating(), "4")) {
+                resultOfRating[4]++;
+            } else if (Objects.equals(transaction.getRating(), "5")) {
+                resultOfRating[5]++;
+            }
+        }
+        return resultOfRating;
+    }
 
     public static void main(String[] args) throws SQLException {
         SearchTransactionService searchTransactionService = new SearchTransactionService();
-        ObservableList<Transaction> transactions = searchTransactionService.searchTransaction("23020714");
+        ObservableList<Transaction> transactions = searchTransactionService.searchTransactionByIdStudent("23020714");
 
         // Check if the list is empty or contains transactions
         if (transactions.isEmpty()) {

@@ -2,7 +2,7 @@ package uet.librarymanagementsystem.services.documentServices;
 
 public class LibraryManagementSystem {
     public static void main(String[] args) {
-        BookLookupService bookLookupService = new BookLookupService("9781449358068");
+        BookLookupService bookLookupService = new BookLookupService("9780261103573");
         if (bookLookupService.checkBookInfoByISBN()) {
             System.out.println(bookLookupService.getIsbn());
             System.out.println(bookLookupService.getTitleBook());

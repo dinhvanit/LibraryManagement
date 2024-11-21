@@ -2,6 +2,7 @@ package uet.librarymanagementsystem.controllers.info_document;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -29,6 +30,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -44,12 +46,7 @@ import java.util.ResourceBundle;
 
 public class GetInfoDocumentController implements Initializable {
 
-    private Page pageOwner;
-    private double averageRating;
-    private int[] ratingCounts;
-    private int totalRatings;
-    private Document documentInfo;
-
+    private final int starRating = 5;
     private Image fullStar;
     private Image halfStar;
     private Image emptyStar;
@@ -135,16 +132,21 @@ public class GetInfoDocumentController implements Initializable {
     private TableColumn<Transaction, String> nameUserRatingColumn;
 
     @FXML
-    private TableView<Transaction> ratingTableView;
-
-    @FXML
     private TableColumn<Transaction, String> reviewColumn;
 
     @FXML
     private TableColumn<Transaction, String> starRatingColumn;
 
     @FXML
+    private TableView<Transaction> ratingTableView;
+
+    private ObservableList<Transaction> ratingList;
+
+    @FXML
     private Button writeRatingAndReviewButton;
+
+    @FXML
+    private Button viewYourReviewButton;
 
     @FXML
     void previewLinkClick(MouseEvent event) {
@@ -156,10 +158,10 @@ public class GetInfoDocumentController implements Initializable {
         writeRatingAndReviewButton.setVisible(isVisible);
     }
 
-    public void setPageOwner(Page page) {
-        System.out.println(page.name());
-        pageOwner = page;
+    public void setButtonViewYourReviewVisibility(Boolean isVisible){
+        viewYourReviewButton.setVisible(isVisible);
     }
+
     private void updateStars(double rating) {
         updateStar(starImage1, 1, rating);
         updateStar(starImage2, 2, rating);
@@ -178,12 +180,12 @@ public class GetInfoDocumentController implements Initializable {
         }
     }
 
-    private void updateRatingBar() {
-        progressBar5.setProgress((double) ratingCounts[0] / totalRatings);  // 5 sao
-        progressBar4.setProgress((double) ratingCounts[1] / totalRatings);  // 4 sao
-        progressBar3.setProgress((double) ratingCounts[2] / totalRatings);  // 3 sao
-        progressBar2.setProgress((double) ratingCounts[3] / totalRatings);  // 2 sao
-        progressBar1.setProgress((double) ratingCounts[4] / totalRatings);  // 1 sao
+    private void updateRatingBar(int[] ratingCounts, int totalRatings) {
+        progressBar5.setProgress((double) ratingCounts[5] / totalRatings);  // 5 sao
+        progressBar4.setProgress((double) ratingCounts[4] / totalRatings);  // 4 sao
+        progressBar3.setProgress((double) ratingCounts[3] / totalRatings);  // 3 sao
+        progressBar2.setProgress((double) ratingCounts[2] / totalRatings);  // 2 sao
+        progressBar1.setProgress((double) ratingCounts[1] / totalRatings);  // 1 sao
     }
 
     private void setFieldLabelByISBN(Book book) {
@@ -266,32 +268,66 @@ public class GetInfoDocumentController implements Initializable {
         WindowUtil.showSecondaryWindow(Page.SHOW_WRITE_RATING_AND_REVIEW, "Write rating and review", currentStage);
     }
 
+    @FXML
+    void viewYourReviewClick(MouseEvent event) {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        WindowUtil.showSecondaryWindow(Page.SHOW_VIEW_YOUR_REVIEW, "View your review", currentStage);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fullStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_full.png")));
         halfStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_half.png")));
         emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_empty.png")));
-        averageRating = 4.7;  // Điểm xếp hạng trung bình
-        ratingCounts = new int[]{50, 30, 10, 5, 3};
-        totalRatings = 98;
+
+        Document documentInfo = ShareData.getDocumentShare();
+
+        SearchTransactionService searchTransactionService = new SearchTransactionService();
+
+        int[] ratingCounts = new int[6];
+
+        try {
+            ratingCounts = searchTransactionService.ratingOfIdDocument(documentInfo.getId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        double averageRating = 0;
+        int totalRatings = 0;
+        for (int i = 1; i <= starRating; i++) {
+            totalRatings += ratingCounts[i];
+            averageRating += ratingCounts[i] * i;
+        }
+        if (totalRatings != 0) {
+            averageRating /= totalRatings;
+        }
+
         totalRatingsLabel.setText(String.valueOf(totalRatings));
         starLabel.setText(String.valueOf(averageRating));
-        updateRatingBar();
+        updateRatingBar(ratingCounts, totalRatings);
         updateStars(averageRating);  // Cập nhật các sao
 
-        documentInfo = ShareData.getDocumentShare();
-        //setDocumentInfo();
-        System.out.println("T ne" + pageOwner);
+        dateRatingColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReviewDate()));
+        nameUserRatingColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getName()));
+        dateRatingColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReviewDate()));
+        starRatingColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRating()));
+        reviewColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReview()));
+
+        ratingList = FXCollections.observableArrayList();
+        try {
+            ratingList = searchTransactionService.searchTransactionByIdDocumentAndReviewed(documentInfo.getId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ratingTableView.setItems(ratingList);
 
         if (documentInfo instanceof Book book) {
-            System.out.println("BOOOOOOOOOOOK");
             if (book.getIsbn() != null) {
                 setFieldLabelByISBN(book);
             } else {
                 setFieldLabelNotByISBN(documentInfo);
             }
         } else {
-            System.out.println("111111");
             setFieldLabelNotByISBN(documentInfo);
         }
     }

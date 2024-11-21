@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 public class BookLookupService {
     private static final String API_KEY = "AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8";
@@ -103,17 +104,19 @@ public class BookLookupService {
     }
 
     public String getTheFirstCategory() {
-        String firstCategory = "N/A";
         JSONArray categoriesArray = bookInfo.optJSONArray("categories");
-
         if (categoriesArray != null && !categoriesArray.isEmpty()) {
-            String fullCategory = categoriesArray.optString(0, "N/A"); // Lấy phần tử đầu tiên
-            if (!"N/A".equals(fullCategory)) {
-                firstCategory = fullCategory.split("\\s+")[0]; // Tách từ đầu tiên
-                firstCategory = firstCategory.toUpperCase();
+            String firstCategory = categoriesArray.optString(0, "N/A").toUpperCase();
+            try {
+                // nếu có trong enum rồi thì trả về category đấy
+                Book.BookCategory.valueOf(firstCategory);
+                return firstCategory;
+            } catch (IllegalArgumentException e) {
+                // còn nếu không thì đặt là others hết
+                return Book.BookCategory.OTHERS.name();
             }
         }
-        return firstCategory;
+        return Book.BookCategory.OTHERS.name(); // Mặc định nếu không có thể loại
     }
 
     public String getThumbnailUrl() {

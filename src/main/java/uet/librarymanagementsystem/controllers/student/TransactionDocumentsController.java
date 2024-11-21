@@ -1,14 +1,12 @@
 
 package uet.librarymanagementsystem.controllers.student;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -71,11 +69,21 @@ public class TransactionDocumentsController implements Initializable {
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
         Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
-        if (selectedDocument != null) {
+        Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null && selectedTransaction != null) {
             ShareData.setDocumentShare(selectedDocument);
+            ShareData.setTransactionShare(selectedTransaction);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindowWithShowInfo(
-                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true);
+            if (selectedTransaction.getReturnDate() == null) {
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+            } else if (selectedTransaction.getRating() == null){
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true, false);
+            } else {
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, true);
+            }
         }
     }
 
@@ -98,7 +106,7 @@ public class TransactionDocumentsController implements Initializable {
 
         transactionList = FXCollections.observableArrayList();
         try {
-            transactionList = searchTransactionService.searchTransaction(LoginController.getIdCurrentStudent());
+            transactionList = searchTransactionService.searchTransactionByIdStudent(LoginController.getIdCurrentStudent());
             System.out.println("size = " + transactionList.size());
         } catch (SQLException e) {
             System.out.println("Loi");

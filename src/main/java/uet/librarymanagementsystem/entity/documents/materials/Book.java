@@ -85,7 +85,7 @@ public class Book extends Document {
         FICTION("01"),                // Tiểu thuyết
         NON_FICTION("02"),            // Phi hư cấu
         SCIENCE("03"),                // Khoa học
-        MATHS("04"),                  // Toán học
+        MATHEMATICS("04"),                  // Toán học
         TECHNOLOGY("05"),             // Công nghệ
         BIOGRAPHY("06"),              // Tiểu sử
         HISTORY("07"),                // Lịch sử
