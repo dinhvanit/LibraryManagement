@@ -22,6 +22,10 @@ public class SearchTransactionService {
     }
 
     public ObservableList<Transaction> searchTransactionByIdDocumentAndReviewed(String id_document) throws SQLException {
+        return TransactionsTable.searchTransByField(null, id_document, null, null, true);
+    }
+
+    public ObservableList<Transaction> searchTransactionByIdDocument(String id_document) throws SQLException {
         return TransactionsTable.searchTransByField(null, id_document, null, null, false);
     }
 
