@@ -54,16 +54,21 @@ public class Book extends Document {
             ObservableList<Document> listDocument = searchDocumentService.searchAll(
                     title, author, getMaterial(), getCategory());
             int len = listDocument.size();
-            for (int i = 0; i < len; i++) {
-                if (listDocument.get(i).getId().substring(12, 16).equals(String.format("%04d", i + 1))) {
+            String Max = "0000";
+            for (Document document : listDocument) {
+                if (document.getId().substring(12, 16).compareTo(Max) > 0) {
                     System.out.println("YES");
+                    Max = document.getId().substring(12, 16);
                 } else {
                     System.out.println("NO");
-                    return String.format("%04d", i + 1);
+                    //return String.format("%04d", i + 1);
                 }
-                System.out.println(listDocument.get(i).getId().substring(0).getClass().getName());
+                //System.out.println(document.getId().substring(0).getClass().getName());
             }
-            return String.format("%04d", len + 1);
+            int maxNumber = Integer.parseInt(Max);
+            maxNumber += 1;
+
+            return String.format("%04d", maxNumber);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -85,7 +90,7 @@ public class Book extends Document {
         FICTION("01"),                // Tiểu thuyết
         NON_FICTION("02"),            // Phi hư cấu
         SCIENCE("03"),                // Khoa học
-        MATHEMATICS("04"),                  // Toán học
+        MATHEMATICS("04"),            // Toán học
         TECHNOLOGY("05"),             // Công nghệ
         BIOGRAPHY("06"),              // Tiểu sử
         HISTORY("07"),                // Lịch sử

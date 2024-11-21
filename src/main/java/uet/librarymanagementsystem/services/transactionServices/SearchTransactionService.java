@@ -30,7 +30,7 @@ public class SearchTransactionService {
     }
 
     public ObservableList<Transaction> getAllTransactions() throws SQLException {
-        return TransactionsTable.searchTransByField(null, null, null, null, true);
+        return TransactionsTable.searchTransByField(null, null, null, null, false);
     }
 
     public int[] ratingOfIdDocument(String id_document) throws SQLException {

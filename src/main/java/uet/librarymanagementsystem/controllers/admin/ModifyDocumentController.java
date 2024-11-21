@@ -30,12 +30,12 @@ public class ModifyDocumentController  implements Initializable {
         String author = authorModifyDocumentTextField.getText().trim();
         String material = materialModifyDocumentTextField.getText().trim();
         String category = categoryModifyDocumentTextField.getText().trim();
-
+/*
         try {
-            DocumentDO.updateDocument(title, author, material, category);
+            //DocumentDO.updateDocument(title, author, material, category);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
