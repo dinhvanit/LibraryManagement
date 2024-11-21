@@ -10,6 +10,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.*;
 
 public class AddBorrowDocumentService {
     public Connection getConn() {
@@ -23,16 +24,29 @@ public class AddBorrowDocumentService {
     }
 
     public static ObservableList<Transaction> addBorrowDocument() throws SQLException {
-        String id_student = LoginController.getIdCurrentStudent();
-        ObservableList<Transaction> transactionList = TransactionsTable.searchTransByField(id_student, null, null, null, false);
+        ExecutorService executor = Executors.newSingleThreadExecutor(); // Một luồng riêng để xử lý
+        Future<ObservableList<Transaction>> future = executor.submit(() -> {
+            String id_student = LoginController.getIdCurrentStudent();
+            ObservableList<Transaction> transactionList = TransactionsTable.searchTransByField(id_student, null, null, null, false);
 
-        ObservableList<Transaction> transactionBorrow = FXCollections.observableArrayList();
-        for (Transaction transaction : transactionList) {
-            if (transaction.getReturnDate() == null) {
-                transactionBorrow.add(transaction);
+            ObservableList<Transaction> transactionBorrow = FXCollections.observableArrayList();
+            for (Transaction transaction : transactionList) {
+                if (transaction.getReturnDate() == null) {
+                    transactionBorrow.add(transaction);
+                }
             }
+            return transactionBorrow;
+        });
+
+        ObservableList<Transaction> result = FXCollections.observableArrayList();
+        try {
+            result = future.get(5, TimeUnit.SECONDS); // Đợi tối đa 10 giây để xử lý hoàn tất
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+        } finally {
+            executor.shutdown();
         }
-        return transactionBorrow;
+        return result;
     }
 
     public static void main(String[] args) throws SQLException {
