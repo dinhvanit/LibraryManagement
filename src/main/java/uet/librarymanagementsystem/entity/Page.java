@@ -5,6 +5,7 @@ public enum Page {
     LOGIN("/uet/librarymanagementsystem/fxml/login.fxml"),
     ADMIN("/uet/librarymanagementsystem/fxml/admin/admin_page.fxml"),
     STUDENT("/uet/librarymanagementsystem/fxml/student/student_page.fxml"),
+    SHOW_INFO("/uet/librarymanagementsystem/fxml/student/show_info_student.fxml"),
     CHANGE_PASSWORD("/uet/librarymanagementsystem/fxml/student/change_password.fxml"),
     ADD_STUDENT("/uet/librarymanagementsystem/fxml/admin/add_student.fxml"),
     ADD_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/add_document.fxml"),
