@@ -15,7 +15,7 @@ import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
-import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -71,8 +71,8 @@ public class TransactionDocumentsController implements Initializable {
         Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
         Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null && selectedTransaction != null) {
-            ShareData.setDocumentShare(selectedDocument);
-            ShareData.setTransactionShare(selectedTransaction);
+            ShareDataService.setDocumentShare(selectedDocument);
+            ShareDataService.setTransactionShare(selectedTransaction);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             if (selectedTransaction.getReturnDate() == null) {
                 WindowUtil.showSecondaryWindowWithShowInfo(
@@ -84,6 +84,18 @@ public class TransactionDocumentsController implements Initializable {
                 WindowUtil.showSecondaryWindowWithShowInfo(
                         Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, true);
             }
+        }
+    }
+
+    @FXML
+    void qrCodeClick(MouseEvent event) {
+        Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
+        Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null && selectedTransaction != null) {
+            ShareDataService.setDocumentShare(selectedDocument);
+            ShareDataService.setTransactionShare(selectedTransaction);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindow(Page.QR_CODE_TRANSACTION, "QR code transaction", currentStage);
         }
     }
 

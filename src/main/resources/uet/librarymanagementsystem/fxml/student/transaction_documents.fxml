@@ -59,7 +59,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="INFO" />
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="INFO">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#qrCodeClick" prefHeight="50.0" prefWidth="90.0" text="QR CODE" />
                      </children>
                   </HBox>
                </children>

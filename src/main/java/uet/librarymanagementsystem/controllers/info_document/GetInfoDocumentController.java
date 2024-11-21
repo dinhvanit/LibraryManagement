@@ -15,29 +15,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import uet.librarymanagementsystem.controllers.LoginController;
-import uet.librarymanagementsystem.controllers.student.BorrowedDocumentsController;
-import uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController;
-import uet.librarymanagementsystem.controllers.student.TransactionDocumentsController;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
-import uet.librarymanagementsystem.entity.documents.ImagesOfMaterial;
+import uet.librarymanagementsystem.entity.documents.ImagesOfLibrary;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
-import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
-import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
-import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-import javax.print.Doc;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.net.URI;
 import java.net.URL;
 import java.sql.SQLException;
@@ -216,7 +206,7 @@ public class GetInfoDocumentController implements Initializable {
                 imageInformation.setImage(image);
             } else {
                 Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
+                        getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
                 imageInformation.setImage(image);
             }
         } else {
@@ -234,19 +224,19 @@ public class GetInfoDocumentController implements Initializable {
         previewHyperlink.setVisible(false);
         if (Objects.equals(document.getMaterial(), MaterialType.BOOK.name())) {
             Image image = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream(ImagesOfMaterial.BOOK.getPath())));
+                    getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
             imageInformation.setImage(image);
         } else if (Objects.equals(document.getMaterial(), MaterialType.JOURNAL.name())) {
             Image image = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream(ImagesOfMaterial.JOURNAL.getPath())));
+                    getClass().getResourceAsStream(ImagesOfLibrary.JOURNAL.getPath())));
             imageInformation.setImage(image);
         } else if (Objects.equals(document.getMaterial(), MaterialType.NEWSPAPER.name())) {
             Image image = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream(ImagesOfMaterial.NEWSPAPER.getPath())));
+                    getClass().getResourceAsStream(ImagesOfLibrary.NEWSPAPER.getPath())));
             imageInformation.setImage(image);
         } else if (Objects.equals(document.getMaterial(), MaterialType.THESIS.name())) {
             Image image = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream(ImagesOfMaterial.THESIS.getPath())));
+                    getClass().getResourceAsStream(ImagesOfLibrary.THESIS.getPath())));
             imageInformation.setImage(image);
         }
     }
@@ -280,7 +270,7 @@ public class GetInfoDocumentController implements Initializable {
         halfStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_half.png")));
         emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_empty.png")));
 
-        Document documentInfo = ShareData.getDocumentShare();
+        Document documentInfo = ShareDataService.getDocumentShare();
 
         SearchTransactionService searchTransactionService = new SearchTransactionService();
 

@@ -5,8 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 
 import java.net.URL;
 import java.util.Objects;
@@ -96,9 +95,9 @@ public class ViewYourReviewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fullStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_full.png")));
         emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_empty.png")));
-        dateLabel.setText(ShareData.getTransactionShare().getReviewDate());
-        setRatingImage(Integer.parseInt(ShareData.getTransactionShare().getRating()));
-        reviewLabel.setText(ShareData.getTransactionShare().getReview());
+        dateLabel.setText(ShareDataService.getTransactionShare().getReviewDate());
+        setRatingImage(Integer.parseInt(ShareDataService.getTransactionShare().getRating()));
+        reviewLabel.setText(ShareDataService.getTransactionShare().getReview());
     }
 
 }
