@@ -4,26 +4,85 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
+import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.services.userServices.SearchStudentService;
+import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.controllers.LoginController;
+
+import java.sql.SQLException;
 
 public class ShowInfoStudentController {
 
     @FXML
     private PieChart pieChart;
 
+    @FXML
+    private Label idStudentLabel;
+    @FXML
+    private Label nameStudentLabel;
+    @FXML
+    private Label phoneStudentLabel;
+    @FXML
+    private Label datebirthStudentLabel;
+    @FXML
+    private Label emailStudentLabel;
+
+    @FXML
+    private Label totalBorrowedDocumentsLabel;
+    @FXML
+    private Label returnedDocumentsLabel;
+    @FXML
+    private Label borrowedWithinDueLabel;
+    @FXML
+    private Label borrowedOverdueLabel;
+
+    private final SearchStudentService searchStudentService;
+
+    public ShowInfoStudentController() {
+        searchStudentService = new SearchStudentService();
+    }
+
     public void initialize() {
-        // Dữ liệu cho biểu đồ PieChart
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Sách đã trả", 40), // Ví dụ: 40 cuốn sách đã trả
-                new PieChart.Data("Sách đang mượn", 30), // Ví dụ: 30 cuốn sách đang mượn
-                new PieChart.Data("Sách chưa trả", 20)  // Ví dụ: 20 cuốn sách chưa trả
-        );
+        try {
 
-        // Gán dữ liệu vào PieChart
-        pieChart.setData(pieChartData);
+            String userId = LoginController.getIdCurrentStudent();
+            // Tìm thông tin sinh viên dựa trên ID
+            Student student = searchStudentService.searchID(userId);
+            if (student != null) {
+                // Hiển thị thông tin cá nhân của sinh viên
+                idStudentLabel.setText(student.getId());
+                nameStudentLabel.setText(student.getName());
+                phoneStudentLabel.setText(student.getPhoneNumber());
+                datebirthStudentLabel.setText(student.getDateOfBirth());
+                emailStudentLabel.setText(student.getEmail());
+            }
 
-        // Thiết lập các thuộc tính biểu đồ
-        pieChart.setTitle("Tình trạng mượn sách");
-        pieChart.setLabelsVisible(true); // Hiển thị nhãn trên biểu đồ
-        pieChart.setLegendVisible(true); // Hiển thị chú thích (legend)
+            // Lấy dữ liệu thống kê mượn tài liệu từ cơ sở dữ liệu
+            int totalBorrowed = 100; // Giả định: lấy từ cơ sở dữ liệu
+            int returned = 60;       // Tài liệu đã trả
+            int withinDue = 30;      // Tài liệu đang mượn còn hạn trả
+            int overdue = 10;        // Tài liệu đang mượn hết hạn trả
+
+            // Cập nhật dữ liệu cho các label
+            totalBorrowedDocumentsLabel.setText(String.valueOf(totalBorrowed));
+            returnedDocumentsLabel.setText(String.valueOf(returned));
+            borrowedWithinDueLabel.setText(String.valueOf(withinDue));
+            borrowedOverdueLabel.setText(String.valueOf(overdue));
+
+            // Thêm dữ liệu vào biểu đồ
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                    new PieChart.Data("Returned Documents", returned),
+                    new PieChart.Data("Borrowed Documents (Within Due Date)", withinDue),
+                    new PieChart.Data("Borrowed Documents (Overdue)", overdue)
+            );
+
+            pieChart.setData(pieChartData);
+            pieChart.setTitle("Borrowed Book Overview");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // có thể hiển thị label lỗi
+        }
     }
 }

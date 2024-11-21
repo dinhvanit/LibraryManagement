@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,31 +21,31 @@
                   <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form">
                      <children>
                         <Label alignment="CENTER" prefHeight="118.0" prefWidth="113.0" text="ID" />
-                        <Label alignment="CENTER" prefHeight="117.0" prefWidth="254.0" text="no information" />
+                        <Label fx:id="idStudentLabel" alignment="CENTER" prefHeight="117.0" prefWidth="254.0" text="no information" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="122.0" prefWidth="106.0" text="NAME" />
-                        <Label alignment="CENTER" prefHeight="123.0" prefWidth="260.0" text="no information" />
+                        <Label fx:id="nameStudentLabel" alignment="CENTER" prefHeight="123.0" prefWidth="260.0" text="no information" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="134.0" prefWidth="106.0" text="DATE BIRTH" />
-                        <Label alignment="CENTER" prefHeight="141.0" prefWidth="260.0" text="no information" />
+                        <Label alignment="CENTER" prefHeight="122.0" prefWidth="113.0" text="PHONE NUMBER" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="phoneStudentLabel" alignment="CENTER" prefHeight="124.0" prefWidth="256.0" text="no information" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="134.0" prefWidth="106.0" text="DATE BIRTH" wrapText="true" />
+                        <Label fx:id="datebirthStudentLabel" alignment="CENTER" prefHeight="141.0" prefWidth="260.0" text="no information" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form">
                      <children>
                         <Label alignment="CENTER" prefHeight="117.0" prefWidth="106.0" text="EMAIIL" />
-                        <Label alignment="CENTER" prefHeight="138.0" prefWidth="260.0" text="no information" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="122.0" prefWidth="113.0" text="TOTAL BORROWED BOOK" textAlignment="CENTER" wrapText="true" />
-                        <Label alignment="CENTER" prefHeight="124.0" prefWidth="256.0" text="no information" />
+                        <Label fx:id="emailStudentLabel" alignment="CENTER" prefHeight="138.0" prefWidth="260.0" text="no information" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" />
@@ -53,11 +54,41 @@
              <!-- Bên phải: Biểu đồ -->
              <VBox alignment="TOP_CENTER" prefHeight="670.0" prefWidth="648.0" spacing="20" style="-fx-padding: 20;" HBox.hgrow="ALWAYS">
                  <children>
-                     <PieChart prefHeight="400.0" prefWidth="350.0" title="BORROWED BOOK" />
+                     <PieChart fx:id="pieChart" labelLineLength="10.0" labelsVisible="false" legendSide="LEFT" prefHeight="400.0" prefWidth="350.0" startAngle="90.0" title="BORROWED BOOK">
+                     <opaqueInsets>
+                        <Insets left="10.0" />
+                     </opaqueInsets></PieChart>
                      <HBox alignment="CENTER" spacing="10">
                          <Label style="-fx-font-size: 14px;" text="Biểu đồ minh họa số sách đã mượn." />
                      </HBox>
-                  <HBox alignment="CENTER" spacing="10" />
+                  <VBox prefHeight="172.0" prefWidth="406.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" text="Total Borrowed Documents" />
+                              <Label fx:id="totalBorrowedDocumentsLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" text="Returned Documents" />
+                              <Label fx:id="returnedDocumentsLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" text="Borrowed Documents (Within Due Date)" />
+                              <Label fx:id="borrowedWithinDueLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" text="Borrowed Documents (Overdue)" />
+                              <Label fx:id="borrowedOverdueLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                  </children>
              </VBox>
          </children>
