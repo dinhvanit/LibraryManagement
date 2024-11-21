@@ -42,6 +42,11 @@ public class StudentPageController {
     }
 
     @FXML
+    void showInfoStudentMenuClick(){
+        WindowUtil.loadCenterPane(Page.SHOW_INFO, borderPaneStudentPage);
+    }
+
+    @FXML
     void logoutMenuClick() {
         // Gọi hàm logout
         WindowUtil.logoutSession();
