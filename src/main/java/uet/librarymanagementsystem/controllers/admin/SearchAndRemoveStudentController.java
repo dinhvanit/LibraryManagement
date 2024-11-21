@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.userServices.ChangePasswordService;
 import uet.librarymanagementsystem.services.userServices.DeleteStudentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 
@@ -143,6 +144,31 @@ public class SearchAndRemoveStudentController implements Initializable {
             System.out.println("Lỗi khi tìm kiếm sinh viên: " + e.getMessage());
         }
     }
+
+    @FXML
+    void modifyStudentButtonOnClick(MouseEvent event) {
+        // Lấy sinh viên được chọn trong bảng "List Of Students"
+        Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            // Lấy ID của sinh viên
+            String studentId = selectedStudent.getId();
+
+            // Đặt lại mật khẩu thành ID của sinh viên
+            ChangePasswordService changePasswordService = new ChangePasswordService();
+            String resultMessage = changePasswordService.changePassword(studentId, studentId);
+
+            // Cập nhật lại mật khẩu trong giao diện
+            selectedStudent.setPassword(studentId); // Cập nhật trên UI
+            searchStudentTableView.refresh(); // Làm mới lại TableView
+
+            // Hiển thị thông báo kết quả
+            System.out.println(resultMessage);
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên để thay đổi mật khẩu.");
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

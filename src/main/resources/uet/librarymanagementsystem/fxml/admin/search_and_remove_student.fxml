@@ -181,7 +181,11 @@
                         </TableView>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD" />
+                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#modifyStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="MODIFY" />
                      </children>
                   </HBox>
                     </children>

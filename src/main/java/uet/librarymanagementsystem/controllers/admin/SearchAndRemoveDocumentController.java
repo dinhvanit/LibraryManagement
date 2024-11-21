@@ -4,18 +4,27 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.DeleteDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
+import javax.print.Doc;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -188,6 +197,22 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     private void performSearch() throws SQLException {
         documentsListSearchResult = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
         searchResultsTableView.setItems(documentsListSearchResult);
+    }
+
+    @FXML
+    void modifyDocumentButtonOnClick(MouseEvent event) {
+        // Lấy tài liệu được chọn từ bảng "List Of Documents"
+        Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedDocument != null) {
+            // Lấy Stage hiện tại
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Hiển thị trang modify_document.fxml
+            WindowUtil.showSecondaryWindow(Page.MODIFY_DOCUMENT, "Modify Information of Document", currentStage);
+        } else {
+            System.out.println("Vui lòng chọn một tài liệu để chỉnh sửa.");
+        }
     }
 
     private void setupTextFieldsListeners() {

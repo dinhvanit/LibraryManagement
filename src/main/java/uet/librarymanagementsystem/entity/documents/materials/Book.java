@@ -81,22 +81,27 @@ public class Book extends Document {
     }
 
     public enum BookCategory {
-        FICTION("01"),
-        MATHS("02"),
-        NON_FICTION("03"),
-        BIOGRAPHY("04"),
-        HISTORY("05"),
-        SCIENCE("06"),
-        TECHNOLOGY("07"),
-        ART("08"),
-        MUSIC("09"),
-        PHILOSOPHY("10"),
-        RELIGION("11"),
-        SELF_HELP("12");
-
-        //khoi tao cac loai category cua tung material, khoi tao ca id dua vao category cho document o day
-
-        //OTHERS;
+        // Thêm các thể loại chi tiết
+        FICTION("01"),                // Tiểu thuyết
+        NON_FICTION("02"),            // Phi hư cấu
+        SCIENCE("03"),                // Khoa học
+        MATHEMATICS("04"),                  // Toán học
+        TECHNOLOGY("05"),             // Công nghệ
+        BIOGRAPHY("06"),              // Tiểu sử
+        HISTORY("07"),                // Lịch sử
+        RELIGION("08"),               // Tôn giáo
+        SELF_HELP("09"),              // Sách tự lực
+        HEALTH("10"),                 // Sức khỏe
+        EDUCATION("11"),              // Giáo dục
+        ART("12"),                    // Nghệ thuật
+        MUSIC("13"),                  // Âm nhạc
+        PHILOSOPHY("14"),             // Triết học
+        SPORTS("15"),                 // Thể thao
+        TRAVEL("16"),                 // Du lịch
+        COOKING("17"),                // Nấu ăn
+        SCIENCE_FICTION("18"),        // Khoa học viễn tưởng
+        FANTASY("19"),                // Thần thoại
+        OTHERS("99");                 // Các thể loại khác
 
         private final String code;
 
