@@ -5,14 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.AddDocumentService;
-
-import java.sql.SQLException;
+import uet.librarymanagementsystem.services.documentServices.BookLookupService;
+import uet.librarymanagementsystem.util.ValidationLabelUtil;
 
 public class AddDocumentController {
 
@@ -23,136 +24,85 @@ public class AddDocumentController {
     private ChoiceBox<String> choiceCategoryAddDoc;
 
     @FXML
-    private TextField fieldAuthorAddDoc;
+    private TextField fieldAuthorAddDoc, fieldTitleAddDoc, fieldISBN;
 
     @FXML
     private Spinner<Integer> spinerQuantityAddDoc;
 
     @FXML
-    private TextField fieldTitleAddDoc;
-
-    @FXML
     private HBox isbnHbox;
 
     @FXML
-    private TextField fieldISBN;
-
-    @FXML
-    private Label isbnValidLabel;
+    private Label materialValidLabel, categoryValidLabel, isbnValidLabel, titleValidLabel, authorValidLabel, statusLabel;
 
     @FXML
     private TableView<Document> addDocumentTableView;
 
     @FXML
-    private TableColumn<Document, String> titleColumnAddResults;
-
-    @FXML
-    private TableColumn<Document, String> authorColumnAddResults;
-
-    @FXML
-    private TableColumn<Document, String> materialColumnAddResults;
-
-    @FXML
-    private TableColumn<Document, String> categoryColumnAddResults;
-
-    @FXML
-    private Label statusLabel;
-
-    @FXML
-    private Label titleValidLabel, authorValidLabel, quantityValidLabel;
+    private TableColumn<Document, String> titleColumnAddResults, authorColumnAddResults, materialColumnAddResults, categoryColumnAddResults;
 
     private final ObservableList<Document> documents = FXCollections.observableArrayList();
     private final AddDocumentService addDocumentService = new AddDocumentService();
+    private final ValidationLabelUtil validationUtil = new ValidationLabelUtil();
 
     @FXML
-    private void addDocumentButtonOnClick() throws SQLException {
-        MaterialType materialType = choiceMaterialAddDoc.getValue();
-        String category = choiceCategoryAddDoc.getValue();
-        String title = fieldTitleAddDoc.getText().trim();
-        String author = fieldAuthorAddDoc.getText().trim();
-        String isbn = fieldISBN.getText().trim();
-        Integer quantity = spinerQuantityAddDoc.getValue();
+    private void initialize() {
+        setupChoiceBoxes();
+        setupValidationListeners();
+        setupTableViewColumns();
+        setupSpinner();
+    }
 
-        // Xóa label trạng thái ban đầu
-        boolean isValid = true;
-
-        // Kiểm tra từng trường và cập nhật label cảnh báo tương ứng
-        if (materialType == null) {
-            statusLabel.setText("Material Type is required.");
+    @FXML
+    private void addDocumentButtonOnClick() {
+        if (!validateInputs()) {
+            statusLabel.setText("Please fix the errors before adding.");
             statusLabel.setStyle("-fx-text-fill: red;");
-            isValid = false;
-        }
-
-        if (category == null) {
-            statusLabel.setText("Category is required.");
-            statusLabel.setStyle("-fx-text-fill: red;");
-            isValid = false;
-        }
-
-        if (title.isEmpty()) {
-            titleValidLabel.setText("Title is required.");
-            titleValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            titleValidLabel.setVisible(false);
-        }
-
-        if (author.isEmpty()) {
-            authorValidLabel.setText("Author is required.");
-            authorValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            authorValidLabel.setVisible(false);
-        }
-
-        if (quantity == null || quantity <= 0) {
-            quantityValidLabel.setText("Quantity must be greater than 0.");
-            quantityValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            quantityValidLabel.setVisible(false);
-        }
-
-        if (materialType == MaterialType.BOOK && isbn.isEmpty()) {
-            isbnValidLabel.setText("ISBN is required for books.");
-            isbnValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            isbnValidLabel.setVisible(false);
-        }
-
-        // Nếu có lỗi đầu vào, dừng hàm
-        if (!isValid) {
             return;
         }
 
-        // Tạo các tài liệu theo số lượng
-        for (int i = 0; i < quantity; i++) {
-            try {
-                Document document = DocumentFactory.createDocument(null, title, author, materialType.name(), category, isbn);
-                documents.add(document);
-            } catch (IllegalArgumentException e) {
-                statusLabel.setText("Invalid category for selected material type.");
-                statusLabel.setStyle("-fx-text-fill: red;");
-                return;
-            }
-        }
+        try {
+            MaterialType materialType = choiceMaterialAddDoc.getValue();
+            String category = choiceCategoryAddDoc.getValue();
+            String title = fieldTitleAddDoc.getText().trim();
+            String author = fieldAuthorAddDoc.getText().trim();
+            String isbn = fieldISBN.getText().trim();
+            int quantity = spinerQuantityAddDoc.getValue();
 
-        // Cập nhật giao diện TableView
-        addDocumentTableView.setItems(documents);
-        statusLabel.setText("Document(s) added to the list!");
-        statusLabel.setStyle("-fx-text-fill: green;");
-        clearFields();
+            for (int i = 0; i < quantity; i++) {
+                Document document = DocumentFactory.createDocument(
+                        null, title, author, materialType.name(), category, isbn.isEmpty() ? null : isbn
+                );
+                documents.add(document);
+            }
+
+            addDocumentTableView.setItems(documents);
+            statusLabel.setText("Document(s) added to the list!");
+            statusLabel.setStyle("-fx-text-fill: green;");
+            clearFields();
+        } catch (IllegalArgumentException e) {
+            statusLabel.setText("Invalid category for selected material type.");
+            statusLabel.setStyle("-fx-text-fill: red;");
+        }
     }
 
+    @FXML
+    private void saveAllDocumentButtonOnClick() {
+        if (documents.isEmpty()) {
+            statusLabel.setText("No documents to save.");
+            return;
+        }
 
-    private void clearFields() {
-        choiceMaterialAddDoc.getSelectionModel().clearSelection();
-        choiceCategoryAddDoc.getSelectionModel().clearSelection();
-        fieldTitleAddDoc.clear();
-        fieldAuthorAddDoc.clear();
-        fieldISBN.clear();
-        isbnHbox.setVisible(false);
+        for (Document document : documents) {
+            addDocumentService.addDocument(
+                    document.getTitle(), document.getAuthor(), document.getMaterial(),
+                    document.getCategory(), document instanceof Book ? ((Book) document).getIsbn() : null
+            );
+        }
+        documents.clear();
+        addDocumentTableView.setItems(documents);
+        statusLabel.setText("All documents have been saved to the database.");
+        statusLabel.setStyle("-fx-text-fill: green;");
     }
 
     @FXML
@@ -160,7 +110,6 @@ public class AddDocumentController {
         Document selectedDocument = addDocumentTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
             documents.remove(selectedDocument);
-            addDocumentTableView.setItems(documents);
             statusLabel.setText("Selected document removed from the list.");
         } else {
             statusLabel.setText("Please select a document to remove.");
@@ -175,102 +124,29 @@ public class AddDocumentController {
     }
 
     @FXML
-    private void saveAllDocumentButtonOnClick() {
-        if (documents.isEmpty()) {
-            statusLabel.setText("No documents to save.");
+    public void searchInforByAPI(MouseEvent event) {
+        String isbn = fieldISBN.getText().trim();
+        if (isbn.isEmpty()) {
+            updateStatusLabel(isbnValidLabel, "Please enter an ISBN before searching.", "-fx-text-fill: red;");
             return;
         }
+        lookupBookInfo(isbn);
+    }
 
-        try {
-            for (Document document : documents) {
-                String isbn = (document instanceof Book) ? ((Book) document).getIsbn() : null;
-                addDocumentService.addDocument(
-                        document.getTitle(),
-                        document.getAuthor(),
-                        document.getMaterial(),
-                        document.getCategory(),
-                        isbn
-                );
-            }
-
-            // Sau khi lưu, xóa danh sách và cập nhật giao diện
-            documents.clear();
-            addDocumentTableView.setItems(documents);
-            statusLabel.setText("All documents have been saved to the database.");
-        } catch (Exception e) {
-            statusLabel.setText("Error occurred while saving documents.");
-            e.printStackTrace();
+    private void lookupBookInfo(String isbn) {
+        BookLookupService lookupService = new BookLookupService(isbn);
+        if (lookupService.checkBookInfoByISBN()) {
+            fieldTitleAddDoc.setText(lookupService.getTitleBook());
+            fieldAuthorAddDoc.setText(lookupService.getTheFirstAuthor());
+            choiceCategoryAddDoc.setValue(lookupService.getTheFirstCategory());
+            updateStatusLabel(isbnValidLabel, "ISBN found!", "-fx-text-fill: green;");
+        } else {
+            updateStatusLabel(isbnValidLabel, "ISBN not found or invalid.", "-fx-text-fill: red;");
         }
     }
 
-    private boolean validateDocumentInput() {
-        boolean isValid = true;
-
-        // Kiểm tra trường Title
-        if (fieldTitleAddDoc.getText().trim().isEmpty()) {
-            titleValidLabel.setText("Title cannot be empty.");
-            titleValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            titleValidLabel.setVisible(false);
-        }
-
-        // Kiểm tra trường Author
-        if (fieldAuthorAddDoc.getText().trim().isEmpty()) {
-            authorValidLabel.setText("Author cannot be empty.");
-            authorValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            authorValidLabel.setVisible(false);
-        }
-
-        // Kiểm tra trường MaterialType
-        if (choiceMaterialAddDoc.getValue() == null) {
-            statusLabel.setText("Material Type must be selected.");
-            statusLabel.setStyle("-fx-text-fill: red;");
-            isValid = false;
-        } else {
-            statusLabel.setText("");
-        }
-
-        // Kiểm tra trường Category
-        if (choiceCategoryAddDoc.getValue() == null) {
-            statusLabel.setText("Category must be selected.");
-            statusLabel.setStyle("-fx-text-fill: red;");
-            isValid = false;
-        } else {
-            statusLabel.setText("");
-        }
-
-        // Kiểm tra ISBN nếu MaterialType là BOOK
-        if (choiceMaterialAddDoc.getValue() == MaterialType.BOOK && fieldISBN.getText().trim().isEmpty()) {
-            isbnValidLabel.setText("ISBN is required for books.");
-            isbnValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            isbnValidLabel.setVisible(false);
-        }
-
-        // Kiểm tra trường Quantity
-        if (spinerQuantityAddDoc.getValue() == null || spinerQuantityAddDoc.getValue() <= 0) {
-            quantityValidLabel.setText("Quantity must be greater than 0.");
-            quantityValidLabel.setVisible(true);
-            isValid = false;
-        } else {
-            quantityValidLabel.setVisible(false);
-        }
-
-        return isValid;
-    }
-
-
-
-    @FXML
-    public void initialize() {
-        // Khởi tạo các lựa chọn MaterialType
+    private void setupChoiceBoxes() {
         choiceMaterialAddDoc.setItems(FXCollections.observableArrayList(MaterialType.values()));
-
-        // Cập nhật khi chọn MaterialType
         choiceMaterialAddDoc.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 choiceCategoryAddDoc.setItems(MaterialType.getCategoriesForMaterial(newValue));
@@ -278,18 +154,88 @@ public class AddDocumentController {
                 isbnHbox.setVisible(isBook);
                 isbnValidLabel.setVisible(isBook);
             }
+            validateChoiceBoxSelection(choiceMaterialAddDoc.getValue(), materialValidLabel);
         });
 
-        // Thiết lập Spinner cho số lượng
-        spinerQuantityAddDoc.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
-        spinerQuantityAddDoc.setEditable(true);
+        choiceCategoryAddDoc.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            validateChoiceBoxSelection(choiceCategoryAddDoc.getValue(), categoryValidLabel);
+        });
+    }
 
-        // Gán dữ liệu cho các cột trong TableView
+    private void setupValidationListeners() {
+        fieldTitleAddDoc.textProperty().addListener((observable, oldValue, newValue) ->
+                validateField(newValue, titleValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
+
+        fieldAuthorAddDoc.textProperty().addListener((observable, oldValue, newValue) ->
+                validateField(newValue, authorValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
+
+        spinerQuantityAddDoc.valueProperty().addListener((observable, oldValue, newValue) -> {
+            validateQuantity(newValue, isbnValidLabel); // Kiểm tra giá trị cho Spinner
+        });
+    }
+
+    private void setupTableViewColumns() {
         titleColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         authorColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
+    }
 
+    private void setupSpinner() {
+        spinerQuantityAddDoc.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+        spinerQuantityAddDoc.setEditable(true);
+    }
 
+    private boolean validateChoiceBoxSelection(Object choiceBoxSelection, Label label) {
+        if (choiceBoxSelection == null || choiceBoxSelection.toString().isEmpty()) {
+            updateStatusLabel(label, "Trường này không được bỏ trống", "-fx-text-fill: red;");
+            return false;
+        }
+        updateStatusLabel(label, "", "-fx-text-fill: green;");
+        return true;
+    }
+
+    private boolean validateQuantity(Integer quantity, Label label) {
+        String quantityText = quantity.toString();
+        String errorMessage = validationUtil.validateNumericField(quantityText, "Số lượng phải là số hợp lệ");
+
+        if (!errorMessage.isEmpty()) {
+            updateStatusLabel(label, errorMessage, "-fx-text-fill: red;");
+            return false;
+        } else if (quantity <= 0) {
+            updateStatusLabel(label, "Số lượng phải lớn hơn 0", "-fx-text-fill: red;");
+            return false;
+        }
+        updateStatusLabel(label, "", "-fx-text-fill: green;");
+        return true;
+    }
+
+    private boolean validateInputs() {
+        return validateField(fieldTitleAddDoc.getText().trim(), titleValidLabel, ValidationLabelUtil.ValidationType.EMPTY) &&
+                validateField(fieldAuthorAddDoc.getText().trim(), authorValidLabel, ValidationLabelUtil.ValidationType.EMPTY) &&
+                validateChoiceBoxSelection(choiceMaterialAddDoc.getValue(), materialValidLabel) &&
+                validateChoiceBoxSelection(choiceCategoryAddDoc.getValue(), categoryValidLabel) &&
+                validateQuantity(spinerQuantityAddDoc.getValue(), isbnValidLabel);
+    }
+    private boolean validateField(String field, Label label, ValidationLabelUtil.ValidationType validationType) {
+        String errorMessage = validationUtil.validateField(field, validationType);
+        updateStatusLabel(label, errorMessage, errorMessage.isEmpty() ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+        return errorMessage.isEmpty();
+    }
+
+    private void updateStatusLabel(Label label, String message, String style) {
+        label.setText(message);
+        label.setStyle(style);
+    }
+
+    private void clearFields() {
+        //choiceMaterialAddDoc.getSelectionModel().clearSelection(); cần load lại mỗi lần add thì bỏ
+        choiceCategoryAddDoc.getSelectionModel().clearSelection();
+        fieldTitleAddDoc.clear();
+        fieldAuthorAddDoc.clear();
+        fieldISBN.clear();
+        isbnValidLabel.setText("");
+        isbnHbox.setVisible(false);
+        spinerQuantityAddDoc.getValueFactory().setValue(1);
     }
 }

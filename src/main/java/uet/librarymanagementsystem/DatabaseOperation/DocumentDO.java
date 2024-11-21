@@ -212,6 +212,41 @@ public class DocumentDO extends DatabaseManager {
         }
     }
 
+    public static void updateDocument(String title, String author, String material, String category) throws SQLException {
+        Connection con = connect();
+
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot update document, connection is closed or invalid.");
+        }
+
+        String sql = "UPDATE Document SET "
+                + "title = COALESCE(NULLIF(?, ''), title), "
+                + "author = COALESCE(NULLIF(?, ''), author), "
+                + "material = COALESCE(NULLIF(?, ''), material), "
+                + "category = COALESCE(NULLIF(?, ''), category) ";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            // Gán giá trị cho các tham số
+            pstmt.setString(1, title);
+            pstmt.setString(2, author);
+            pstmt.setString(3, material);
+            pstmt.setString(4, category);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Document updated successfully!");
+            } else {
+                System.out.println("No document found");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            con.close();
+        }
+    }
+
+
     public static void migrateDataToNewTableSQLite() throws SQLException {
         Connection con = connect();
         String migrateDataSQL = "INSERT INTO Document_New (id, title, author, material, category, isbn, desc, img, link, pages, quantity) " +

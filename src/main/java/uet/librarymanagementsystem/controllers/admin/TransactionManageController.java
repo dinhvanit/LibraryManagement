@@ -5,13 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.entity.documents.Document;
+import uet.librarymanagementsystem.services.shareData.ShareData;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -74,7 +80,15 @@ public class TransactionManageController implements Initializable {
 
     @FXML
     void infoDocumentManageButtonOnClick(MouseEvent event) {
-
+        Document selectedDocument = transactionManageTableView.getSelectionModel().getSelectedItem().getDocument();
+        Transaction selectedTransaction = transactionManageTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null && selectedTransaction != null) {
+            ShareData.setDocumentShare(selectedDocument);
+            ShareData.setTransactionShare(selectedTransaction);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindowWithShowInfo(
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        }
     }
 
     @FXML
@@ -92,7 +106,7 @@ public class TransactionManageController implements Initializable {
                 transactions = searchTransactionService.searchTransactionByIdStudent(idStudent);
             } else if (!idDocument.isEmpty()) {
                 // Tìm kiếm theo ID DOCUMENT
-                transactions = searchTransactionService.searchTransactionByIdDocumentAndReviewed(idDocument);
+                transactions = searchTransactionService.searchTransactionByIdDocument(idDocument);
             } else {
                 // Nếu không nhập gì thì lấy tất cả giao dịch
                 transactions = searchTransactionService.getAllTransactions();
