@@ -6,6 +6,8 @@ module uet.librarymanagementsystem {
     requires org.slf4j;
     requires java.desktop;
     requires org.json;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
 
     opens uet.librarymanagementsystem.controllers to javafx.fxml;
     exports uet.librarymanagementsystem;

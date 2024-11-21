@@ -17,7 +17,9 @@ public enum Page {
     RETURN_DOCUMENT("/uet/librarymanagementsystem/fxml/student/borrowed_documents.fxml"),
     SHOW_INFO_DOCUMENT("/uet/librarymanagementsystem/fxml/info_document/get_info_document.fxml"),
     SHOW_WRITE_RATING_AND_REVIEW("/uet/librarymanagementsystem/fxml/info_document/rating_and_review.fxml"),
-    SHOW_VIEW_YOUR_REVIEW("/uet/librarymanagementsystem/fxml/info_document/view_your_review.fxml");
+    SHOW_VIEW_YOUR_REVIEW("/uet/librarymanagementsystem/fxml/info_document/view_your_review.fxml"),
+    QR_CODE_TRANSACTION("/uet/librarymanagementsystem/fxml/info_document/qr_code_transaction.fxml");
+
     private final String fxmlPath;
 
     Page(String fxmlPath) {

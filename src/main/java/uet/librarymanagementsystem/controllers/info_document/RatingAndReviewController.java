@@ -9,11 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
-import uet.librarymanagementsystem.controllers.student.SearchAndBorrowDocumentController;
-import uet.librarymanagementsystem.entity.documents.Document;
-import uet.librarymanagementsystem.entity.documents.ImagesOfMaterial;
-import uet.librarymanagementsystem.entity.documents.materials.Book;
-import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -60,7 +56,7 @@ public class RatingAndReviewController implements Initializable {
             reviewLabel.setVisible(true);
         } else {
             TransactionsTable.updateRatingReviewDateReview(
-                    ShareData.getTransactionShare().getId(),
+                    ShareDataService.getTransactionShare().getId(),
                     rating, areaTextReview.getText(), String.valueOf(LocalDate.now()));
             Stage stage = (Stage) ratingLabel.getScene().getWindow();
             stage.close();

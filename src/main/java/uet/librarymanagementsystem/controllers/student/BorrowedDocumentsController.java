@@ -15,7 +15,7 @@ import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.AddBorrowDocumentService;
-import uet.librarymanagementsystem.services.shareData.ShareData;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
@@ -56,7 +56,7 @@ public class BorrowedDocumentsController implements Initializable {
     void infoDocumentButtonOnClick(MouseEvent event) {
         Document selectedDocument = borrowedDocumentsTableView.getSelectionModel().getSelectedItem().getDocument();
         if (selectedDocument != null) {
-            ShareData.setDocumentShare(selectedDocument);
+            ShareDataService.setDocumentShare(selectedDocument);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindowWithShowInfo(
                     Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
