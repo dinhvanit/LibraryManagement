@@ -91,6 +91,12 @@ public class SearchAndBorrowDocumentController implements Initializable {
     private Label dueDateLabel;
 
     @FXML
+    private Label notionChooseADocumentLabel;
+
+    @FXML
+    private Label notionChooseAddLabel;
+
+    @FXML
     private void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
         performAdd();
     }
@@ -99,9 +105,12 @@ public class SearchAndBorrowDocumentController implements Initializable {
         dueDateLabel.setText(setDueDate());
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            notionChooseAddLabel.setVisible(false);
             documentsListToBorrow.add(selectedDocument);
             documentsListSearchResult.remove(selectedDocument);
             searchResultsTableView.setItems(documentsListSearchResult);
+        } else {
+            notionChooseAddLabel.setVisible(true);
         }
     }
 
@@ -111,13 +120,18 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     void borrowAllDocumentsButtonOnClick(MouseEvent event) throws SQLException {
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        String dueDate = setDueDate();
-        for (Document document : documentsListToBorrow) {
-            Transaction transaction = new Transaction(document, student, today, null, dueDate);
-            TransactionsTable.insertTransaction(transaction);
+        if (documentsListToBorrow.isEmpty()) {
+            notionChooseADocumentLabel.setVisible(true);
+        } else {
+            notionChooseADocumentLabel.setVisible(false);
+            String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String dueDate = setDueDate();
+            for (Document document : documentsListToBorrow) {
+                Transaction transaction = new Transaction(document, student, today, null, dueDate);
+                TransactionsTable.insertTransaction(transaction);
+            }
+            documentsListToBorrow.clear();
         }
-        documentsListToBorrow.clear();
     }
 
     @FXML
@@ -129,10 +143,15 @@ public class SearchAndBorrowDocumentController implements Initializable {
         Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         String dueDate = setDueDate();
-        Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
-        TransactionsTable.insertTransaction(transaction);
-        documentsListToBorrow.remove(selectedDocument);
-        documentsToBorrowTableView.setItems(documentsListToBorrow);
+        if (selectedDocument != null) {
+            notionChooseADocumentLabel.setVisible(false);
+            Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
+            TransactionsTable.insertTransaction(transaction);
+            documentsListToBorrow.remove(selectedDocument);
+            documentsToBorrowTableView.setItems(documentsListToBorrow);
+        } else {
+            notionChooseADocumentLabel.setVisible(true);
+        }
     }
 
     @FXML

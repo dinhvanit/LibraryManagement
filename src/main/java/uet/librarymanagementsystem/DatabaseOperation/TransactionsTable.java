@@ -8,6 +8,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 import static uet.librarymanagementsystem.DatabaseOperation.DatabaseManager.connect;
 import javafx.collections.ObservableList;
@@ -267,7 +268,8 @@ public class TransactionsTable {
     }
 
     public static ObservableList<Transaction> searchTransByField(
-            String idStudent, String idDocument, String returnDate, String starRating, boolean reviewed) {
+            String idStudent, String idDocument, boolean careAboutReturning, boolean returned,
+            boolean dueDate, String starRating, boolean reviewed) {
         StringBuilder query = new StringBuilder(
                 "SELECT * FROM TransactionDocument WHERE 1=1");
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
@@ -278,13 +280,19 @@ public class TransactionsTable {
         if (idDocument != null && !idDocument.isEmpty()) {
             query.append(" AND id_document = ?");
         }
-        if (returnDate != null && !returnDate.isEmpty()) {
-            query.append(" AND return_date = ?");
+        if (careAboutReturning) {
+            if (returned) {
+                query.append(" AND return_date IS NOT NULL");
+            } else {
+                query.append(" AND return_date IS NULL");
+            }
+        }
+        if (dueDate) {
+            query.append(" AND due_date < ?");
         }
         if (starRating != null && !starRating.isEmpty()) {
             query.append(" AND rating = ?");
         }
-
         if (reviewed) {
             query.append(" AND review IS NOT NULL");
         }
@@ -300,8 +308,8 @@ public class TransactionsTable {
             if (idDocument != null && !idDocument.isEmpty()) {
                 pstmt.setString(paramIndex++, idDocument);
             }
-            if (returnDate != null && !returnDate.isEmpty()) {
-                pstmt.setString(paramIndex++, returnDate);
+            if (dueDate) {
+                pstmt.setDate(paramIndex++, java.sql.Date.valueOf(LocalDate.now()));
             }
             if (starRating != null && !starRating.isEmpty()) {
                 pstmt.setString(paramIndex++, starRating);

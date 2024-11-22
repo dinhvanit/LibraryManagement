@@ -128,7 +128,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="482.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="482.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="274.0">
                            <children>
@@ -169,6 +169,11 @@
                         <Insets left="10.0" />
                      </padding>
                   </HBox>
+                  <HBox alignment="CENTER" prefHeight="22.0" prefWidth="482.0">
+                     <children>
+                        <Label fx:id="notionChooseADocumentLabel" text="Please choose a document" textFill="#d40c0c" visible="false" />
+                     </children>
+                  </HBox>
                   <TableView fx:id="documentsToBorrowTableView" prefHeight="215.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="idColumnDocumentsToBorrow" editable="false" prefWidth="75.0" text="ID" />
@@ -200,7 +205,7 @@
          <center>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="60.0" prefWidth="418.0">
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="418.0">
                      <children>
                         <Label text="Search Results">
                            <font>
@@ -210,6 +215,11 @@
                      <padding>
                         <Insets left="10.0" />
                      </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="27.0" prefWidth="418.0">
+                     <children>
+                        <Label fx:id="notionChooseAddLabel" prefHeight="23.0" prefWidth="142.0" text="Please choose a document" textFill="#ef0808" visible="false" />
+                     </children>
                   </HBox>
                   <TableView fx:id="searchResultsTableView" prefHeight="380.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
                     <columns>
