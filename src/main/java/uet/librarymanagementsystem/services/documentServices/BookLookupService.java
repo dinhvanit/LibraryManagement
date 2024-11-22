@@ -184,22 +184,27 @@ public class BookLookupService {
     }
 
     public String getDescription() {
+
         return bookInfo.optString("description", "N/A");
     }
 
     public String getPublisher() {
+
         return bookInfo.optString("publisher", "N/A");
     }
 
     public String getLanguage() {
+
         return bookInfo.optString("language", "N/A");
     }
 
     public String getPreviewLink() {
+
         return bookInfo.optString("previewLink", "N/A");
     }
 
     public String getIsbn() {
+
         return isbn;
     }
 }

@@ -20,8 +20,10 @@ import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.DeleteDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import javax.print.Doc;
@@ -265,6 +267,17 @@ public class SearchAndRemoveDocumentController  implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    @FXML
+    void infoDocumentButtonOnClick(MouseEvent event) {
+        Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null) {
+            ShareDataService.setDocumentShare(selectedDocument);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindowWithShowInfo(
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        }
     }
 
     @Override
