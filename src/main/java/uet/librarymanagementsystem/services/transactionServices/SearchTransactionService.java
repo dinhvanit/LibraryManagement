@@ -1,13 +1,14 @@
 package uet.librarymanagementsystem.services.transactionServices;
 
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class SearchTransactionService {
@@ -18,19 +19,35 @@ public class SearchTransactionService {
     }
 
     public ObservableList<Transaction> searchTransactionByIdStudent(String id_student) throws SQLException {
-        return TransactionsTable.searchTransByField(id_student, null, null, null, false);
+        return TransactionsTable.searchTransByField(id_student, null, false, false, false, null, false);
     }
 
     public ObservableList<Transaction> searchTransactionByIdDocumentAndReviewed(String id_document) throws SQLException {
-        return TransactionsTable.searchTransByField(null, id_document, null, null, true);
+        return TransactionsTable.searchTransByField(null, id_document, false, false, false, null, true);
     }
 
     public ObservableList<Transaction> searchTransactionByIdDocument(String id_document) throws SQLException {
-        return TransactionsTable.searchTransByField(null, id_document, null, null, false);
+        return TransactionsTable.searchTransByField(null, id_document, false, false, false, null, false);
     }
 
     public ObservableList<Transaction> getAllTransactions() throws SQLException {
-        return TransactionsTable.searchTransByField(null, null, null, null, false);
+        return TransactionsTable.searchTransByField(null, null, false, false, false, null, false);
+    }
+
+    public ObservableList<Transaction> searchTransactionByIdStudentBorrowing(String id_student) throws SQLException {
+        return TransactionsTable.searchTransByField(id_student, null, true, false, false, null, false);
+    }
+
+    public ObservableList<Transaction> searchTransactionByIdStudentReturned(String id_student) throws SQLException {
+        return TransactionsTable.searchTransByField(id_student, null, true, true, false, null, false);
+    }
+
+    public ObservableList<Transaction> searchTransactionByIdStudentOverDate(String id_student) throws SQLException {
+        return TransactionsTable.searchTransByField(id_student, null, true, false, true, null, false);
+    }
+
+    public ObservableList<Transaction> searchTransactionByAllStudentOverDate() throws SQLException {
+        return TransactionsTable.searchTransByField(null, null, true, false, true, null, false);
     }
 
     public int[] ratingOfIdDocument(String id_document) throws SQLException {

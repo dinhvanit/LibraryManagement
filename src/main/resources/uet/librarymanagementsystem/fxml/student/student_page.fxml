@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -17,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" stylesheets="@../../cssDesign/studentPage.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
+<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
     <top>
         <HBox prefHeight="98.0" prefWidth="710.0" BorderPane.alignment="CENTER">
             <children>
@@ -247,16 +246,4 @@
             </TableView>
          </children></AnchorPane>
     </center>
-   <styleClass>
-      <String fx:value="body" />
-      <String fx:value="background" />
-      <String fx:value="btn" />
-      <String fx:value="button" />
-      <String fx:value="card" />
-      <String fx:value="highlight" />
-      <String fx:value="menu-button" />
-      <String fx:value="menu-button" />
-      <String fx:value="secondary-text" />
-      <String fx:value="table-row" />
-   </styleClass>
 </BorderPane>

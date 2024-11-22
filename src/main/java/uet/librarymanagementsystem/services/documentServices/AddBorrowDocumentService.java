@@ -2,11 +2,10 @@ package uet.librarymanagementsystem.services.documentServices;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import uet.librarymanagementsystem.DatabaseOperation.BorrowedDocuments;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
-import uet.librarymanagementsystem.DatabaseOperation.TransactionsTable;
 import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,15 +26,8 @@ public class AddBorrowDocumentService {
         ExecutorService executor = Executors.newSingleThreadExecutor(); // Một luồng riêng để xử lý
         Future<ObservableList<Transaction>> future = executor.submit(() -> {
             String id_student = LoginController.getIdCurrentStudent();
-            ObservableList<Transaction> transactionList = TransactionsTable.searchTransByField(id_student, null, null, null, false);
-
-            ObservableList<Transaction> transactionBorrow = FXCollections.observableArrayList();
-            for (Transaction transaction : transactionList) {
-                if (transaction.getReturnDate() == null) {
-                    transactionBorrow.add(transaction);
-                }
-            }
-            return transactionBorrow;
+            SearchTransactionService searchTransactionService = new SearchTransactionService();
+            return searchTransactionService.searchTransactionByIdStudentBorrowing(id_student);
         });
 
         ObservableList<Transaction> result = FXCollections.observableArrayList();
