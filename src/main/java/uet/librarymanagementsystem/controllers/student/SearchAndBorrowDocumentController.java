@@ -18,6 +18,7 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
+import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -29,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class SearchAndBorrowDocumentController implements Initializable {
     private final int borrowingPeriod = 6;
+    private final int maxDocuments = 10;
     private Student student;
     private SearchDocumentService searchDocumentService;
     private ObservableList<Document> documentsListSearchResult;
@@ -120,35 +122,53 @@ public class SearchAndBorrowDocumentController implements Initializable {
 
     @FXML
     void borrowAllDocumentsButtonOnClick(MouseEvent event) throws SQLException {
+        String id_student = LoginController.getIdCurrentStudent();
+        SearchTransactionService searchTransactionService = new SearchTransactionService();
+        ObservableList<Transaction> listTransactionBorrowing = searchTransactionService.searchTransactionByIdStudentBorrowing(id_student);
         if (documentsListToBorrow.isEmpty()) {
             notionChooseADocumentLabel.setVisible(true);
         } else {
-            notionChooseADocumentLabel.setVisible(false);
-            String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            String dueDate = setDueDate();
-            for (Document document : documentsListToBorrow) {
-                Transaction transaction = new Transaction(document, student, today, null, dueDate);
-                TransactionsTable.insertTransaction(transaction);
+            if (listTransactionBorrowing.size() + documentsListToBorrow.size() > maxDocuments) {
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                WindowUtil.showSecondaryWindow(Page.NOTION_MAX_DOCUMENTS, "Notion", currentStage);
+                System.out.println("You have exceeded the maximum number of documents you can borrow.");
+            } else {
+                notionChooseADocumentLabel.setVisible(false);
+                String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                String dueDate = setDueDate();
+                for (Document document : documentsListToBorrow) {
+                    Transaction transaction = new Transaction(document, student, today, null, dueDate);
+                    TransactionsTable.insertTransaction(transaction);
+                }
+                documentsListToBorrow.clear();
             }
-            documentsListToBorrow.clear();
         }
     }
 
     @FXML
     void borrowDocumentButtonOnClick(MouseEvent event) throws SQLException {
-        performBorrow();
+        performBorrow(event);
     }
 
-    private void performBorrow() throws SQLException {
+    private void performBorrow(MouseEvent event) throws SQLException {
+        String id_student = LoginController.getIdCurrentStudent();
         Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        String dueDate = setDueDate();
+        SearchTransactionService searchTransactionService = new SearchTransactionService();
+        ObservableList<Transaction> listTransactionBorrowing = searchTransactionService.searchTransactionByIdStudentBorrowing(id_student);
         if (selectedDocument != null) {
             notionChooseADocumentLabel.setVisible(false);
-            Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
-            TransactionsTable.insertTransaction(transaction);
-            documentsListToBorrow.remove(selectedDocument);
-            documentsToBorrowTableView.setItems(documentsListToBorrow);
+            if (listTransactionBorrowing.size() >= maxDocuments) {
+                System.out.println("You have exceeded the maximum number of documents you can borrow.");
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                WindowUtil.showSecondaryWindow(Page.NOTION_MAX_DOCUMENTS, "Notion", currentStage);
+            } else {
+                String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+                String dueDate = setDueDate();
+                Transaction transaction = new Transaction(selectedDocument, student, today, null, dueDate);
+                TransactionsTable.insertTransaction(transaction);
+                documentsListToBorrow.remove(selectedDocument);
+                documentsToBorrowTableView.setItems(documentsListToBorrow);
+            }
         } else {
             notionChooseADocumentLabel.setVisible(true);
         }
@@ -162,10 +182,13 @@ public class SearchAndBorrowDocumentController implements Initializable {
     private void performDelete() {
         Document selectedDocument = documentsToBorrowTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            notionChooseADocumentLabel.setVisible(false);
             documentsListSearchResult.add(selectedDocument);
             searchResultsTableView.setItems(documentsListSearchResult);
             documentsListToBorrow.remove(selectedDocument);
             documentsToBorrowTableView.setItems(documentsListToBorrow);
+        } else {
+            notionChooseADocumentLabel.setVisible(true);
         }
     }
 
@@ -173,10 +196,13 @@ public class SearchAndBorrowDocumentController implements Initializable {
     void infoDocumentClick(MouseEvent event) {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            notionChooseAddLabel.setVisible(false);
             ShareDataService.setDocumentShare(selectedDocument);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindowWithShowInfo(
                     Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        } else {
+            notionChooseAddLabel.setVisible(true);
         }
     }
 

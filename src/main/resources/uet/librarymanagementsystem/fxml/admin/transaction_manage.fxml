@@ -75,6 +75,11 @@
                               <TextField fx:id="idManageDocumentTextField" />
                            </children>
                         </HBox>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="330.0">
+                           <children>
+                              <Label fx:id="notionChoiceTransactionLabel" text="Please select a transaction." textFill="#e70707" visible="false" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

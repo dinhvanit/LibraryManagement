@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -68,6 +69,12 @@ public class SearchAndRemoveStudentController implements Initializable {
     private SearchStudentService searchStudentService;
 
     @FXML
+    private Label notionChoiceAddLabel;
+
+    @FXML
+    private Label notionChoiceDeleteLabel;
+
+    @FXML
     private void addStudentButtonOnClick(MouseEvent event) {
         Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
 
@@ -76,9 +83,11 @@ public class SearchAndRemoveStudentController implements Initializable {
 
             searchStudentTableView.getItems().remove(selectedStudent);
 
+            notionChoiceAddLabel.setVisible(false);
             System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
         } else {
             System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+            notionChoiceAddLabel.setVisible(true);
         }
     }
 
@@ -104,6 +113,7 @@ public class SearchAndRemoveStudentController implements Initializable {
         Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
 
         if (selectedStudent != null) {
+            notionChoiceDeleteLabel.setVisible(false);
             // Delete student from the database using deleteStudentByID method
             deleteStudentService.deleteStudentByID(selectedStudent.getId());
 
@@ -111,6 +121,7 @@ public class SearchAndRemoveStudentController implements Initializable {
             deleteStudentTableView.getItems().remove(selectedStudent);
             System.out.println("Student with ID " + selectedStudent.getId() + " removed from UI.");
         } else {
+            notionChoiceDeleteLabel.setVisible(true);
             System.out.println("No student selected for deletion.");
         }
     }
@@ -120,12 +131,14 @@ public class SearchAndRemoveStudentController implements Initializable {
         Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
 
         if (selectedStudent != null) {
+            notionChoiceDeleteLabel.setVisible(false);
             deleteStudentTableView.getItems().remove(selectedStudent);
 
             searchStudentTableView.getItems().add(selectedStudent);
 
             System.out.println("Sinh viên đã được xóa khỏi bảng Students to Delete và chuyển lại vào bảng List Of Students.");
         } else {
+            notionChoiceDeleteLabel.setVisible(true);
             System.out.println("Vui lòng chọn một sinh viên từ bảng Students to Delete để xóa.");
         }
     }

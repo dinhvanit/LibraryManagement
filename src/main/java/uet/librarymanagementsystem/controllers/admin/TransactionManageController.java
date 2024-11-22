@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -79,15 +80,23 @@ public class TransactionManageController implements Initializable {
     private TableView<Transaction> transactionManageTableView;
 
     @FXML
+    private Label notionChoiceTransactionLabel;
+
+    @FXML
     void infoDocumentManageButtonOnClick(MouseEvent event) {
-        Document selectedDocument = transactionManageTableView.getSelectionModel().getSelectedItem().getDocument();
-        Transaction selectedTransaction = transactionManageTableView.getSelectionModel().getSelectedItem();
-        if (selectedDocument != null && selectedTransaction != null) {
-            ShareDataService.setDocumentShare(selectedDocument);
-            ShareDataService.setTransactionShare(selectedTransaction);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindowWithShowInfo(
-                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        if (transactionManageTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceTransactionLabel.setVisible(true);
+        } else {
+            notionChoiceTransactionLabel.setVisible(false);
+            Document selectedDocument = transactionManageTableView.getSelectionModel().getSelectedItem().getDocument();
+            Transaction selectedTransaction = transactionManageTableView.getSelectionModel().getSelectedItem();
+            if (selectedDocument != null && selectedTransaction != null) {
+                ShareDataService.setDocumentShare(selectedDocument);
+                ShareDataService.setTransactionShare(selectedTransaction);
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+            }
         }
     }
 

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -53,13 +54,21 @@ public class BorrowedDocumentsController implements Initializable {
     private TableColumn<Transaction, String> titleColumnBorrowedDocuments;
 
     @FXML
+    private Label notionChoiceTransactionLabel;
+
+    @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
-        Document selectedDocument = borrowedDocumentsTableView.getSelectionModel().getSelectedItem().getDocument();
-        if (selectedDocument != null) {
-            ShareDataService.setDocumentShare(selectedDocument);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindowWithShowInfo(
-                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        if (borrowedDocumentsTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceTransactionLabel.setVisible(true);
+        } else {
+            notionChoiceTransactionLabel.setVisible(false);
+            Document selectedDocument = borrowedDocumentsTableView.getSelectionModel().getSelectedItem().getDocument();
+            if (selectedDocument != null) {
+                ShareDataService.setDocumentShare(selectedDocument);
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                WindowUtil.showSecondaryWindowWithShowInfo(
+                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+            }
         }
     }
 
@@ -75,12 +84,17 @@ public class BorrowedDocumentsController implements Initializable {
 
     @FXML
     void returnDocumentButtonOnClick(MouseEvent event) throws SQLException {
-        Transaction selectedTransaction = borrowedDocumentsTableView.getSelectionModel().getSelectedItem();
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        if (selectedTransaction != null) {
-            TransactionsTable.updateReturnDate(selectedTransaction.getId(), today);
-            borrowedDocumentsList.remove(selectedTransaction);
-            borrowedDocumentsTableView.setItems(borrowedDocumentsList);
+        if (borrowedDocumentsTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceTransactionLabel.setVisible(true);
+        } else {
+            notionChoiceTransactionLabel.setVisible(false);
+            Transaction selectedTransaction = borrowedDocumentsTableView.getSelectionModel().getSelectedItem();
+            String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            if (selectedTransaction != null) {
+                TransactionsTable.updateReturnDate(selectedTransaction.getId(), today);
+                borrowedDocumentsList.remove(selectedTransaction);
+                borrowedDocumentsTableView.setItems(borrowedDocumentsList);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -67,35 +68,48 @@ public class TransactionDocumentsController implements Initializable {
     private TableColumn<Transaction, String> reviewDateColumnTransaction;
 
     @FXML
+    private Label notionChoiceTransactionLabel;
+
+    @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
-        Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
-        Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
-        if (selectedDocument != null && selectedTransaction != null) {
-            ShareDataService.setDocumentShare(selectedDocument);
-            ShareDataService.setTransactionShare(selectedTransaction);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            if (selectedTransaction.getReturnDate() == null) {
-                WindowUtil.showSecondaryWindowWithShowInfo(
-                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
-            } else if (selectedTransaction.getRating() == null){
-                WindowUtil.showSecondaryWindowWithShowInfo(
-                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true, false);
-            } else {
-                WindowUtil.showSecondaryWindowWithShowInfo(
-                        Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, true);
+        if (transactionTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceTransactionLabel.setVisible(true);
+        } else {
+            notionChoiceTransactionLabel.setVisible(false);
+            Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
+            Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
+            if (selectedDocument != null && selectedTransaction != null) {
+                ShareDataService.setDocumentShare(selectedDocument);
+                ShareDataService.setTransactionShare(selectedTransaction);
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                if (selectedTransaction.getReturnDate() == null) {
+                    WindowUtil.showSecondaryWindowWithShowInfo(
+                            Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+                } else if (selectedTransaction.getRating() == null){
+                    WindowUtil.showSecondaryWindowWithShowInfo(
+                            Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, true, false);
+                } else {
+                    WindowUtil.showSecondaryWindowWithShowInfo(
+                            Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, true);
+                }
             }
         }
     }
 
     @FXML
     void qrCodeClick(MouseEvent event) {
-        Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
-        Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
-        if (selectedDocument != null && selectedTransaction != null) {
-            ShareDataService.setDocumentShare(selectedDocument);
-            ShareDataService.setTransactionShare(selectedTransaction);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindow(Page.QR_CODE_TRANSACTION, "QR code transaction", currentStage);
+        if (transactionTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceTransactionLabel.setVisible(true);
+        } else {
+            notionChoiceTransactionLabel.setVisible(false);
+            Document selectedDocument = transactionTableView.getSelectionModel().getSelectedItem().getDocument();
+            Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
+            if (selectedDocument != null && selectedTransaction != null) {
+                ShareDataService.setDocumentShare(selectedDocument);
+                ShareDataService.setTransactionShare(selectedTransaction);
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                WindowUtil.showSecondaryWindow(Page.QR_CODE_TRANSACTION, "QR code transaction", currentStage);
+            }
         }
     }
 
