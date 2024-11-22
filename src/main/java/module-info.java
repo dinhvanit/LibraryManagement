@@ -8,6 +8,7 @@ module uet.librarymanagementsystem {
     requires org.json;
     requires com.google.zxing;
     requires com.google.zxing.javase;
+    requires java.mail;
 
     opens uet.librarymanagementsystem.controllers to javafx.fxml;
     exports uet.librarymanagementsystem;

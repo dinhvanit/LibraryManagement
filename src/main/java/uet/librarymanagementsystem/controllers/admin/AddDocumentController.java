@@ -137,7 +137,7 @@ public class AddDocumentController {
         BookLookupService lookupService = new BookLookupService(isbn);
         if (lookupService.checkBookInfoByISBN()) {
             fieldTitleAddDoc.setText(lookupService.getTitleBook());
-            fieldAuthorAddDoc.setText(lookupService.getTheFirstAuthor());
+            fieldAuthorAddDoc.setText(lookupService.getAllAuthors());
             choiceCategoryAddDoc.setValue(lookupService.getTheFirstCategory());
             updateStatusLabel(isbnValidLabel, "ISBN found!", "-fx-text-fill: green;");
         } else {
@@ -229,7 +229,7 @@ public class AddDocumentController {
     }
 
     private void clearFields() {
-        //choiceMaterialAddDoc.getSelectionModel().clearSelection(); cần load lại mỗi lần add thì bỏ
+        choiceMaterialAddDoc.getSelectionModel().clearSelection();
         choiceCategoryAddDoc.getSelectionModel().clearSelection();
         fieldTitleAddDoc.clear();
         fieldAuthorAddDoc.clear();
