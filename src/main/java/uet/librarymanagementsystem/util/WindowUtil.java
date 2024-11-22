@@ -18,6 +18,7 @@ import static java.util.Objects.requireNonNull;
 public class WindowUtil {
     private static Stage stage;
     private static final Map<Page, Parent> loadedParents = new HashMap<>();
+    private static final Map<BorderPane, Page> borderPaneCurrentPages = new HashMap<>();
 
     public static void setStage(Stage primaryStage) {
         stage = primaryStage;
@@ -108,6 +109,22 @@ public class WindowUtil {
         try {
             Parent view = FXMLLoader.load(WindowUtil.class.getResource(page.getFXMLPath()));
             borderPane.setCenter(view);
+            borderPaneCurrentPages.put(borderPane, page);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void reloadCenterPane(BorderPane borderPane) {
+        try {
+            // Kiểm tra BorderPane đã được lưu Page chưa
+            Page currentPage = borderPaneCurrentPages.get(borderPane);
+            if (currentPage != null) {
+                Parent view = FXMLLoader.load(WindowUtil.class.getResource(currentPage.getFXMLPath()));
+                borderPane.setCenter(view);
+            } else {
+                System.out.println("No page is currently loaded for this BorderPane.");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
