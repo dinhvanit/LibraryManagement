@@ -1,17 +1,16 @@
 package uet.librarymanagementsystem.controllers.student;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class StudentPageController {
-
+public class StudentPageController implements Initializable {
 
     @FXML
     private BorderPane borderPaneStudentPage;
@@ -19,11 +18,6 @@ public class StudentPageController {
     @FXML
     void searchAndBorrowButtonClick(MouseEvent event) {
         WindowUtil.loadCenterPane(Page.SEARCH_AND_BORROW_DOCUMENT, borderPaneStudentPage);
-    }
-
-    @FXML
-    void logOutButtonClick(MouseEvent event) {
-        WindowUtil.logoutSession();
     }
 
     @FXML
@@ -42,13 +36,27 @@ public class StudentPageController {
     }
 
     @FXML
-    void showInfoStudentMenuClick(){
+    void showInfoStudentMenuClick() {
         WindowUtil.loadCenterPane(Page.SHOW_INFO, borderPaneStudentPage);
     }
 
     @FXML
+    public void reloadPageButton(MouseEvent event) {
+        WindowUtil.reloadCenterPane(borderPaneStudentPage);
+    }
+
+    public void homeButtonOnClick() {
+        WindowUtil.loadCenterPane(Page.HOME_STUDENT, borderPaneStudentPage);
+    }
+
+    @FXML
     void logoutMenuClick() {
-        // Gọi hàm logout
         WindowUtil.logoutSession();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Tải HOME_STUDENT vào CenterPane khi StudentPage được hiển thị
+        WindowUtil.loadCenterPane(Page.HOME_STUDENT, borderPaneStudentPage);
     }
 }

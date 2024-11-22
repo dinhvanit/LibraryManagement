@@ -1,0 +1,80 @@
+/* Phần nền tổng thể */
+.login-form {
+    -fx-background-color: linear-gradient(to bottom right, #7f7fd5, #86a8e7, #91eae4); /* Gradient nền mềm mại */
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+
+/* Card form đăng nhập */
+.card-form {
+    -fx-background-color: rgba(240, 248, 255, 0.9); /* Nền trắng ánh xanh */
+    -fx-background-radius: 20px;
+    -fx-border-color: rgba(200, 200, 200, 0.5); /* Đường viền xám nhạt mờ */
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0.2, 0, 5); /* Bóng đổ mềm */
+}
+
+
+/* TextField */
+.textfield {
+    -fx-background-color: transparent;
+    -fx-border-color: #0078d7; /* Viền xanh lam đậm đồng bộ */
+    -fx-border-width: 0px 0px 2px 0px; /* Chỉ viền dưới */
+    -fx-text-fill: #333; /* Màu chữ đậm */
+    -fx-font-size: 14px;
+    -fx-padding: 5px 0;
+}
+
+.textfield:focused {
+    -fx-border-color: #1e90ff; /* Viền sáng hơn khi chọn */
+    -fx-border-width: 0px 0px 3px 0px;
+}
+
+/* Nút đăng nhập */
+.login-btn {
+    -fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe); /* Gradient xanh dương nhạt */
+    -fx-background-radius: 25px; /* Bo tròn nút */
+    -fx-text-fill: #ffffff; /* Màu chữ trắng */
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.2, 0, 2); /* Bóng đổ mềm */
+}
+
+.login-btn:hover {
+    -fx-background-color: linear-gradient(to bottom, #1e90ff, #0078d7); /* Đảo gradient khi hover */
+}
+
+/* ChoiceBox (hộp chọn) */
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0078d7;
+    -fx-border-radius: 10px; /* Bo góc */
+    -fx-text-fill: #333;
+}
+
+/* Checkbox */
+.show-password-checkbox {
+    -fx-text-fill: #0078d7; /* Màu chữ đồng bộ */
+    -fx-font-size: 12px;
+}
+
+/* Label tiêu đề */
+.label-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0078d7; /* Xanh lam đậm nổi bật */
+    -fx-padding: 10px 0;
+    -fx-alignment: center;
+}
+
+/* Phần hình chữ nhật xanh */
+.left-panel {
+    -fx-background-color: #00bcd4; /* Màu xanh ngọc nổi bật */
+    -fx-background-radius: 20px; /* Bo góc tròn hơn */
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-text-fill: #ffffff; /* Màu chữ trắng */
+}

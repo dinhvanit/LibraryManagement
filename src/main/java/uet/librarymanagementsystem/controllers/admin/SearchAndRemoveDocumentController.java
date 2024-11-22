@@ -17,6 +17,7 @@ import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.DeleteDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;

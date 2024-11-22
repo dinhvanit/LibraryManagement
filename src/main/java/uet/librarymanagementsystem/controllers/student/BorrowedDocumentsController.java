@@ -110,11 +110,7 @@ public class BorrowedDocumentsController implements Initializable {
         dueDateColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         borrowedDocumentsList = FXCollections.observableArrayList();
-        try {
-            borrowedDocumentsList = AddBorrowDocumentService.addBorrowDocument();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        borrowedDocumentsList = AddBorrowDocumentService.addBorrowDocument();
         borrowedDocumentsTableView.setItems(borrowedDocumentsList);
 
     }

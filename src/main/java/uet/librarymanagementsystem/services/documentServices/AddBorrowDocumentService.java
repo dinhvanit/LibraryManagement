@@ -5,26 +5,31 @@ import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.services.TaskService;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import uet.librarymanagementsystem.LMSApplication;
 
 public class AddBorrowDocumentService {
-    public Connection getConn() {
-        return conn;
-    }
-
-    private Connection conn;
+    private final Connection conn;
+    private final TaskService taskService;
 
     public AddBorrowDocumentService() {
         this.conn = DatabaseManager.connect();
+        this.taskService = LMSApplication.getTaskService();
     }
 
-    public static ObservableList<Transaction> addBorrowDocument() throws SQLException {
-        ExecutorService executor = Executors.newSingleThreadExecutor(); // Một luồng riêng để xử lý
-        Future<ObservableList<Transaction>> future = executor.submit(() -> {
+    public static ObservableList<Transaction> addBorrowDocument() {
+        // Truy cập TaskService từ LMSApplication
+        TaskService taskService = LMSApplication.getTaskService();
+
+        Future<ObservableList<Transaction>> future = taskService.runTask(() -> {
             String id_student = LoginController.getIdCurrentStudent();
             SearchTransactionService searchTransactionService = new SearchTransactionService();
             return searchTransactionService.searchTransactionByIdStudentBorrowing(id_student);
@@ -32,14 +37,18 @@ public class AddBorrowDocumentService {
 
         ObservableList<Transaction> result = FXCollections.observableArrayList();
         try {
-            result = future.get(5, TimeUnit.SECONDS); // Đợi tối đa 10 giây để xử lý hoàn tất
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            e.printStackTrace();
-        } finally {
-            executor.shutdown();
+            result = future.get(5, TimeUnit.SECONDS); // Đợi tối đa 5 giây để lấy kết quả
+        } catch (InterruptedException e) {
+            System.err.println("Task interrupted: " + e.getMessage());
+        } catch (ExecutionException e) {
+            System.err.println("Task execution failed: " + e.getMessage());
+        } catch (TimeoutException e) {
+            System.err.println("Task timed out: " + e.getMessage());
         }
         return result;
     }
+
+
 
     public static void main(String[] args) throws SQLException {
         AddBorrowDocumentService addBorrowDocumentService = new AddBorrowDocumentService();

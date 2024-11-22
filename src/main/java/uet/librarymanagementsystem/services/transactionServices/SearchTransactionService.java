@@ -50,6 +50,15 @@ public class SearchTransactionService {
         return TransactionsTable.searchTransByField(null, null, true, false, true, null, false);
     }
 
+    public int[] countBooksByStatus(String idStudent) throws SQLException {
+        int borrowingBooks = searchTransactionByIdStudentBorrowing(idStudent).size();
+        int returnedBooks = searchTransactionByIdStudentReturned(idStudent).size();
+        int overdueBooks = searchTransactionByIdStudentOverDate(idStudent).size();
+        int withinDueBooks = borrowingBooks- overdueBooks;
+
+        return new int[]{returnedBooks, withinDueBooks, overdueBooks};
+    }
+
     public int[] ratingOfIdDocument(String id_document) throws SQLException {
         ObservableList<Transaction> transactionByIdDocument = searchTransactionByIdDocumentAndReviewed(id_document);
         int[] resultOfRating = new int[]{0, 0, 0, 0, 0 ,0};

@@ -14,95 +14,71 @@ import java.util.ResourceBundle;
 
 public class AddStudentController implements Initializable {
 
-    private boolean isAdded = false; // Trạng thái kiểm tra đã thêm thông tin hay chưa
-    private ValidationLabelUtil validationUtil = new ValidationLabelUtil();
+    private boolean isAdded = false;
+    private final ValidationLabelUtil validationUtil = new ValidationLabelUtil();
 
     @FXML
     private DatePicker fieldBirthdayStudent;
 
     @FXML
-    private TextField fieldEmailStudent;
+    private TextField fieldEmailStudent, fieldIDStudent, fieldNameStudent, fieldPhoneStudent;
 
     @FXML
-    private TextField fieldIDStudent;
-
-    @FXML
-    private TextField fieldNameStudent;
-
-    @FXML
-    private TextField fieldPhoneStudent;
-
-    @FXML
-    private Label statusLabel; // Label hiển thị trạng thái
-
-    @FXML
-    private Label idValidLabel, nameValidLabel, birthValidLabel, phoneValidLabel, emailValidLabel;
+    private Label statusLabel, idValidLabel, nameValidLabel, birthValidLabel, phoneValidLabel, emailValidLabel;
 
     @FXML
     private Label checkInforId, checkInforName, checkInforBirthday, checkInforPhone, checkInforEmail, checkInforPassword;
 
     @FXML
     void addStudentButtonOnClick(MouseEvent event) {
-        if (checkInput()) {
-            LocalDate dob = fieldBirthdayStudent.getValue();
-            String formattedDob = (dob != null) ? dob.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) : null;
-
-            checkInforId.setText(fieldIDStudent.getText());
-            checkInforName.setText(fieldNameStudent.getText());
-            checkInforBirthday.setText(formattedDob);
-            checkInforPhone.setText(fieldPhoneStudent.getText());
-            checkInforEmail.setText(fieldEmailStudent.getText());
-            checkInforPassword.setText(fieldIDStudent.getText()); // Mật khẩu mặc định là ID
-
-            statusLabel.setStyle("-fx-text-fill: green;");
-
-            statusLabel.setText("Đã tải thông tin. Vui lòng kiểm tra nhấn 'Save' để lưu.");
+        if (validateInputs()) {
+            populateCheckInforLabels();
+            updateStatus("Đã tải thông tin. Vui lòng kiểm tra và nhấn 'Save' để lưu.", "green");
             isAdded = true;
             clearFields();
         } else {
-            statusLabel.setStyle("-fx-text-fill: red;");
-            statusLabel.setText("Vui lòng điền đúng thông tin vào tất cả các trường.");
+            updateStatus("Vui lòng điền đúng thông tin vào tất cả các trường.", "red");
             isAdded = false;
         }
     }
 
-    private boolean checkInput() {
-        boolean isValid = true;
-
-        isValid &= validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY);
-        isValid &= validateField(fieldNameStudent, nameValidLabel, ValidationLabelUtil.ValidationType.EMPTY);
-        isValid &= validateDateField(fieldBirthdayStudent, birthValidLabel);
-        isValid &= validateField(fieldPhoneStudent, phoneValidLabel, ValidationLabelUtil.ValidationType.PHONE);
-        isValid &= validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL);
-
-        return isValid;
+    private boolean validateInputs() {
+        return validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY)
+                & validateField(fieldNameStudent, nameValidLabel, ValidationLabelUtil.ValidationType.EMPTY)
+                & validateDateField(fieldBirthdayStudent, birthValidLabel)
+                & validateField(fieldPhoneStudent, phoneValidLabel, ValidationLabelUtil.ValidationType.PHONE)
+                & validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL);
     }
 
     private boolean validateField(TextField field, Label label, ValidationLabelUtil.ValidationType type) {
         String errorMessage = validationUtil.validateField(field.getText(), type);
-        label.setText(errorMessage);
-        label.setVisible(!errorMessage.isEmpty());
+        updateValidationLabel(label, errorMessage);
         return errorMessage.isEmpty();
     }
 
     private boolean validateDateField(DatePicker datePicker, Label label) {
         LocalDate date = datePicker.getValue();
-        if (date == null) {
-            label.setText("Ngày tháng không được để trống.");
-            label.setVisible(true);
-            return false;
-        }
-        label.setVisible(false);
-        return true;
+        String errorMessage = (date == null) ? "Ngày tháng không được để trống." : "";
+        updateValidationLabel(label, errorMessage);
+        return errorMessage.isEmpty();
     }
 
-    @FXML
-    void removeStudentButtonOnClick(MouseEvent event) {
-        isAdded = false;
-        clearFields();
-        clearCheckInforLabels();
-        statusLabel.setStyle("-fx-text-fill: red;");
-        statusLabel.setText("Thông tin đã được xóa.");
+    private void updateValidationLabel(Label label, String errorMessage) {
+        label.setText(errorMessage);
+        label.setVisible(!errorMessage.isEmpty());
+    }
+
+    private void populateCheckInforLabels() {
+        String formattedDob = fieldBirthdayStudent.getValue() != null
+                ? fieldBirthdayStudent.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                : "";
+
+        checkInforId.setText(fieldIDStudent.getText());
+        checkInforName.setText(fieldNameStudent.getText());
+        checkInforBirthday.setText(formattedDob);
+        checkInforPhone.setText(fieldPhoneStudent.getText());
+        checkInforEmail.setText(fieldEmailStudent.getText());
+        checkInforPassword.setText(fieldIDStudent.getText()); // Mật khẩu mặc định là ID
     }
 
     @FXML
@@ -115,12 +91,23 @@ public class AddStudentController implements Initializable {
                     checkInforPhone.getText(),
                     checkInforEmail.getText()
             );
-            statusLabel.setText(result);
-            statusLabel.setStyle(result.equals("Sinh viên được thêm thành công.") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+            updateStatus(result, result.contains("thành công") ? "green" : "red");
         } else {
-            statusLabel.setText("Vui lòng điền đầy đủ thông tin hợp lệ.");
-            statusLabel.setStyle("-fx-text-fill: red;");
+            updateStatus("Vui lòng điền đầy đủ thông tin hợp lệ.", "red");
         }
+    }
+
+    @FXML
+    void removeStudentButtonOnClick(MouseEvent event) {
+        isAdded = false;
+        clearFields();
+        clearCheckInforLabels();
+        updateStatus("Thông tin đã được xóa.", "red");
+    }
+
+    private void updateStatus(String message, String color) {
+        statusLabel.setText(message);
+        statusLabel.setStyle("-fx-text-fill: " + color + ";");
     }
 
     private void clearFields() {
@@ -132,12 +119,13 @@ public class AddStudentController implements Initializable {
     }
 
     private void clearCheckInforLabels() {
-        checkInforId.setText("chưa có thông tin gì");
-        checkInforName.setText("chưa có thông tin gì");
-        checkInforBirthday.setText("chưa có thông tin gì");
-        checkInforPhone.setText("chưa có thông tin gì");
-        checkInforEmail.setText("chưa có thông tin gì");
-        checkInforPassword.setText("chưa có thông tin gì");
+        String emptyMessage = "chưa có thông tin gì";
+        checkInforId.setText(emptyMessage);
+        checkInforName.setText(emptyMessage);
+        checkInforBirthday.setText(emptyMessage);
+        checkInforPhone.setText(emptyMessage);
+        checkInforEmail.setText(emptyMessage);
+        checkInforPassword.setText(emptyMessage);
     }
 
     @Override
@@ -146,14 +134,21 @@ public class AddStudentController implements Initializable {
     }
 
     private void setupValidationListeners() {
-        fieldIDStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
-        fieldNameStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldNameStudent, nameValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
-        // Lắng nghe thay đổi từ DatePicker
+        fieldIDStudent.textProperty().addListener((obs, oldVal, newVal) ->
+                validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
+
+        fieldNameStudent.textProperty().addListener((obs, oldVal, newVal) ->
+                validateField(fieldNameStudent, nameValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
+
         fieldBirthdayStudent.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
             String error = validationUtil.validateDateFormat(newVal);
-            birthValidLabel.setText(error);
+            updateValidationLabel(birthValidLabel, error);
         });
-        fieldPhoneStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldPhoneStudent, phoneValidLabel, ValidationLabelUtil.ValidationType.PHONE));
-        fieldEmailStudent.textProperty().addListener((obs, oldVal, newVal) -> validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL));
+
+        fieldPhoneStudent.textProperty().addListener((obs, oldVal, newVal) ->
+                validateField(fieldPhoneStudent, phoneValidLabel, ValidationLabelUtil.ValidationType.PHONE));
+
+        fieldEmailStudent.textProperty().addListener((obs, oldVal, newVal) ->
+                validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL));
     }
 }
