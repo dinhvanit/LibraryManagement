@@ -1,6 +1,161 @@
-.button {
+/* Màu nền tổng thể */
+.body {
+    -fx-background-color: #f8f9fa; /* Màu xám sáng */
+    -fx-font-family: Arial, sans-serif; /* Font chữ */
+    -fx-text-fill: #333333; /* Màu văn bản chính */
+    -fx-padding: 0;
+}
+
+/* Tiêu đề và phần quan trọng */
+h1, h2, h3 {
+    -fx-text-fill: #0066cc; /* Xanh dương mạnh */
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Liên kết */
+a {
+    -fx-text-fill: #0066cc; /* Xanh dương mạnh */
+    -fx-text-decoration: none;
+}
+
+a:hover {
+    -fx-text-fill: #0056b3; /* Xanh dương tối hơn khi hover */
+    -fx-text-decoration: underline;
+}
+
+/* Nút bấm */
+.button, .btn {
+    -fx-background-color: #28a745; /* Màu xanh lá */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
     -fx-cursor: hand;
 }
-.table-row-yellow {
-     -fx-background-color: yellow;
+
+.button:hover, .btn:hover {
+    -fx-background-color: #218838; /* Xanh lá cây đậm khi hover */
+}
+
+/* Màu nền cho các khối thông tin */
+.background {
+    -fx-background-color: #d3f8d3; /* Màu xanh lá nhạt */
+    -fx-padding: 20px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 4); /* Hiệu ứng đổ bóng */
+}
+
+/* Màu nền cho các mục quan trọng */
+.highlight {
+    -fx-background-color: #ffc107; /* Màu vàng nhạt */
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+/* Đường viền phân tách các phần */
+hr {
+    -fx-border-color: #dee2e6; /* Xám trung tính */
+    -fx-border-width: 1px;
+}
+
+/* Các bảng và mục danh sách */
+.table {
+    -fx-border-color: #dee2e6; /* Xám trung tính */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+}
+
+.table-row, th, td {
+    -fx-border-color: #dee2e6; /* Xám trung tính */
+    -fx-padding: 10px;
+}
+
+th {
+    -fx-background-color: #0066cc; /* Xanh dương mạnh */
+    -fx-text-fill: white;
+}
+
+/* Hiệu ứng hover trên các hàng bảng */
+.table-row:hover {
+    -fx-background-color: #f1f1f1; /* Màu nền nhẹ khi hover */
+}
+
+/* Màu cho văn bản phụ */
+.secondary-text {
+    -fx-text-fill: #6c757d; /* Xám nhạt */
+}
+
+/* Định dạng cho các phần menu */
+nav {
+    -fx-background-color: #0066cc; /* Xanh dương mạnh */
+    -fx-padding: 10px 0;
+}
+
+nav a {
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-text-decoration: none;
+}
+
+nav a:hover {
+    -fx-background-color: #0056b3; /* Xanh dương tối hơn khi hover */
+}
+
+/* Tùy chỉnh MenuButton */
+.menu-button {
+    -fx-background-color: #4CAF50; /* Xanh lá */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #3e8e41;
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+}
+
+/* Hiệu ứng hover khi rê chuột vào MenuButton */
+.menu-button:hover {
+    -fx-background-color: #45a049;
+    -fx-border-color: #388e3c;
+}
+
+/* MenuItem trong MenuButton */
+.menu-item {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Hiệu ứng hover khi rê chuột vào MenuItem */
+.menu-item:hover {
+    -fx-background-color: #f1f1f1;
+    -fx-text-fill: #4CAF50;
+}
+
+/* MenuButton khi bị chọn */
+.menu-button:focused {
+    -fx-background-color: #3e8e41;
+    -fx-border-color: #2e7d32;
+}
+
+/* Style cho Card (Thẻ thông tin) */
+.card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* Định dạng cho phần tìm kiếm */
+.search-bar {
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 5px;
+    -fx-width: 300px;
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,18 +17,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
+<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" stylesheets="@../../cssDesign/studentPage.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
     <top>
         <HBox prefHeight="98.0" prefWidth="710.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox>
+                <HBox prefWidth="180.0">
                     <children>
                         <ImageView fitHeight="34.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </HBox>
-                <HBox HBox.hgrow="ALWAYS">
+                <HBox stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="Library Management System">
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Library Management System">
                             <font>
                                 <Font size="30.0" />
                             </font>
@@ -64,32 +68,195 @@
         </HBox>
     </top>
     <left>
-        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+        <VBox prefWidth="180.0" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Search And Borrow Documents" wrapText="true">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#returnButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Return Documents" wrapText="true">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#transactionButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Transaction Documents" wrapText="true">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#logOutButtonClick" prefHeight="70.0" prefWidth="150.0" stylesheets="@../../cssDesign/studentPage.css" text="Log Out" wrapText="true">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="34.0" prefWidth="150.0">
+               <children>
+                  <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Browse">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/home.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" styleClass="secondary-text" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Home">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/explore-Photoroom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" styleClass="secondary-text" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Explore">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="60.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/search-Photoroom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Search">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Separator prefWidth="180.0" />
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="34.0" prefWidth="150.0">
+               <children>
+                  <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Your Documents">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" onMouseClicked="#returnButtonClick" prefHeight="60.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/reading-Photoroom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Reading">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/History.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#transactionButtonClick" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="History">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </left>
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="304.0" layoutY="180.0" prefHeight="253.0" prefWidth="276.0">
+               <children>
+                  <ImageView fitHeight="240.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/ngang.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <TableView layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn prefWidth="75.0" text="Column X" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
     </center>
+   <styleClass>
+      <String fx:value="body" />
+      <String fx:value="background" />
+      <String fx:value="btn" />
+      <String fx:value="button" />
+      <String fx:value="card" />
+      <String fx:value="highlight" />
+      <String fx:value="menu-button" />
+      <String fx:value="menu-button" />
+      <String fx:value="secondary-text" />
+      <String fx:value="table-row" />
+   </styleClass>
 </BorderPane>
