@@ -1,16 +1,19 @@
 package uet.librarymanagementsystem.services.documentServices;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import uet.librarymanagementsystem.LMSApplication;
+import uet.librarymanagementsystem.services.TaskService;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 public class BookLookupService {
@@ -66,8 +69,11 @@ public class BookLookupService {
 //    }
 
     private JSONObject fetchBookInfoByISBN() {
-        ExecutorService executor = Executors.newSingleThreadExecutor(); // Một luồng riêng cho tác vụ này
-        Future<JSONObject> future = executor.submit(() -> {
+        // Lấy TaskService từ LMSApplication
+        TaskService taskService = LMSApplication.getTaskService();
+
+        // Chạy tác vụ tìm kiếm book info trên thread pool của TaskService
+        Future<JSONObject> future = taskService.runTask(() -> {
             String urlString = GOOGLE_BOOKS_API_URL + isbn + "&key=" + API_KEY;
             System.out.println("Fetching: " + urlString);
             try {
@@ -102,11 +108,9 @@ public class BookLookupService {
         });
 
         try {
-            return future.get(5, TimeUnit.SECONDS); // Chờ tối đa 5 giây
+            return future.get(5, TimeUnit.SECONDS); // Chờ tối đa 5 giây để lấy kết quả
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            e.printStackTrace();
-        } finally {
-            executor.shutdown();
+            System.err.println("Error fetching book info: " + e.getMessage());
         }
 
         return null;

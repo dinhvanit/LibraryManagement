@@ -14,6 +14,20 @@
         <junit.version>5.10.2</junit.version>
     </properties>
 
+    <repositories>
+        <!-- Default Maven Central Repository -->
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
+        <!-- JitPack Repository -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -92,7 +106,12 @@
             <version>1.6.2</version>
         </dependency>
 
-
+        <!-- OpenPDF Dependency -->
+        <dependency>
+            <groupId>com.github.librepdf</groupId>
+            <artifactId>openpdf</artifactId>
+            <version>1.3.30</version>
+        </dependency>
     </dependencies>
 
     <build>
