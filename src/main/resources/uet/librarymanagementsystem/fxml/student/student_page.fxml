@@ -2,15 +2,13 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -25,18 +23,26 @@
                         <ImageView fitHeight="34.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </HBox>
-                <HBox stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
+                <HBox HBox.hgrow="ALWAYS">
                     <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Library Management System">
+                        <Label text="Library Management System">
                             <font>
                                 <Font size="30.0" />
                             </font>
                         </Label>
                     </children>
                 </HBox>
-                <HBox prefHeight="98.0" prefWidth="158.0">
+                <HBox alignment="CENTER" prefHeight="98.0" prefWidth="216.0">
                     <children>
-                        <MenuButton mnemonicParsing="false" prefHeight="38.0" prefWidth="182.0" text="Setting">
+                  <Button mnemonicParsing="false" onMouseClicked="#reloadPageButton" prefHeight="38.0" prefWidth="38.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="REFRESH" size="20" text="" />
+                     </graphic>
+                  </Button>
+                        <MenuButton mnemonicParsing="false" prefHeight="38.0" prefWidth="155.0" text="Setting">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#showInfoStudentMenuClick" text="Trang cá nhân">
                                     <graphic>
@@ -55,7 +61,7 @@
                                 </MenuItem>
                             </items>
                             <HBox.margin>
-                                <Insets left="10.0" right="10.0" top="25.0" />
+                                <Insets bottom="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
                             <graphic>
                                 <FontAwesomeIconView glyphName="COG" size="20" text="" />
@@ -69,9 +75,9 @@
     <left>
         <VBox prefWidth="180.0" BorderPane.alignment="CENTER">
             <children>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="34.0" prefWidth="150.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="150.0">
                <children>
-                  <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Browse">
+                  <Label text="Browse">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -84,7 +90,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
+            <HBox alignment="CENTER" onMouseClicked="#homeButtonOnClick" prefHeight="60.0" prefWidth="150.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <HBox.margin>
@@ -98,9 +104,9 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" styleClass="secondary-text" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Home">
+                        <Label text="Home">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -123,9 +129,9 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" styleClass="secondary-text" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Explore">
+                        <Label text="Explore">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -150,7 +156,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Search">
+                        <Label text="Search">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -159,10 +165,10 @@
                   </HBox>
                </children>
             </HBox>
-            <Separator prefWidth="180.0" />
+            <Separator prefHeight="0.0" prefWidth="180.0" />
             <HBox alignment="CENTER_LEFT" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="34.0" prefWidth="150.0">
                <children>
-                  <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Your Documents">
+                  <Label text="Your Documents">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -188,7 +194,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="Reading">
+                        <Label text="Reading">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -213,7 +219,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" onMouseClicked="#transactionButtonClick" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="wordBold" stylesheets="@../../cssDesign/studentPage.css" text="History">
+                        <Label text="History">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -225,25 +231,4 @@
             </children>
         </VBox>
     </left>
-    <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox layoutX="304.0" layoutY="180.0" prefHeight="253.0" prefWidth="276.0">
-               <children>
-                  <ImageView fitHeight="240.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image/ngang.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <TableView layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-    </center>
 </BorderPane>
