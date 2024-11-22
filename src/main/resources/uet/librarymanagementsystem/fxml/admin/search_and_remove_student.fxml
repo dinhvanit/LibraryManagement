@@ -96,17 +96,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <HBox prefHeight="50.0" prefWidth="290.0">
-                            <children>
-                                <HBox prefHeight="50.0" prefWidth="120.0">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0" />
-                            </children>
-                        </HBox>
-                        <HBox prefHeight="50.0" prefWidth="290.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="290.0">
                      <children>
                         <Label alignment="CENTER" text="Students to Delete">
                            <font>
@@ -118,6 +108,11 @@
                         </Label>
                      </children>
                         </HBox>
+                  <HBox alignment="CENTER" prefHeight="18.0" prefWidth="430.0">
+                     <children>
+                        <Label fx:id="notionChoiceDeleteLabel" text="Please choose a student" textFill="#f70303" visible="false" />
+                     </children>
+                  </HBox>
                         <HBox alignment="CENTER" prefHeight="85.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
                      <children>
                         <TableView fx:id="deleteStudentTableView" prefHeight="200.0" prefWidth="430.0">
@@ -154,7 +149,7 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="480.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
                                 <Label text="List Of Students">
                                     <font>
@@ -166,6 +161,11 @@
                                 </Label>
                             </children>
                         </HBox>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="470.0">
+                     <children>
+                        <Label fx:id="notionChoiceAddLabel" text="Please choose a student" textFill="#ef0404" visible="false" />
+                     </children>
+                  </HBox>
                         <TableView fx:id="searchStudentTableView" prefHeight="470.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnSearchResults" prefWidth="75.0" text="ID" />

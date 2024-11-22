@@ -9,11 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.entity.Page;
@@ -22,6 +19,7 @@ import uet.librarymanagementsystem.entity.documents.MaterialType;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.DeleteDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import javax.print.Doc;
@@ -85,6 +83,11 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     @FXML
     private TableColumn<Document, String> titleColumnSearchResults;
 
+    @FXML
+    private Label notionChoiceDocumentAddLabel;
+
+    @FXML
+    private Label notionChoiceDocumentDeleteLabel;
 
     @FXML
     void addDocumentButtonOnClick(MouseEvent event) {
@@ -94,9 +97,12 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     private void performAdd() {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            notionChoiceDocumentAddLabel.setVisible(false);
             documentsListToDelete.add(selectedDocument);
             documentsListSearchResult.remove(selectedDocument);
             searchResultsTableView.setItems(documentsListSearchResult);
+        } else {
+            notionChoiceDocumentAddLabel.setVisible(true);
         }
     }
 
@@ -130,30 +136,23 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     @FXML
     void deleteDocumentButtonOnClick(MouseEvent event) {
         // Lấy danh sách các tài liệu được chọn
-        ObservableList<Document> selectedDocuments = deleteResultsTableView.getSelectionModel().getSelectedItems();
 
-        if (selectedDocuments.isEmpty()) {
-            System.out.println("Không có tài liệu nào được chọn để xóa.");
-            return;
-        }
-
-        DeleteDocumentService deleteDocumentService = new DeleteDocumentService();
-
-        // Duyệt qua từng tài liệu để xóa
-        for (Document document : selectedDocuments) {
+        if (deleteResultsTableView.getSelectionModel().getSelectedItem() == null) {
+            notionChoiceDocumentDeleteLabel.setVisible(true);
+        } else {
+            notionChoiceDocumentDeleteLabel.setVisible(false);
+            DeleteDocumentService deleteDocumentService = new DeleteDocumentService();
+            Document selectedDocument = deleteResultsTableView.getSelectionModel().getSelectedItem();
             deleteDocumentService.deleteDocument(
-                    document.getId(),
-                    document.getMaterial(),
-                    document.getCategory(),
-                    document.getTitle(),
-                    document.getAuthor()
+                    selectedDocument.getId(),
+                    selectedDocument.getMaterial(),
+                    selectedDocument.getCategory(),
+                    selectedDocument.getTitle(),
+                    selectedDocument.getAuthor()
             );
+            documentsListToDelete.remove(selectedDocument);
+            deleteResultsTableView.setItems(documentsListToDelete);
         }
-
-        // Cập nhật lại danh sách hiển thị
-        documentsListToDelete.removeAll(selectedDocuments);
-        deleteResultsTableView.setItems(documentsListToDelete);
-        System.out.println("Xóa các tài liệu đã chọn thành công.");
     }
 
 
@@ -165,10 +164,13 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     private void performRemove() {
         Document selectedDocument = deleteResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
+            notionChoiceDocumentDeleteLabel.setVisible(false);
             documentsListSearchResult.add(selectedDocument);
             searchResultsTableView.setItems(documentsListSearchResult);
             documentsListToDelete.remove(selectedDocument);
             deleteResultsTableView.setItems(documentsListToDelete);
+        } else {
+            notionChoiceDocumentDeleteLabel.setVisible(true);
         }
     }
 
@@ -265,6 +267,20 @@ public class SearchAndRemoveDocumentController  implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    @FXML
+    void infoDocumentClick(MouseEvent event) {
+        Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
+        if (selectedDocument != null) {
+            notionChoiceDocumentAddLabel.setVisible(false);
+            ShareDataService.setDocumentShare(selectedDocument);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindowWithShowInfo(
+                    Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        } else {
+            notionChoiceDocumentAddLabel.setVisible(true);
+        }
     }
 
     @Override

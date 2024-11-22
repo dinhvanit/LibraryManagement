@@ -139,7 +139,12 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="486.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER" prefHeight="20.0" prefWidth="482.0">
+                     <children>
+                        <Label fx:id="notionChoiceDocumentDeleteLabel" text="Please choose a document" textFill="#f20505" visible="false" />
+                     </children>
+                  </HBox>
+                        <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="482.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="titleColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="TITLE" />
@@ -151,7 +156,7 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="482.0">
+                        <HBox alignment="CENTER" prefHeight="71.0" prefWidth="482.0">
                             <children>
                         <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="REMOVE">
                            <HBox.margin>
@@ -171,7 +176,7 @@
             <center>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="418.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="418.0">
                             <children>
                                 <Label text="List Of Documents">
                                     <font>
@@ -182,6 +187,11 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                     <children>
+                        <Label fx:id="notionChoiceDocumentAddLabel" text="Please choose a document" textFill="#ea0808" visible="false" />
+                     </children>
+                  </HBox>
                         <TableView fx:id="searchResultsTableView" prefHeight="470.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnSearchResults" prefWidth="75.0" text="ID" />
@@ -200,7 +210,11 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#modifyDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="MODIFY" />
+                        <Button mnemonicParsing="false" onMouseClicked="#modifyDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="MODIFY">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" text="INFO" />
                      </children>
                   </HBox>
                     </children>
