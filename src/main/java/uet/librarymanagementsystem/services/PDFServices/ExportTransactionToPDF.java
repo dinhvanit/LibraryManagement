@@ -19,7 +19,7 @@ public class ExportTransactionToPDF {
 
     public static void main(String[] args) {
         try {
-            exportTransactionToPDF("23020714");
+            exportTransactionToPDF("123");
             System.out.println("PDF created successfully!");
         } catch (Exception e) {
             e.printStackTrace();

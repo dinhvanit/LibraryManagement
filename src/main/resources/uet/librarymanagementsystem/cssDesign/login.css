@@ -1,7 +1,6 @@
 /* Phần nền tổng thể */
 .login-form {
     -fx-background-color: linear-gradient(to bottom right, #7f7fd5, #86a8e7, #91eae4); /* Gradient nền mềm mại */
-    -fx-padding: 50px;
     -fx-alignment: center;
 }
 
@@ -10,9 +9,7 @@
     -fx-background-color: rgba(240, 248, 255, 0.9); /* Nền trắng ánh xanh */
     -fx-background-radius: 20px;
     -fx-border-color: rgba(200, 200, 200, 0.5); /* Đường viền xám nhạt mờ */
-    -fx-border-width: 1px;
     -fx-border-radius: 20px;
-    -fx-padding: 40px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0.2, 0, 5); /* Bóng đổ mềm */
 }
 
@@ -38,7 +35,6 @@
     -fx-background-radius: 25px; /* Bo tròn nút */
     -fx-text-fill: #ffffff; /* Màu chữ trắng */
     -fx-font-size: 16px;
-    -fx-padding: 10px 20px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.2, 0, 2); /* Bóng đổ mềm */
 }
