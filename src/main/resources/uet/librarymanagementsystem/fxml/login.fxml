@@ -11,61 +11,66 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="860.0" styleClass="login-form" stylesheets="@../cssDesign/login.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="887.0" styleClass="login-form" stylesheets="@../cssDesign/login.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.LoginController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" styleClass="card-form" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutX="35.400001525878906" layoutY="-5.999998569488525" prefHeight="400.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/library2.png" />
-               </image>
-            </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY MANAGEMENT">
-               <font>
-                  <Font name="KozMinPro-Bold" size="15.0" />
-               </font>
-            </Text>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="230.0" layoutY="31.0" prefHeight="338.0" prefWidth="443.0" stylesheets="@../cssDesign/login.css" AnchorPane.bottomAnchor="30.600000000000023" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="14.799999999999955" AnchorPane.topAnchor="31.0">
-         <children>
-            <AnchorPane prefHeight="294.0" prefWidth="394.0" styleClass="card-form">
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" styleClass="card-form">
                <children>
-                  <Label layoutX="24.0" layoutY="14.0" stylesheets="@../cssDesign/login.css" text="Choose Your Account Type :" textFill="#3512b8">
+                  <ImageView fitHeight="200.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/library2.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY MANAGEMENT">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="KozMinPro-Bold" size="15.0" />
                      </font>
-                  </Label>
-                  <ChoiceBox fx:id="accSelectorChoiceBox" layoutX="25.0" layoutY="43.0" prefWidth="150.0" stylesheets="@../cssDesign/login.css" />
-                  <TextField fx:id="credentialUserNameField" layoutX="46.0" layoutY="95.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="username" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
-                  <TextField fx:id="visiblePasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
-                  <PasswordField fx:id="credentialPasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
-                  <Label fx:id="loginMessegeLabel" layoutX="24.0" layoutY="234.0" prefHeight="20.0" prefWidth="304.0" textFill="#fc0000">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="loginButton" layoutX="168.0" layoutY="254.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" styleClass="login-btn" stylesheets="@../cssDesign/login.css" text="Login">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="24.0" layoutY="115.0" size="20" text="" />
-                  <FontAwesomeIconView fill="WHITE" glyphName="KEY" layoutX="21.0" layoutY="183.0" selectionFill="#3a2cb8" size="20" text="" />
-                  <CheckBox fx:id="showPasswordButton" layoutX="48.0" layoutY="200.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" textFill="#27367a" />
+                  </Text>
                </children>
-            </AnchorPane>
+            </VBox>
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="417.0" prefWidth="589.0" stylesheets="@../cssDesign/login.css" HBox.hgrow="ALWAYS">
+               <children>
+                  <AnchorPane prefHeight="317.0" prefWidth="410.0" styleClass="card-form" stylesheets="@../cssDesign/login.css">
+                     <children>
+                        <Label layoutX="24.0" layoutY="14.0" stylesheets="@../cssDesign/login.css" text="Choose Your Account Type :" textFill="#3512b8">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="accSelectorChoiceBox" layoutX="25.0" layoutY="43.0" prefWidth="150.0" stylesheets="@../cssDesign/login.css" />
+                        <TextField fx:id="credentialUserNameField" layoutX="46.0" layoutY="95.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="username" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
+                        <TextField fx:id="visiblePasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
+                        <PasswordField fx:id="credentialPasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
+                        <Label fx:id="loginMessegeLabel" layoutX="24.0" layoutY="234.0" prefHeight="20.0" prefWidth="304.0" textFill="#fc0000">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="loginButton" layoutX="168.0" layoutY="254.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#loginButtonOnAction" styleClass="login-btn" stylesheets="@../cssDesign/login.css" text="Login">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <FontAwesomeIconView glyphName="USER" layoutX="24.0" layoutY="115.0" selectionFill="#080808" size="20" text="" />
+                        <FontAwesomeIconView glyphName="KEY" layoutX="21.0" layoutY="183.0" selectionFill="#3a2cb8" size="20" text="" />
+                        <CheckBox fx:id="showPasswordButton" layoutX="48.0" layoutY="200.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" textFill="#27367a" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" />
+               </padding>
+            </VBox>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="10.0" left="20.0" right="20.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
