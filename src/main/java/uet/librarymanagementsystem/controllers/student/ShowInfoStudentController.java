@@ -9,6 +9,7 @@ import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 
 import java.sql.SQLException;
 
@@ -39,6 +40,8 @@ public class ShowInfoStudentController {
 
     private final SearchStudentService searchStudentService;
 
+    private final SearchTransactionService searchTransactionService = new SearchTransactionService();
+
     public ShowInfoStudentController() {
         searchStudentService = new SearchStudentService();
     }
@@ -58,11 +61,11 @@ public class ShowInfoStudentController {
                 emailStudentLabel.setText(student.getEmail());
             }
 
-            // Lấy dữ liệu thống kê mượn tài liệu từ cơ sở dữ liệu
-            int totalBorrowed = 100; // Giả định: lấy từ cơ sở dữ liệu
-            int returned = 60;       // Tài liệu đã trả
-            int withinDue = 30;      // Tài liệu đang mượn còn hạn trả
-            int overdue = 10;        // Tài liệu đang mượn hết hạn trả
+            int[] bookCounts = searchTransactionService.countBooksByStatus(userId);
+            int returned = bookCounts[0];
+            int withinDue = bookCounts[1];
+            int overdue = bookCounts[2];
+            int totalBorrowed = returned + withinDue + overdue;
 
             // Cập nhật dữ liệu cho các label
             totalBorrowedDocumentsLabel.setText(String.valueOf(totalBorrowed));
