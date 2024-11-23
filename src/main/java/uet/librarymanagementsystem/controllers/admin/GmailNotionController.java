@@ -16,8 +16,8 @@ import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.entity.users.Student;
-import uet.librarymanagementsystem.services.EmailServices.OverDateTransactionService;
-import uet.librarymanagementsystem.services.EmailServices.OverdueEmailNotificationService;
+import uet.librarymanagementsystem.services.EmailServices.CheckOverDateTrans;
+import uet.librarymanagementsystem.services.EmailServices.SendWarningEmail;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.util.WindowUtil;
@@ -89,7 +89,7 @@ public class GmailNotionController implements Initializable {
             writer.write(newTime); // Ghi đè thời gian mới
             dateEmailLabel.setText(newTime);
             System.out.println("Thời gian mới đã được ghi vào file: " + newTime);
-            OverdueEmailNotificationService.notifyOverdueUsers();
+            SendWarningEmail.notifyOverdueUsers();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindow(Page.NOTION_SUCCESS, "Notion success", currentStage);
         } catch (IOException e) {
@@ -132,7 +132,7 @@ public class GmailNotionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OverDateTransactionService overDateTransactionService = new OverDateTransactionService();
+        CheckOverDateTrans checkOverDateTrans = new CheckOverDateTrans();
 
         // Cấu hình các cột của bảng
         idTransactionManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
@@ -148,7 +148,7 @@ public class GmailNotionController implements Initializable {
 
         transactionManageList = FXCollections.observableArrayList();
 
-        transactionManageList = overDateTransactionService.getOverdueTransactions();
+        transactionManageList = checkOverDateTrans.getOverdueTransactions();
 
         peopleEmailLabel.setText(String.valueOf(transactionManageList.size()));
 

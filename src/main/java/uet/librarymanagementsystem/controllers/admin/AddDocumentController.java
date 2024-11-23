@@ -3,10 +3,14 @@ package uet.librarymanagementsystem.controllers.admin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
@@ -14,6 +18,7 @@ import uet.librarymanagementsystem.entity.documents.materials.Book;
 import uet.librarymanagementsystem.services.documentServices.AddDocumentService;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
 import uet.librarymanagementsystem.util.ValidationLabelUtil;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 public class AddDocumentController {
 
@@ -87,7 +92,7 @@ public class AddDocumentController {
     }
 
     @FXML
-    private void saveAllDocumentButtonOnClick() {
+    private void saveAllDocumentButtonOnClick(Event event) {
         if (documents.isEmpty()) {
             statusLabel.setText("No documents to save.");
             return;
@@ -101,6 +106,9 @@ public class AddDocumentController {
         }
         documents.clear();
         addDocumentTableView.setItems(documents);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        WindowUtil.showSecondaryWindow(Page.NOTION_SUCCESS, "Notion success", currentStage);
+
         statusLabel.setText("All documents have been saved to the database.");
         statusLabel.setStyle("-fx-text-fill: green;");
     }
