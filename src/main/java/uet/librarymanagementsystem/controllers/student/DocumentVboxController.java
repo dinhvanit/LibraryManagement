@@ -60,7 +60,7 @@ public class DocumentVboxController {
                     // Xử lý cho các loại tài liệu khác
                     if (document instanceof Journal) {
                         return new Image(Objects.requireNonNull(
-                                getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
+                                getClass().getResourceAsStream(ImagesOfLibrary.JOURNAL.getPath())));
                     } else if (document instanceof Newspaper) {
                         return new Image(Objects.requireNonNull(
                                 getClass().getResourceAsStream(ImagesOfLibrary.NEWSPAPER.getPath())));
@@ -92,5 +92,7 @@ public class DocumentVboxController {
         System.out.println("Tiêu đề: " + document.getTitle());
         System.out.println("Tác giả: " + document.getAuthor());
         System.out.println("Thể loại: " + document.getCategory());
+
+
     }
 }
