@@ -1,4 +1,3 @@
-/*
 package uet.librarymanagementsystem.services.documentServices;
 
 import javafx.collections.ObservableList;
@@ -20,7 +19,7 @@ public class Get6LatestDoc {
             throw new SQLException("Cannot fetch titles, connection is closed or invalid.");
         }
 
-        String querySQL = "SELECT id, name, isbn FROM Title ORDER BY id DESC LIMIT 6";
+        String querySQL = "SELECT id, name, material, category, isbn FROM Title ORDER BY id DESC LIMIT 6";
         ObservableList<Document> latestTitles = FXCollections.observableArrayList();
 
         try (PreparedStatement stmt = con.prepareStatement(querySQL)) {
@@ -29,9 +28,11 @@ public class Get6LatestDoc {
             while (rs.next()) {
                 String id = rs.getString("id");
                 String name = rs.getString("name");
+                String material = rs.getString("material");
+                String category = rs.getString("category");
                 String isbn = rs.getString("isbn");
 
-                Document document = DocumentFactory.createDocument(id, name, null, null, null, isbn);
+                Document document = DocumentFactory.createDocument(id, name, null, material, category, isbn);
                 latestTitles.add(document);
             }
         } catch (SQLException e) {
@@ -68,4 +69,3 @@ public class Get6LatestDoc {
         }
     }
 }
-*/

@@ -1,16 +1,22 @@
 package uet.librarymanagementsystem.controllers.student;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.ImagesOfLibrary;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
+import uet.librarymanagementsystem.entity.documents.materials.Journal;
+import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
+import uet.librarymanagementsystem.entity.documents.materials.Thesis;
 import uet.librarymanagementsystem.services.TaskService;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
-//import uet.librarymanagementsystem.services.documentServices.Get6LatestDoc;
 
 import java.net.URL;
 import java.util.Objects;
@@ -19,109 +25,68 @@ import java.util.ResourceBundle;
 public class HomeStudentController implements Initializable {
 
     @FXML
-    private Label authorLabelNewDoc1;
+    private FlowPane recentDocsFlowPane;
 
     @FXML
-    private Label authorLabelNewDoc2;
+    private FlowPane recommendBooksFlowPane;
 
-    @FXML
-    private Label authorLabelNewDoc3;
 
-    @FXML
-    private Label authorLabelNewDoc4;
+    private void loadRecentDocs() {
+        System.out.println("load recentDocFlowPane");
+        // Tạo một vài tài liệu mẫu để hiển thị
+        Document book = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
+        Document journal = new Journal("2", "AI Research", "Jane Smith", Journal.JournalCategory.RESEARCH);
+        Document newspaper = new Newspaper("3", "Daily News", "News Team", Newspaper.NewspaperCategory.WEATHER);
+        Document thesis = new Thesis("4", "Thesis on AI", "Dr. Brown", Thesis.ThesisCategory.ENGINEERING);
 
-    @FXML
-    private Label authorLabelNewDoc5;
+        // Thêm vào FlowPane
+        recentDocsFlowPane.getChildren().add(createDocumentVBox(book));
+        recentDocsFlowPane.getChildren().add(createDocumentVBox(journal));
+        recentDocsFlowPane.getChildren().add(createDocumentVBox(newspaper));
+        recentDocsFlowPane.getChildren().add(createDocumentVBox(thesis));
+        System.out.println("them vao recentFlowpane Ok");
+    }
 
-    @FXML
-    private Label authorLabelNewDoc6;
+    private void loadRecommendBooks(String category) {
+        System.out.println("load Recommmend Books");
+        // Tạo các sách mẫu
+        Document book1 = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
+        Document book2 = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
 
-    @FXML
-    private ImageView imageNewDoc1;
+        // Thêm vào FlowPane
+        recommendBooksFlowPane.getChildren().add(createDocumentVBox(book1));
+        recommendBooksFlowPane.getChildren().add(createDocumentVBox(book2));
+        System.out.println("them vao pane oke");
+    }
 
-    @FXML
-    private ImageView imageNewDoc2;
+    private VBox createDocumentVBox(Document document) {
+        try {
+            System.out.println("Create Vbox");
+            // Tải FXML VBox và gán controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/uet/librarymanagementsystem/fxml/student/document_vbox.fxml"));
+            VBox documentBox = loader.load();
 
-    @FXML
-    private ImageView imageNewDoc3;
+            // Truyền dữ liệu vào controller
+            DocumentVboxController controller = loader.getController();
+            controller.setDocument(document);
 
-    @FXML
-    private ImageView imageNewDoc4;
-
-    @FXML
-    private ImageView imageNewDoc5;
-
-    @FXML
-    private ImageView imageNewDoc6;
-
-    @FXML
-    private Label titleLabelNewDoc1;
-
-    @FXML
-    private Label titleLabelNewDoc2;
-
-    @FXML
-    private Label titleLabelNewDoc3;
-
-    @FXML
-    private Label titleLabelNewDoc4;
-
-    @FXML
-    private Label titleLabelNewDoc5;
-
-    @FXML
-    private Label titleLabelNewDoc6;
+            return documentBox;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to create Document VBox for: " + document.getTitle(), e);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            // Lấy danh sách 6 tài liệu mới nhất từ database
-//            ObservableList<Document> latestDocuments = Get6LatestDoc.getLatestTitles();
-            updateDocumentInfo();
+            loadRecentDocs();
+            loadRecommendBooks("HISTORY");
+
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error occurred while initializing HomeStudentController.");
-        }
-    }
-
-    private void updateDocumentInfo() {
-        Label[] titleLabels = {
-                titleLabelNewDoc1, titleLabelNewDoc2, titleLabelNewDoc3,
-                titleLabelNewDoc4, titleLabelNewDoc5, titleLabelNewDoc6
-        };
-
-        Label[] authorLabels = {
-                authorLabelNewDoc1, authorLabelNewDoc2, authorLabelNewDoc3,
-                authorLabelNewDoc4, authorLabelNewDoc5, authorLabelNewDoc6
-        };
-
-        ImageView[] imageViews = {
-                imageNewDoc1, imageNewDoc2, imageNewDoc3,
-                imageNewDoc4, imageNewDoc5, imageNewDoc6
-        };
-
-        String[] isbns = { // Danh sách ISBN (cần điều chỉnh nếu lấy từ DB)
-                "9781449358068", "9781551640273", "9781492078005",
-                "9780590353427", "9780261103573", "9780135166307"
-        };
-
-        TaskService taskService = new TaskService();
-
-        for (int i = 0; i < isbns.length; i++) {
-            final int index = i; // Lưu chỉ mục để cập nhật đúng phần tử
-            taskService.runTask(() -> {
-                BookLookupService bookLookupService = new BookLookupService(isbns[index]);
-                String thumbnailUrl = bookLookupService.getThumbnailUrl();
-                Image image = new Image(thumbnailUrl, true); // true: tải không đồng bộ
-
-                javafx.application.Platform.runLater(() -> {
-                    // Cập nhật giao diện khi ảnh sẵn sàng
-                    imageViews[index].setImage(image);
-                    titleLabels[index].setText(bookLookupService.getTitleBook());
-                    authorLabels[index].setText(bookLookupService.getTheFirstAuthor());
-                });
-                return null;
-            });
         }
     }
 }

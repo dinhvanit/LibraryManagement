@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<VBox fx:id="vbox" onMouseClicked="#handleClick" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.DocumentVboxController"
+      prefWidth="171.0" prefHeight="240.0" spacing="10" styleClass="background" stylesheets="@../../cssDesign/studentPage.css">
+    <children>
+        <ImageView fx:id="imageView" fitWidth="150.0" fitHeight="150.0" />
+        <Label fx:id="titleLabel" text="Title" style="-fx-font-weight: bold;" />
+        <Label fx:id="authorLabel" text="Author" />
+    </children>
+</VBox>
