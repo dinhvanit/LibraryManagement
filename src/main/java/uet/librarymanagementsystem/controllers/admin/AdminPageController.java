@@ -1,15 +1,27 @@
 package uet.librarymanagementsystem.controllers.admin;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.services.EmailServices.CheckOverDateTrans;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-public class AdminPageController {
+import javax.swing.text.html.ImageView;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminPageController implements Initializable {
 
     @FXML
     private BorderPane borderPaneAdminPage;
+
+    @FXML
+    private AnchorPane notionArchorPaneImage;
 
     @FXML
     void clickManageStudents(MouseEvent event) {
@@ -46,4 +58,31 @@ public class AdminPageController {
         WindowUtil.logoutSession();
     }
 
+    @FXML
+    void exploreClick(MouseEvent event) {
+
+    }
+
+    @FXML
+    void gmailClick(MouseEvent event) {
+        WindowUtil.loadCenterPane(Page.NOTION_GMAIL, borderPaneAdminPage);
+    }
+
+    @FXML
+    void homeClick(MouseEvent event) {
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CheckOverDateTrans checkOverDateTrans = new CheckOverDateTrans();
+        ObservableList<Transaction> overDateTransactionsList = checkOverDateTrans.getOverdueTransactions();
+        if (overDateTransactionsList.isEmpty()) {
+            System.out.println("HE");
+            notionArchorPaneImage.setVisible(false);
+        } else {
+            System.out.println("co nguoi chua tra");
+            notionArchorPaneImage.setVisible(true);
+        }
+    }
 }

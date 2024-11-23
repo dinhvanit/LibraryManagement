@@ -8,6 +8,7 @@ public enum Page {
     SHOW_INFO("/uet/librarymanagementsystem/fxml/student/show_info_student.fxml"),
     CHANGE_PASSWORD("/uet/librarymanagementsystem/fxml/student/change_password.fxml"),
     HOME_STUDENT("/uet/librarymanagementsystem/fxml/student/home_student_page.fxml"),
+    DOCUMENT_VBOX("/uet/librarymanagementsystem/fxml/student/document_vbox.fxml"),
     ADD_STUDENT("/uet/librarymanagementsystem/fxml/admin/add_student.fxml"),
     ADD_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/add_document.fxml"),
     SEARCH_AND_REMOVE_STUDENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_student.fxml"),
@@ -21,7 +22,9 @@ public enum Page {
     SHOW_WRITE_RATING_AND_REVIEW("/uet/librarymanagementsystem/fxml/info_document/rating_and_review.fxml"),
     SHOW_VIEW_YOUR_REVIEW("/uet/librarymanagementsystem/fxml/info_document/view_your_review.fxml"),
     QR_CODE_TRANSACTION("/uet/librarymanagementsystem/fxml/info_document/qr_code_transaction.fxml"),
-    NOTION_MAX_DOCUMENTS("/uet/librarymanagementsystem/fxml/student/notionMaxOfDocuments.fxml");
+    NOTION_MAX_DOCUMENTS("/uet/librarymanagementsystem/fxml/notification/notion_max_of_documents.fxml"),
+    NOTION_GMAIL("/uet/librarymanagementsystem/fxml/admin/gmail_notion.fxml"),
+    NOTION_SUCCESS("/uet/librarymanagementsystem/fxml/notification/success_notification.fxml");
 
     private final String fxmlPath;
 

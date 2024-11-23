@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.LMSApplication;
 import uet.librarymanagementsystem.entity.Page;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.userServices.CheckLoginService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
@@ -77,6 +78,7 @@ public class LoginController implements Initializable {
             if (CheckLoginService.checkLogin(userId, password)) {
                 try {
                     idCurrentStudent = userId;
+                    ShareDataService.setIdStudentShare(idCurrentStudent);
                     WindowUtil.setPage(Page.STUDENT, "Student Dashboard");
 
                 } catch (Exception e) {

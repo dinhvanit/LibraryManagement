@@ -17,8 +17,10 @@ import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
 import uet.librarymanagementsystem.entity.documents.materials.Thesis;
 import uet.librarymanagementsystem.services.TaskService;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
+import uet.librarymanagementsystem.services.documentServices.Get6LatestDoc;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -32,31 +34,23 @@ public class HomeStudentController implements Initializable {
 
 
     private void loadRecentDocs() {
-        System.out.println("load recentDocFlowPane");
-        // Tạo một vài tài liệu mẫu để hiển thị
-        Document book = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
-        Document journal = new Journal("2", "AI Research", "Jane Smith", Journal.JournalCategory.RESEARCH);
-        Document newspaper = new Newspaper("3", "Daily News", "News Team", Newspaper.NewspaperCategory.WEATHER);
-        Document thesis = new Thesis("4", "Thesis on AI", "Dr. Brown", Thesis.ThesisCategory.ENGINEERING);
+        System.out.println("Loading recent documents...");
+        try {
+            // Lấy danh sách tài liệu mới nhất từ cơ sở dữ liệu
+            ObservableList<Document> latestTitles = Get6LatestDoc.getLatestTitles();
 
-        // Thêm vào FlowPane
-        recentDocsFlowPane.getChildren().add(createDocumentVBox(book));
-        recentDocsFlowPane.getChildren().add(createDocumentVBox(journal));
-        recentDocsFlowPane.getChildren().add(createDocumentVBox(newspaper));
-        recentDocsFlowPane.getChildren().add(createDocumentVBox(thesis));
-        System.out.println("them vao recentFlowpane Ok");
+            // Duyệt qua danh sách tài liệu và thêm mỗi tài liệu vào FlowPane
+            for (Document document : latestTitles) {
+                recentDocsFlowPane.getChildren().add(createDocumentVBox(document));
+            }
+            System.out.println("Successfully added documents to recentDocsFlowPane.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred while fetching the latest documents.");
+        }
     }
 
     private void loadRecommendBooks(String category) {
-        System.out.println("load Recommmend Books");
-        // Tạo các sách mẫu
-        Document book1 = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
-        Document book2 = new Book("1", "Java Programming", "John Doe", Book.BookCategory.HISTORY, "1234567890");
-
-        // Thêm vào FlowPane
-        recommendBooksFlowPane.getChildren().add(createDocumentVBox(book1));
-        recommendBooksFlowPane.getChildren().add(createDocumentVBox(book2));
-        System.out.println("them vao pane oke");
     }
 
     private VBox createDocumentVBox(Document document) {
