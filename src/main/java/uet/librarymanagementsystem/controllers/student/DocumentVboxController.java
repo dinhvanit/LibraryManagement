@@ -1,9 +1,11 @@
 package uet.librarymanagementsystem.controllers.student;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.concurrent.Task;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.ImagesOfLibrary;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
@@ -29,50 +31,57 @@ public class DocumentVboxController {
     public void setDocument(Document document) {
         this.document = document;
 
-        // Check if the document is a Book
-        if (document instanceof Book book) {
-            if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
-                // Use BookLookupService to fetch book info by ISBN
-                BookLookupService lookupService = new BookLookupService(book.getIsbn());
-                String thumbnailUrl = lookupService.getThumbnailUrl();
-
-                if (!thumbnailUrl.equals("N/A")) {
-                    // If the ISBN returns a valid thumbnail URL, set the image
-                    Image image = new Image(thumbnailUrl);
-                    imageView.setImage(image);
-                } else {
-                    // If no image is found for ISBN, use default BOOK image
-                    Image image = new Image(Objects.requireNonNull(
-                            getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
-                    imageView.setImage(image);
-                }
-            } else {
-                // If no ISBN is available, set the default BOOK image
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
-                imageView.setImage(image);
-            }
-        } else {
-            if (document instanceof Journal) {
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
-                imageView.setImage(image);
-            } else if (document instanceof Newspaper) {
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfLibrary.NEWSPAPER.getPath())));
-                imageView.setImage(image);
-            } else if (document instanceof Thesis) {
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfLibrary.THESIS.getPath())));
-                imageView.setImage(image);
-            } else {
-                Image image = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
-                imageView.setImage(image);
-            }
-        }
+        // Đặt tiêu đề và tác giả vào các label
         titleLabel.setText(document.getTitle());
         authorLabel.setText(document.getAuthor());
+
+        // Tải ảnh thu nhỏ bất đồng bộ
+        loadThumbnailImage();
+    }
+
+    private void loadThumbnailImage() {
+        Task<Image> imageTask = new Task<>() {
+            @Override
+            protected Image call() throws Exception {
+                if (document instanceof Book book) {
+                    // Nếu là Book, tìm ảnh thu nhỏ từ ISBN
+                    if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
+                        BookLookupService lookupService = new BookLookupService(book.getIsbn());
+                        String thumbnailUrl = lookupService.getThumbnailUrl();
+
+                        if (!thumbnailUrl.equals("N/A")) {
+                            return new Image(thumbnailUrl); // Trả về ảnh từ URL
+                        }
+                    }
+                    // Nếu không tìm được ảnh thu nhỏ, sử dụng ảnh mặc định cho sách
+                    return new Image(Objects.requireNonNull(
+                            getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
+                } else {
+                    // Xử lý cho các loại tài liệu khác
+                    if (document instanceof Journal) {
+                        return new Image(Objects.requireNonNull(
+                                getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
+                    } else if (document instanceof Newspaper) {
+                        return new Image(Objects.requireNonNull(
+                                getClass().getResourceAsStream(ImagesOfLibrary.NEWSPAPER.getPath())));
+                    } else if (document instanceof Thesis) {
+                        return new Image(Objects.requireNonNull(
+                                getClass().getResourceAsStream(ImagesOfLibrary.THESIS.getPath())));
+                    } else {
+                        return new Image(Objects.requireNonNull(
+                                getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
+                    }
+                }
+            }
+        };
+
+        // Khi tải ảnh hoàn tất, cập nhật lên giao diện người dùng
+        imageTask.setOnSucceeded(event -> {
+            imageView.setImage(imageTask.getValue());
+        });
+
+        // Bắt đầu tải ảnh trong một luồng nền
+        new Thread(imageTask).start();
     }
 
     @FXML
