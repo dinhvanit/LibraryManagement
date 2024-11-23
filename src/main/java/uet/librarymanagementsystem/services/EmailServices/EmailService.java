@@ -35,6 +35,7 @@ public class EmailService {
             Transport.send(message);
             System.out.println("Email sent successfully to " + toEmail);
         } catch (MessagingException e) {
+            System.out.println("Day");
             e.printStackTrace();
         }
     }

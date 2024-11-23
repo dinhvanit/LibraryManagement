@@ -1,4 +1,4 @@
-package uet.librarymanagementsystem.controllers.student;
+package uet.librarymanagementsystem.controllers.notification;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;

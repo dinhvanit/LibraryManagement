@@ -4,7 +4,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +17,7 @@
    <top>
       <HBox prefHeight="70.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="72.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="72.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" />
             <Label prefHeight="78.0" prefWidth="394.0" text="Library Management System" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="30.0" />
@@ -46,11 +49,259 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#clickManageStudents" prefHeight="70.0" prefWidth="150.0" text="Manage Students" wrapText="true" />
-            <Button mnemonicParsing="false" onMouseClicked="#clickManageDocuments" prefHeight="70.0" prefWidth="150.0" text="Manage Documents" wrapText="true" />
-            <Button mnemonicParsing="false" onMouseClicked="#clickListOfStudents" prefHeight="70.0" prefWidth="150.0" text="List Of Students" wrapText="true" />
-            <Button mnemonicParsing="false" onMouseClicked="#clickListOfDocuments" prefHeight="70.0" prefWidth="150.0" text="List Of Documents" wrapText="true" />
-            <Button mnemonicParsing="false" onMouseClicked="#clickListOfTransactions" prefHeight="70.0" prefWidth="150.0" text="List Of Transactions" wrapText="true" />
+            <HBox prefHeight="26.0" prefWidth="150.0">
+               <children>
+                  <Label text="Browse">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox onMouseClicked="#homeClick" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/home.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Home">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="388.0" onMouseClicked="#exploreClick" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/explore-Photoroom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Explore">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="147.0" prefHeight="26.0" prefWidth="150.0">
+               <children>
+                  <Label text="Students">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="173.0" onMouseClicked="#clickListOfStudents" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/searchStudentImage2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Search">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="224.0" onMouseClicked="#clickManageStudents" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/addStudentImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Add">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="274.0" prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="277.0" prefHeight="26.0" prefWidth="150.0">
+               <children>
+                  <Label text="Documents">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="224.0" onMouseClicked="#clickListOfDocuments" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/searchDocumentAdminImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Search">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="431.0" onMouseClicked="#clickManageDocuments" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/addDocumentImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Add">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="404.0" prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="408.0" prefHeight="26.0" prefWidth="150.0">
+               <children>
+                  <Label text="Transactions">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="484.0" onMouseClicked="#clickListOfTransactions" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/viewTransactionImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="View">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="398.0" prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="401.0" prefHeight="26.0" prefWidth="150.0">
+               <children>
+                  <Label text="Notion">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="428.0" onMouseClicked="#gmailClick" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="56.0">
+                     <children>
+                        <AnchorPane prefHeight="78.0" prefWidth="56.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/gmailImage.png" />
+                                 </image>
+                              </ImageView>
+                              <AnchorPane fx:id="notionArchorPaneImage" layoutX="38.400001525878906" layoutY="-4.0" visible="false" AnchorPane.bottomAnchor="27.92727203369141" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-4.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../image/dauChamThanImage.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Gmail">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>
