@@ -138,7 +138,7 @@ public class TitleTable {
     }
 
     public static void main(String []args) throws SQLException {
-//        createTitleTable();
+        createTitleTable();
 //        clearTitleTable();
 //          dropTitleTable();
     }
