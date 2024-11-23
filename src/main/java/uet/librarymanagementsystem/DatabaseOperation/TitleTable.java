@@ -16,10 +16,13 @@ public class TitleTable {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Title (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name VARCHAR(255) NOT NULL, " +
-                "isbn VARCHAR(255)" + // khong de unique cho no co the nhan null
+                "material VARCHAR(255) NOT NULL, " +
+                "category VARCHAR(255) NOT NULL, " +
+                "isbn VARCHAR(255)" + // isbn không UNIQUE để có thể nhận null
                 ")";
 
         statement.execute(createTableSQL);
+        System.out.println("Table 'Title' created successfully.");
         con.close();
     }
 
@@ -57,19 +60,21 @@ public class TitleTable {
 //        con.close();
 //    }
 
-    public static void insertTitle(String titleName, String isbn) throws SQLException {
+    public static void insertTitle(String titleName, String material, String category, String isbn) throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
             throw new SQLException("Cannot insert title, connection is closed or invalid.");
         }
 
         if (isbn == null) {
-            String checkTitleSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
+            String checkTitleSQL = "SELECT COUNT(*) FROM Title WHERE name = ? AND material = ? AND category = ?";
             try (PreparedStatement checkStmt = con.prepareStatement(checkTitleSQL)) {
                 checkStmt.setString(1, titleName);
+                checkStmt.setString(2, material);
+                checkStmt.setString(3, category);
                 ResultSet rs = checkStmt.executeQuery();
                 if (rs.next() && rs.getInt(1) > 0) {
-                    System.out.println("TITLE already exists in the database.");
+                    System.out.println("TITLE with the same material and category already exists in the database.");
                     con.close();
                     return;
                 }
@@ -87,16 +92,23 @@ public class TitleTable {
             }
         }
 
-        String insertSQL = "INSERT INTO Title (name, isbn) VALUES (?, ?)";
+        // Chèn dữ liệu vào bảng Title
+        String insertSQL = "INSERT INTO Title (name, material, category, isbn) VALUES (?, ?, ?, ?)";
         try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
             insertStmt.setString(1, titleName);
-            insertStmt.setString(2, isbn);
+            insertStmt.setString(2, material);
+            insertStmt.setString(3, category);
+            insertStmt.setString(4, isbn);
             insertStmt.executeUpdate();
             System.out.println("TITLE inserted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred while inserting TITLE.");
+        } finally {
+            con.close();
         }
-
-        con.close();
     }
+
 
     public static void clearTitleTable() throws SQLException {
         Connection con = connect(); // Kết nối tới cơ sở dữ liệu
