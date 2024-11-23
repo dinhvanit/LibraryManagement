@@ -15,7 +15,8 @@ public class TitleTable {
 
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Title (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name VARCHAR(255) NOT NULL" +
+                "name VARCHAR(255) NOT NULL, " +
+                "isbn VARCHAR(255)" + // khong de unique cho no co the nhan null
                 ")";
 
         statement.execute(createTableSQL);
@@ -56,28 +57,40 @@ public class TitleTable {
 //        con.close();
 //    }
 
-    public static void insertTitle(String titleName) throws SQLException {
+    public static void insertTitle(String titleName, String isbn) throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
             throw new SQLException("Cannot insert title, connection is closed or invalid.");
         }
 
-        // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
-        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
-        try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
-            checkStmt.setString(1, titleName);
-            ResultSet rs = checkStmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                System.out.println("TITLE already exists in the database.");
-                con.close();
-                return;
+        if (isbn == null) {
+            String checkTitleSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
+            try (PreparedStatement checkStmt = con.prepareStatement(checkTitleSQL)) {
+                checkStmt.setString(1, titleName);
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.out.println("TITLE already exists in the database.");
+                    con.close();
+                    return;
+                }
+            }
+        } else {
+            String checkIsbnSQL = "SELECT COUNT(*) FROM Title WHERE isbn = ?";
+            try (PreparedStatement checkStmt = con.prepareStatement(checkIsbnSQL)) {
+                checkStmt.setString(1, isbn);
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.out.println("ISBN already exists in the database.");
+                    con.close();
+                    return;
+                }
             }
         }
 
-        // Thêm tiêu đề mới nếu nó chưa tồn tại
-        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
+        String insertSQL = "INSERT INTO Title (name, isbn) VALUES (?, ?)";
         try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
             insertStmt.setString(1, titleName);
+            insertStmt.setString(2, isbn);
             insertStmt.executeUpdate();
             System.out.println("TITLE inserted successfully.");
         }
@@ -109,9 +122,24 @@ public class TitleTable {
         }
     }
 
+    public static void dropTitleTable() throws SQLException {
+        Connection con = connect();
+        if (con == null || con.isClosed()) {
+            throw new SQLException("Cannot drop table, connection is closed or invalid.");
+        }
+        Statement statement = con.createStatement();
+
+        String dropTableSQL = "DROP TABLE IF EXISTS Title";
+
+        statement.execute(dropTableSQL);
+        System.out.println("Table 'Title' has been dropped successfully.");
+
+        con.close();
+    }
 
     public static void main(String []args) throws SQLException {
 //        createTitleTable();
-        clearTitleTable();
+//        clearTitleTable();
+//          dropTitleTable();
     }
 }
