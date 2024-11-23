@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 public class AddDocumentService {
     private static final Logger logger = Logger.getLogger(AddDocumentService.class.getName());
 
-    public void addTitleAndAuthor(String title, String material, String category, String isbn, String author) throws SQLException {
+    public void addTitleAndAuthor(String title, String author) throws SQLException {
         // Kiểm tra và thêm Title nếu chưa có
 
         TitleTable.createTitleTable();
-        TitleTable.insertTitle(title, material, category, isbn);
+        TitleTable.insertTitle(title);
 
         // Kiểm tra và thêm Author nếu chưa có
 
@@ -30,7 +30,7 @@ public class AddDocumentService {
             // Khởi tạo đối tượng Document từ DocumentFactory
             Document document = DocumentFactory.createDocument(null, title, author, material, category, isbn);
 
-            addTitleAndAuthor(title, material, category, isbn, author);
+            addTitleAndAuthor(title, author);
 
             document.setId(); // Giả sử phương thức setId() tạo ID mới cho tài liệu dựa trên loại tài liệu và tiêu đề
             System.out.println(document.getId());

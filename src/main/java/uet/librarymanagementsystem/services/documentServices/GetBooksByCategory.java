@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,16 +15,20 @@ import java.sql.SQLException;
 public class GetBooksByCategory {
     public ObservableList<Document> getBooks(String category) throws SQLException {
         Connection con = DatabaseManager.connect();
-
         ObservableList<Document> books = FXCollections.observableArrayList();
 
-        // Truy vấn sách theo category được yêu cầu
         String queryPrimarySQL = """
-            SELECT id, name, material, category, isbn
-            FROM Title
+        WITH UniqueBooks AS (
+            SELECT MIN(id) AS id
+            FROM Document
             WHERE material = 'BOOK' AND category = ?
-            LIMIT 12;
-        """;
+            GROUP BY SUBSTRING(id, 1, 12)
+        )
+        SELECT d.id, d.title, d.author, d.material, d.category, d.isbn
+        FROM Document d
+        JOIN UniqueBooks u ON d.id = u.id
+        LIMIT 12;
+    """;
 
         try (PreparedStatement stmtPrimary = con.prepareStatement(queryPrimarySQL)) {
             stmtPrimary.setString(1, category);
@@ -32,8 +37,8 @@ public class GetBooksByCategory {
             while (rsPrimary.next()) {
                 books.add(DocumentFactory.createDocument(
                         rsPrimary.getString("id"),
-                        rsPrimary.getString("name"),
-                        null,
+                        rsPrimary.getString("title"),
+                        rsPrimary.getString("author"),
                         rsPrimary.getString("material"),
                         rsPrimary.getString("category"),
                         rsPrimary.getString("isbn")
@@ -41,32 +46,7 @@ public class GetBooksByCategory {
             }
         }
 
-        if (books.size() < 12) {
-            String queryFallbackSQL = """
-                SELECT id, name, material, category, isbn
-                FROM Title
-                WHERE material = 'BOOK' AND category != ?
-                LIMIT ?;
-            """;
-
-            try (PreparedStatement stmtFallback = con.prepareStatement(queryFallbackSQL)) {
-                stmtFallback.setString(1, category);
-                stmtFallback.setInt(2, 12 - books.size()); // Số lượng còn thiếu
-                ResultSet rsFallback = stmtFallback.executeQuery();
-
-                while (rsFallback.next()) {
-                    books.add(DocumentFactory.createDocument(
-                            rsFallback.getString("id"),
-                            rsFallback.getString("name"),
-                            null,
-                            rsFallback.getString("material"),
-                            rsFallback.getString("category"),
-                            rsFallback.getString("isbn")
-                    ));
-                }
-            }
-        }
-
+        con.close();
         return books;
     }
 
@@ -74,20 +54,32 @@ public class GetBooksByCategory {
         GetBooksByCategory getBooksByCategory = new GetBooksByCategory();
 
         try {
-
-            String category = "FICTION";
+            // Lấy sách thuộc danh mục FICTION
+            String category = "BIOGRAPHY";
             ObservableList<Document> books = getBooksByCategory.getBooks(category);
 
             System.out.println("Books retrieved for category: " + category);
-            books.forEach(System.out::println);
+            for (Document doc : books) {
+                // Chuyển đổi sang đối tượng Book
+                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
+                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
+                book.getInfo(book);
+            }
 
-            String emptyCategory = "NonExistentCategory";
-            ObservableList<Document> fallbackBooks = getBooksByCategory.getBooks(emptyCategory);
-            System.out.println("\nBooks retrieved for fallback case (not enough books in category '" + emptyCategory + "'):");
-            fallbackBooks.forEach(System.out::println);
+//
+//            String emptyCategory = "NonExistentCategory";
+//            ObservableList<Document> fallbackBooks = getBooksByCategory.getBooks(emptyCategory);
+//            System.out.println("\nBooks retrieved for fallback case (not enough books in category '" + emptyCategory + "'):");
+//            for (Document doc : fallbackBooks) {
+//                // Chuyển đổi sang đối tượng Book
+//                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
+//                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
+//                book.getInfo(book);
+//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }
