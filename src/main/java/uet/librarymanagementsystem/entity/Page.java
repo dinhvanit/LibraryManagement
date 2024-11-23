@@ -8,6 +8,7 @@ public enum Page {
     SHOW_INFO("/uet/librarymanagementsystem/fxml/student/show_info_student.fxml"),
     CHANGE_PASSWORD("/uet/librarymanagementsystem/fxml/student/change_password.fxml"),
     HOME_STUDENT("/uet/librarymanagementsystem/fxml/student/home_student_page.fxml"),
+    DOCUMENT_VBOX("/uet/librarymanagementsystem/fxml/student/document_vbox.fxml"),
     ADD_STUDENT("/uet/librarymanagementsystem/fxml/admin/add_student.fxml"),
     ADD_DOCUMENT("/uet/librarymanagementsystem/fxml/admin/add_document.fxml"),
     SEARCH_AND_REMOVE_STUDENT("/uet/librarymanagementsystem/fxml/admin/search_and_remove_student.fxml"),
