@@ -1,3 +1,4 @@
+/*
 package uet.librarymanagementsystem.services.documentServices;
 
 import javafx.collections.ObservableList;
@@ -5,6 +6,8 @@ import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 import uet.librarymanagementsystem.entity.documents.Document;
 import javafx.collections.FXCollections;
 import uet.librarymanagementsystem.entity.documents.DocumentFactory;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,4 +45,27 @@ public class Get6LatestDoc {
         return latestTitles;
     }
 
+    public static void main(String[] args) {
+        try {
+            ObservableList<Document> latestTitles = Get6LatestDoc.getLatestTitles();
+
+            System.out.println("6 Latest Titles:");
+            for (Document doc : latestTitles) {
+                System.out.println("ID: " + doc.getId() + ", Name: " + doc.getTitle());
+                if (doc instanceof Book book) {
+                    if (book.getIsbn() != null) {
+                        System.out.println(book.getIsbn());
+                    } else {
+                        System.out.println("khong co isbn");
+                    }
+                } else {
+                    System.out.println("khong phai sach");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred while fetching the latest titles:");
+            e.printStackTrace();
+        }
+    }
 }
+*/
