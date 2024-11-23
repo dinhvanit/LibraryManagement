@@ -32,11 +32,11 @@ public class GetFavouriteCategory {
             throw e;
         }
 
-        return null; // Không có dữ liệu
+        return "FICTION"; //day la the loai nhieu book nhat
     }
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(getMostFrequentCategory("23020714"));
+        System.out.println(getMostFrequentCategory("123"));
     }
 }
 
