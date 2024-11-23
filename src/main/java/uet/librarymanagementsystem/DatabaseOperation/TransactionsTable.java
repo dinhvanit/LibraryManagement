@@ -381,6 +381,68 @@ public class TransactionsTable {
         return transactionList;
     }
 
+    public static ObservableList<String> getTop5Categories() {
+        String query = "SELECT category, COUNT(*) AS count " +
+                "FROM TransactionDocument " +
+                "GROUP BY category " +
+                "ORDER BY count DESC " +
+                "LIMIT 5";
+
+        ObservableList<String> topCategories = FXCollections.observableArrayList();
+
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String category = rs.getString("category");  // Lấy tên category
+                int count = rs.getInt("count");              // Lấy số lượng mượn của category
+                topCategories.add(category + " " + count);  // Thêm thông tin vào danh sách
+            }
+
+            if (topCategories.isEmpty()) {
+                System.out.println("No categories found.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("An error occurred while fetching top categories: " + e.getMessage());
+        }
+
+        return topCategories;
+    }
+
+    public static ObservableList<String> getBooksBorrowedLastWeek() {
+        String query = "SELECT borrow_date, COUNT(*) AS borrow_count " +
+                "FROM TransactionDocument " +
+                "WHERE borrow_date >= DATE('now', '-7 days') " +
+                "GROUP BY borrow_date " +
+                "ORDER BY borrow_date";
+
+        ObservableList<String> borrowData = FXCollections.observableArrayList();
+
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String borrowDate = rs.getString("borrow_date");
+                int borrowCount = rs.getInt("borrow_count");
+                borrowData.add(borrowDate + " " + borrowCount);
+            }
+
+            if (borrowData.isEmpty()) {
+                System.out.println("Không có sách nào được mượn trong 7 ngày qua.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Đã xảy ra lỗi khi lấy thông tin sách mượn trong tuần qua: " + e.getMessage());
+        }
+
+        return borrowData;
+    }
+
+
+
     public static void clearTransactionTable() throws SQLException {
         Connection conn = connect();
 
@@ -423,7 +485,13 @@ public class TransactionsTable {
 //            createTransactionTable();
 //            insertTransaction(transaction);
 //            updateReturnDate("7", "15-11-2025");
-        clearTransactionTable();
+        //clearTransactionTable();
+/*
+        ObservableList<String> topCategories = getTop5Categories();
+        for (String string:topCategories) {
+            System.out.println(string);
+        }
+*/
 
     }
 }

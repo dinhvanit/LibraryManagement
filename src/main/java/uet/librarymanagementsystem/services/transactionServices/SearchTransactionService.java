@@ -50,6 +50,10 @@ public class SearchTransactionService {
         return TransactionsTable.searchTransByField(null, null, true, false, true, null, false);
     }
 
+    public ObservableList<Transaction> searchTransactionBorrowing() throws SQLException {
+        return TransactionsTable.searchTransByField(null, null, true, false, false, null, false);
+    }
+
     public int[] countBooksByStatus(String idStudent) throws SQLException {
         int borrowingBooks = searchTransactionByIdStudentBorrowing(idStudent).size();
         int returnedBooks = searchTransactionByIdStudentReturned(idStudent).size();
