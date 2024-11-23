@@ -131,13 +131,13 @@
                      </children></HBox>
                         <HBox alignment="CENTER" prefHeight="70.0" prefWidth="430.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE">
+                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="REMOVE">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#deleteStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="DELETE " />
-                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="DELETE ALL">
+                                <Button mnemonicParsing="false" onMouseClicked="#deleteStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE " />
+                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE ALL">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -181,11 +181,15 @@
                         </TableView>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD">
+                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="ADD">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#modifyStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="MODIFY" />
+                        <Button mnemonicParsing="false" onMouseClicked="#modifyStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="MODIFY">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#infoStudentButtonClick" prefHeight="50.0" prefWidth="90.0" text="INFO" />
                      </children>
                   </HBox>
                     </children>

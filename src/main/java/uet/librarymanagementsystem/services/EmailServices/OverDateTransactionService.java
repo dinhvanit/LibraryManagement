@@ -83,7 +83,7 @@ public class OverDateTransactionService {
         OverDateTransactionService overdueService = new OverDateTransactionService();
 
         try {
-            ObservableList<Transaction> overdueTransactions = overdueService.getOverdueTransactions();
+            //ObservableList<Transaction> overdueTransactions = overdueService.getOverdueTransactions();
             OverdueEmailNotificationService.notifyOverdueUsers();
         } finally {
             overdueService.closeConnection();

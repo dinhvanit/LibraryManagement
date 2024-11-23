@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import uet.librarymanagementsystem.controllers.LoginController;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.controllers.LoginController;
@@ -49,7 +50,7 @@ public class ShowInfoStudentController {
     public void initialize() {
         try {
 
-            String userId = LoginController.getIdCurrentStudent();
+            String userId = ShareDataService.getIdStudentShare();
             // Tìm thông tin sinh viên dựa trên ID
             Student student = searchStudentService.searchID(userId);
             if (student != null) {

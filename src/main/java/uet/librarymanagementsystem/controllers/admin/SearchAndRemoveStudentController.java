@@ -4,15 +4,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.userServices.ChangePasswordService;
 import uet.librarymanagementsystem.services.userServices.DeleteStudentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -179,6 +184,22 @@ public class SearchAndRemoveStudentController implements Initializable {
             System.out.println(resultMessage);
         } else {
             System.out.println("Vui lòng chọn một sinh viên để thay đổi mật khẩu.");
+        }
+    }
+
+    @FXML
+    void infoStudentButtonClick(MouseEvent event) {
+        Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            ShareDataService.setIdStudentShare(selectedStudent.getId());
+            notionChoiceAddLabel.setVisible(false);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindow(Page.SHOW_INFO, "Information student", currentStage);
+            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+        } else {
+            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+            notionChoiceAddLabel.setVisible(true);
         }
     }
 
