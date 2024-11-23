@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
-import uet.librarymanagementsystem.services.EmailServices.OverDateTransactionService;
+import uet.librarymanagementsystem.services.EmailServices.CheckOverDateTrans;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import javax.swing.text.html.ImageView;
@@ -75,8 +75,8 @@ public class AdminPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OverDateTransactionService overDateTransactionService = new OverDateTransactionService();
-        ObservableList<Transaction> overDateTransactionsList = overDateTransactionService.getOverdueTransactions();
+        CheckOverDateTrans checkOverDateTrans = new CheckOverDateTrans();
+        ObservableList<Transaction> overDateTransactionsList = checkOverDateTrans.getOverdueTransactions();
         if (overDateTransactionsList.isEmpty()) {
             System.out.println("HE");
             notionArchorPaneImage.setVisible(false);
