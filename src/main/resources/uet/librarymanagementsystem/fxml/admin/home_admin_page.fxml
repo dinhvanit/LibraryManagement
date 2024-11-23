@@ -1,11 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.admin.HomeAdminController">
    <children>
-      <BorderPane layoutX="469.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <BorderPane layoutX="358.0" layoutY="131.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="285.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="286.0" prefWidth="449.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox prefHeight="266.0" prefWidth="636.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <GridPane prefHeight="266.0" prefWidth="270.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../image/nhieu_tai_lieu_image.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="126.0">
+                                                                     <children>
+                                                                        <Label text="DOCUMENTS">
+                                                                           <font>
+                                                                              <Font size="15.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="126.0" VBox.vgrow="ALWAYS">
+                                                                     <children>
+                                                                        <Label fx:id="totalDocumentsLabel" text="Label">
+                                                                           <font>
+                                                                              <Font size="30.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../image/studentCount.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label text="USERS">
+                                                                           <font>
+                                                                              <Font size="15.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="totalUsersLabel" text="Label">
+                                                                           <font>
+                                                                              <Font size="30.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../image/categoryIcon.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label text="CATEGORIES">
+                                                                           <font>
+                                                                              <Font size="15.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="totalCategoriesLabel" text="Label">
+                                                                           <font>
+                                                                              <Font size="30.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../image/readingDocumentsImage.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label text="BORROWING">
+                                                                           <font>
+                                                                              <Font size="15.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="borrowingTotalLabel" text="Label">
+                                                                           <font>
+                                                                              <Font size="30.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="283.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="314.0" prefWidth="389.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <BarChart fx:id="barChartTopCategories">
+                                            <xAxis>
+                                              <CategoryAxis fx:id="nameOfCategoryX" side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis fx:id="countOfCategoryY" side="LEFT" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="490.0" layoutY="10.0" prefHeight="314.0" prefWidth="389.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <LineChart fx:id="lineChartStatusBorrowing">
+                                            <xAxis>
+                                              <CategoryAxis fx:id="timeX" side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis fx:id="countOfDocumentY" side="LEFT" />
+                                            </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

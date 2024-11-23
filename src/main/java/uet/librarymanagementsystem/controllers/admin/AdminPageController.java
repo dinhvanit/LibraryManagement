@@ -70,7 +70,7 @@ public class AdminPageController implements Initializable {
 
     @FXML
     void homeClick(MouseEvent event) {
-
+        WindowUtil.loadCenterPane(Page.HOME_ADMIN_PAGE, borderPaneAdminPage);
     }
 
     @Override
@@ -84,5 +84,6 @@ public class AdminPageController implements Initializable {
             System.out.println("co nguoi chua tra");
             notionArchorPaneImage.setVisible(true);
         }
+        WindowUtil.loadCenterPane(Page.HOME_ADMIN_PAGE, borderPaneAdminPage);
     }
 }

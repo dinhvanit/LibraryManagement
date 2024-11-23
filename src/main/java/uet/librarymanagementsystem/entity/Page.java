@@ -23,7 +23,8 @@ public enum Page {
     QR_CODE_TRANSACTION("/uet/librarymanagementsystem/fxml/info_document/qr_code_transaction.fxml"),
     NOTION_MAX_DOCUMENTS("/uet/librarymanagementsystem/fxml/notification/notion_max_of_documents.fxml"),
     NOTION_GMAIL("/uet/librarymanagementsystem/fxml/admin/gmail_notion.fxml"),
-    NOTION_SUCCESS("/uet/librarymanagementsystem/fxml/notification/success_notification.fxml");
+    NOTION_SUCCESS("/uet/librarymanagementsystem/fxml/notification/success_notification.fxml"),
+    HOME_ADMIN_PAGE("/uet/librarymanagementsystem/fxml/admin/home_admin_page.fxml");
 
     private final String fxmlPath;
 
