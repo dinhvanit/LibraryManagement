@@ -13,12 +13,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.users.Student;
+import uet.librarymanagementsystem.services.PDFServices.ExportTransactionToPDF;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.userServices.ChangePasswordService;
 import uet.librarymanagementsystem.services.userServices.DeleteStudentService;
 import uet.librarymanagementsystem.services.userServices.SearchStudentService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -203,6 +205,19 @@ public class SearchAndRemoveStudentController implements Initializable {
         }
     }
 
+    @FXML
+    void exportPDFClick(MouseEvent event) throws IOException {
+        Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent != null) {
+            ShareDataService.setIdStudentShare(selectedStudent.getId());
+            ExportTransactionToPDF.exportTransactionToPDF(ShareDataService.getIdStudentShare());
+            notionChoiceAddLabel.setVisible(false);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            WindowUtil.showSecondaryWindow(Page.NOTION_SUCCESS, "Export PDF", currentStage);
+        } else {
+            notionChoiceAddLabel.setVisible(true);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

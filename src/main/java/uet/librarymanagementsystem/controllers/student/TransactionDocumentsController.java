@@ -16,10 +16,12 @@ import uet.librarymanagementsystem.controllers.LoginController;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.transactions.Transaction;
+import uet.librarymanagementsystem.services.PDFServices.ExportTransactionToPDF;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -111,6 +113,13 @@ public class TransactionDocumentsController implements Initializable {
                 WindowUtil.showSecondaryWindow(Page.QR_CODE_TRANSACTION, "QR code transaction", currentStage);
             }
         }
+    }
+
+    @FXML
+    void exportPDFClick(MouseEvent event) throws IOException {
+        ExportTransactionToPDF.exportTransactionToPDF(ShareDataService.getIdStudentShare());
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        WindowUtil.showSecondaryWindow(Page.NOTION_SUCCESS, "Export PDF", currentStage);
     }
 
     @Override

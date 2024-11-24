@@ -69,7 +69,11 @@
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#qrCodeClick" prefHeight="50.0" prefWidth="90.0" text="QR CODE" />
+                        <Button mnemonicParsing="false" onMouseClicked="#qrCodeClick" prefHeight="50.0" prefWidth="90.0" text="QR CODE">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#exportPDFClick" prefHeight="50.0" prefWidth="90.0" text="PDF" />
                      </children>
                   </HBox>
                </children>
