@@ -15,24 +15,35 @@ import java.sql.SQLException;
 public class Get6LatestDoc {
     public static ObservableList<Document> getLatestTitles() throws SQLException {
         Connection con = DatabaseManager.connect();
-        if (con == null || con.isClosed()) {
-            throw new SQLException("Cannot fetch titles, connection is closed or invalid.");
-        }
-
-        String querySQL = "SELECT id, name, material, category, isbn FROM Title ORDER BY id DESC LIMIT 6";
         ObservableList<Document> latestTitles = FXCollections.observableArrayList();
+
+        String querySQL = """
+        SELECT id, title, author, material, category, isbn
+        FROM Document
+        WHERE ROWID IN (
+            SELECT MAX(ROWID)
+            FROM Document
+            WHERE material = 'BOOK'
+            GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
+        )
+        ORDER BY ROWID DESC
+        LIMIT 6;
+    """;
 
         try (PreparedStatement stmt = con.prepareStatement(querySQL)) {
             ResultSet rs = stmt.executeQuery();
 
+            // Duyệt qua các kết quả trả về
             while (rs.next()) {
                 String id = rs.getString("id");
-                String name = rs.getString("name");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
                 String material = rs.getString("material");
                 String category = rs.getString("category");
                 String isbn = rs.getString("isbn");
 
-                Document document = DocumentFactory.createDocument(id, name, null, material, category, isbn);
+                // Tạo đối tượng Document từ DocumentFactory
+                Document document = DocumentFactory.createDocument(id, title, author, material, category, isbn);
                 latestTitles.add(document);
             }
         } catch (SQLException e) {
@@ -40,31 +51,38 @@ public class Get6LatestDoc {
             System.out.println("Error occurred while fetching the latest titles.");
             throw e;
         } finally {
-            con.close();
+            con.close(); // Đảm bảo kết nối được đóng
         }
 
         return latestTitles;
     }
 
-    public static void main(String[] args) {
-        try {
-            ObservableList<Document> latestTitles = Get6LatestDoc.getLatestTitles();
 
-            System.out.println("6 Latest Titles:");
-            for (Document doc : latestTitles) {
-                System.out.println("ID: " + doc.getId() + ", Name: " + doc.getTitle());
-                if (doc instanceof Book book) {
-                    if (book.getIsbn() != null) {
-                        System.out.println(book.getIsbn());
-                    } else {
-                        System.out.println("khong co isbn");
-                    }
-                } else {
-                    System.out.println("khong phai sach");
-                }
+
+    public static void main(String[] args) {
+
+        try {
+            // Lấy sách thuộc danh mục FICTION
+            ObservableList<Document> books = Get6LatestDoc.getLatestTitles();
+            for (Document doc : books) {
+                // Chuyển đổi sang đối tượng Book
+                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
+                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
+                book.getInfo(book);
             }
-        } catch (Exception e) {
-            System.err.println("An error occurred while fetching the latest titles:");
+
+//
+//            String emptyCategory = "NonExistentCategory";
+//            ObservableList<Document> fallbackBooks = getBooksByCategory.getBooks(emptyCategory);
+//            System.out.println("\nBooks retrieved for fallback case (not enough books in category '" + emptyCategory + "'):");
+//            for (Document doc : fallbackBooks) {
+//                // Chuyển đổi sang đối tượng Book
+//                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
+//                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
+//                book.getInfo(book);
+//            }
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
