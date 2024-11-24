@@ -17,8 +17,10 @@ import java.util.stream.Collectors;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 public class BookLookupService {
-    private static final String API_KEY = "AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8";
-
+    private static final String API_KEY = "AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc";
+    //key 1 : AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8
+    //key 2: AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc
+    //key 3: AIzaSyC4zneS0O_o98El3X90MkDfmL_x0uvKm9U
     private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
     private final String isbn;

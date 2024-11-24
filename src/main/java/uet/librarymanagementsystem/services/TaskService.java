@@ -6,27 +6,44 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class TaskService {
-    private final int THREAD_POOL_SIZE;
+    private static TaskService instance; // Instance duy nhất của TaskService
     private final ExecutorService executor;
 
-    public TaskService() {
-        this.THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors();
-        this.executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        System.out.println("Thread pool size: " + THREAD_POOL_SIZE);
+    // Constructor private để ngăn khởi tạo từ bên ngoài
+    private TaskService() {
+        int threadPoolSize = Runtime.getRuntime().availableProcessors();
+        this.executor = Executors.newFixedThreadPool(threadPoolSize);
+        System.out.println("Thread pool size: " + threadPoolSize);
     }
 
-    // Phương thức chạy một Callable và trả về Future
+    // Truy cập instance duy nhất của TaskService
+    public static synchronized TaskService getInstance() {
+        if (instance == null) {
+            instance = new TaskService();
+        }
+        return instance;
+    }
+
+    // Chạy một Callable và trả về Future
     public <T> Future<T> runTask(Callable<T> task) {
-        return executor.submit(task); // Trả về Future từ executor
+        return executor.submit(task);
     }
 
+    // Chạy một Runnable
     public void runTask(Runnable task) {
-        executor.submit(task);
+        executor.execute(task); // Sử dụng execute thay vì submit cho Runnable
     }
 
     // Đóng thread pool
     public void shutdown() {
-        executor.shutdown();
+        if (!executor.isShutdown()) {
+            executor.shutdown();
+            System.out.println("TaskService has been shut down.");
+        }
+    }
+
+    // Kiểm tra trạng thái thread pool
+    public boolean isShutdown() {
+        return executor.isShutdown();
     }
 }
-
