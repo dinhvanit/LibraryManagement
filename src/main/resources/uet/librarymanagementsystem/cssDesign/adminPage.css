@@ -94,7 +94,6 @@
 
 .info-box:hover {
     -fx-background: linear-gradient(to bottom, #ffffff, #ece4f7); /* Nền nhạt hơn khi hover */
-    -fx-transform: scale(1.03);
 }
 
 /* Biểu đồ */

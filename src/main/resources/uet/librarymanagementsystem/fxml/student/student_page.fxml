@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
+<BorderPane fx:id="borderPaneStudentPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" stylesheets="@../../cssDesign/studentPage.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.StudentPageController">
     <top>
         <HBox prefHeight="98.0" prefWidth="710.0" BorderPane.alignment="CENTER">
             <children>
@@ -90,7 +90,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" onMouseClicked="#homeButtonOnClick" prefHeight="60.0" prefWidth="150.0">
+            <HBox alignment="CENTER" onMouseClicked="#homeButtonOnClick" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <HBox.margin>
@@ -115,32 +115,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/explore-Photoroom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label text="Explore">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="60.0" prefWidth="150.0">
+            <HBox alignment="CENTER" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <HBox.margin>
@@ -178,7 +153,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" onMouseClicked="#returnButtonClick" prefHeight="60.0" prefWidth="150.0">
+            <HBox alignment="CENTER" onMouseClicked="#returnButtonClick" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <HBox.margin>
@@ -203,7 +178,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <HBox.margin>
