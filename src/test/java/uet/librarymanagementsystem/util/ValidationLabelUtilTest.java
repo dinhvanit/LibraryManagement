@@ -24,10 +24,9 @@ class ValidationLabelUtilTest {
     void testValidateEmailFormat() {
         // Kiểm tra email hợp lệ
         assertEquals("", validator.validateEmailFormat("test@gmail.com"));
-        assertEquals("", validator.validateEmailFormat("user@vnu.edu.vn"));
 
         // Kiểm tra email không hợp lệ
-        assertEquals("Email cần có đuôi @gmail.com hoặc @vnu.edu.vn", validator.validateEmailFormat("user@example.com"));
+        assertEquals("Email cần có đuôi @gmail.com", validator.validateEmailFormat("user@example.com"));
     }
 
     @Test

@@ -1,69 +1,313 @@
-/*
-set adminPage
-*/
-
-.top-form{
-    -fx-background-color:#fff;
-    -fx-border-color:#000;
-    -fx-border-width:.2px .2px .5px .2px;
-}
-.semiTop-form{
-    -fx-border-color:#000;
-    -fx-border-width:0px 0px .5px 0px;
+/* Tổng thể */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #dbe8f9, #e8d9f2); /* Gradient xanh nhạt và tím nhạt */
+    -fx-text-fill: #333; /* Màu chữ tối để dễ nhìn */
 }
 
-.close-btn{
-    -fx-background-color:transparent;
-    -fx-cursor:hand;
-}
-.close-btn:hover{
-    -fx-background-color:#f13f57;
+/* Card form đăng nhập */
+.card-form {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e3f2fd); /* Gradient trắng và xanh nhạt */
+    -fx-background-radius: 20px;
+    -fx-border-color: rgba(173, 216, 230, 0.7); /* Viền xanh nhạt trong suốt */
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px; /* Tăng độ dày viền nhẹ */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.3, 0, 5); /* Bóng đổ mềm mại */
+    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt */
 }
 
-.minimize-btn{
-    -fx-background-color:transparent;
+/* BorderPane (khung chính) */
+.border-pane {
+    -fx-background-color: linear-gradient(to bottom, #e3f2fd, #f3e5f5); /* Gradient xanh nhạt và tím nhạt */
+    -fx-border-color: rgba(0, 0, 0, 0.1); /* Viền nhẹ */
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0); /* Bóng nhẹ */
+}
+
+/* Tiêu đề */
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, #4f86c6, #da77f2); /* Gradient xanh nhạt pha tím */
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #f8f9fa; /* Sidebar xanh nhạt dịu */
+    -fx-border-radius: 10;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+/* Các HBox trong sidebar */
+.sidebar .hbox-item {
+    -fx-background-color: transparent;
+    -fx-padding: 10 15;
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-cursor: hand;
-}
-.minimize-btn:hover{
-    -fx-background-color:#dddddd;
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-.bars{
-    -fx-background-color:transparent;
-    -fx-cursor:hand;
+.sidebar .hbox-item:hover {
+    -fx-background-color: #eceff1; /* Nền xanh nhạt hơn khi hover */
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0); /* Bóng nhẹ khi hover */
 }
 
-.bars:hover{
-    -fx-background-color:#d6d6d6;
-    -fx-background-radius:5px;
-
+/* Icon trong HBox */
+.sidebar .hbox-item .icon {
+    -fx-font-size: 18px;
+    -fx-text-fill: #4a4a4a; /* Màu biểu tượng đồng bộ với chữ */
 }
 
-.nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #2612df, #0fe30f);
+.sidebar .hbox-item:hover .icon {
+    -fx-text-fill: #333; /* Màu biểu tượng đậm hơn khi hover */
 }
 
-.edit-btn{
-    -fx-background-color:transparent;
-    -fx-cursor:hand;
-    -fx-padding:60px 0px 0px 0px;
+/* Label trong HBox */
+.sidebar .hbox-item .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333; /* Màu chữ tối như cũ */
+    -fx-font-weight: bold;
 }
 
-.nav-btn{
-    -fx-background-color:linear-gradient(to bottom right, #158a6f, #19c7d3);
-    -fx-background-radius:5px;
-    -fx-cursor:hand;
-    -fx-font-size:15px;
-    -fx-text-fill:#fff;
-    -fx-font-family:"Microsoft Sans Serif";
+/* Các nhãn thông tin (labels) */
+.label-info {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333; /* Màu chữ giữ nguyên */
+    -fx-font-weight: bold;
 }
 
-.logout-btn{
-    -fx-background-color:#366d9d;
-    -fx-background-radius:10px;
-    -fx-cursor:hand;
+/* Các hộp thông tin (info boxes) */
+.info-box {
+    -fx-background: linear-gradient(to bottom, #ffffff, #f8eafa); /* Nền trắng pha tím nhạt */
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
+    -fx-transition: all 0.3s;
 }
-.logout-btn:hover{
-    -fx-background-color:#396fc6;
-    -fx-background-radius:10px;
+
+.info-box:hover {
+    -fx-background: linear-gradient(to bottom, #ffffff, #ece4f7); /* Nền nhạt hơn khi hover */
+    -fx-transform: scale(1.03);
 }
+
+/* Biểu đồ */
+.chart {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #fff7e6); /* Nền biểu đồ trắng và vàng nhạt */
+    -fx-background-radius: 20px;
+    -fx-border-radius: 15px; /* Bo góc mềm mại hơn */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0.3, 0, 0); /* Bóng nhẹ */
+    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng mượt */
+}
+
+/* Hiệu ứng Hover cho Biểu đồ */
+.chart:hover {
+    -fx-background-color: linear-gradient(to bottom, #fffbea, #fff2d1); /* Gradient sáng hơn khi hover */
+    -fx-scale-x: 1.03; /* Phóng to nhẹ trên trục X */
+    -fx-scale-y: 1.03; /* Phóng to nhẹ trên trục Y */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.4, 0, 0); /* Bóng đổ mạnh hơn khi hover */
+}
+
+
+/* Button (Nút bấm) */
+.button {
+    -fx-background: linear-gradient(to right, #e3f2fd, #f3e5f5); /* Gradient xanh nhạt và tím nhạt */
+    -fx-text-fill: #333; /* Màu chữ tối cho dễ nhìn */
+    -fx-font-size: 14px; /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-border-radius: 15; /* Bo tròn góc nút */
+    -fx-cursor: hand; /* Con trỏ chuột khi hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.4, 0, 0); /* Bóng nhẹ */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Hiệu ứng Hover */
+.button:hover {
+    -fx-background: linear-gradient(to right, #d1ecff, #edd8f7); /* Gradient sáng hơn khi hover */
+    -fx-scale-x: 1.05; /* Phóng to nhẹ theo trục X */
+    -fx-scale-y: 1.05; /* Phóng to nhẹ theo trục Y */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0.5, 0, 0); /* Bóng đậm hơn khi hover */
+}
+
+/* Hiệu ứng Click */
+.button:pressed {
+    -fx-background: linear-gradient(to right, #c5dfee, #e7cbee); /* Gradient đậm hơn khi nhấn */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.3, 0, 0); /* Bóng giảm khi nhấn */
+    -fx-scale-x: 0.98; /* Thu nhỏ nhẹ */
+    -fx-scale-y: 0.98;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e0f7fa); /* Nền trắng pha xanh nước biển nhạt */
+    -fx-border-color: rgba(200, 200, 200, 0.5); /* Viền xám nhạt */
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.3, 0, 0); /* Bóng nhẹ */
+}
+
+/* Header (Tiêu đề của TableView) */
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #d1c4e9, #ede7f6); /* Gradient tím nhạt */
+    -fx-border-color: rgba(150, 150, 150, 0.3); /* Viền mờ xám nhạt */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Màu chữ tối */
+    -fx-alignment: center; /* Canh giữa nội dung */
+}
+
+/* Row (Dòng trong TableView) */
+.table-view .table-row-cell {
+    -fx-background-color: transparent; /* Nền mặc định trong suốt */
+    -fx-border-color: transparent;
+}
+
+.table-view .table-row-cell:filled {
+    -fx-background-color: linear-gradient(to bottom, #e0f7fa, #b2ebf2); /* Nền xanh nước biển nhạt */
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: linear-gradient(to bottom, #fce4ec, #f8bbd0); /* Nền hồng tím nhạt khi hover */
+}
+
+/* Dòng được chọn */
+.table-view .table-row-cell:selected {
+    -fx-background-color: linear-gradient(to bottom, #b3e5fc, #81d4fa); /* Nền xanh nước biển đậm hơn khi được chọn */
+    -fx-text-fill: #333; /* Màu chữ tối */
+}
+
+/* Ô trong bảng (Cells) */
+.table-view .table-cell {
+    -fx-text-fill: #333; /* Màu chữ */
+    -fx-font-size: 13px;
+    -fx-alignment: center-left; /* Canh trái */
+}
+
+/* Scrollbar (Thanh cuộn) */
+.table-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:vertical .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom, #d1c4e9, #b39ddb); /* Gradient cho thanh cuộn tím nhạt */
+    -fx-background-radius: 5px;
+}
+
+.table-view .scroll-bar:vertical .thumb:hover,
+.table-view .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #9575cd, #7e57c2); /* Gradient sáng hơn khi hover */
+}
+
+/* TextField Styles */
+.text-field {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e0f7fa); /* Gradient trắng đến xanh nước biển nhạt */
+    -fx-border-color: rgba(150, 200, 255, 0.8); /* Viền xanh nhạt */
+    -fx-border-radius: 10px; /* Bo góc mềm mại */
+    -fx-background-radius: 10px;
+    -fx-padding: 5 10; /* Khoảng cách nội dung bên trong */
+    -fx-font-size: 14px; /* Kích thước chữ trong TextField */
+    -fx-text-fill: #333; /* Màu chữ */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng nhẹ */
+    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng mượt */
+}
+
+/* Hover effect for TextField */
+.text-field:hover {
+    -fx-background-color: linear-gradient(to bottom, #f0fcff, #cfeffd); /* Sáng hơn khi hover */
+    -fx-border-color: rgba(100, 150, 255, 0.9); /* Viền đậm hơn khi hover */
+}
+
+/* Focus effect for TextField */
+.text-field:focused {
+    -fx-background-color: linear-gradient(to bottom, #e8faff, #d1f3fc); /* Gradient khi focus */
+    -fx-border-color: rgba(50, 100, 255, 1); /* Viền đậm hơn khi focus */
+    -fx-border-width: 2px; /* Tăng độ dày viền khi focus */
+    -fx-effect: dropshadow(gaussian, rgba(50, 100, 255, 0.2), 8, 0.3, 0, 0); /* Bóng rõ hơn khi focus */
+}
+
+/* Label Styles */
+.label {
+    -fx-font-size: 16px; /* Kích thước chữ lớn hơn một chút */
+    -fx-font-weight: bold; /* Chữ đậm */
+    -fx-text-fill: #555; /* Màu chữ xám đậm */
+    -fx-padding: 0 5; /* Khoảng cách giữa Label và các thành phần khác */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0.2, 0, 0); /* Bóng nhẹ để tạo chiều sâu */
+}
+
+/* Custom Alignment for Labels */
+.label-field {
+    -fx-alignment: center-right; /* Canh phải các nhãn cạnh TextField */
+}
+
+/* Lớp CSS dành cho nhãn cảnh báo */
+.label-alert {
+    -fx-font-size: 10px; /* Cỡ chữ nhỏ hơn bình thường */
+    -fx-font-style: italic; /* Chữ nghiêng */
+    -fx-text-fill: #ff4d4d; /* Màu đỏ tươi để dễ nhận biết */
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.2), 2, 0.3, 0, 0); /* Bóng mờ nhẹ màu đỏ */
+}
+
+/* Lớp CSS dành cho nhãn tiêu đề nhỏ */
+.label-small {
+    -fx-font-size: 23px; /* Cỡ chữ nhỏ hơn bình thường */
+    -fx-font-weight: bold; /* Chữ đậm để làm nổi bật */
+    -fx-text-fill: #555; /* Màu xám đậm */
+    -fx-background-color: transparent; /* Không có nền */
+    -fx-alignment: center-left; /* Canh trái nội dung */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0.3, 0, 0); /* Bóng nhẹ để tạo chiều sâu */
+    -fx-text-alignment: center; /* Căn giữa chữ */
+}
+
+/* ChoiceBox Styles */
+.choice-box {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e8f5ff); /* Nền trắng pha xanh nhạt */
+    -fx-border-color: rgba(150, 200, 255, 0.8); /* Viền xanh nhạt */
+    -fx-border-radius: 10px; /* Bo góc mềm mại */
+    -fx-background-radius: 10px;
+    -fx-font-size: 14px; /* Kích thước chữ */
+    -fx-text-fill: #333; /* Màu chữ */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng nhẹ */
+    -fx-cursor: hand; /* Con trỏ dạng tay khi di chuột */
+    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt */
+}
+
+/* Hover effect for ChoiceBox */
+.choice-box:hover {
+    -fx-background-color: linear-gradient(to bottom, #f0fcff, #d6eeff); /* Màu nền sáng hơn khi hover */
+    -fx-border-color: rgba(100, 150, 255, 0.9); /* Viền đậm hơn khi hover */
+}
+
+/* Focus effect for ChoiceBox */
+.choice-box:focused {
+    -fx-background-color: linear-gradient(to bottom, #e0f7ff, #cbeeff); /* Gradient khi focus */
+    -fx-border-color: rgba(50, 100, 255, 1); /* Viền xanh đậm khi focus */
+    -fx-effect: dropshadow(gaussian, rgba(50, 100, 255, 0.2), 8, 0.3, 0, 0); /* Bóng rõ hơn khi focus */
+}
+
+/* Popup menu (Dropdown options) */
+.choice-box .list-cell {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #e6f7ff); /* Nền trắng pha xanh nhạt cho menu */
+    -fx-text-fill: #333; /* Màu chữ */
+    -fx-font-size: 14px; /* Kích thước chữ trong menu */
+}
+
+.choice-box .list-cell:hover {
+    -fx-background-color: linear-gradient(to bottom, #d6f3ff, #c0e6ff); /* Màu nền sáng hơn khi hover */
+    -fx-text-fill: #000; /* Màu chữ đậm hơn khi hover */
+}
+
+/* Disabled ChoiceBox */
+.choice-box:disabled {
+    -fx-background-color: #f2f2f2; /* Màu nền xám nhạt */
+    -fx-border-color: rgba(200, 200, 200, 0.8); /* Viền xám nhạt */
+    -fx-text-fill: rgba(100, 100, 100, 0.8); /* Màu chữ mờ nhạt */
+}
+
+

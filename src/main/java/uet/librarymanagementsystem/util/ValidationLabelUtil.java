@@ -26,9 +26,9 @@ public class ValidationLabelUtil {
      * @return Thông báo lỗi nếu có, trả về chuỗi rỗng nếu không có lỗi
      */
     public String validateEmailFormat(String field) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com|vnu\\.edu\\.vn)$";;
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com)$";;
         if (!field.matches(emailRegex)) {
-            return "Email cần có đuôi @gmail.com hoặc @vnu.edu.vn";
+            return "Email cần có đuôi @gmail.com";
         }
         return "";
     }

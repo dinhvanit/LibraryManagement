@@ -18,7 +18,7 @@
             <top>
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Label prefHeight="36.0" prefWidth="283.0" text="Manage Transaction ">
+                        <Label prefHeight="36.0" prefWidth="283.0" styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Manage Transaction ">
                             <font>
                                 <Font size="25.0" />
                             </font>
@@ -39,7 +39,7 @@
                      <children>
                         <HBox prefHeight="50.0" prefWidth="150.0">
                            <children>
-                              <Label text="ID STUDENT">
+                              <Label stylesheets="@../../cssDesign/adminPage.css" text="ID STUDENT">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -51,7 +51,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="300.0">
                            <children>
-                              <TextField fx:id="idManageStudentTextField" />
+                              <TextField fx:id="idManageStudentTextField" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                         </HBox>
                      </children>
@@ -60,7 +60,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="150.0">
                            <children>
-                              <Label text="ID DOCUMENT">
+                              <Label stylesheets="@../../cssDesign/adminPage.css" text="ID DOCUMENT">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -72,7 +72,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="idManageDocumentTextField" />
+                              <TextField fx:id="idManageDocumentTextField" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                         </HBox>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="330.0">
@@ -84,7 +84,7 @@
                   </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <TableView fx:id="transactionManageTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                <TableView fx:id="transactionManageTableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" HBox.hgrow="ALWAYS">
                                     <columns>
                                         <TableColumn fx:id="idTransactionManageColumnTransaction" prefWidth="75.0" text="ID TRANSACTION" />
                               <TableColumn fx:id="idStudentManageColumnTransaction" prefWidth="75.0" text="ID STUDENT" />
@@ -109,11 +109,11 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#infoDocumentManageButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="INFO">
+                                <Button mnemonicParsing="false" onMouseClicked="#infoDocumentManageButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="INFO">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#searchTransactionManageButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="SEARCH" />
+                        <Button mnemonicParsing="false" onMouseClicked="#searchTransactionManageButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SEARCH" />
                             </children>
                         </HBox>
                     </children>

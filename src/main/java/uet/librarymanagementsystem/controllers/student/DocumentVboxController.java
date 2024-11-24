@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.concurrent.Task;
+import javafx.stage.Stage;
+import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.ImagesOfLibrary;
 import uet.librarymanagementsystem.entity.documents.materials.Book;
@@ -13,6 +15,8 @@ import uet.librarymanagementsystem.entity.documents.materials.Journal;
 import uet.librarymanagementsystem.entity.documents.materials.Newspaper;
 import uet.librarymanagementsystem.entity.documents.materials.Thesis;
 import uet.librarymanagementsystem.services.documentServices.BookLookupService;
+import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
+import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.util.Objects;
 
@@ -52,6 +56,9 @@ public class DocumentVboxController {
                         if (!thumbnailUrl.equals("N/A")) {
                             return new Image(thumbnailUrl); // Trả về ảnh từ URL
                         }
+                    } else {
+                        return new Image(Objects.requireNonNull(
+                                getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
                     }
                     // Nếu không tìm được ảnh thu nhỏ, sử dụng ảnh mặc định cho sách
                     return new Image(Objects.requireNonNull(
@@ -86,13 +93,12 @@ public class DocumentVboxController {
 
     @FXML
     private void handleClick() {
-        // Xử lý sự kiện bấm vào VBox
-        System.out.println("Thông tin tài liệu:");
-        System.out.println("ID: " + document.getId());
-        System.out.println("Tiêu đề: " + document.getTitle());
-        System.out.println("Tác giả: " + document.getAuthor());
-        System.out.println("Thể loại: " + document.getCategory());
-
-
+        if (document != null) {
+            ShareDataService.setDocumentShare(document);
+            Stage currentStage = (Stage) imageView.getScene().getWindow();
+            WindowUtil.showSecondaryWindowWithShowInfo(Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
+        } else {
+            System.out.println("show info khong thanh cong");
+        }
     }
 }

@@ -178,9 +178,9 @@ public class UserDO extends DatabaseManager {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-//        createUserTable();
-         insertStudent("23020675", "Dang Dinh Khang", "2005/02/18","0962552005", "23020675@vnu.edu.vn", "khangdz1802");
-    }
+//    public static void main(String[] args) throws SQLException {
+////        createUserTable();
+//         insertStudent("23020675", "Dang Dinh Khang", "2005/02/18","0962552005", "23020675@vnu.edu.vn", "khangdz1802");
+//    }
 
 }

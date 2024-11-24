@@ -78,15 +78,4 @@ public class CheckOverDateTrans {
             System.err.println("Error closing database connection: " + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        CheckOverDateTrans overdueService = new CheckOverDateTrans();
-
-        try {
-            ObservableList<Transaction> overdueTransactions = overdueService.getOverdueTransactions();
-            SendWarningEmail.notifyOverdueUsers();
-        } finally {
-            overdueService.closeConnection();
-        }
-    }
 }

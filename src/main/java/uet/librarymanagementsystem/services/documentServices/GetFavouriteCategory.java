@@ -34,9 +34,5 @@ public class GetFavouriteCategory {
 
         return "FICTION"; //day la the loai nhieu book nhat
     }
-
-    public static void main(String[] args) throws SQLException {
-        System.out.println(getMostFrequentCategory("123"));
-    }
 }
 

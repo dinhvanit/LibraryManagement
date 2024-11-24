@@ -44,7 +44,7 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                      <HBox alignment="CENTER_LEFT" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                                                          <children>
                                                             <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -80,7 +80,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                      <HBox alignment="CENTER_LEFT" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                                                          <children>
                                                             <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -116,7 +116,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                    <children>
-                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                      <HBox alignment="CENTER_LEFT" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                                                          <children>
                                                             <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -152,7 +152,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <children>
-                                                      <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                      <HBox alignment="CENTER_LEFT" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                                                          <children>
                                                             <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -205,9 +205,9 @@
                            <children>
                               <VBox prefHeight="314.0" prefWidth="389.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <BarChart fx:id="barChartTopCategories">
+                                          <BarChart fx:id="barChartTopCategories" stylesheets="@../../cssDesign/adminPage.css">
                                             <xAxis>
                                               <CategoryAxis fx:id="nameOfCategoryX" side="BOTTOM" />
                                             </xAxis>
@@ -219,11 +219,11 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox layoutX="490.0" layoutY="10.0" prefHeight="314.0" prefWidth="389.0" HBox.hgrow="ALWAYS">
+                              <VBox alignment="TOP_RIGHT" layoutX="490.0" layoutY="10.0" prefHeight="314.0" prefWidth="389.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <LineChart fx:id="lineChartStatusBorrowing">
+                                          <LineChart fx:id="lineChartStatusBorrowing" stylesheets="@../../cssDesign/adminPage.css">
                                             <xAxis>
                                               <CategoryAxis fx:id="timeX" side="BOTTOM" />
                                             </xAxis>

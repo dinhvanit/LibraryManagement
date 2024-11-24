@@ -39,9 +39,4 @@ public class EmailService {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        EmailService.sendEmail("prodz18022005@gmail.com", "tra sach qua han", "cuon sach xxx cua ban da qua han, hay tra mau");
-
-    }
 }

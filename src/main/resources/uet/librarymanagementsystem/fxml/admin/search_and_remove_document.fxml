@@ -21,7 +21,7 @@
                     <children>
                         <HBox prefHeight="60.0" prefWidth="418.0">
                             <children>
-                                <Label text="Document Information">
+                                <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Document Information">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -35,7 +35,7 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="TITLE">
+                                        <Label stylesheets="@../../cssDesign/adminPage.css" text="TITLE">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -47,7 +47,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldTitleDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldTitleDocumentAdmin" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
@@ -56,7 +56,7 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="AUTHOR">
+                                        <Label stylesheets="@../../cssDesign/adminPage.css" text="AUTHOR">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -71,7 +71,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldAuthorDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldAuthorDocumentAdmin" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
@@ -80,7 +80,7 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="100.0">
                                     <children>
-                                        <Label prefWidth="80.0" text="MATERIAL">
+                                        <Label prefWidth="80.0" stylesheets="@../../cssDesign/adminPage.css" text="MATERIAL">
                                             <font>
                                                 <Font size="15.0" />
                                             </font></Label>
@@ -94,7 +94,7 @@
                                 </HBox>
                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceMaterialDocumentAdmin" prefHeight="26.0" prefWidth="200.0" />
+                                        <ChoiceBox fx:id="choiceMaterialDocumentAdmin" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
@@ -103,7 +103,7 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="100.0">
                                     <children>
-                                        <Label prefHeight="22.0" prefWidth="79.0" text="CATEGORY">
+                                        <Label prefHeight="22.0" prefWidth="79.0" stylesheets="@../../cssDesign/adminPage.css" text="CATEGORY">
                                             <font>
                                                 <Font size="15.0" />
                                             </font></Label>
@@ -114,19 +114,19 @@
                                 </HBox>
                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceCategoryDocumentAdmin" prefHeight="26.0" prefWidth="206.0" />
+                                        <ChoiceBox fx:id="choiceCategoryDocumentAdmin" prefHeight="26.0" prefWidth="206.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="142.0">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#searchDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="SEARCH" />
+                              <Button mnemonicParsing="false" onMouseClicked="#searchDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SEARCH" />
                            </children>
                                 </HBox>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="482.0">
                             <children>
-                                <Label text="Documents To Delete">
+                                <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Documents To Delete">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -144,7 +144,7 @@
                         <Label fx:id="notionChoiceDocumentDeleteLabel" text="Please choose a document" textFill="#f20505" visible="false" />
                      </children>
                   </HBox>
-                        <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="482.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="deleteResultsTableView" prefHeight="250.0" prefWidth="482.0" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="titleColumnDocumentsToDelete" editable="false" prefWidth="75.0" text="TITLE" />
@@ -158,16 +158,16 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="71.0" prefWidth="482.0">
                             <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="REMOVE">
+                        <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="REMOVE">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#deleteDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE">
+                                <Button mnemonicParsing="false" onMouseClicked="#deleteDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE ALL" />
+                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE ALL" textAlignment="CENTER" wrapText="true" />
                             </children>
                         </HBox>
                     </children>
@@ -178,7 +178,7 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="418.0">
                             <children>
-                                <Label text="List Of Documents">
+                                <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="List Of Documents">
                                     <font>
                                         <Font size="25.0" />
                                     </font></Label>
@@ -192,7 +192,7 @@
                         <Label fx:id="notionChoiceDocumentAddLabel" text="Please choose a document" textFill="#ea0808" visible="false" />
                      </children>
                   </HBox>
-                        <TableView fx:id="searchResultsTableView" prefHeight="470.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="searchResultsTableView" prefHeight="470.0" prefWidth="418.0" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnSearchResults" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="titleColumnSearchResults" prefWidth="75.0" text="TITLE" />
@@ -206,15 +206,15 @@
                         </TableView>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="ADD">
+                        <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="ADD">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#modifyDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="MODIFY">
+                        <Button mnemonicParsing="false" onMouseClicked="#modifyDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="MODIFY">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" text="INFO" />
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="INFO" />
                      </children>
                   </HBox>
                     </children>

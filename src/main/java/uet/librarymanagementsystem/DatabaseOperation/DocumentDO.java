@@ -258,32 +258,32 @@ public class DocumentDO extends DatabaseManager {
     }
 
 
-    public static void main(String[] args) {
-        try {
-
-//            List<Document> documents = DocumentDO.getAllDocument();
-//            documents.forEach(document -> {
-//                System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
+//    public static void main(String[] args) {
+//        try {
 //
-//                // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
-//                if (document instanceof Book) {
-//                    Book book = (Book) document;
-//                    System.out.println(" - ISBN: " + book.getIsbn());
-//                } else {
-//                    System.out.println();
-//                }
-//            });
+////            List<Document> documents = DocumentDO.getAllDocument();
+////            documents.forEach(document -> {
+////                System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
+////
+////                // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
+////                if (document instanceof Book) {
+////                    Book book = (Book) document;
+////                    System.out.println(" - ISBN: " + book.getIsbn());
+////                } else {
+////                    System.out.println();
+////                }
+////            });
+////
+////             createDocumentTable();
+////             addIdColumnSQLite();
+////             createNewDocumentTableSQLite();
+////             migrateDataToNewTableSQLite();
+//                deleteAllDocuments();
 //
-//             createDocumentTable();
-//             addIdColumnSQLite();
-//             createNewDocumentTableSQLite();
-//             migrateDataToNewTableSQLite();
-                deleteAllDocuments();
-
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "An exception occurred", e); // dung thay cho stack trace
-
-        }
-    }
+//        } catch (SQLException e) {
+//            logger.log(Level.SEVERE, "An exception occurred", e); // dung thay cho stack trace
+//
+//        }
+//    }
 
 }

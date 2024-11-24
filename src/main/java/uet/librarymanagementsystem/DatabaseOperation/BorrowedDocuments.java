@@ -54,28 +54,15 @@ public class BorrowedDocuments {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        createBorrowedDocumentsTable(); // Tạo bảng BorrowedDocuments
-
-        try {
-            // Mẫu giao dịch 1: Sinh viên mượn tài liệu với các thông tin giả định
-            insertBorrowedDocument("23020675", "D001", "2024-01-15", "2024-01-22");
-
-            // Mẫu giao dịch 2: Sinh viên khác mượn tài liệu
-            insertBorrowedDocument("23020674", "D002", "2024-02-01", "2024-02-08");
-
-            // Mẫu giao dịch 3: Sinh viên khác mượn tài liệu và trả muộn
-            insertBorrowedDocument("23020000", "D003", "2024-02-05", "2024-02-20");
-
-            // Mẫu giao dịch 4: Sinh viên mượn tài liệu nhưng chưa trả
-            insertBorrowedDocument("23020781", "D004", "2024-03-01", null); // Giá trị null cho ngày trả
-
-            // Mẫu giao dịch 5: Một sinh viên khác mượn lại cùng tài liệu
-            insertBorrowedDocument("23020981", "D001", "2024-03-10", "2024-03-17");
-
-        } catch (SQLException e) {
-            System.err.println("Error during sample transactions: " + e.getMessage());
-        }
-
-    }
+//    public static void main(String[] args) throws SQLException {
+//        createBorrowedDocumentsTable(); // Tạo bảng BorrowedDocuments
+//
+//        try {
+//
+//
+//        } catch (SQLException e) {
+//            System.err.println("Error during sample transactions: " + e.getMessage());
+//        }
+//
+//    }
 }
