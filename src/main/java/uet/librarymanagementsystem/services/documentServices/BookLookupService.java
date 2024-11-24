@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import uet.librarymanagementsystem.LMSApplication;
 import uet.librarymanagementsystem.services.TaskService;
+import uet.librarymanagementsystem.entity.documents.materials.Book;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,12 +15,15 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
-import uet.librarymanagementsystem.entity.documents.materials.Book;
+import java.util.Map;
+import java.util.HashMap;
 
 public class BookLookupService {
-    private static final String API_KEY = "AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8";
-
+    private static final String API_KEY = "AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc";
     private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+
+    // Cache để lưu trữ thông tin sách đã tìm kiếm
+    private static final Map<String, JSONObject> isbnCache = new HashMap<>();
 
     private final String isbn;
     private final JSONObject bookInfo;
@@ -33,43 +37,14 @@ public class BookLookupService {
         return bookInfo;
     }
 
-//    public JSONObject fetchBookInfoByISBN() {
-//        String urlString = GOOGLE_BOOKS_API_URL + isbn + "&key=" + API_KEY;
-//        System.out.println("Fetching: " + urlString);
-//        try {
-//            // Establish connection
-//            URL url = new URL(urlString);
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("GET");
-//
-//            // Read response
-//            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//            StringBuilder content = new StringBuilder();
-//            String inputLine;
-//            while ((inputLine = in.readLine()) != null) {
-//                content.append(inputLine);
-//            }
-//
-//            // Close connection
-//            in.close();
-//            conn.disconnect();
-//
-//            // Parse JSON response
-//            JSONObject jsonResponse = new JSONObject(content.toString());
-//            JSONArray items = jsonResponse.optJSONArray("items");
-//
-//            if (items != null && items.length() > 0) {
-//                return items.getJSONObject(0).getJSONObject("volumeInfo");
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
     private JSONObject fetchBookInfoByISBN() {
-        // Lấy TaskService từ LMSApplication
+        // Kiểm tra xem thông tin sách đã có trong cache chưa
+        if (isbnCache.containsKey(isbn)) {
+            System.out.println("Fetching from cache for ISBN: " + isbn);
+            return isbnCache.get(isbn); // Trả về thông tin từ cache nếu đã có
+        }
+
+        // Nếu chưa có trong cache, lấy thông tin từ API
         TaskService taskService = LMSApplication.getTaskService();
 
         // Chạy tác vụ tìm kiếm book info trên thread pool của TaskService
@@ -99,7 +74,10 @@ public class BookLookupService {
                 JSONArray items = jsonResponse.optJSONArray("items");
 
                 if (items != null && items.length() > 0) {
-                    return items.getJSONObject(0).getJSONObject("volumeInfo");
+                    JSONObject bookDetails = items.getJSONObject(0).getJSONObject("volumeInfo");
+                    // Lưu vào cache
+                    isbnCache.put(isbn, bookDetails);
+                    return bookDetails;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -132,7 +110,6 @@ public class BookLookupService {
             allAuthors = authorsArray.toList().stream()
                     .map(Object::toString)
                     .collect(Collectors.joining(", "));
-
         }
         return allAuthors;
     }
@@ -188,27 +165,22 @@ public class BookLookupService {
     }
 
     public String getDescription() {
-
         return bookInfo.optString("description", "N/A");
     }
 
     public String getPublisher() {
-
         return bookInfo.optString("publisher", "N/A");
     }
 
     public String getLanguage() {
-
         return bookInfo.optString("language", "N/A");
     }
 
     public String getPreviewLink() {
-
         return bookInfo.optString("previewLink", "N/A");
     }
 
     public String getIsbn() {
-
         return isbn;
     }
 }
