@@ -18,17 +18,12 @@ public class GetBooksByCategory {
         ObservableList<Document> books = FXCollections.observableArrayList();
 
         String queryPrimarySQL = """
-        WITH UniqueBooks AS (
-            SELECT MIN(id) AS id
+            SELECT id, title, author, material, category, isbn
             FROM Document
             WHERE material = 'BOOK' AND category = ?
-            GROUP BY SUBSTRING(id, 1, 12)
-        )
-        SELECT d.id, d.title, d.author, d.material, d.category, d.isbn
-        FROM Document d
-        JOIN UniqueBooks u ON d.id = u.id
-        LIMIT 12;
-    """;
+            GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
+            LIMIT 12;
+        """;
 
         try (PreparedStatement stmtPrimary = con.prepareStatement(queryPrimarySQL)) {
             stmtPrimary.setString(1, category);
