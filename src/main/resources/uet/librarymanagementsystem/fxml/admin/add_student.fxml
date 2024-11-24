@@ -19,9 +19,9 @@
             <left>
                 <VBox prefHeight="500.0" prefWidth="420.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox prefHeight="60.0" prefWidth="418.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="418.0">
                             <children>
-                                <Label alignment="CENTER" text="Student Information">
+                                <Label alignment="CENTER" styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Student Information">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -41,7 +41,7 @@
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
                                     <children>
-                                        <Label alignment="CENTER" text="ID">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="ID">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -53,12 +53,12 @@
                                 </HBox>
                                 <HBox prefHeight="34.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldIDStudent" prefHeight="26.0" prefWidth="200.0" promptText="00000000" />
+                                        <TextField fx:id="fieldIDStudent" prefHeight="26.0" prefWidth="200.0" promptText="00000000" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="idValidLabel" prefHeight="18.0" prefWidth="329.0" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="idValidLabel" prefHeight="18.0" prefWidth="329.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -73,7 +73,7 @@
                             <children>
                                 <HBox prefHeight="42.0" prefWidth="120.0">
                                     <children>
-                                        <Label alignment="CENTER" text="FULL NAME">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="FULL NAME">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -85,12 +85,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldNameStudent" prefHeight="26.0" prefWidth="200.0" promptText="Nguyễn Văn A" />
+                                        <TextField fx:id="fieldNameStudent" prefHeight="26.0" prefWidth="200.0" promptText="Nguyễn Văn A" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="nameValidLabel" prefWidth="297.0" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="nameValidLabel" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -105,7 +105,7 @@
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
                                     <children>
-                                        <Label alignment="CENTER" text="BIRTHDAY">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="BIRTHDAY">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -117,12 +117,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <DatePicker fx:id="fieldBirthdayStudent" prefHeight="26.0" prefWidth="230.0" promptText="dd/mm/yyyy" />
+                              <DatePicker fx:id="fieldBirthdayStudent" prefHeight="26.0" prefWidth="230.0" promptText="dd/mm/yyyy" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="birthValidLabel" prefHeight="28.0" prefWidth="306.0" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="birthValidLabel" prefHeight="28.0" prefWidth="306.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -137,7 +137,7 @@
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
                                     <children>
-                                        <Label alignment="CENTER" text="PHONE">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="PHONE">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -149,12 +149,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldPhoneStudent" prefHeight="26.0" prefWidth="200.0" promptText="0123456789" />
+                                        <TextField fx:id="fieldPhoneStudent" prefHeight="26.0" prefWidth="200.0" promptText="0123456789" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="phoneValidLabel" prefHeight="28.0" prefWidth="297.0" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="phoneValidLabel" prefHeight="28.0" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -169,7 +169,7 @@
                             <children>
                                 <HBox prefHeight="50.0" prefWidth="120.0">
                                     <children>
-                                        <Label alignment="CENTER" text="EMAIL">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="EMAIL">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -181,12 +181,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldEmailStudent" prefHeight="26.0" prefWidth="200.0" promptText="example@gmail.com" />
+                                        <TextField fx:id="fieldEmailStudent" prefHeight="26.0" prefWidth="200.0" promptText="example@gmail.com" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="emailValidLabel" prefHeight="28.0" prefWidth="303.0" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="emailValidLabel" prefHeight="28.0" prefWidth="303.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -207,17 +207,17 @@
                      </children></HBox>
                         <HBox alignment="CENTER" prefHeight="70.0" prefWidth="420.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD">
+                                <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="ADD">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE">
+                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="REMOVE">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                        <Button layoutX="220.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#saveStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SAVE" />
+                        <Button layoutX="220.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#saveStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SAVE" />
                             </children></HBox>
                     </children>
                 </VBox>
@@ -227,7 +227,7 @@
                <children>
                   <AnchorPane layoutX="-3.2" layoutY="7.2" prefHeight="59.0" prefWidth="480.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="12.0" text="Information Student to Add" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="93.59999999999997" AnchorPane.topAnchor="12.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="12.0" styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Information Student to Add" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="93.59999999999997" AnchorPane.topAnchor="12.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -241,11 +241,11 @@
                               <FontAwesomeIconView glyphName="USERS" size="100" text="" wrappingWidth="110.45705699920654" />
                            </children>
                         </StackPane>
-                        <VBox layoutX="1.0" layoutY="182.4" prefHeight="359.0" prefWidth="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="182.0">
+                        <VBox layoutX="1.0" layoutY="182.4" prefHeight="359.0" prefWidth="480.0" stylesheets="@../../cssDesign/adminPage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="182.0">
                            <children>
                               <HBox alignment="CENTER" prefHeight="47.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="80.0" text="ID">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="80.0" stylesheets="@../../cssDesign/adminPage.css" text="ID" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -253,7 +253,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforId" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforId" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -262,7 +262,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="80.0" text="FULL NAME">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="122.0" stylesheets="@../../cssDesign/adminPage.css" text="FULL NAME" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -270,7 +270,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforName" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforName" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -278,7 +278,7 @@
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="80.0" text="BIRTHDAY">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="90.0" stylesheets="@../../cssDesign/adminPage.css" text="BIRTHDAY" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -286,7 +286,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforBirthday" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforBirthday" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -294,7 +294,7 @@
                                  </children></HBox>
                               <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="80.0" text="PHONE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="80.0" stylesheets="@../../cssDesign/adminPage.css" text="PHONE" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -302,7 +302,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforPhone" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforPhone" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -310,7 +310,7 @@
                                  </children></HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="148.0" prefHeight="50.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="80.0" text="EMAIL">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="80.0" stylesheets="@../../cssDesign/adminPage.css" text="EMAIL" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -318,7 +318,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforEmail" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforEmail" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -327,7 +327,7 @@
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="212.0" prefHeight="50.0" prefWidth="480.0">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="80.0" text="PASSWORD">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="100.0" stylesheets="@../../cssDesign/adminPage.css" text="PASSWORD" wrapText="true">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -335,7 +335,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforPassword" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforPassword" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>

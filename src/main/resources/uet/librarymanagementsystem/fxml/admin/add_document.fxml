@@ -23,7 +23,7 @@
                     <children>
                         <HBox prefHeight="60.0" prefWidth="418.0">
                             <children>
-                                <Label alignment="CENTER" text="Document Information">
+                                <Label alignment="CENTER" styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Document Information">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -46,7 +46,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                     <children>
-                                        <Label alignment="CENTER" text="MATERIAL">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="MATERIAL">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -55,12 +55,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceMaterialAddDoc" prefHeight="26.0" prefWidth="200.0" />
+                                        <ChoiceBox fx:id="choiceMaterialAddDoc" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="materialValidLabel" prefHeight="18.0" prefWidth="290.0" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="materialValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -72,7 +72,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                     <children>
-                                        <Label alignment="CENTER" text="CATEGORY">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="CATEGORY">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -81,12 +81,12 @@
                                 </HBox>
                                 <HBox prefHeight="32.0" prefWidth="200.0">
                                     <children>
-                                        <ChoiceBox fx:id="choiceCategoryAddDoc" prefHeight="26.0" prefWidth="200.0" />
+                                        <ChoiceBox fx:id="choiceCategoryAddDoc" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="categoryValidLabel" prefHeight="18.0" prefWidth="290.0" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="categoryValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -98,7 +98,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                     <children>
-                                        <Label alignment="CENTER" text="TITLE">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="TITLE">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -107,12 +107,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldTitleAddDoc" prefHeight="26.0" prefWidth="200.0" promptText="title" />
+                                        <TextField fx:id="fieldTitleAddDoc" prefHeight="26.0" prefWidth="200.0" promptText="title" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="titleValidLabel" layoutX="140.0" layoutY="149.0" prefHeight="18.0" prefWidth="290.0" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="titleValidLabel" layoutX="140.0" layoutY="149.0" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -124,7 +124,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                     <children>
-                                        <Label alignment="CENTER" text="AUTHOR">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="AUTHOR">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -133,12 +133,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="fieldAuthorAddDoc" prefHeight="26.0" prefWidth="200.0" promptText="author" />
+                                        <TextField fx:id="fieldAuthorAddDoc" prefHeight="26.0" prefWidth="200.0" promptText="author" stylesheets="@../../cssDesign/adminPage.css" />
                                     </children>
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="authorValidLabel" layoutX="10.0" layoutY="282.0" prefHeight="11.0" prefWidth="290.0" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="authorValidLabel" layoutX="10.0" layoutY="282.0" prefHeight="11.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -150,7 +150,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                     <children>
-                                        <Label alignment="CENTER" text="QUANTITY">
+                                        <Label alignment="CENTER" stylesheets="@../../cssDesign/adminPage.css" text="QUANTITY">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -159,7 +159,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Spinner fx:id="spinerQuantityAddDoc" editable="true" prefHeight="26.0" prefWidth="203.0" />
+                              <Spinner fx:id="spinerQuantityAddDoc" editable="true" prefHeight="26.0" prefWidth="203.0" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                                 </HBox>
                             </children>
@@ -203,27 +203,27 @@
                         <HBox alignment="CENTER" prefHeight="85.0" prefWidth="420.0" VBox.vgrow="ALWAYS" />
                         <HBox alignment="CENTER" prefHeight="85.0" prefWidth="420.0">
                             <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="ADD">
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin>
+                                </Button>
                                 <Label fx:id="statusLabel" textFill="#ff0505" />
+                                <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="REMOVE">
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Button>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="70.0" prefWidth="420.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="ADD">
+                                <Button mnemonicParsing="false" onMouseClicked="#removeAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="REMOVE ALL" textAlignment="CENTER" wrapText="true">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#removeDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE">
-                                    <HBox.margin>
-                                        <Insets right="20.0" />
-                                    </HBox.margin>
-                                </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#removeAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="REMOVE ALL">
-                                    <HBox.margin>
-                                        <Insets right="20.0" />
-                                    </HBox.margin>
-                                </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#saveAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SAVE ALL" />
+                                <Button mnemonicParsing="false" onMouseClicked="#saveAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SAVE ALL" />
                             </children>
                         </HBox>
                     </children>
@@ -234,7 +234,7 @@
                     <children>
                         <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
-                                <Label text="List Of Add Documents">
+                                <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="List Of Add Documents">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -244,7 +244,7 @@
                                 </Label>
                             </children>
                         </HBox>
-                        <TableView fx:id="addDocumentTableView" prefHeight="470.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="addDocumentTableView" prefHeight="470.0" prefWidth="480.0" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="titleColumnAddResults" prefWidth="75.0" text="TITLE" />
                                 <TableColumn fx:id="authorColumnAddResults" prefWidth="85.60003662109375" text="AUTHOR" />

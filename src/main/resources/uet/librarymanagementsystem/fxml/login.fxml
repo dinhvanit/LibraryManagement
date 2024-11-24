@@ -43,7 +43,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="accSelectorChoiceBox" layoutX="25.0" layoutY="43.0" prefWidth="150.0" stylesheets="@../cssDesign/login.css" />
+                        <ChoiceBox fx:id="accSelectorChoiceBox" layoutX="25.0" layoutY="43.0" prefWidth="150.0" styleClass="card-form" stylesheets="@../cssDesign/login.css" />
                         <TextField fx:id="credentialUserNameField" layoutX="46.0" layoutY="95.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="username" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
                         <TextField fx:id="visiblePasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />
                         <PasswordField fx:id="credentialPasswordField" layoutX="46.0" layoutY="162.0" onKeyPressed="#onEnterLogin" prefHeight="26.0" prefWidth="280.0" promptText="password" styleClass="textfield" stylesheets="@../cssDesign/login.css" />

@@ -20,7 +20,7 @@
                     <children>
                         <HBox prefHeight="60.0" prefWidth="430.0">
                             <children>
-                                <Label alignment="CENTER" text="Student Information">
+                                <Label alignment="CENTER" styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="Student Information">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -43,7 +43,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                            <children>
-                                        <Label alignment="CENTER" text="ID">
+                                        <Label alignment="CENTER" styleClass="label-field" stylesheets="@../../cssDesign/adminPage.css" text="ID">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -52,7 +52,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                                        <TextField fx:id="fieldIDStudent" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldIDStudent" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                                 </HBox>
                             </children>
@@ -64,7 +64,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                            <children>
-                                        <Label alignment="CENTER" text="FULL NAME">
+                                        <Label alignment="CENTER" styleClass="label-field" stylesheets="@../../cssDesign/adminPage.css" text="FULL NAME">
                                             <font>
                                                 <Font size="15.0" />
                                             </font>
@@ -73,7 +73,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                                        <TextField fx:id="fieldNameStudent" prefHeight="26.0" prefWidth="200.0" />
+                                        <TextField fx:id="fieldNameStudent" prefHeight="26.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" />
                            </children>
                                 </HBox>
                             </children>
@@ -87,7 +87,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                                      <Button mnemonicParsing="false" onMouseClicked="#searchStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="SEARCH">
+                                      <Button mnemonicParsing="false" onMouseClicked="#searchStudentButtonOnClick" prefHeight="50.0" prefWidth="100.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SEARCH">
                                           <HBox.margin>
                                               <Insets right="20.0" />
                                           </HBox.margin>
@@ -98,7 +98,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="290.0">
                      <children>
-                        <Label alignment="CENTER" text="Students to Delete">
+                        <Label alignment="CENTER" styleClass="label-info" stylesheets="@../../cssDesign/adminPage.css" text="Students to Delete">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -115,7 +115,7 @@
                   </HBox>
                         <HBox alignment="CENTER" prefHeight="85.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="deleteStudentTableView" prefHeight="200.0" prefWidth="430.0">
+                        <TableView fx:id="deleteStudentTableView" prefHeight="200.0" prefWidth="430.0" stylesheets="@../../cssDesign/adminPage.css">
                           <columns>
                             <TableColumn fx:id="idColumnStudentsToDelete" prefWidth="75.0" text="ID" />
                             <TableColumn fx:id="nameColumnStudentsToDelete" prefWidth="75.0" text="NAME" />
@@ -131,13 +131,13 @@
                      </children></HBox>
                         <HBox alignment="CENTER" prefHeight="70.0" prefWidth="430.0">
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="REMOVE">
+                                <Button mnemonicParsing="false" onMouseClicked="#removeStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="REMOVE">
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#deleteStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE " />
-                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="DELETE ALL">
+                                <Button mnemonicParsing="false" onMouseClicked="#deleteStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE " />
+                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE ALL" textAlignment="CENTER" wrapText="true">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -151,7 +151,7 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="480.0">
                             <children>
-                                <Label text="List Of Students">
+                                <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="List Of Students">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -166,7 +166,7 @@
                         <Label fx:id="notionChoiceAddLabel" text="Please choose a student" textFill="#ef0404" visible="false" />
                      </children>
                   </HBox>
-                        <TableView fx:id="searchStudentTableView" prefHeight="470.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="searchStudentTableView" prefHeight="470.0" prefWidth="480.0" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="idColumnSearchResults" prefWidth="75.0" text="ID" />
                                 <TableColumn fx:id="nameColumnSearchResults" prefWidth="75.0" text="NAME" />
@@ -181,11 +181,11 @@
                         </TableView>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="ADD">
+                        <Button mnemonicParsing="false" onMouseClicked="#addStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="ADD">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#modifyStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" text="MODIFY">
+                        <Button mnemonicParsing="false" onMouseClicked="#modifyStudentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="MODIFY">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
