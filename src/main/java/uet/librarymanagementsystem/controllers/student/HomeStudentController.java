@@ -1,5 +1,6 @@
 package uet.librarymanagementsystem.controllers.student;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +26,7 @@ public class HomeStudentController implements Initializable {
     @FXML
     private FlowPane recommendBooksFlowPane;
 
-    private final TaskService taskService = new TaskService();
+    private final TaskService taskService = TaskService.getInstance();
     private final GetBooksByCategory getBooksByFavoriteCategory = new GetBooksByCategory();
 
     // Tải tài liệu gần đây
