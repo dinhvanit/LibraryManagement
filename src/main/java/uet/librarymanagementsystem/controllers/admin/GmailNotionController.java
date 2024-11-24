@@ -120,7 +120,7 @@ public class GmailNotionController implements Initializable {
         if (transactionManageTableView.getSelectionModel().getSelectedItem() != null) {
             Student selectedStudent = transactionManageTableView.getSelectionModel().getSelectedItem().getStudent();
             ShareDataService.setIdStudentShare(selectedStudent.getId());
-            notionChoiceTransactionLabel.setVisible(false);
+            notionChoiceTransactionLabel.setVisible(true);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindow(Page.SHOW_INFO, "Information student", currentStage);
             System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
