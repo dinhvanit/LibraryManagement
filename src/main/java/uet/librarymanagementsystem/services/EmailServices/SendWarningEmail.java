@@ -50,8 +50,4 @@ public class SendWarningEmail {
             overdueService.closeConnection();
         }
     }
-
-    public static void main(String[] args) {
-        notifyOverdueUsers();
-    }
 }

@@ -57,33 +57,4 @@ public class Get6LatestDoc {
         return latestTitles;
     }
 
-
-
-    public static void main(String[] args) {
-
-        try {
-            // Lấy sách thuộc danh mục FICTION
-            ObservableList<Document> books = Get6LatestDoc.getLatestTitles();
-            for (Document doc : books) {
-                // Chuyển đổi sang đối tượng Book
-                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
-                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
-                book.getInfo(book);
-            }
-
-//
-//            String emptyCategory = "NonExistentCategory";
-//            ObservableList<Document> fallbackBooks = getBooksByCategory.getBooks(emptyCategory);
-//            System.out.println("\nBooks retrieved for fallback case (not enough books in category '" + emptyCategory + "'):");
-//            for (Document doc : fallbackBooks) {
-//                // Chuyển đổi sang đối tượng Book
-//                Book.BookCategory bookCategory = Book.BookCategory.valueOf(doc.getCategory().toUpperCase());
-//                Book book = new Book(doc.getId(), doc.getTitle(), doc.getAuthor(), bookCategory, doc instanceof Book ? ((Book) doc).getIsbn() : null);
-//                book.getInfo(book);
-//            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

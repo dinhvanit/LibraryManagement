@@ -81,36 +81,4 @@ public class SearchTransactionService {
         }
         return resultOfRating;
     }
-
-    public static void main(String[] args) throws SQLException {
-        SearchTransactionService searchTransactionService = new SearchTransactionService();
-        ObservableList<Transaction> transactions = searchTransactionService.searchTransactionByIdStudent("23020714");
-
-        // Check if the list is empty or contains transactions
-        if (transactions.isEmpty()) {
-            System.out.println("No transactions found for Student ID: 23020714");
-        } else {
-            System.out.println("Transactions found for Student ID: 23020714");
-            for (Transaction transaction : transactions) {
-                System.out.println("Transaction ID: " + transaction.getId());
-                System.out.println("Student ID: " + transaction.getStudent().getId());
-                System.out.println("Student Name: " + transaction.getStudent().getName());
-                System.out.println("Date of Birth: " + transaction.getStudent().getDateOfBirth());
-                System.out.println("Phone Number: " + transaction.getStudent().getPhoneNumber());
-                System.out.println("Email: " + transaction.getStudent().getEmail());
-                System.out.println("Document ID: " + transaction.getDocument().getId());
-                System.out.println("Document Title: " + transaction.getDocument().getTitle());
-                System.out.println("Author: " + transaction.getDocument().getAuthor());
-                System.out.println("Material: " + transaction.getDocument().getMaterial());
-                System.out.println("Category: " + transaction.getDocument().getCategory());
-                System.out.println("Borrow_Date: " + transaction.getBorrowDate());
-                System.out.println("Return_Date: " + transaction.getReturnDate());
-                System.out.println("Due_Date: " + transaction.getDueDate());
-                System.out.println("--------------------------------------------------");
-
-            }
-        }
-    }
-
-
 }

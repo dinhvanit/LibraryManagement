@@ -141,13 +141,13 @@ public class DatabaseManager {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-//        connect(); // Kết nối tới CSDL
-////        dropTableMaterial();
-//        dropTableTitle();
-//            doitencot();
-//        dropTableBorrowedDocuments();
-            dropTableTransaction();
-//        dropTableCategory();
-    }
+//    public static void main(String[] args) throws SQLException {
+////        connect(); // Kết nối tới CSDL
+//////        dropTableMaterial();
+////        dropTableTitle();
+////            doitencot();
+////        dropTableBorrowedDocuments();
+//            dropTableTransaction();
+////        dropTableCategory();
+//    }
 }

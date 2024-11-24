@@ -47,12 +47,4 @@ public class AddBorrowDocumentService {
         }
         return result;
     }
-
-
-
-    public static void main(String[] args) throws SQLException {
-        AddBorrowDocumentService addBorrowDocumentService = new AddBorrowDocumentService();
-        addBorrowDocument();
-    }
-
 }
