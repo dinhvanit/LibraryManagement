@@ -132,9 +132,9 @@ public class TitleTable {
         con.close();
     }
 
-    public static void main(String []args) throws SQLException {
-        createTitleTable();
-//        clearTitleTable();
+/*    public static void main(String []args) throws SQLException {
+//        createTitleTable();
+        clearTitleTable();
 //          dropTitleTable();
-    }
+    }*/
 }

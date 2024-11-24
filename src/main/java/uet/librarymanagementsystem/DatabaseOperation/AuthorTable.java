@@ -1,4 +1,5 @@
 package uet.librarymanagementsystem.DatabaseOperation;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -102,8 +103,7 @@ public class AuthorTable {
         }
     }
 
-
-    public static void main(String []args) throws SQLException {
-        clearAuthorTable();
-    }
+//    public static void main(String []args) throws SQLException {
+//        clearAuthorTable();
+//    }
 }

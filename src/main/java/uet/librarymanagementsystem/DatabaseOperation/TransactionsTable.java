@@ -23,27 +23,27 @@ public class TransactionsTable {
 
         try {
             String createTableSQL = """
-            CREATE TABLE IF NOT EXISTS TransactionDocument (
-                id_transaction INTEGER PRIMARY KEY AUTOINCREMENT,
-                id_student VARCHAR(255),
-                name_student VARCHAR(255),
-                date_of_birth DATE,
-                phone_number VARCHAR(255),
-                email VARCHAR(255),
-                password VARCHAR(255),
-                id_document VARCHAR(255),
-                title_document VARCHAR(255),
-                author VARCHAR(255),
-                material VARCHAR(255),
-                category VARCHAR(255),
-                borrow_date DATE,
-                return_date DATE,
-                due_date DATE,
-                isbn VARCHAR(255),
-                FOREIGN KEY (id_student) REFERENCES Student(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY (id_document) REFERENCES Document(document_id) ON DELETE CASCADE ON UPDATE CASCADE
-            );
-            """;
+                    CREATE TABLE IF NOT EXISTS TransactionDocument (
+                        id_transaction INTEGER PRIMARY KEY AUTOINCREMENT,
+                        id_student VARCHAR(255),
+                        name_student VARCHAR(255),
+                        date_of_birth DATE,
+                        phone_number VARCHAR(255),
+                        email VARCHAR(255),
+                        password VARCHAR(255),
+                        id_document VARCHAR(255),
+                        title_document VARCHAR(255),
+                        author VARCHAR(255),
+                        material VARCHAR(255),
+                        category VARCHAR(255),
+                        borrow_date DATE,
+                        return_date DATE,
+                        due_date DATE,
+                        isbn VARCHAR(255),
+                        FOREIGN KEY (id_student) REFERENCES Student(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
+                        FOREIGN KEY (id_document) REFERENCES Document(document_id) ON DELETE CASCADE ON UPDATE CASCADE
+                    );
+                    """;
 
             Statement stmt = conn.createStatement();
             stmt.execute(createTableSQL);
@@ -92,7 +92,7 @@ public class TransactionsTable {
             transactionStmt.setString(13, transaction.getReturnDate());
             transactionStmt.setString(14, transaction.getDueDate());
             if (transaction.getDocument() instanceof Book) {
-                transactionStmt.setString(15,  ((Book) transaction.getDocument()).getIsbn());
+                transactionStmt.setString(15, ((Book) transaction.getDocument()).getIsbn());
             } else {
                 transactionStmt.setNull(15, Types.VARCHAR);
             }
@@ -442,7 +442,6 @@ public class TransactionsTable {
     }
 
 
-
     public static void clearTransactionTable() throws SQLException {
         Connection conn = connect();
 
@@ -468,30 +467,7 @@ public class TransactionsTable {
     }
 
 
-    public static void main(String[] args) throws SQLException {
-//        String id = "23020714";
-//        String name = "Nguyen Dinh Van";
-//        String birthday = "2005-11-03";
-//        String phone = "123456789";
-//        String email = "vanit@gmail.com";
-//        Student student = new Student(id, name, birthday, phone, email, id);
-//
-//        Book book = new Book("0101000200310002", "After Long Silence", "Helen Fremont", Book.BookCategory.FICTION);
-//
-//        Transaction transaction = new Transaction(book, student, "2024-11-12", null, "2024-12-12");
-////        insertTransaction(transaction);
-////        System.out.println(transaction.getId());
-////          searchTransByStudent_id("23020675")
-//            createTransactionTable();
-//            insertTransaction(transaction);
-//            updateReturnDate("7", "15-11-2025");
-        //clearTransactionTable();
-/*
-        ObservableList<String> topCategories = getTop5Categories();
-        for (String string:topCategories) {
-            System.out.println(string);
-        }
-*/
-
-    }
+//    public static void main(String[] args) throws SQLException {
+//        //clearTransactionTable();
+//}
 }
