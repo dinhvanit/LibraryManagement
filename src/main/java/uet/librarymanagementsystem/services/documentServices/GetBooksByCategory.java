@@ -22,7 +22,7 @@ public class GetBooksByCategory {
             FROM Document
             WHERE material = 'BOOK' AND category = ?
             GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
-            LIMIT 12;
+            LIMIT 18;
         """;
 
         try (PreparedStatement stmtPrimary = con.prepareStatement(queryPrimarySQL)) {
