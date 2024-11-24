@@ -17,7 +17,7 @@
          <top>
             <HBox alignment="CENTER" prefHeight="74.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="NOTION EMAIL">
+                  <Label styleClass="label-small" stylesheets="@../../cssDesign/adminPage.css" text="NOTION EMAIL">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
@@ -44,7 +44,7 @@
                         <Label fx:id="notionChoiceTransactionLabel" text="Please choose a transaction" textFill="#f70404" visible="false" />
                      </children>
                   </HBox>
-                  <TableView fx:id="transactionManageTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="transactionManageTableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../cssDesign/adminPage.css" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="idTransactionManageColumnTransaction" prefWidth="75.0" text="ID TRANSACTION" />
                         <TableColumn fx:id="idStudentManageColumnTransaction" prefWidth="75.0" text="ID STUDENT" />
@@ -63,7 +63,7 @@
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="63.0" prefWidth="900.0">
                      <children>
-                        <Button fx:id="sendAllEmailButton" mnemonicParsing="false" onMouseClicked="#sendAllEmailClick" prefHeight="50.0" prefWidth="90.0" text="SEND ALL EMAIL" wrapText="true">
+                        <Button fx:id="sendAllEmailButton" mnemonicParsing="false" onMouseClicked="#sendAllEmailClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="SEND ALL EMAIL" textAlignment="CENTER" wrapText="true">
                            <padding>
                               <Insets left="20.0" />
                            </padding>
@@ -71,12 +71,12 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" text="INFO DOCUMENT" wrapText="true">
+                        <Button mnemonicParsing="false" onMouseClicked="#infoDocumentClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="INFO DOCUMENT" textAlignment="CENTER" wrapText="true">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#infoStudentClick" prefHeight="50.0" prefWidth="90.0" text="INFO STUDENT" wrapText="true">
+                        <Button mnemonicParsing="false" onMouseClicked="#infoStudentClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="INFO STUDENT" textAlignment="CENTER" wrapText="true">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
