@@ -189,11 +189,11 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#infoStudentButtonClick" prefHeight="50.0" prefWidth="90.0" text="INFO">
+                        <Button mnemonicParsing="false" onMouseClicked="#infoStudentButtonClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="INFO">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#exportPDFClick" prefHeight="50.0" prefWidth="90.0" text="PDF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#exportPDFClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="PDF" />
                      </children>
                   </HBox>
                     </children>
