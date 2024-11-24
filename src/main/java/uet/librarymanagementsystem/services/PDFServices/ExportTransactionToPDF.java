@@ -17,15 +17,6 @@ import uet.librarymanagementsystem.DatabaseOperation.DatabaseManager;
 
 public class ExportTransactionToPDF {
 
-    public static void main(String[] args) {
-        try {
-            exportTransactionToPDF("123");
-            System.out.println("PDF created successfully!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void exportTransactionToPDF(String idStudent) throws IOException, DocumentException {
         // Tên file PDF sẽ là idStudent.pdf
         String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\uet\\librarymanagementsystem\\PDFfiles" + File.separator + idStudent + ".pdf";

@@ -106,6 +106,7 @@ public class Book extends Document {
         COOKING("17"),                // Nấu ăn
         SCIENCE_FICTION("18"),        // Khoa học viễn tưởng
         FANTASY("19"),                // Thần thoại
+        ROMANCE("20"),
         OTHERS("99");                 // Các thể loại khác
 
         private final String code;
