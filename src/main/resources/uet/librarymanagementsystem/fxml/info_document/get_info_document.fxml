@@ -29,7 +29,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="INFORMATION">
+                        <Label styleClass="label-small" stylesheets="@../../cssDesign/studentPage.css" text="INFORMATION">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -63,7 +63,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="ID: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="ID: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -72,7 +72,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="idLabel" text="N/A" wrapText="true" HBox.hgrow="ALWAYS">
+                                                      <Label fx:id="idLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true" HBox.hgrow="ALWAYS">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -85,7 +85,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="ISBN: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="ISBN: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -94,7 +94,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="isbnLabel" text="N/A" wrapText="true">
+                                                      <Label fx:id="isbnLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -107,7 +107,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Title: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Title: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -116,7 +116,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="titleLabel" prefWidth="260.0" text="N/A" wrapText="true">
+                                                      <Label fx:id="titleLabel" prefWidth="260.0" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -129,7 +129,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Author: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Author: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -138,7 +138,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="232.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="authorLabel" prefWidth="260.0" text="N/A" wrapText="true">
+                                                      <Label fx:id="authorLabel" prefWidth="260.0" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -151,7 +151,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Material: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Material: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -160,7 +160,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="materialLabel" text="N/A" wrapText="true">
+                                                      <Label fx:id="materialLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -173,7 +173,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Category: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Category: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -182,7 +182,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="categoryLabel" text="N/A" wrapText="true">
+                                                      <Label fx:id="categoryLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -195,7 +195,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label prefWidth="100.0" text="Publisher: ">
+                                                      <Label prefWidth="100.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Publisher: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -204,7 +204,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="publisherLabel" text="N/A" wrapText="true">
+                                                      <Label fx:id="publisherLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -217,7 +217,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Language: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Language: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -226,7 +226,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="235.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="languageLabel" text="N/A" wrapText="true">
+                                                      <Label fx:id="languageLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -239,7 +239,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefWidth="100.0">
                                                    <children>
-                                                      <Label text="Preview: ">
+                                                      <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Preview: ">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -272,7 +272,7 @@
                                        <children>
                                           <HBox prefWidth="100.0">
                                              <children>
-                                                <Label prefWidth="100.0" text="Description: ">
+                                                <Label prefWidth="100.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Description: ">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
@@ -293,7 +293,7 @@
                                                          <children>
                                                             <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Label fx:id="descriptionLabel" text="N/A" wrapText="true" HBox.hgrow="ALWAYS">
+                                                                  <Label fx:id="descriptionLabel" stylesheets="@../../cssDesign/studentPage.css" text="N/A" wrapText="true" HBox.hgrow="ALWAYS">
                                                                      <font>
                                                                         <Font size="15.0" />
                                                                      </font>
@@ -317,7 +317,7 @@
                                  <children>
                                     <HBox layoutX="10.0" layoutY="440.0" prefHeight="55.0">
                                        <children>
-                                          <Label text="Rating and Review">
+                                          <Label styleClass="label-small" stylesheets="@../../cssDesign/studentPage.css" text="Rating and Review">
                                              <font>
                                                 <Font size="18.0" />
                                              </font></Label>
@@ -454,7 +454,7 @@
                                     </HBox>
                                     <HBox layoutX="10.0" layoutY="412.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TableView fx:id="ratingTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                          <TableView fx:id="ratingTableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS">
                                             <columns>
                                               <TableColumn fx:id="dateRatingColumn" prefWidth="75.0" text="DATE" />
                                               <TableColumn fx:id="nameUserRatingColumn" prefWidth="75.0" text="NAME" />
@@ -471,12 +471,12 @@
                                        </children></HBox>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="64.0">
                                        <children>
-                                          <Button fx:id="viewYourReviewButton" mnemonicParsing="false" onMouseClicked="#viewYourReviewClick" prefHeight="50.0" prefWidth="114.0" text="VIEW YOUR REVIEW" wrapText="true">
+                                          <Button fx:id="viewYourReviewButton" mnemonicParsing="false" onMouseClicked="#viewYourReviewClick" prefHeight="50.0" prefWidth="114.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="VIEW YOUR REVIEW" wrapText="true">
                                              <HBox.margin>
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="writeRatingAndReviewButton" mnemonicParsing="false" onMouseClicked="#writeRatingAndReviewClick" prefHeight="50.0" prefWidth="114.0" text="WRITE RATING AND REVIEW" wrapText="true" />
+                                          <Button fx:id="writeRatingAndReviewButton" mnemonicParsing="false" onMouseClicked="#writeRatingAndReviewClick" prefHeight="50.0" prefWidth="114.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="WRITE RATING AND REVIEW" wrapText="true" />
                                        </children>
                                        <VBox.margin>
                                           <Insets right="10.0" />

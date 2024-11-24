@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -20,7 +21,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="46.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Rating and review">
+                        <Label styleClass="label-small" stylesheets="@../../cssDesign/studentPage.css" text="Rating and review">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -37,7 +38,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="98.0">
                            <children>
-                              <Label text="Rating">
+                              <Label stylesheets="@../../cssDesign/studentPage.css" text="Rating">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -93,7 +94,7 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="164.0" prefWidth="98.0">
                            <children>
-                              <Label text="Review">
+                              <Label stylesheets="@../../cssDesign/studentPage.css" text="Review">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -102,7 +103,7 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextArea fx:id="areaTextReview" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <TextArea fx:id="areaTextReview" prefHeight="200.0" prefWidth="200.0" styleClass="text-field" stylesheets="@../../cssDesign/studentPage.css" HBox.hgrow="ALWAYS" />
                            </children>
                            <HBox.margin>
                               <Insets right="10.0" />
@@ -116,7 +117,11 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="65.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#saveRatingAndReview" prefHeight="50.0" prefWidth="90.0" text="SAVE" />
+                  <Button mnemonicParsing="false" onMouseClicked="#saveRatingAndReview" prefHeight="50.0" prefWidth="90.0" stylesheets="@../../cssDesign/studentPage.css" text="SAVE">
+                     <styleClass>
+                        <String fx:value="card-form" />
+                        <String fx:value="button" />
+                     </styleClass></Button>
                </children>
             </HBox>
          </bottom>

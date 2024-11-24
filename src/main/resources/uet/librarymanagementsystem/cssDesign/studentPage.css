@@ -1,161 +1,280 @@
-/* Màu nền tổng thể */
-.body {
-    -fx-background-color: #f8f9fa; /* Màu xám sáng */
-    -fx-font-family: Arial, sans-serif; /* Font chữ */
-    -fx-text-fill: #333333; /* Màu văn bản chính */
-    -fx-padding: 0;
+/* Tổng thể */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #e3f9d8, #f5f2d0); /* Gradient vàng nhạt và xanh lá nhạt */
+    -fx-text-fill: #333; /* Màu chữ tối để dễ nhìn */
 }
 
-/* Tiêu đề và phần quan trọng */
-h1, h2, h3 {
-    -fx-text-fill: #0066cc; /* Xanh dương mạnh */
+/* Card form */
+.card-form {
+    -fx-background-color: linear-gradient(to bottom, #fff8e1, #ffe082); /* Gradient vàng nhạt đến vàng đậm */
+    -fx-background-radius: 20px;
+
+    -fx-border-color: rgba(255, 193, 7, 0.7); /* Viền vàng đậm trong suốt */
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 20, 0.4, 0, 5); /* Bóng đậm hơn */
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+
+/* BorderPane */
+.border-pane {
+    -fx-background-color: linear-gradient(to bottom, #f9fbe3, #f5f0d6);
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
+}
+
+/* Tiêu đề */
+.label-title {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(to right, #a2e065, #d1c955); /* Gradient xanh lá nhạt pha vàng */
 }
 
-/* Liên kết */
-a {
-    -fx-text-fill: #0066cc; /* Xanh dương mạnh */
-    -fx-text-decoration: none;
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #f5f9e6;
+    -fx-border-radius: 10;
 }
 
-a:hover {
-    -fx-text-fill: #0056b3; /* Xanh dương tối hơn khi hover */
-    -fx-text-decoration: underline;
-}
-
-/* Nút bấm */
-.button, .btn {
-    -fx-background-color: #28a745; /* Màu xanh lá */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
+.sidebar .hbox-item {
+    -fx-background-color: transparent;
+    -fx-alignment: center-left;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-.button:hover, .btn:hover {
-    -fx-background-color: #218838; /* Xanh lá cây đậm khi hover */
+.sidebar .hbox-item:hover {
+    -fx-background-color: #f0f7db;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0);
 }
 
-/* Màu nền cho các khối thông tin */
-.background {
-    -fx-background-color: #d3f8d3; /* Màu xanh lá nhạt */
-    -fx-padding: 20px;
-    -fx-background-radius: 8px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 4); /* Hiệu ứng đổ bóng */
+.sidebar .hbox-item .icon {
+    -fx-font-size: 18px;
+    -fx-text-fill: #4a4a4a;
 }
 
-/* Màu nền cho các mục quan trọng */
-.highlight {
-    -fx-background-color: #ffc107; /* Màu vàng nhạt */
-    -fx-text-fill: white;
-    -fx-padding: 10px;
-    -fx-border-radius: 5px;
+.sidebar .hbox-item:hover .icon {
+    -fx-text-fill: #333;
 }
 
-/* Đường viền phân tách các phần */
-hr {
-    -fx-border-color: #dee2e6; /* Xám trung tính */
-    -fx-border-width: 1px;
+.sidebar .hbox-item .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
 }
 
-/* Các bảng và mục danh sách */
-.table {
-    -fx-border-color: #dee2e6; /* Xám trung tính */
-    -fx-border-width: 1px;
-    -fx-border-radius: 8px;
-    -fx-padding: 10px;
+/* Labels */
+.label-info {
+    -fx-font-size: 15px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
 }
 
-.table-row, th, td {
-    -fx-border-color: #dee2e6; /* Xám trung tính */
-    -fx-padding: 10px;
+.label-small {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }
 
-th {
-    -fx-background-color: #0066cc; /* Xanh dương mạnh */
-    -fx-text-fill: white;
+.label-alert {
+    -fx-font-size: 10px;
+    -fx-font-style: italic;
+    -fx-text-fill: #ff4d4d;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.2), 2, 0.3, 0, 0);
 }
 
-/* Hiệu ứng hover trên các hàng bảng */
-.table-row:hover {
-    -fx-background-color: #f1f1f1; /* Màu nền nhẹ khi hover */
-}
-
-/* Màu cho văn bản phụ */
-.secondary-text {
-    -fx-text-fill: #6c757d; /* Xám nhạt */
-}
-
-/* Định dạng cho các phần menu */
-nav {
-    -fx-background-color: #0066cc; /* Xanh dương mạnh */
-    -fx-padding: 10px 0;
-}
-
-nav a {
-    -fx-text-fill: white;
-    -fx-padding: 10px 20px;
-    -fx-text-decoration: none;
-}
-
-nav a:hover {
-    -fx-background-color: #0056b3; /* Xanh dương tối hơn khi hover */
-}
-
-/* Tùy chỉnh MenuButton */
-.menu-button {
-    -fx-background-color: #4CAF50; /* Xanh lá */
-    -fx-text-fill: white;
+/* Buttons */
+.button {
+    -fx-background: linear-gradient(to right, #f9fbe3, #f5f0d6);
+    -fx-text-fill: #333;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
-    -fx-background-radius: 8px;
-    -fx-border-color: #3e8e41;
-    -fx-border-radius: 8px;
-    -fx-border-width: 2px;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.4, 0, 0);
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hiệu ứng hover khi rê chuột vào MenuButton */
-.menu-button:hover {
-    -fx-background-color: #45a049;
-    -fx-border-color: #388e3c;
+.button:hover {
+    -fx-background: linear-gradient(to right, #f7fad2, #f0ebd0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0.5, 0, 0);
 }
 
-/* MenuItem trong MenuButton */
-.menu-item {
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
+.button:pressed {
+    -fx-background: linear-gradient(to right, #d9f2c3, #e7dcb8);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.3, 0, 0);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
 }
 
-/* Hiệu ứng hover khi rê chuột vào MenuItem */
-.menu-item:hover {
-    -fx-background-color: #f1f1f1;
-    -fx-text-fill: #4CAF50;
-}
-
-/* MenuButton khi bị chọn */
-.menu-button:focused {
-    -fx-background-color: #3e8e41;
-    -fx-border-color: #2e7d32;
-}
-
-/* Style cho Card (Thẻ thông tin) */
-.card {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #dee2e6;
+/* ChoiceBox */
+.choice-box {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f5fad6);
+    -fx-border-color: rgba(200, 230, 180, 0.8);
     -fx-border-radius: 10px;
-    -fx-padding: 15px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+    -fx-background-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0);
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Định dạng cho phần tìm kiếm */
-.search-bar {
-    -fx-padding: 10px;
-    -fx-background-color: #ffffff;
-    -fx-border-color: #dee2e6;
-    -fx-border-radius: 5px;
-    -fx-width: 300px;
+.choice-box:hover {
+    -fx-background-color: linear-gradient(to bottom, #f9ffe0, #f2f9d1);
+    -fx-border-color: rgba(180, 200, 150, 0.9);
+}
+
+.choice-box:focused {
+    -fx-background-color: linear-gradient(to bottom, #e9ffe3, #d8f3c7);
+    -fx-border-color: rgba(150, 200, 100, 1);
+    -fx-effect: dropshadow(gaussian, rgba(150, 200, 100, 0.2), 8, 0.3, 0, 0);
+}
+
+.choice-box .list-cell {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f9ffe0);
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+}
+
+.choice-box .list-cell:hover {
+    -fx-background-color: linear-gradient(to bottom, #eaffd8, #d5f9c7);
+    -fx-text-fill: #000;
+}
+
+/* TextField */
+.text-field {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f9ffe0);
+    -fx-border-color: rgba(200, 230, 180, 0.8);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.text-field:hover {
+    -fx-background-color: linear-gradient(to bottom, #f9ffe0, #f2f7d1);
+    -fx-border-color: rgba(180, 200, 150, 0.9);
+}
+
+.text-field:focused {
+    -fx-background-color: linear-gradient(to bottom, #e9ffe3, #d8f3c7);
+    -fx-border-color: rgba(150, 200, 100, 1);
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(150, 200, 100, 0.2), 8, 0.3, 0, 0);
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f9ffe0);
+    -fx-border-color: rgba(200, 200, 150, 0.5);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.3, 0, 0);
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #d1ecb8, #f1f9d6);
+    -fx-border-color: rgba(150, 150, 100, 0.3);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center;
+}
+
+.table-view .table-row-cell:filled {
+    -fx-background-color: linear-gradient(to bottom, #f9ffe0, #e4ffd1);
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: linear-gradient(to bottom, #f9f5dc, #f4e8c9);
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: linear-gradient(to bottom, #cfe8a7, #b4d685);
+    -fx-text-fill: #333;
+}
+/* FlowPane Styles */
+.flow-pane {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f7ffe6); /* Nền trắng và vàng nhạt */
+    -fx-border-color: rgba(200, 200, 150, 0.5); /* Viền vàng nhạt */
+    -fx-border-radius: 10px; /* Bo góc mềm mại */
+    -fx-background-radius: 10px;
+    -fx-alignment: center; /* Canh giữa các mục */
+    -fx-wrap-text: true; /* Đảm bảo các mục sẽ xuống dòng nếu quá dài */
+}
+
+/* ScrollPane Styles */
+.scroll-pane {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f9ffe0); /* Nền trắng pha vàng nhạt */
+    -fx-border-color: rgba(200, 200, 150, 0.5); /* Viền vàng nhạt */
+    -fx-border-radius: 10px; /* Bo góc mềm mại */
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng đổ nhẹ */
+}
+
+/* Scrollbar Styles */
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent; /* Nền trong suốt */
+}
+
+.scroll-pane .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom, #e9ffd9, #d3f3b8); /* Gradient xanh lá nhạt */
+    -fx-background-radius: 5px; /* Bo góc thanh cuộn */
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover,
+.scroll-pane .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #c8e697, #a4d470); /* Gradient sáng hơn khi hover */
+}
+
+/* Item Styling (Book Item) */
+.book-item {
+    -fx-background-color: #ffffff; /* Nền trắng cho từng cuốn sách */
+    -fx-border-color: rgba(200, 200, 200, 0.5); /* Viền xám nhạt */
+    -fx-border-radius: 10px; /* Bo góc mềm mại */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng đổ nhẹ */
+    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng mượt khi hover */
+    -fx-pref-width: 180px; /* Chiều rộng mặc định cho mục sách */
+    -fx-alignment: center; /* Căn giữa nội dung bên trong */
+}
+
+/* Hover Effect for Book Items */
+.book-item:hover {
+    -fx-background-color: linear-gradient(to bottom, #f9ffe0, #f5f5dc); /* Gradient nhạt hơn khi hover */
+    -fx-scale-x: 1.03; /* Phóng to nhẹ trên trục X */
+    -fx-scale-y: 1.03; /* Phóng to nhẹ trên trục Y */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0.4, 0, 0); /* Bóng đậm hơn khi hover */
+}
+
+/* Title Styling for Books */
+.book-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Màu chữ tối */
+    -fx-text-alignment: center; /* Căn giữa tiêu đề */
+}
+
+/* Author Styling for Books */
+.book-author {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666; /* Màu chữ xám nhạt */
+    -fx-text-alignment: center;
 }

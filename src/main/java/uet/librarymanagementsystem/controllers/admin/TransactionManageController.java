@@ -33,7 +33,6 @@ public class TransactionManageController implements Initializable {
 
     @FXML
     private TableColumn<Transaction, String> borrowDateManageColumnTransaction;
-
     @FXML
     private TableColumn<Transaction, String> categoryManageColumnTransaction;
 
@@ -82,6 +81,10 @@ public class TransactionManageController implements Initializable {
     @FXML
     private Label notionChoiceTransactionLabel;
 
+    /**
+     * Opens a new window with document details.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void infoDocumentManageButtonOnClick(MouseEvent event) {
         if (transactionManageTableView.getSelectionModel().getSelectedItem() == null) {
@@ -100,49 +103,48 @@ public class TransactionManageController implements Initializable {
         }
     }
 
+    /**
+     * Searches by student ID, document ID, or retrieves all transactions if no criteria are provided.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void searchTransactionManageButtonOnClick(MouseEvent event) {
-        // Lấy giá trị từ các trường nhập liệu
         String idStudent = idManageStudentTextField.getText().trim();
         String idDocument = idManageDocumentTextField.getText().trim();
 
-        // Tạo service để tìm kiếm giao dịch
         SearchTransactionService searchTransactionService = new SearchTransactionService();
         ObservableList<Transaction> transactions;
 
-        try {if (!idStudent.isEmpty()) {
-                // Tìm kiếm theo ID STUDENT
+        try {
+            if (!idStudent.isEmpty()) {
                 transactions = searchTransactionService.searchTransactionByIdStudent(idStudent);
             } else if (!idDocument.isEmpty()) {
-                // Tìm kiếm theo ID DOCUMENT
                 transactions = searchTransactionService.searchTransactionByIdDocument(idDocument);
             } else {
-                // Nếu không nhập gì thì lấy tất cả giao dịch
                 transactions = searchTransactionService.getAllTransactions();
             }
 
-            // Cập nhật bảng với dữ liệu tìm được
             transactionManageTableView.setItems(transactions);
-
-            // Hiển thị số lượng giao dịch (debug)
-            System.out.println("Số lượng giao dịch tìm được: " + transactions.size());
-
+            System.out.println("Number of transactions found: " + transactions.size());
         } catch (SQLException e) {
-            // Xử lý lỗi kết nối hoặc truy vấn
             e.printStackTrace();
-            System.out.println("Lỗi khi tìm kiếm giao dịch: " + e.getMessage());
+            System.out.println("Error occurred while searching transactions: " + e.getMessage());
         }
     }
 
-
+    /**
+     * Initializes the controller, configuring table columns and loading initial data.
+     * @param url the location used to resolve relative paths for the root object
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SearchTransactionService searchTransactionService = new SearchTransactionService();
 
-        // Cấu hình các cột của bảng
+        // Configure table columns.
         idTransactionManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
-        idStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getId())); // Lấy ID sinh viên
-        nameStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getName())); // Lấy tên sinh viên
+        idStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getId()));
+        nameStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getName()));
         idDocumentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getId()));
         titleManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getTitle()));
         authorManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
@@ -155,22 +157,16 @@ public class TransactionManageController implements Initializable {
         reviewManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReview()));
         ratingManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRating()));
 
-        // Khởi tạo danh sách giao dịch
         transactionManageList = FXCollections.observableArrayList();
 
         try {
-            // Lấy toàn bộ giao dịch từ cơ sở dữ liệu
             transactionManageList = searchTransactionService.getAllTransactions();
-
-            // Hiển thị số lượng giao dịch (dành cho debug)
-            System.out.println("Tổng số giao dịch: " + transactionManageList.size());
+            System.out.println("Total transactions: " + transactionManageList.size());
         } catch (SQLException e) {
-            // Xử lý lỗi khi kết nối cơ sở dữ liệu
-            System.out.println("Lỗi khi tải dữ liệu giao dịch: " + e.getMessage());
+            System.out.println("Error loading transaction data: " + e.getMessage());
             throw new RuntimeException(e);
         }
 
-        // Gắn danh sách giao dịch vào bảng
         transactionManageTableView.setItems(transactionManageList);
     }
 }

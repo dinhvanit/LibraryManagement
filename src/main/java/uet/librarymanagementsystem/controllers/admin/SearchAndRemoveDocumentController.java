@@ -90,11 +90,23 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     @FXML
     private Label notionChoiceDocumentDeleteLabel;
 
+
+    private SearchDocumentService searchDocumentService;
+    private ObservableList<Document> documentsListSearchResult;
+    private ObservableList<Document> documentsListToDelete;
+
+    /**
+     * Adds the selected document from the search results to the list of documents to delete.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void addDocumentButtonOnClick(MouseEvent event) {
         performAdd();
     }
 
+    /**
+     * Adds the selected document from the search results to the list of documents to delete.
+     */
     private void performAdd() {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
@@ -107,16 +119,19 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         }
     }
 
+    /**
+     * Deletes all documents in the list of documents to delete.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void deleteAllDocumentButtonOnClick(MouseEvent event) {
         if (documentsListToDelete.isEmpty()) {
-            System.out.println("Danh sách tài liệu cần xóa đang trống.");
+            System.out.println("The list of documents to delete is empty.");
             return;
         }
 
         DeleteDocumentService deleteDocumentService = new DeleteDocumentService();
 
-        // Duyệt qua danh sách để xóa từng tài liệu
         for (Document document : documentsListToDelete) {
             deleteDocumentService.deleteDocument(
                     document.getId(),
@@ -127,17 +142,17 @@ public class SearchAndRemoveDocumentController  implements Initializable {
             );
         }
 
-        // Xóa tất cả các tài liệu trong danh sách
         documentsListToDelete.clear();
         deleteResultsTableView.setItems(documentsListToDelete);
-        System.out.println("Xóa tất cả tài liệu trong danh sách thành công.");
+        System.out.println("All documents in the list were successfully deleted.");
     }
 
-
+    /**
+     * Deletes the selected document from the list of documents to delete.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void deleteDocumentButtonOnClick(MouseEvent event) {
-        // Lấy danh sách các tài liệu được chọn
-
         if (deleteResultsTableView.getSelectionModel().getSelectedItem() == null) {
             notionChoiceDocumentDeleteLabel.setVisible(true);
         } else {
@@ -156,12 +171,18 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         }
     }
 
-
+    /**
+     * Removes the selected document from the list of documents to delete and adds it back to the search results.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void removeDocumentButtonOnClick(MouseEvent event) {
         performRemove();
     }
 
+    /**
+     * Removes the selected document from the list of documents to delete and adds it back to the search results.
+     */
     private void performRemove() {
         Document selectedDocument = deleteResultsTableView.getSelectionModel().getSelectedItem();
         if (selectedDocument != null) {
@@ -175,49 +196,43 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         }
     }
 
-    private SearchDocumentService searchDocumentService;
-    private ObservableList<Document> documentsListSearchResult;
-    private ObservableList<Document> documentsListToDelete;
-
+    /**
+     * Searches for documents based on user input and displays the results in the search results table view.
+     * @param event the mouse event triggered when the button is clicked
+     * @throws SQLException if a database access error occurs
+     */
     @FXML
     private void searchDocumentButtonOnClick(MouseEvent event) throws SQLException {
         performSearch();
-
-        ObservableList<Document> documents = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
-        documents.forEach(document -> {
-            System.out.print(document.getId() + " - " + document.getTitle() + " - " + document.getAuthor() + " - " + document.getMaterial() + " - " + document.getCategory());
-
-            // Kiểm tra xem tài liệu có phải là Book không để lấy ISBN
-            if (document instanceof Book) {
-                Book book = (Book) document;
-                System.out.println(" - ISBN: " + book.getIsbn());
-            } else {
-                System.out.println();
-            }
-        });
     }
 
+    /**
+     * Performs the search for documents based on user input and updates the search results table view.
+     * @throws SQLException if a database access error occurs
+     */
     private void performSearch() throws SQLException {
         documentsListSearchResult = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
         searchResultsTableView.setItems(documentsListSearchResult);
     }
 
+    /**
+     * Opens a new window to modify the selected document.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void modifyDocumentButtonOnClick(MouseEvent event) {
-        // Lấy tài liệu được chọn từ bảng "List Of Documents"
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
-
         if (selectedDocument != null) {
-            // Lấy Stage hiện tại
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Hiển thị trang modify_document.fxml
             WindowUtil.showSecondaryWindow(Page.MODIFY_DOCUMENT, "Modify Information of Document", currentStage);
         } else {
-            System.out.println("Vui lòng chọn một tài liệu để chỉnh sửa.");
+            System.out.println("Please select a document to modify.");
         }
     }
 
+    /**
+     * Sets up listeners for text fields to perform real-time searches based on user input.
+     */
     private void setupTextFieldsListeners() {
         fieldTitleDocumentAdmin.textProperty().addListener((observable, oldValue, newValue) -> {
             titleDocument = newValue;
@@ -238,9 +253,12 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         });
     }
 
+    /**
+     * Sets up the choice boxes for selecting material types and categories.
+     */
     private void setupChoiceBoxes() {
         ObservableList<MaterialType> materialTypesWithEmptyOption = FXCollections.observableArrayList();
-        materialTypesWithEmptyOption.add(null); // Thêm tùy chọn trống
+        materialTypesWithEmptyOption.add(null); // Adds an empty option
         materialTypesWithEmptyOption.addAll(MaterialType.values());
         choiceMaterialDocumentAdmin.setItems(materialTypesWithEmptyOption);
 
@@ -270,6 +288,10 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         });
     }
 
+    /**
+     * Opens a window to display detailed information about the selected document.
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void infoDocumentClick(MouseEvent event) {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
@@ -284,6 +306,11 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         }
     }
 
+    /**
+     * Initializes the controller.
+     * @param url            the location used to resolve relative paths for the root object
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchDocumentService = new SearchDocumentService();
@@ -293,7 +320,6 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         authorColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
-        //isbnColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListSearchResult = FXCollections.observableArrayList();
         searchResultsTableView.setItems(documentsListSearchResult);
@@ -303,13 +329,12 @@ public class SearchAndRemoveDocumentController  implements Initializable {
         authorColumnDocumentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnDocumentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnDocumentsToDelete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
-        //isbnColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListToDelete = FXCollections.observableArrayList();
         deleteResultsTableView.setItems(documentsListToDelete);
 
         setupTextFieldsListeners();
         setupChoiceBoxes();
+
     }
 }
-
