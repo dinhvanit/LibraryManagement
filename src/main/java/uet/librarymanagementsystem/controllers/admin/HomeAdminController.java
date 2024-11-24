@@ -39,17 +39,23 @@ public class HomeAdminController implements Initializable {
 
     @FXML
     private Label totalCategoriesLabel;
-
     @FXML
     private Label totalDocumentsLabel;
 
     @FXML
     private Label totalUsersLabel;
 
-
+    /**
+     * Initializes the admin home page.
+     * @param url the location used to resolve relative paths for the root object
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Set the total number of categories (static value in this example).
         totalCategoriesLabel.setText("31");
+
+        // Retrieve the total number of documents from the database.
         SearchDocumentService searchDocumentService = new SearchDocumentService();
         try {
             totalDocumentsLabel.setText(String.valueOf(
@@ -58,6 +64,7 @@ public class HomeAdminController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // Retrieve the total number of users from the database.
         SearchStudentService searchStudentService = new SearchStudentService();
         try {
             totalUsersLabel.setText(String.valueOf(searchStudentService.search(null, null).size()));
@@ -65,6 +72,7 @@ public class HomeAdminController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // Retrieve the total number of borrowed documents from the database.
         SearchTransactionService searchTransactionService = new SearchTransactionService();
         try {
             borrowingTotalLabel.setText(String.valueOf(searchTransactionService.searchTransactionBorrowing().size()));
@@ -72,15 +80,17 @@ public class HomeAdminController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // Configure BarChart for top 5 most borrowed categories.
         barChartTopCategories.setTitle("Top 5 most borrowed categories");
         nameOfCategoryX.setLabel("Categories");
         countOfCategoryY.setLabel("Borrow count");
 
-        // Tạo dữ liệu cho BarChart
+        // Create data series for the BarChart.
         XYChart.Series<String, Integer> seriesBar = new XYChart.Series<>();
         seriesBar.setName("Data");
         ObservableList<String> topCategories = TransactionsTable.getTop5Categories();
-        // Thêm các dữ liệu vào Series từ topCategories
+
+        // Add data to the BarChart series.
         for (String categoryData : topCategories) {
             String[] parts = categoryData.split(" ");
             String category = parts[0];
@@ -88,32 +98,30 @@ public class HomeAdminController implements Initializable {
             seriesBar.getData().add(new XYChart.Data<>(category, count));
         }
 
-        // Thêm Series vào BarChart
+        // Add the series to the BarChart.
         barChartTopCategories.getData().add(seriesBar);
 
-
-        // Thiết lập Label cho trục X và Y của LineChart
+        // Configure LineChart for documents borrowed over the last 7 days.
         timeX.setLabel("Date");
         countOfDocumentY.setLabel("Number of Documents Borrowed");
         lineChartStatusBorrowing.setTitle("Documents Borrowed Over the Last 7 Days");
 
-        // Lấy dữ liệu từ database và thêm vào LineChart
+        // Retrieve data for the LineChart from the database.
         ObservableList<String> borrowData = TransactionsTable.getBooksBorrowedLastWeek();
         XYChart.Series<String, Number> seriesLine = new XYChart.Series<>();
         seriesLine.setName("Documents Borrowed");
 
-        // Thêm dữ liệu vào series
+        // Add data to the LineChart series.
         for (String data : borrowData) {
-            String[] parts = data.split(" ");  // Phân tách ngày và số lượng mượn
-            String borrowDate = parts[0];      // Ngày mượn
-            int borrowCount = Integer.parseInt(parts[1]);  // Số sách mượn trong ngày
+            String[] parts = data.split(" "); // Split the date and count.
+            String borrowDate = parts[0]; // Date of borrowing.
+            int borrowCount = Integer.parseInt(parts[1]); // Number of documents borrowed on that date.
 
-            // Thêm vào LineChart: Trục X là ngày (borrowDate), trục Y là số sách mượn (borrowCount)
+            // Add the data point to the LineChart.
             seriesLine.getData().add(new XYChart.Data<>(borrowDate, borrowCount));
         }
 
-        // Thêm series vào LineChart
+        // Add the series to the LineChart.
         lineChartStatusBorrowing.getData().add(seriesLine);
-
     }
 }

@@ -11,24 +11,24 @@
     <children>
         <VBox layoutY="51.2" prefHeight="590.0" prefWidth="768.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
             <children>
-                <Label text="RECENTLY DOCUMENT ADD">
+                <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="RECENTLY DOCUMENT ADD">
                     <VBox.margin>
                         <Insets left="100.0" />
                     </VBox.margin>
                 </Label>
-                <ScrollPane fx:id="recentDocsScrollPane" prefHeight="275.0" prefWidth="860.0" VBox.vgrow="ALWAYS">
+                <ScrollPane fx:id="recentDocsScrollPane" prefHeight="275.0" prefWidth="860.0" stylesheets="@../../cssDesign/studentPage.css" VBox.vgrow="ALWAYS">
                     <content>
-                        <FlowPane fx:id="recentDocsFlowPane" hgap="10.0" prefHeight="250.0" prefWidth="1200.0" vgap="10.0" />
+                        <FlowPane fx:id="recentDocsFlowPane" hgap="10.0" prefHeight="250.0" prefWidth="1200.0" styleClass="flow-pane" stylesheets="@../../cssDesign/studentPage.css" vgap="10.0" />
                     </content>
                 </ScrollPane>
-                <Label text="RECOMMEND BOOK">
+                <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="RECOMMEND BOOK">
                     <VBox.margin>
                         <Insets left="100.0" />
                     </VBox.margin>
                 </Label>
-                <ScrollPane fx:id="recommendBooksScrollPane" prefHeight="262.0" prefWidth="687.0" VBox.vgrow="ALWAYS">
+                <ScrollPane fx:id="recommendBooksScrollPane" prefHeight="262.0" prefWidth="687.0" stylesheets="@../../cssDesign/studentPage.css" VBox.vgrow="ALWAYS">
                     <content>
-                        <FlowPane fx:id="recommendBooksFlowPane" hgap="10.0" prefHeight="530.0" prefWidth="1200.0" vgap="10.0" />
+                        <FlowPane fx:id="recommendBooksFlowPane" hgap="10.0" prefHeight="530.0" prefWidth="1200.0" styleClass="flow-pane" stylesheets="@../../cssDesign/studentPage.css" vgap="10.0" />
                     </content>
                 </ScrollPane>
             </children>

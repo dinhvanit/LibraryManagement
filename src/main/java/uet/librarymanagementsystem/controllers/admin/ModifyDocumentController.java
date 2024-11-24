@@ -24,6 +24,12 @@ public class ModifyDocumentController  implements Initializable {
     @FXML
     private TextField titleModifyDocumentTextField;
 
+    /**
+     * Handles the action when the "Save" button is clicked for modifying a document.
+     * This method retrieves the modified document information from the text fields and prepares the data for update.
+     *
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void saveModifyDocumentButtonOnClick(MouseEvent event) {
         String title = titleModifyDocumentTextField.getText().trim();
@@ -37,6 +43,10 @@ public class ModifyDocumentController  implements Initializable {
             e.printStackTrace();
         }*/
     }
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

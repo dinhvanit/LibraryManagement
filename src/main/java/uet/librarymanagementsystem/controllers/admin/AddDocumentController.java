@@ -50,6 +50,9 @@ public class AddDocumentController {
     private final AddDocumentService addDocumentService = new AddDocumentService();
     private final ValidationLabelUtil validationUtil = new ValidationLabelUtil();
 
+    /**
+     * Initializes.
+     */
     @FXML
     private void initialize() {
         setupChoiceBoxes();
@@ -58,6 +61,9 @@ public class AddDocumentController {
         setupSpinner();
     }
 
+    /**
+     * Validates inputs and adds the document(s) to the list if valid.
+     */
     @FXML
     private void addDocumentButtonOnClick() {
         if (!validateInputs()) {
@@ -91,6 +97,10 @@ public class AddDocumentController {
         }
     }
 
+    /**
+     * Saves all documents in the list to the database.
+     * @param event the event triggering this action
+     */
     @FXML
     private void saveAllDocumentButtonOnClick(Event event) {
         if (documents.isEmpty()) {
@@ -113,6 +123,9 @@ public class AddDocumentController {
         statusLabel.setStyle("-fx-text-fill: green;");
     }
 
+    /**
+     * Removes the selected document from the list and updates the status label.
+     */
     @FXML
     private void removeDocumentButtonOnClick() {
         Document selectedDocument = addDocumentTableView.getSelectionModel().getSelectedItem();
@@ -124,6 +137,9 @@ public class AddDocumentController {
         }
     }
 
+    /**
+     * Clears all documents from the list and updates the status label.
+     */
     @FXML
     private void removeAllDocumentButtonOnClick() {
         documents.clear();
@@ -131,6 +147,10 @@ public class AddDocumentController {
         statusLabel.setText("All documents removed from the list.");
     }
 
+    /**
+     * Looks up book information using the provided ISBN.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     public void searchInforByAPI(MouseEvent event) {
         String isbn = fieldISBN.getText().trim();
@@ -141,6 +161,10 @@ public class AddDocumentController {
         lookupBookInfo(isbn);
     }
 
+    /**
+     * Updates fields with retrieved book data if found.
+     * @param isbn the ISBN to look up
+     */
     private void lookupBookInfo(String isbn) {
         BookLookupService lookupService = new BookLookupService(isbn);
         if (lookupService.checkBookInfoByISBN()) {
@@ -153,6 +177,9 @@ public class AddDocumentController {
         }
     }
 
+    /**
+     * Sets up the choice boxes for material type and category.
+     */
     private void setupChoiceBoxes() {
         choiceMaterialAddDoc.setItems(FXCollections.observableArrayList(MaterialType.values()));
         choiceMaterialAddDoc.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -170,6 +197,9 @@ public class AddDocumentController {
         });
     }
 
+    /**
+     * Sets up validation listeners for input fields and spinner.
+     */
     private void setupValidationListeners() {
         fieldTitleAddDoc.textProperty().addListener((observable, oldValue, newValue) ->
                 validateField(newValue, titleValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
@@ -178,10 +208,13 @@ public class AddDocumentController {
                 validateField(newValue, authorValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
 
         spinerQuantityAddDoc.valueProperty().addListener((observable, oldValue, newValue) -> {
-            validateQuantity(newValue, isbnValidLabel); // Kiểm tra giá trị cho Spinner
+            validateQuantity(newValue, isbnValidLabel);
         });
     }
 
+    /**
+     * Sets up the table view columns to display document data.
+     */
     private void setupTableViewColumns() {
         titleColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         authorColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
@@ -189,35 +222,54 @@ public class AddDocumentController {
         categoryColumnAddResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
     }
 
+    /**
+     * Configures the spinner for document quantity input.
+     */
     private void setupSpinner() {
         spinerQuantityAddDoc.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
         spinerQuantityAddDoc.setEditable(true);
     }
 
+    /**
+     * Validates the selected item in a choice box.
+     * @param choiceBoxSelection the selected value in the choice box
+     * @param label              the label to display validation messages
+     * @return true if valid, false otherwise
+     */
     private boolean validateChoiceBoxSelection(Object choiceBoxSelection, Label label) {
         if (choiceBoxSelection == null || choiceBoxSelection.toString().isEmpty()) {
-            updateStatusLabel(label, "Trường này không được bỏ trống", "-fx-text-fill: red;");
+            updateStatusLabel(label, "This field cannot be empty.", "-fx-text-fill: red;");
             return false;
         }
         updateStatusLabel(label, "", "-fx-text-fill: green;");
         return true;
     }
 
+    /**
+     * Validates the quantity input in the spinner.
+     * @param quantity the quantity value to validate
+     * @param label    the label to display validation messages
+     * @return true if valid, false otherwise
+     */
     private boolean validateQuantity(Integer quantity, Label label) {
         String quantityText = quantity.toString();
-        String errorMessage = validationUtil.validateNumericField(quantityText, "Số lượng phải là số hợp lệ");
+        String errorMessage = validationUtil.validateNumericField(quantityText, "Quantity must be a valid number");
 
         if (!errorMessage.isEmpty()) {
             updateStatusLabel(label, errorMessage, "-fx-text-fill: red;");
             return false;
         } else if (quantity <= 0) {
-            updateStatusLabel(label, "Số lượng phải lớn hơn 0", "-fx-text-fill: red;");
+            updateStatusLabel(label, "Quantity must be greater than 0", "-fx-text-fill: red;");
             return false;
         }
         updateStatusLabel(label, "", "-fx-text-fill: green;");
         return true;
     }
 
+    /**
+     * Validates all input fields and choice boxes.
+     * @return true if all inputs are valid, false otherwise
+     */
     private boolean validateInputs() {
         return validateField(fieldTitleAddDoc.getText().trim(), titleValidLabel, ValidationLabelUtil.ValidationType.EMPTY) &&
                 validateField(fieldAuthorAddDoc.getText().trim(), authorValidLabel, ValidationLabelUtil.ValidationType.EMPTY) &&
@@ -225,17 +277,34 @@ public class AddDocumentController {
                 validateChoiceBoxSelection(choiceCategoryAddDoc.getValue(), categoryValidLabel) &&
                 validateQuantity(spinerQuantityAddDoc.getValue(), isbnValidLabel);
     }
+
+    /**
+     * Validates a specific field based on the given validation type.
+     * @param field          the input value to validate
+     * @param label          the label to display validation messages
+     * @param validationType the type of validation to perform
+     * @return true if valid, false otherwise
+     */
     private boolean validateField(String field, Label label, ValidationLabelUtil.ValidationType validationType) {
         String errorMessage = validationUtil.validateField(field, validationType);
         updateStatusLabel(label, errorMessage, errorMessage.isEmpty() ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
         return errorMessage.isEmpty();
     }
 
+    /**
+     * Updates the status label with a message and style.
+     * @param label   the label to update
+     * @param message the message to display
+     * @param style   the style to apply
+     */
     private void updateStatusLabel(Label label, String message, String style) {
         label.setText(message);
         label.setStyle(style);
     }
 
+    /**
+     * Clears all input fields and resets validation labels.
+     */
     private void clearFields() {
         choiceMaterialAddDoc.getSelectionModel().clearSelection();
         choiceCategoryAddDoc.getSelectionModel().clearSelection();

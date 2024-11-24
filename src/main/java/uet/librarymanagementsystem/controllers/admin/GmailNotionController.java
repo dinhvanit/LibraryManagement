@@ -65,7 +65,6 @@ public class GmailNotionController implements Initializable {
     private TableView<Transaction> transactionManageTableView;
 
     private ObservableList<Transaction> transactionManageList;
-
     @FXML
     private Label peopleEmailLabel;
 
@@ -78,25 +77,32 @@ public class GmailNotionController implements Initializable {
     @FXML
     private Label notionChoiceTransactionLabel;
 
+    /**
+     * Sends notification emails to all users with overdue transactions.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     void sendAllEmailClick(MouseEvent event) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        // Ghi thời gian hiện tại vào file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/uet/librarymanagementsystem/fileTxt/date_notion.txt"))) {
             LocalDateTime now = LocalDateTime.now();
             String newTime = now.format(formatter);
-            writer.write(newTime); // Ghi đè thời gian mới
+            writer.write(newTime); // Write the current date and time to the file.
             dateEmailLabel.setText(newTime);
-            System.out.println("Thời gian mới đã được ghi vào file: " + newTime);
-            SendWarningEmail.notifyOverdueUsers();
+            System.out.println("Updated notification time: " + newTime);
+            SendWarningEmail.notifyOverdueUsers(); // Sends the warning emails.
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindow(Page.NOTION_SUCCESS, "Notion success", currentStage);
         } catch (IOException e) {
-            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 
+    /**
+     * Opens a secondary window with document details.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     void infoDocumentClick(MouseEvent event) {
         if (transactionManageTableView.getSelectionModel().getSelectedItem() == null) {
@@ -115,6 +121,10 @@ public class GmailNotionController implements Initializable {
         }
     }
 
+    /**
+     * Opens a secondary window with student details.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     void infoStudentClick(MouseEvent event) {
         if (transactionManageTableView.getSelectionModel().getSelectedItem() != null) {
@@ -123,18 +133,23 @@ public class GmailNotionController implements Initializable {
             notionChoiceTransactionLabel.setVisible(true);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             WindowUtil.showSecondaryWindow(Page.SHOW_INFO, "Information student", currentStage);
-            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+            System.out.println("Student added to Students to Delete table.");
         } else {
-            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+            System.out.println("Please select a student from the List of Students table.");
             notionChoiceTransactionLabel.setVisible(false);
         }
     }
 
+    /**
+     * Initializes the controller.
+     * @param url the location used to resolve relative paths for the root object
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CheckOverDateTrans checkOverDateTrans = new CheckOverDateTrans();
 
-        // Cấu hình các cột của bảng
+        // Configure table columns
         idTransactionManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         idStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getId()));
         nameStudentManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getName()));
@@ -147,11 +162,9 @@ public class GmailNotionController implements Initializable {
         dueDateManageColumnTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDueDate()));
 
         transactionManageList = FXCollections.observableArrayList();
-
         transactionManageList = checkOverDateTrans.getOverdueTransactions();
 
         peopleEmailLabel.setText(String.valueOf(transactionManageList.size()));
-
         transactionManageTableView.setItems(transactionManageList);
 
         if (transactionManageList.isEmpty()) {
@@ -162,12 +175,12 @@ public class GmailNotionController implements Initializable {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/uet/librarymanagementsystem/fileTxt/date_notion.txt"))) {
             String oldTime = reader.readLine();
-            System.out.println("Thời gian cũ trong file: " + oldTime);
+            System.out.println("Previous notification time: " + oldTime);
             dateEmailLabel.setText(oldTime);
         } catch (FileNotFoundException e) {
-            System.out.println("File không tồn tại, sẽ tạo file mới.");
+            System.out.println("File not found, creating a new one.");
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc file: " + e.getMessage());
+            System.out.println("Error reading file: " + e.getMessage());
         }
     }
 }

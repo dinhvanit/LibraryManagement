@@ -29,19 +29,27 @@ public class AddStudentController implements Initializable {
     @FXML
     private Label checkInforId, checkInforName, checkInforBirthday, checkInforPhone, checkInforEmail, checkInforPassword;
 
+    /**
+     * Validates inputs and populates information labels if valid.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     void addStudentButtonOnClick(MouseEvent event) {
         if (validateInputs()) {
             populateCheckInforLabels();
-            updateStatus("Đã tải thông tin. Vui lòng kiểm tra và nhấn 'Save' để lưu.", "green");
+            updateStatus("Information loaded. Please check and press 'Save' to save.", "green");
             isAdded = true;
             clearFields();
         } else {
-            updateStatus("Vui lòng điền đúng thông tin vào tất cả các trường.", "red");
+            updateStatus("Please fill in all fields correctly.", "red");
             isAdded = false;
         }
     }
 
+    /**
+     * Validates all input fields including ID, Name, Date of Birth, Phone, and Email.
+     * @return true if all inputs are valid, false otherwise
+     */
     private boolean validateInputs() {
         return validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY)
                 & validateField(fieldNameStudent, nameValidLabel, ValidationLabelUtil.ValidationType.EMPTY)
@@ -50,24 +58,45 @@ public class AddStudentController implements Initializable {
                 & validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL);
     }
 
+    /**
+     * Validates a TextField based on a specific validation type.
+     * @param field the TextField to validate
+     * @param label the Label to display validation messages
+     * @param type the validation type
+     * @return true if the field is valid, false otherwise
+     */
     private boolean validateField(TextField field, Label label, ValidationLabelUtil.ValidationType type) {
         String errorMessage = validationUtil.validateField(field.getText(), type);
         updateValidationLabel(label, errorMessage);
         return errorMessage.isEmpty();
     }
 
+    /**
+     * Validates a DatePicker input.
+     * @param datePicker the DatePicker to validate
+     * @param label the Label to display validation messages
+     * @return true if the date is valid, false otherwise
+     */
     private boolean validateDateField(DatePicker datePicker, Label label) {
         LocalDate date = datePicker.getValue();
-        String errorMessage = (date == null) ? "Ngày tháng không được để trống." : "";
+        String errorMessage = (date == null) ? "Date cannot be empty." : "";
         updateValidationLabel(label, errorMessage);
         return errorMessage.isEmpty();
     }
 
+    /**
+     * Updates the validation label with an error message.
+     * @param label the Label to update
+     * @param errorMessage the error message to display
+     */
     private void updateValidationLabel(Label label, String errorMessage) {
         label.setText(errorMessage);
         label.setVisible(!errorMessage.isEmpty());
     }
 
+    /**
+     * Sets default password to the student's ID.
+     */
     private void populateCheckInforLabels() {
         String formattedDob = fieldBirthdayStudent.getValue() != null
                 ? fieldBirthdayStudent.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
@@ -78,9 +107,12 @@ public class AddStudentController implements Initializable {
         checkInforBirthday.setText(formattedDob);
         checkInforPhone.setText(fieldPhoneStudent.getText());
         checkInforEmail.setText(fieldEmailStudent.getText());
-        checkInforPassword.setText(fieldIDStudent.getText()); // Mật khẩu mặc định là ID
+        checkInforPassword.setText(fieldIDStudent.getText()); // Default password is the student ID
     }
 
+    /**
+     * Saves the student information.
+     */
     @FXML
     private void saveStudentButtonOnClick() {
         if (isAdded) {
@@ -91,25 +123,37 @@ public class AddStudentController implements Initializable {
                     checkInforPhone.getText(),
                     checkInforEmail.getText()
             );
-            updateStatus(result, result.contains("thành công") ? "green" : "red");
+            updateStatus(result, result.contains("success") ? "green" : "red");
         } else {
-            updateStatus("Vui lòng điền đầy đủ thông tin hợp lệ.", "red");
+            updateStatus("Please fill in all valid information.", "red");
         }
     }
 
+    /**
+     * Clears all input fields and information labels.
+     * @param event the mouse event triggering this action
+     */
     @FXML
     void removeStudentButtonOnClick(MouseEvent event) {
         isAdded = false;
         clearFields();
         clearCheckInforLabels();
-        updateStatus("Thông tin đã được xóa.", "red");
+        updateStatus("Information has been removed.", "red");
     }
 
+    /**
+     * Updates the status label with a message and color.
+     * @param message the message to display
+     * @param color the color of the text (e.g., "red", "green")
+     */
     private void updateStatus(String message, String color) {
         statusLabel.setText(message);
         statusLabel.setStyle("-fx-text-fill: " + color + ";");
     }
 
+    /**
+     * Clears all input fields in the form.
+     */
     private void clearFields() {
         fieldIDStudent.clear();
         fieldNameStudent.clear();
@@ -118,8 +162,11 @@ public class AddStudentController implements Initializable {
         fieldEmailStudent.clear();
     }
 
+    /**
+     * Clears all information labels to their default "no information" state.
+     */
     private void clearCheckInforLabels() {
-        String emptyMessage = "chưa có thông tin gì";
+        String emptyMessage = "no information available";
         checkInforId.setText(emptyMessage);
         checkInforName.setText(emptyMessage);
         checkInforBirthday.setText(emptyMessage);
@@ -128,11 +175,19 @@ public class AddStudentController implements Initializable {
         checkInforPassword.setText(emptyMessage);
     }
 
+    /**
+     * Initializes the controller by setting up validation listeners for input fields.
+     * @param url the location of the FXML file
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupValidationListeners();
     }
 
+    /**
+     * Sets up validation listeners for all input fields.
+     */
     private void setupValidationListeners() {
         fieldIDStudent.textProperty().addListener((obs, oldVal, newVal) ->
                 validateField(fieldIDStudent, idValidLabel, ValidationLabelUtil.ValidationType.EMPTY));
@@ -151,4 +206,5 @@ public class AddStudentController implements Initializable {
         fieldEmailStudent.textProperty().addListener((obs, oldVal, newVal) ->
                 validateField(fieldEmailStudent, emailValidLabel, ValidationLabelUtil.ValidationType.EMAIL));
     }
+
 }

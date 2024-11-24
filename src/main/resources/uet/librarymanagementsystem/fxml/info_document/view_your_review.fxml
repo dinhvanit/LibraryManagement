@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.info_document.ViewYourReviewController">
    <children>
       <BorderPane layoutX="200.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -20,7 +19,7 @@
                   <HBox prefHeight="62.0" prefWidth="178.0" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="283.0">
                      <children>
-                        <Label text="View your review">
+                        <Label styleClass="label-small" stylesheets="@../../cssDesign/studentPage.css" text="View your review">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -37,7 +36,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="126.0">
                            <children>
-                              <Label text="Date:">
+                              <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Date:">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -62,7 +61,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="126.0">
                            <children>
-                              <Label text="Rating:">
+                              <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Rating:">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -107,7 +106,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="126.0">
                            <children>
-                              <Label text="Review:">
+                              <Label styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Review:">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

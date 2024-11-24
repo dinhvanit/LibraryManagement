@@ -81,58 +81,65 @@ public class SearchAndRemoveStudentController implements Initializable {
     @FXML
     private Label notionChoiceDeleteLabel;
 
+    private DeleteStudentService deleteStudentService = new DeleteStudentService();
+
+    /**
+     * Adds a selected student from the search results table to the "Students to Delete" table.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     private void addStudentButtonOnClick(MouseEvent event) {
         Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
 
         if (selectedStudent != null) {
             deleteStudentTableView.getItems().add(selectedStudent);
-
             searchStudentTableView.getItems().remove(selectedStudent);
-
             notionChoiceAddLabel.setVisible(false);
-            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+            System.out.println("The student has been added to the 'Students to Delete' table.");
         } else {
-            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+            System.out.println("Please select a student from the 'List of Students' table.");
             notionChoiceAddLabel.setVisible(true);
         }
     }
 
-
+    /**
+     * Deletes all students in the "Students to Delete" table from the database.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     private void deleteAllStudentButtonOnClick(MouseEvent event) {
-        // Iterate over each student in the TableView
         for (Student student : deleteStudentTableView.getItems()) {
-            // Delete each student from the database using deleteStudentByID method
             deleteStudentService.deleteStudentByID(student.getId());
-            System.out.println("Student with ID " + student.getId() + " deleted from database.");
+            System.out.println("Student with ID " + student.getId() + " deleted from the database.");
         }
 
-        // Clear all students from the TableView
         deleteStudentTableView.getItems().clear();
         System.out.println("All students removed from the 'Students to Delete' table.");
     }
 
-    private DeleteStudentService deleteStudentService = new DeleteStudentService();
-
+    /**
+     * Deletes the selected student in the "Students to Delete" table from the database.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     private void deleteStudentButtonOnClick(MouseEvent event) {
         Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
 
         if (selectedStudent != null) {
             notionChoiceDeleteLabel.setVisible(false);
-            // Delete student from the database using deleteStudentByID method
             deleteStudentService.deleteStudentByID(selectedStudent.getId());
-
-            // Remove student from the TableView
             deleteStudentTableView.getItems().remove(selectedStudent);
-            System.out.println("Student with ID " + selectedStudent.getId() + " removed from UI.");
+            System.out.println("Student with ID " + selectedStudent.getId() + " removed from the UI.");
         } else {
             notionChoiceDeleteLabel.setVisible(true);
             System.out.println("No student selected for deletion.");
         }
     }
 
+    /**
+     * Removes a selected student from the "Students to Delete" table and adds them back to the search results table.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void removeStudentButtonOnClick(MouseEvent event) {
         Student selectedStudent = deleteStudentTableView.getSelectionModel().getSelectedItem();
@@ -140,17 +147,18 @@ public class SearchAndRemoveStudentController implements Initializable {
         if (selectedStudent != null) {
             notionChoiceDeleteLabel.setVisible(false);
             deleteStudentTableView.getItems().remove(selectedStudent);
-
             searchStudentTableView.getItems().add(selectedStudent);
-
-            System.out.println("Sinh viên đã được xóa khỏi bảng Students to Delete và chuyển lại vào bảng List Of Students.");
+            System.out.println("The student has been removed from the 'Students to Delete' table and added back to the 'List of Students' table.");
         } else {
             notionChoiceDeleteLabel.setVisible(true);
-            System.out.println("Vui lòng chọn một sinh viên từ bảng Students to Delete để xóa.");
+            System.out.println("Please select a student from the 'Students to Delete' table to remove.");
         }
     }
 
-
+    /**
+     * Searches for students based on user input and updates the search results table.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void searchStudentButtonOnClick(MouseEvent event) {
         String id = fieldIDStudent.getText();
@@ -158,37 +166,39 @@ public class SearchAndRemoveStudentController implements Initializable {
 
         try {
             ObservableList<Student> searchResults = searchStudentService.search(id, name);
-            searchStudentTableView.setItems(searchResults); // Cập nhật kết quả tìm kiếm vào TableView
+            searchStudentTableView.setItems(searchResults);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Lỗi khi tìm kiếm sinh viên: " + e.getMessage());
+            System.out.println("Error occurred while searching for students: " + e.getMessage());
         }
     }
 
+    /**
+     * Resets the password of the selected student in the "List of Students" table to their ID.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void modifyStudentButtonOnClick(MouseEvent event) {
-        // Lấy sinh viên được chọn trong bảng "List Of Students"
         Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
 
         if (selectedStudent != null) {
-            // Lấy ID của sinh viên
             String studentId = selectedStudent.getId();
-
-            // Đặt lại mật khẩu thành ID của sinh viên
             ChangePasswordService changePasswordService = new ChangePasswordService();
             String resultMessage = changePasswordService.changePassword(studentId, studentId);
 
-            // Cập nhật lại mật khẩu trong giao diện
-            selectedStudent.setPassword(studentId); // Cập nhật trên UI
-            searchStudentTableView.refresh(); // Làm mới lại TableView
+            selectedStudent.setPassword(studentId);
+            searchStudentTableView.refresh();
 
-            // Hiển thị thông báo kết quả
             System.out.println(resultMessage);
         } else {
-            System.out.println("Vui lòng chọn một sinh viên để thay đổi mật khẩu.");
+            System.out.println("Please select a student to change their password.");
         }
     }
 
+    /**
+     * Opens a new window displaying detailed information about the selected student.=
+     * @param event the mouse event triggered when the button is clicked
+     */
     @FXML
     void infoStudentButtonClick(MouseEvent event) {
         Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
@@ -197,14 +207,19 @@ public class SearchAndRemoveStudentController implements Initializable {
             ShareDataService.setIdStudentShare(selectedStudent.getId());
             notionChoiceAddLabel.setVisible(false);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindow(Page.SHOW_INFO, "Information student", currentStage);
-            System.out.println("Sinh viên đã được thêm vào bảng Students to Delete.");
+            WindowUtil.showSecondaryWindow(Page.SHOW_INFO, "Information Student", currentStage);
+            System.out.println("Student information is being displayed.");
         } else {
-            System.out.println("Vui lòng chọn một sinh viên từ bảng List Of Students.");
+            System.out.println("Please select a student from the 'List of Students' table.");
             notionChoiceAddLabel.setVisible(true);
         }
     }
 
+    /**
+     * Exports transaction details of the selected student to a PDF file.=
+     * @param event the mouse event triggered when the button is clicked
+     * @throws IOException if an error occurs during the export process
+     */
     @FXML
     void exportPDFClick(MouseEvent event) throws IOException {
         Student selectedStudent = searchStudentTableView.getSelectionModel().getSelectedItem();
@@ -219,6 +234,11 @@ public class SearchAndRemoveStudentController implements Initializable {
         }
     }
 
+    /**
+     * Initializes the controller.
+     * @param url the location used to resolve relative paths for the root object
+     * @param resourceBundle the resources used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Khởi tạo các thành phần cần thiết, ví dụ như khởi tạo dịch vụ tìm kiếm
