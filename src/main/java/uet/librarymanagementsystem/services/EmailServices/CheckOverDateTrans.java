@@ -23,14 +23,11 @@ public class CheckOverDateTrans {
     public ObservableList<Transaction> getOverdueTransactions() {
         ObservableList<Transaction> overdueTransactions = FXCollections.observableArrayList();
         String query = """
-                SELECT * FROM TransactionDocument
-                WHERE (return_date > due_date OR (return_date IS NULL AND due_date < ?))
-                """;
+            SELECT * FROM TransactionDocument
+            WHERE return_date IS NULL
+            """;
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            // Đặt ngày hiện tại cho tham số query
-            pstmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String idTransaction = rs.getString("id_transaction");
@@ -49,16 +46,12 @@ public class CheckOverDateTrans {
                     String returnDate = rs.getString("return_date");
                     String dueDate = rs.getString("due_date");
 
-                    // Tạo đối tượng Student
                     Student student = new Student(idStudent, nameStudent, dateOfBirth, phoneNumber, email, null);
 
-                    // Tạo đối tượng Document
                     Document document = DocumentFactory.createDocument(idDocument, titleDocument, author, material, category, isbn);
 
-                    // Tạo đối tượng Transaction
                     Transaction transaction = new Transaction(idTransaction, document, student, borrowDate, returnDate, dueDate, null, null, null);
 
-                    // Thêm giao dịch quá hạn vào danh sách
                     overdueTransactions.add(transaction);
                 }
             }
@@ -68,6 +61,7 @@ public class CheckOverDateTrans {
 
         return overdueTransactions;
     }
+
 
     public void closeConnection() {
         try {

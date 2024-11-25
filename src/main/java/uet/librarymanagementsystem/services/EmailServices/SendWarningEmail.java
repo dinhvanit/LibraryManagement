@@ -22,10 +22,10 @@ public class SendWarningEmail {
                         String bookID = transaction.getDocument().getId();
                         String dueDate = transaction.getDueDate();
 
-                        String subject = "Thông báo quá hạn trả sách";
+                        String subject = "Nhắc thời hạn trả sách";
                         String body = String.format(
                                 "Xin chào %s,\n\n" +
-                                        "Cuốn sách \"%s\" (mã ID: %s) mà bạn mượn đã quá hạn trả vào ngày %s.\n" +
+                                        "Cuốn sách \"%s\" (mã ID: %s) mà bạn mượn sẽ quá hạn trả vào ngày %s.\n" +
                                         "Vui lòng trả sách sớm nhất có thể để tránh bị phạt.\n\n" +
                                         "Trân trọng,\n" +
                                         "Đây là tin nhắn tự động từ thư viện, vui lòng không phản hồi!",
