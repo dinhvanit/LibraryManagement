@@ -124,6 +124,4 @@ public class RatingAndReviewController implements Initializable {
         emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_empty.png")));
 
     }
-
-
 }

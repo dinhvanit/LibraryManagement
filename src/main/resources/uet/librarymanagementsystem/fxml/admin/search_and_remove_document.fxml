@@ -167,7 +167,7 @@
                                     <HBox.margin>
                                         <Insets right="20.0" />
                                     </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE ALL" textAlignment="CENTER" wrapText="true" />
+                        <Button mnemonicParsing="false" onMouseClicked="#deleteAllDocumentButtonOnClick" prefHeight="50.0" prefWidth="108.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="DELETE ALL" textAlignment="CENTER" wrapText="true" />
                             </children>
                         </HBox>
                     </children>
@@ -207,10 +207,6 @@
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" onMouseClicked="#addDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="ADD">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onMouseClicked="#modifyDocumentButtonOnClick" prefHeight="50.0" prefWidth="90.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" text="MODIFY">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin></Button>

@@ -4,26 +4,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import uet.librarymanagementsystem.entity.Page;
 import uet.librarymanagementsystem.entity.documents.Document;
 import uet.librarymanagementsystem.entity.documents.MaterialType;
-import uet.librarymanagementsystem.entity.documents.materials.Book;
-import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.documentServices.DeleteDocumentService;
 import uet.librarymanagementsystem.services.documentServices.SearchDocumentService;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 import uet.librarymanagementsystem.util.WindowUtil;
-
-import javax.print.Doc;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -213,21 +205,6 @@ public class SearchAndRemoveDocumentController  implements Initializable {
     private void performSearch() throws SQLException {
         documentsListSearchResult = searchDocumentService.searchByNotNull(titleDocument, authorDocument, materialDocument, categoryDocument);
         searchResultsTableView.setItems(documentsListSearchResult);
-    }
-
-    /**
-     * Opens a new window to modify the selected document.
-     * @param event the mouse event triggered when the button is clicked
-     */
-    @FXML
-    void modifyDocumentButtonOnClick(MouseEvent event) {
-        Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
-        if (selectedDocument != null) {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            WindowUtil.showSecondaryWindow(Page.MODIFY_DOCUMENT, "Modify Information of Document", currentStage);
-        } else {
-            System.out.println("Please select a document to modify.");
-        }
     }
 
     /**

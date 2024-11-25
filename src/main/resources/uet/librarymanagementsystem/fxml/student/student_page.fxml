@@ -124,31 +124,6 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../image/explore-Photoroom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label text="Explore">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" onMouseClicked="#searchAndBorrowButtonClick" prefHeight="60.0" prefWidth="150.0" styleClass="button" stylesheets="@../../cssDesign/studentPage.css">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">

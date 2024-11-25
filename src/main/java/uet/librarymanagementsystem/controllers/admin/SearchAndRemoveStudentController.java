@@ -81,7 +81,7 @@ public class SearchAndRemoveStudentController implements Initializable {
     @FXML
     private Label notionChoiceDeleteLabel;
 
-    private DeleteStudentService deleteStudentService = new DeleteStudentService();
+    private final DeleteStudentService deleteStudentService = new DeleteStudentService();
 
     /**
      * Adds a selected student from the search results table to the "Students to Delete" table.=

@@ -13,7 +13,6 @@
     -fx-border-radius: 20px;
     -fx-border-width: 1.5px; /* Tăng độ dày viền nhẹ */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.3, 0, 5); /* Bóng đổ mềm mại */
-    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt */
 }
 
 /* BorderPane (khung chính) */
@@ -28,8 +27,6 @@
 
 /* Tiêu đề */
 .label-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
     -fx-text-fill: linear-gradient(to right, #4f86c6, #da77f2); /* Gradient xanh nhạt pha tím */
 }
 
@@ -62,7 +59,6 @@
 
 /* Icon trong HBox */
 .sidebar .hbox-item .icon {
-    -fx-font-size: 18px;
     -fx-text-fill: #4a4a4a; /* Màu biểu tượng đồng bộ với chữ */
 }
 
@@ -72,38 +68,33 @@
 
 /* Label trong HBox */
 .sidebar .hbox-item .label {
-    -fx-font-size: 14px;
     -fx-text-fill: #333; /* Màu chữ tối như cũ */
     -fx-font-weight: bold;
 }
 
 /* Các nhãn thông tin (labels) */
 .label-info {
-    -fx-font-size: 20px;
     -fx-text-fill: #333; /* Màu chữ giữ nguyên */
     -fx-font-weight: bold;
 }
 
 /* Các hộp thông tin (info boxes) */
 .info-box {
-    -fx-background: linear-gradient(to bottom, #ffffff, #f8eafa); /* Nền trắng pha tím nhạt */
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f8eafa); /* Nền trắng pha tím nhạt */
     -fx-border-radius: 10;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
-    -fx-transition: all 0.3s;
 }
 
 .info-box:hover {
-    -fx-background: linear-gradient(to bottom, #ffffff, #ece4f7); /* Nền nhạt hơn khi hover */
-    -fx-transform: scale(1.03);
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #ece4f7); /* Nền nhạt hơn khi hover */
 }
 
 /* Biểu đồ */
 .chart {
     -fx-background-color: linear-gradient(to bottom, #ffffff, #fff7e6); /* Nền biểu đồ trắng và vàng nhạt */
     -fx-background-radius: 20px;
-    -fx-border-radius: 15px; /* Bo góc mềm mại hơn */
+    -fx-border-radius: 5px; /* Bo góc mềm mại hơn */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0.3, 0, 0); /* Bóng nhẹ */
-    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng mượt */
 }
 
 /* Hiệu ứng Hover cho Biểu đồ */
@@ -117,7 +108,7 @@
 
 /* Button (Nút bấm) */
 .button {
-    -fx-background: linear-gradient(to right, #e3f2fd, #f3e5f5); /* Gradient xanh nhạt và tím nhạt */
+    -fx-background-color: linear-gradient(to right, #e3f2fd, #f3e5f5); /* Gradient xanh nhạt và tím nhạt */
     -fx-text-fill: #333; /* Màu chữ tối cho dễ nhìn */
     -fx-font-size: 14px; /* Kích thước chữ vừa phải */
     -fx-font-weight: bold; /* Chữ in đậm */
@@ -129,7 +120,7 @@
 
 /* Hiệu ứng Hover */
 .button:hover {
-    -fx-background: linear-gradient(to right, #d1ecff, #edd8f7); /* Gradient sáng hơn khi hover */
+    -fx-background-color: linear-gradient(to right, #d1ecff, #edd8f7); /* Gradient sáng hơn khi hover */
     -fx-scale-x: 1.05; /* Phóng to nhẹ theo trục X */
     -fx-scale-y: 1.05; /* Phóng to nhẹ theo trục Y */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0.5, 0, 0); /* Bóng đậm hơn khi hover */
@@ -137,7 +128,7 @@
 
 /* Hiệu ứng Click */
 .button:pressed {
-    -fx-background: linear-gradient(to right, #c5dfee, #e7cbee); /* Gradient đậm hơn khi nhấn */
+    -fx-background-color: linear-gradient(to right, #c5dfee, #e7cbee); /* Gradient đậm hơn khi nhấn */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.3, 0, 0); /* Bóng giảm khi nhấn */
     -fx-scale-x: 0.98; /* Thu nhỏ nhẹ */
     -fx-scale-y: 0.98;
@@ -156,7 +147,6 @@
 .table-view .column-header {
     -fx-background-color: linear-gradient(to bottom, #d1c4e9, #ede7f6); /* Gradient tím nhạt */
     -fx-border-color: rgba(150, 150, 150, 0.3); /* Viền mờ xám nhạt */
-    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #333; /* Màu chữ tối */
     -fx-alignment: center; /* Canh giữa nội dung */
@@ -185,7 +175,6 @@
 /* Ô trong bảng (Cells) */
 .table-view .table-cell {
     -fx-text-fill: #333; /* Màu chữ */
-    -fx-font-size: 13px;
     -fx-alignment: center-left; /* Canh trái */
 }
 
@@ -211,11 +200,8 @@
     -fx-border-color: rgba(150, 200, 255, 0.8); /* Viền xanh nhạt */
     -fx-border-radius: 10px; /* Bo góc mềm mại */
     -fx-background-radius: 10px;
-    -fx-padding: 5 10; /* Khoảng cách nội dung bên trong */
-    -fx-font-size: 14px; /* Kích thước chữ trong TextField */
     -fx-text-fill: #333; /* Màu chữ */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng nhẹ */
-    -fx-transition: all 0.3s ease-in-out; /* Hiệu ứng mượt */
 }
 
 /* Hover effect for TextField */
@@ -234,7 +220,6 @@
 
 /* Label Styles */
 .label {
-    -fx-font-size: 16px; /* Kích thước chữ lớn hơn một chút */
     -fx-font-weight: bold; /* Chữ đậm */
     -fx-text-fill: #555; /* Màu chữ xám đậm */
     -fx-padding: 0 5; /* Khoảng cách giữa Label và các thành phần khác */
@@ -248,7 +233,6 @@
 
 /* Lớp CSS dành cho nhãn cảnh báo */
 .label-alert {
-    -fx-font-size: 10px; /* Cỡ chữ nhỏ hơn bình thường */
     -fx-font-style: italic; /* Chữ nghiêng */
     -fx-text-fill: #ff4d4d; /* Màu đỏ tươi để dễ nhận biết */
     -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.2), 2, 0.3, 0, 0); /* Bóng mờ nhẹ màu đỏ */
@@ -256,7 +240,6 @@
 
 /* Lớp CSS dành cho nhãn tiêu đề nhỏ */
 .label-small {
-    -fx-font-size: 23px; /* Cỡ chữ nhỏ hơn bình thường */
     -fx-font-weight: bold; /* Chữ đậm để làm nổi bật */
     -fx-text-fill: #555; /* Màu xám đậm */
     -fx-background-color: transparent; /* Không có nền */
@@ -271,7 +254,6 @@
     -fx-border-color: rgba(150, 200, 255, 0.8); /* Viền xanh nhạt */
     -fx-border-radius: 10px; /* Bo góc mềm mại */
     -fx-background-radius: 10px;
-    -fx-font-size: 14px; /* Kích thước chữ */
     -fx-text-fill: #333; /* Màu chữ */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 0); /* Bóng nhẹ */
     -fx-cursor: hand; /* Con trỏ dạng tay khi di chuột */

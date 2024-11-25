@@ -1,11 +1,19 @@
 package uet.librarymanagementsystem.DatabaseOperation;
 
 import java.sql.*;
-import java.util.Scanner;
-
 import static uet.librarymanagementsystem.DatabaseOperation.DatabaseManager.connect;
 
+/**
+ * This class provides operations for managing the "Title" table in the database.
+ * It includes methods for creating, inserting, clearing, and dropping the Title table.
+ */
 public class TitleTable {
+
+    /**
+     * Creates the "Title" table in the database if it does not exist.
+     * The table has two columns: id (auto-incremented primary key) and name (non-null string).
+     * @throws SQLException If a database access error occurs.
+     */
     public static void createTitleTable() throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -23,41 +31,13 @@ public class TitleTable {
         con.close();
     }
 
-
-//    public static void insertTitleFromKeyboard() throws SQLException {
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Enter title name: ");
-//        String titleName = scanner.nextLine();
-//
-//        Connection con = connect();
-//        if (con == null || con.isClosed()) {
-//            throw new SQLException("Cannot insert title, connection is closed or invalid.");
-//        }
-//
-//        // Kiểm tra xem tiêu đề đã tồn tại trong cơ sở dữ liệu chưa
-//        String checkSQL = "SELECT COUNT(*) FROM Title WHERE name = ?";
-//        try (PreparedStatement checkStmt = con.prepareStatement(checkSQL)) {
-//            checkStmt.setString(1, titleName);
-//            ResultSet rs = checkStmt.executeQuery();
-//            if (rs.next() && rs.getInt(1) > 0) {
-//                System.out.println("TITLE already exists in the database.");
-//                con.close();
-//                return;
-//            }
-//        }
-//
-//        // Thêm tiêu đề mới nếu nó chưa tồn tại
-//        String insertSQL = "INSERT INTO Title (name) VALUES (?)";
-//        try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
-//            insertStmt.setString(1, titleName);
-//            insertStmt.executeUpdate();
-//            System.out.println("TITLE inserted successfully.");
-//        }
-//
-//        con.close();
-//    }
-
+    /**
+     * Inserts a new title into the "Title" table if it does not already exist.
+     * It first checks if a title with the same name is already present in the database.
+     * If it exists, a message is displayed and no insertion occurs.
+     * @param titleName The name of the title to be inserted.
+     * @throws SQLException If a database access error occurs.
+     */
     public static void insertTitle(String titleName) throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -75,7 +55,7 @@ public class TitleTable {
                 }
             }
 
-            // Chèn dữ liệu vào bảng Title
+            // Insert the new title into the Title table
             String insertSQL = "INSERT INTO Title (name) VALUES (?)";
             try (PreparedStatement insertStmt = con.prepareStatement(insertSQL)) {
                 insertStmt.setString(1, titleName);
@@ -91,17 +71,20 @@ public class TitleTable {
         }
     }
 
-
-
+    /**
+     * Clears all data from the "Title" table in the database.
+     * This operation deletes all records but keeps the table structure intact.
+     * @throws SQLException If a database access error occurs.
+     */
     public static void clearTitleTable() throws SQLException {
-        Connection con = connect(); // Kết nối tới cơ sở dữ liệu
+        Connection con = connect(); // Connect to the database
 
         if (con == null || con.isClosed()) {
             throw new SQLException("Cannot clear title table, connection is closed or invalid.");
         }
 
         try {
-            // Lệnh SQL để xóa tất cả dữ liệu trong bảng
+            // SQL command to delete all data in the Title table
             String clearTableSQL = "DELETE FROM Title";
 
             Statement statement = con.createStatement();
@@ -113,10 +96,15 @@ public class TitleTable {
             System.out.println("Error occurred while clearing the Title table.");
             throw e;
         } finally {
-            con.close(); // Đảm bảo kết nối được đóng sau khi thực hiện
+            con.close(); // Ensure the connection is closed after execution
         }
     }
 
+    /**
+     * Drops the "Title" table from the database if it exists.
+     * This operation permanently deletes the table and its data.
+     * @throws SQLException If a database access error occurs.
+     */
     public static void dropTitleTable() throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -131,10 +119,11 @@ public class TitleTable {
 
         con.close();
     }
+}
+
 
 /*    public static void main(String []args) throws SQLException {
 //        createTitleTable();
         clearTitleTable();
 //          dropTitleTable();
-    }*/
-}
+}*/

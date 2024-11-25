@@ -66,8 +66,8 @@ public class Journal extends Document {
     public enum JournalCategory {
         RESEARCH("01"),
         REVIEW("02"),
-        CASE_STUDY("03"), // tại sao cái này bị lỗi substring
-        OTHERS ("04"); // Thêm các loại category cho tạp chí
+        CASE_STUDY("03"),
+        OTHERS ("04");
 
         private final String code;
 

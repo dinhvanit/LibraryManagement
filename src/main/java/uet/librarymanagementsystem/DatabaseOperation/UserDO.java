@@ -1,10 +1,6 @@
 package uet.librarymanagementsystem.DatabaseOperation;
 
-import uet.librarymanagementsystem.entity.documents.Document;
-
 import java.sql.*;
-import java.util.List;
-import java.util.logging.Level;
 
 public class UserDO extends DatabaseManager {
 

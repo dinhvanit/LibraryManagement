@@ -2,14 +2,23 @@ package uet.librarymanagementsystem.DatabaseOperation;
 
 import java.sql.*;
 
+/**
+ * This class provides utility methods to manage database operations, including connecting to the SQLite database,
+ * printing table columns, and dropping specific tables.
+ */
 public class DatabaseManager {
 
+    // Database connection URL
     private static final String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\uet\\librarymanagementsystem\\Database\\library.db";
 
-    //private static final String url = "Database/library.db";
+    /**
+     * Establishes a connection to the SQLite database.
+     *
+     * @return A {@link Connection} object representing the connection to the database.
+     */
     public static Connection connect() {
         Connection conn = null;
-        try {      // relative path
+        try {
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
@@ -18,7 +27,13 @@ public class DatabaseManager {
         return conn;
     }
 
-    // ham nay dung de in ra cac cot co trong 1 bang
+    /**
+     * Prints the columns of a specified table in the database.
+     * This method retrieves metadata about the table and its columns and displays column names, types, and sizes.
+     *
+     * @param tableName The name of the table whose columns need to be printed.
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void printTableColumns(String tableName) throws SQLException {
         Connection con = connect();
         if (con == null || con.isClosed()) {
@@ -27,7 +42,7 @@ public class DatabaseManager {
 
         DatabaseMetaData metaData = con.getMetaData();
 
-        // Kiểm tra xem bảng có tồn tại không
+        // Check if the table exists
         ResultSet tables = metaData.getTables(null, null, tableName, null);
         if (!tables.next()) {
             System.out.println("Table " + tableName + " does not exist.");
@@ -36,7 +51,7 @@ public class DatabaseManager {
             return;
         }
 
-        // Lấy thông tin cột của bảng
+        // Retrieve and print column information
         ResultSet columns = metaData.getColumns(null, null, tableName, null);
         System.out.println("Columns in table " + tableName + ":");
         while (columns.next()) {
@@ -51,6 +66,11 @@ public class DatabaseManager {
         con.close();
     }
 
+    /**
+     * Drops the "Material" table from the database if it exists.
+     *
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void dropTableMaterial() throws SQLException {
         Connection con = connect();
 
@@ -66,6 +86,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Drops the "Title" table from the database if it exists.
+     *
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void dropTableTitle() throws SQLException {
         Connection con = connect();
 
@@ -81,21 +106,11 @@ public class DatabaseManager {
         }
     }
 
-    public static void dropTableBorrowedDocuments() throws SQLException {
-        Connection con = connect();
-
-        try (con; Statement statement = con.createStatement()) {
-            if (con == null || con.isClosed()) {
-                throw new SQLException("Cannot drop table, connection is closed or invalid.");
-            }
-            String dropSQL = "DROP TABLE IF EXISTS BorrowedDocuments";
-            statement.executeUpdate(dropSQL);
-            System.out.println("Table BorrowedDocuments has been dropped successfully.");
-        } catch (SQLException e) {
-            System.err.println("Error dropping table: " + e.getMessage());
-        }
-    }
-
+    /**
+     * Drops the "Category" table from the database if it exists.
+     *
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void dropTableCategory() throws SQLException {
         Connection con = connect();
 
@@ -111,6 +126,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Drops the "TransactionDocument" table from the database if it exists.
+     *
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void dropTableTransaction() throws SQLException {
         Connection con = connect();
 
@@ -126,6 +146,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Renames the column "ID" to "id" in the "Author" table.
+     *
+     * @throws SQLException If a database access error occurs or the SQL statement fails.
+     */
     public static void doitencot() {
         Connection con = connect();
 
@@ -140,14 +165,4 @@ public class DatabaseManager {
             System.err.println("Error changing table: " + e.getMessage());
         }
     }
-
-//    public static void main(String[] args) throws SQLException {
-////        connect(); // Kết nối tới CSDL
-//////        dropTableMaterial();
-////        dropTableTitle();
-////            doitencot();
-////        dropTableBorrowedDocuments();
-//            dropTableTransaction();
-////        dropTableCategory();
-//    }
 }

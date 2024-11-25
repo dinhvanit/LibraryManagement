@@ -28,6 +28,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class to manage the search and borrowing functionality for documents.
+ */
 public class SearchAndBorrowDocumentController implements Initializable {
     private final int borrowingPeriod = 6;
     private final int maxDocuments = 10;
@@ -98,6 +101,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
     @FXML
     private Label notionChooseAddLabel;
 
+    /**
+     * Handles adding a document to the list of documents to borrow.
+     *
+     * @param event the mouse event triggered when clicking the add button.
+     */
     @FXML
     private void addDocumentToBorrowButtonOnClick(MouseEvent event) throws SQLException {
         performAdd();
@@ -120,6 +128,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
         return LocalDate.now().plusMonths(borrowingPeriod).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
+    /**
+     * Handles borrowing all documents in the borrowing list.
+     *
+     * @param event the mouse event triggered when clicking the borrow all button.
+     */
     @FXML
     void borrowAllDocumentsButtonOnClick(MouseEvent event) throws SQLException {
         String id_student = LoginController.getIdCurrentStudent();
@@ -145,6 +158,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Handles borrowing a specific document.
+     *
+     * @param event the mouse event triggered when clicking the borrow button.
+     */
     @FXML
     void borrowDocumentButtonOnClick(MouseEvent event) throws SQLException {
         performBorrow(event);
@@ -174,6 +192,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Handles deleting a document from the borrowing list.
+     *
+     * @param event the mouse event triggered when clicking the delete button.
+     */
     @FXML
     void deleteDocumentButtonOnClick(MouseEvent event) {
         performDelete();
@@ -192,6 +215,11 @@ public class SearchAndBorrowDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Handles showing detailed information about a selected document.
+     *
+     * @param event the mouse event triggered when clicking a document.
+     */
     @FXML
     void infoDocumentClick(MouseEvent event) {
         Document selectedDocument = searchResultsTableView.getSelectionModel().getSelectedItem();
@@ -277,7 +305,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
         authorColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
-        //isbnColumnSearchResults.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListSearchResult = FXCollections.observableArrayList();
         searchResultsTableView.setItems(documentsListSearchResult);
@@ -287,7 +314,6 @@ public class SearchAndBorrowDocumentController implements Initializable {
         authorColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
         materialColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
         categoryColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
-        //isbnColumnDocumentsToBorrow.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
 
         documentsListToBorrow = FXCollections.observableArrayList();
         documentsToBorrowTableView.setItems(documentsListToBorrow);

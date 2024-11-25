@@ -14,8 +14,14 @@ import uet.librarymanagementsystem.services.transactionServices.SearchTransactio
 
 import java.sql.SQLException;
 
+/**
+ * Controller class for displaying student information.
+ * This class retrieves and displays student personal details and
+ * borrowing statistics, and visualizes them using a pie chart.
+ */
 public class ShowInfoStudentController {
 
+    // UI components
     @FXML
     private PieChart pieChart;
 
@@ -39,22 +45,32 @@ public class ShowInfoStudentController {
     @FXML
     private Label borrowedOverdueLabel;
 
+    // Services for retrieving student and transaction data
     private final SearchStudentService searchStudentService;
-
     private final SearchTransactionService searchTransactionService = new SearchTransactionService();
 
+    /**
+     * Constructor for ShowInfoStudentController.
+     * Initializes the service for searching student information.
+     */
     public ShowInfoStudentController() {
         searchStudentService = new SearchStudentService();
     }
 
+    /**
+     * Initializes the controller.
+     * This method retrieves student information and borrowing statistics,
+     * updates the UI labels, and populates the pie chart.
+     */
     public void initialize() {
         try {
-
+            // Retrieve the shared student ID
             String userId = ShareDataService.getIdStudentShare();
-            // Tìm thông tin sinh viên dựa trên ID
+
+            // Retrieve student information by ID
             Student student = searchStudentService.searchID(userId);
             if (student != null) {
-                // Hiển thị thông tin cá nhân của sinh viên
+                // Display student's personal information
                 idStudentLabel.setText(student.getId());
                 nameStudentLabel.setText(student.getName());
                 phoneStudentLabel.setText(student.getPhoneNumber());
@@ -62,19 +78,20 @@ public class ShowInfoStudentController {
                 emailStudentLabel.setText(student.getEmail());
             }
 
+            // Retrieve borrowing statistics
             int[] bookCounts = searchTransactionService.countBooksByStatus(userId);
-            int returned = bookCounts[0];
-            int withinDue = bookCounts[1];
-            int overdue = bookCounts[2];
+            int returned = bookCounts[0]; // Number of returned books
+            int withinDue = bookCounts[1]; // Number of books borrowed within due date
+            int overdue = bookCounts[2]; // Number of overdue books
             int totalBorrowed = returned + withinDue + overdue;
 
-            // Cập nhật dữ liệu cho các label
+            // Update labels with borrowing statistics
             totalBorrowedDocumentsLabel.setText(String.valueOf(totalBorrowed));
             returnedDocumentsLabel.setText(String.valueOf(returned));
             borrowedWithinDueLabel.setText(String.valueOf(withinDue));
             borrowedOverdueLabel.setText(String.valueOf(overdue));
 
-            // Thêm dữ liệu vào biểu đồ
+            // Populate pie chart with borrowing statistics
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                     new PieChart.Data("Returned Documents", returned),
                     new PieChart.Data("Borrowed Documents (Within Due Date)", withinDue),
@@ -86,7 +103,7 @@ public class ShowInfoStudentController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // có thể hiển thị label lỗi
+            // Error handling: You can display an error message on the UI
         }
     }
 }
