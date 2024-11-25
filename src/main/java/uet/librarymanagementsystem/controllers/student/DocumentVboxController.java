@@ -1,6 +1,5 @@
 package uet.librarymanagementsystem.controllers.student;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,7 +19,12 @@ import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.util.Objects;
 
+/**
+ * Controller class responsible for displaying a document's thumbnail image,
+ * title, and author in the student interface.
+ */
 public class DocumentVboxController {
+
     @FXML
     private ImageView imageView;
 
@@ -30,41 +34,53 @@ public class DocumentVboxController {
     @FXML
     private Label authorLabel;
 
-    private Document document; // Lưu trữ tài liệu liên kết với VBox
+    private Document document; // Stores the associated document with the VBox
 
+    /**
+     * Sets the document and updates the UI to display the document's title,
+     * author, and thumbnail image.
+     *
+     * @param document the document to be displayed
+     */
     public void setDocument(Document document) {
         this.document = document;
 
-        // Đặt tiêu đề và tác giả vào các label
+        // Set the title and author labels
         titleLabel.setText(document.getTitle());
         authorLabel.setText(document.getAuthor());
 
-        // Tải ảnh thu nhỏ bất đồng bộ
+        // Load the thumbnail image asynchronously
         loadThumbnailImage();
     }
 
+    /**
+     * Asynchronously loads the thumbnail image for the document. The image is
+     * determined based on the document type (e.g., Book, Journal, Newspaper, Thesis).
+     * If the document is a Book, it tries to fetch the thumbnail image using the
+     * book's ISBN. If no thumbnail is found, a default image is used.
+     */
     private void loadThumbnailImage() {
         Task<Image> imageTask = new Task<>() {
             @Override
             protected Image call() throws Exception {
                 if (document instanceof Book book) {
-                    // Nếu là Book, tìm ảnh thu nhỏ từ ISBN
+                    // If it's a Book, fetch the thumbnail from ISBN
                     if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
                         BookLookupService lookupService = new BookLookupService(book.getIsbn());
                         String thumbnailUrl = lookupService.getThumbnailUrl();
 
                         if (!thumbnailUrl.equals("N/A")) {
-                            return new Image(thumbnailUrl); // Trả về ảnh từ URL
+                            return new Image(thumbnailUrl); // Return image from URL
                         }
                     } else {
                         return new Image(Objects.requireNonNull(
                                 getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
                     }
-                    // Nếu không tìm được ảnh thu nhỏ, sử dụng ảnh mặc định cho sách
+                    // If no thumbnail is found, use the default book image
                     return new Image(Objects.requireNonNull(
                             getClass().getResourceAsStream(ImagesOfLibrary.BOOK.getPath())));
                 } else {
-                    // Xử lý cho các loại tài liệu khác
+                    // Handle other document types
                     if (document instanceof Journal) {
                         return new Image(Objects.requireNonNull(
                                 getClass().getResourceAsStream(ImagesOfLibrary.JOURNAL.getPath())));
@@ -82,23 +98,29 @@ public class DocumentVboxController {
             }
         };
 
-        // Khi tải ảnh hoàn tất, cập nhật lên giao diện người dùng
+        // When the image loading is completed, update the UI
         imageTask.setOnSucceeded(event -> {
             imageView.setImage(imageTask.getValue());
         });
 
-        // Bắt đầu tải ảnh trong một luồng nền
+        // Start the image loading in a background thread
         new Thread(imageTask).start();
     }
 
+    /**
+     * Handles the click event for showing additional document information.
+     * If the document is not null, the document information is shared and a new
+     * window displaying the document's details is opened.
+     */
     @FXML
     private void handleClick() {
         if (document != null) {
+            // Share the document data and show information window
             ShareDataService.setDocumentShare(document);
             Stage currentStage = (Stage) imageView.getScene().getWindow();
             WindowUtil.showSecondaryWindowWithShowInfo(Page.SHOW_INFO_DOCUMENT, "Information Document", currentStage, false, false);
         } else {
-            System.out.println("show info khong thanh cong");
+            System.out.println("show info unsuccessful");
         }
     }
 }

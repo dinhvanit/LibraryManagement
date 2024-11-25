@@ -25,7 +25,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * The {@code BorrowedDocumentsController} class manages the borrowed documents' data display and interactions
+ * in the student view. It allows users to view borrowed documents, return individual documents, or return all borrowed documents.
+ */
 public class BorrowedDocumentsController implements Initializable {
+
     @FXML
     private TableView<Transaction> borrowedDocumentsTableView;
 
@@ -36,7 +41,6 @@ public class BorrowedDocumentsController implements Initializable {
 
     @FXML
     private TableColumn<Transaction, String> borrowDateColumnBorrowedDocuments;
-
 
     @FXML
     private TableColumn<Transaction, String> categoryColumnBorrowedDocuments;
@@ -56,6 +60,13 @@ public class BorrowedDocumentsController implements Initializable {
     @FXML
     private Label notionChoiceTransactionLabel;
 
+    /**
+     * Handles the event when the user clicks the 'Document Info' button.
+     * Displays detailed information of the selected document in a new window.
+     * If no document is selected, a notification is shown.
+     *
+     * @param event The MouseEvent triggered by clicking the 'Document Info' button.
+     */
     @FXML
     void infoDocumentButtonOnClick(MouseEvent event) {
         if (borrowedDocumentsTableView.getSelectionModel().getSelectedItem() == null) {
@@ -72,8 +83,15 @@ public class BorrowedDocumentsController implements Initializable {
         }
     }
 
+    /**
+     * Handles the event when the user clicks the 'Return All Documents' button.
+     * Updates the return date for all borrowed documents and clears the borrowed documents list.
+     *
+     * @param event The MouseEvent triggered by clicking the 'Return All Documents' button.
+     * @throws SQLException If a database error occurs while updating return dates.
+     */
     @FXML
-    void returnAllDocumentsButtonOnClick(MouseEvent event) throws SQLException{
+    void returnAllDocumentsButtonOnClick(MouseEvent event) throws SQLException {
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         for (Transaction transaction : borrowedDocumentsList) {
             TransactionsTable.updateReturnDate(transaction.getId(), today);
@@ -82,6 +100,13 @@ public class BorrowedDocumentsController implements Initializable {
         borrowedDocumentsTableView.setItems(borrowedDocumentsList);
     }
 
+    /**
+     * Handles the event when the user clicks the 'Return Document' button.
+     * Updates the return date for the selected document and removes it from the borrowed documents list.
+     *
+     * @param event The MouseEvent triggered by clicking the 'Return Document' button.
+     * @throws SQLException If a database error occurs while updating the return date.
+     */
     @FXML
     void returnDocumentButtonOnClick(MouseEvent event) throws SQLException {
         if (borrowedDocumentsTableView.getSelectionModel().getSelectedItem() == null) {
@@ -98,9 +123,15 @@ public class BorrowedDocumentsController implements Initializable {
         }
     }
 
+    /**
+     * Initializes the controller by setting up the table columns and populating the list of borrowed documents.
+     * The borrowed documents list is fetched using the {@code AddBorrowDocumentService}.
+     *
+     * @param url The location used to resolve relative paths for the root object, or {@code null} if the location is not available.
+     * @param resourceBundle The resources used to localize the root object, or {@code null} if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         idColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getId()));
         titleColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getTitle()));
         authorColumnBorrowedDocuments.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDocument().getAuthor()));
@@ -112,7 +143,5 @@ public class BorrowedDocumentsController implements Initializable {
         borrowedDocumentsList = FXCollections.observableArrayList();
         borrowedDocumentsList = AddBorrowDocumentService.addBorrowDocument();
         borrowedDocumentsTableView.setItems(borrowedDocumentsList);
-
     }
-
 }

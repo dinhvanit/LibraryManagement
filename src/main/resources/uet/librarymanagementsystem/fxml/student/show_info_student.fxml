@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="670.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.ShowInfoStudentController">
+<AnchorPane prefHeight="670.0" prefWidth="835.0" stylesheets="@../../cssDesign/studentPage.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.student.ShowInfoStudentController">
    <children>
       <HBox prefHeight="670.4" prefWidth="836.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,31 +18,31 @@
                         <Label alignment="CENTER" prefHeight="340.0" prefWidth="410.0" styleClass="label-small" stylesheets="@../../cssDesign/studentPage.css" text="THÔNG TIN HỌC SINH" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form">
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form" stylesheets="@../../cssDesign/studentPage.css">
                      <children>
                         <Label alignment="CENTER" prefHeight="118.0" prefWidth="113.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="ID" />
                         <Label fx:id="idStudentLabel" alignment="CENTER" prefHeight="117.0" prefWidth="254.0" stylesheets="@../../cssDesign/studentPage.css" text="no information" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form" stylesheets="@../../cssDesign/studentPage.css">
                      <children>
                         <Label alignment="CENTER" prefHeight="122.0" prefWidth="106.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="NAME" />
                         <Label fx:id="nameStudentLabel" alignment="CENTER" prefHeight="123.0" prefWidth="260.0" stylesheets="@../../cssDesign/studentPage.css" text="no information" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form" stylesheets="@../../cssDesign/studentPage.css">
                      <children>
                         <Label alignment="CENTER" prefHeight="122.0" prefWidth="113.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="PHONE NUMBER" textAlignment="CENTER" wrapText="true" />
                         <Label fx:id="phoneStudentLabel" alignment="CENTER" prefHeight="124.0" prefWidth="256.0" stylesheets="@../../cssDesign/studentPage.css" text="no information" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0">
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form" stylesheets="@../../cssDesign/studentPage.css">
                      <children>
                         <Label alignment="CENTER" prefHeight="134.0" prefWidth="106.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="DATE BIRTH" wrapText="true" />
                         <Label fx:id="datebirthStudentLabel" alignment="CENTER" prefHeight="141.0" prefWidth="260.0" stylesheets="@../../cssDesign/studentPage.css" text="no information" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form">
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="310.0" styleClass="card-form" stylesheets="@../../cssDesign/studentPage.css">
                      <children>
                         <Label alignment="CENTER" prefHeight="117.0" prefWidth="106.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="EMAIIL" />
                         <Label fx:id="emailStudentLabel" alignment="CENTER" prefHeight="138.0" prefWidth="260.0" stylesheets="@../../cssDesign/studentPage.css" text="no information" />
@@ -54,7 +54,7 @@
              <!-- Bên phải: Biểu đồ -->
              <VBox alignment="TOP_CENTER" prefHeight="670.0" prefWidth="648.0" spacing="20" style="-fx-padding: 20;" HBox.hgrow="ALWAYS">
                  <children>
-                     <PieChart fx:id="pieChart" labelLineLength="10.0" labelsVisible="false" legendSide="LEFT" prefHeight="400.0" prefWidth="350.0" startAngle="90.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" title="BORROWED BOOK">
+                     <PieChart fx:id="pieChart" labelLineLength="10.0" labelsVisible="false" legendSide="LEFT" prefHeight="400.0" prefWidth="350.0" startAngle="90.0" stylesheets="@../../cssDesign/studentPage.css" title="BORROWED BOOK">
                      <opaqueInsets>
                         <Insets left="10.0" />
                      </opaqueInsets></PieChart>
@@ -63,25 +63,25 @@
                      </HBox>
                   <VBox prefHeight="172.0" prefWidth="406.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0">
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0" styleClass="text-field" stylesheets="@../../cssDesign/studentPage.css">
                            <children>
                               <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Total Borrowed Documents" />
                               <Label fx:id="totalBorrowedDocumentsLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0">
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="406.0" styleClass="text-field" stylesheets="@../../cssDesign/studentPage.css">
                            <children>
                               <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Returned Documents" />
                               <Label fx:id="returnedDocumentsLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0">
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0" styleClass="text-field" stylesheets="@../../cssDesign/studentPage.css">
                            <children>
                               <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Borrowed Documents (Within Due Date)" />
                               <Label fx:id="borrowedWithinDueLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0">
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="406.0" styleClass="text-field" stylesheets="@../../cssDesign/studentPage.css">
                            <children>
                               <Label alignment="CENTER" prefHeight="118.0" prefWidth="450.0" styleClass="label-info" stylesheets="@../../cssDesign/studentPage.css" text="Borrowed Documents (Overdue)" />
                               <Label fx:id="borrowedOverdueLabel" alignment="CENTER" prefHeight="117.0" prefWidth="200.0" />

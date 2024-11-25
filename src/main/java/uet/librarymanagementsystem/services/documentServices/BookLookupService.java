@@ -19,7 +19,10 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class BookLookupService {
-    private static final String API_KEY = "AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc";
+    //private static final String API_KEY = "AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc";
+    private static final String API_KEY = "AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8";
+    //private static final String API_KEY = "AIzaSyAIjS9fiavDgdjrYG9ePatAs8tOOE3VK5Y"
+
     // key du phong
     // key1: AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8
     // key2: AIzaSyAIjS9fiavDgdjrYG9ePatAs8tOOE3VK5Y

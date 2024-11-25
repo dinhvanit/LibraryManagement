@@ -97,7 +97,7 @@
 
 /* Buttons */
 .button {
-    -fx-background: linear-gradient(to right, #f9fbe3, #f5f0d6);
+    -fx-background-color: linear-gradient(to right, #f9fbe3, #f5f0d6);
     -fx-text-fill: #333;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -108,14 +108,14 @@
 }
 
 .button:hover {
-    -fx-background: linear-gradient(to right, #f7fad2, #f0ebd0);
+    -fx-background-color: linear-gradient(to right, #f7fad2, #f0ebd0);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0.5, 0, 0);
 }
 
 .button:pressed {
-    -fx-background: linear-gradient(to right, #d9f2c3, #e7dcb8);
+    -fx-background-corlor: linear-gradient(to right, #d9f2c3, #e7dcb8);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.3, 0, 0);
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
@@ -218,6 +218,8 @@
     -fx-background-radius: 10px;
     -fx-alignment: center; /* Canh giữa các mục */
     -fx-wrap-text: true; /* Đảm bảo các mục sẽ xuống dòng nếu quá dài */
+    -fx-hgap: 10px; /* Khoảng cách ngang giữa các phần tử */
+    -fx-vgap: 10px; /* Khoảng cách dọc giữa các phần tử */
 }
 
 /* ScrollPane Styles */

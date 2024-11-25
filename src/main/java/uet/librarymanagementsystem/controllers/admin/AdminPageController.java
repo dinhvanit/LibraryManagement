@@ -11,7 +11,6 @@ import uet.librarymanagementsystem.entity.transactions.Transaction;
 import uet.librarymanagementsystem.services.EmailServices.CheckOverDateTrans;
 import uet.librarymanagementsystem.util.WindowUtil;
 
-import javax.swing.text.html.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,7 +20,7 @@ public class AdminPageController implements Initializable {
     private BorderPane borderPaneAdminPage; // The main layout container for the admin page.
 
     @FXML
-    private AnchorPane notionArchorPaneImage; // AnchorPane to display notifications for overdue transactions.
+    private AnchorPane notionAnchorPaneImage; // AnchorPane to display notifications for overdue transactions.
 
     /**
      * Loads the Add Student page into the center pane.
@@ -124,10 +123,10 @@ public class AdminPageController implements Initializable {
         ObservableList<Transaction> overDateTransactionsList = checkOverDateTrans.getOverdueTransactions();
         if (overDateTransactionsList.isEmpty()) {
             System.out.println("No overdue transactions.");
-            notionArchorPaneImage.setVisible(false);
+            notionAnchorPaneImage.setVisible(false);
         } else {
             System.out.println("There are overdue transactions.");
-            notionArchorPaneImage.setVisible(true);
+            notionAnchorPaneImage.setVisible(true);
         }
         WindowUtil.loadCenterPane(Page.HOME_ADMIN_PAGE, borderPaneAdminPage);
     }

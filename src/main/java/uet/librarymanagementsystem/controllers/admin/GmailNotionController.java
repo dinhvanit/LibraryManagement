@@ -19,12 +19,10 @@ import uet.librarymanagementsystem.entity.users.Student;
 import uet.librarymanagementsystem.services.EmailServices.CheckOverDateTrans;
 import uet.librarymanagementsystem.services.EmailServices.SendWarningEmail;
 import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
-import uet.librarymanagementsystem.services.transactionServices.SearchTransactionService;
 import uet.librarymanagementsystem.util.WindowUtil;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;

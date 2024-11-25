@@ -207,7 +207,7 @@
                                  <children>
                                     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <BarChart fx:id="barChartTopCategories" stylesheets="@../../cssDesign/adminPage.css">
+                                          <BarChart fx:id="barChartTopCategories">
                                             <xAxis>
                                               <CategoryAxis fx:id="nameOfCategoryX" side="BOTTOM" />
                                             </xAxis>
@@ -223,7 +223,7 @@
                                  <children>
                                     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <LineChart fx:id="lineChartStatusBorrowing" stylesheets="@../../cssDesign/adminPage.css">
+                                          <LineChart fx:id="lineChartStatusBorrowing">
                                             <xAxis>
                                               <CategoryAxis fx:id="timeX" side="BOTTOM" />
                                             </xAxis>

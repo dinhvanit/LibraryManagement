@@ -12,7 +12,6 @@ import uet.librarymanagementsystem.services.shareDataServers.ShareDataService;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class QRCodeController implements Initializable {
@@ -26,31 +25,40 @@ public class QRCodeController implements Initializable {
     @FXML
     private ImageView qrCodeImage;
 
+    /**
+     * Initializes the QR code page by fetching the latest transaction,
+     * generating a new QR code, and displaying it along with the
+     * transaction details such as transaction ID and student name.
+     *
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            // Lấy lại thông tin giao dịch mới nhất
+            // Retrieve the latest transaction information
             Transaction transaction = ShareDataService.getTransactionShare();
 
-            // Tạo lại QR Code mới
+            // Generate a new QR code for the transaction
             QRCodeGeneratorService.generateQRCode(transaction);
 
-            // Kiểm tra sự tồn tại của file QR code
+            // Check if the QR code file exists
             File qrCodeFile = new File(ImagesOfLibrary.QRCODEWIRTE.getPath());
             if (qrCodeFile.exists()) {
-                // Đọc ảnh QR code từ file và hiển thị
+                // Read the QR code image from the file and display it
                 Image image = new Image("file:" + qrCodeFile.getAbsolutePath());
                 qrCodeImage.setImage(image);
             } else {
+                // Log message if QR code file is not found
                 System.out.println("QR Code file not found.");
             }
 
-            // Cập nhật lại thông tin giao dịch trong giao diện người dùng
+            // Update the UI with transaction details
             idTransactionLabel.setText(transaction.getId());
             nameStudentLabel.setText(transaction.getStudent().getName());
         } catch (Exception e) {
+            // Print any exception stack trace for debugging purposes
             e.printStackTrace();
         }
     }
-
 }

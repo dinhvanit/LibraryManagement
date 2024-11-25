@@ -152,6 +152,11 @@ public class GetInfoDocumentController implements Initializable {
         viewYourReviewButton.setVisible(isVisible);
     }
 
+    /**
+     * Updates the rating stars based on the given rating value.
+     *
+     * @param rating The rating value to update the stars with.
+     */
     private void updateStars(double rating) {
         updateStar(starImage1, 1, rating);
         updateStar(starImage2, 2, rating);
@@ -160,6 +165,13 @@ public class GetInfoDocumentController implements Initializable {
         updateStar(starImage5, 5, rating);
     }
 
+    /**
+     * Updates a single star image based on the current rating and star count.
+     *
+     * @param star   The ImageView representing the star.
+     * @param count  The current star count (1 to 5).
+     * @param rating The rating value to determine which star image to show.
+     */
     private void updateStar(ImageView star, int count, double rating) {
         if (rating >= count) {
             star.setImage(fullStar);
@@ -170,6 +182,12 @@ public class GetInfoDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Updates the rating progress bars based on the counts of each rating.
+     *
+     * @param ratingCounts An array of rating counts for each star level (1-5).
+     * @param totalRatings The total number of ratings.
+     */
     private void updateRatingBar(int[] ratingCounts, int totalRatings) {
         progressBar5.setProgress((double) ratingCounts[5] / totalRatings);  // 5 sao
         progressBar4.setProgress((double) ratingCounts[4] / totalRatings);  // 4 sao
@@ -178,6 +196,11 @@ public class GetInfoDocumentController implements Initializable {
         progressBar1.setProgress((double) ratingCounts[1] / totalRatings);  // 1 sao
     }
 
+    /**
+     * Sets the document's field labels (ID, title, author, etc.) using the book's ISBN.
+     *
+     * @param book The book object containing the ISBN and other details.
+     */
     private void setFieldLabelByISBN(Book book) {
         BookLookupService bookLookupService = new BookLookupService(book.getIsbn());
         if (bookLookupService.checkBookInfoByISBN()) {
@@ -214,6 +237,11 @@ public class GetInfoDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Sets the document's field labels (ID, title, author, etc.) when the document doesn't have an ISBN.
+     *
+     * @param document The document object to populate the fields.
+     */
     private void setFieldLabelNotByISBN(Document document) {
         idLabel.setText(document.getId());
         titleLabel.setText(document.getTitle());
@@ -252,18 +280,36 @@ public class GetInfoDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Handles the click event for writing a rating and review for the document.
+     * This method opens a secondary window where the user can write their rating and review.
+     *
+     * @param event The mouse event triggered when the user clicks the "Write rating and review" button.
+     */
     @FXML
     void writeRatingAndReviewClick(MouseEvent event) {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         WindowUtil.showSecondaryWindow(Page.SHOW_WRITE_RATING_AND_REVIEW, "Write rating and review", currentStage);
     }
 
+    /**
+     * Handles the click event for viewing the user's previously written review for the document.
+     * This method opens a secondary window where the user can view their review.
+     *
+     * @param event The mouse event triggered when the user clicks the "View your review" button.
+     */
     @FXML
     void viewYourReviewClick(MouseEvent event) {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         WindowUtil.showSecondaryWindow(Page.SHOW_VIEW_YOUR_REVIEW, "View your review", currentStage);
     }
 
+    /**
+     * Initializes the controller and sets up all the required images, document data, and ratings.
+     *
+     * @param url            The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the controller, or null if no localization is required.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fullStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uet/librarymanagementsystem/image/Star_full.png")));

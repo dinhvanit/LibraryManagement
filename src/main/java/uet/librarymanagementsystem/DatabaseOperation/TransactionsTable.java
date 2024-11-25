@@ -13,6 +13,11 @@ import java.time.LocalDate;
 import static uet.librarymanagementsystem.DatabaseOperation.DatabaseManager.connect;
 import javafx.collections.ObservableList;
 
+/**
+ * Class to handle all operations related to the Transaction table in the database.
+ * Provides methods to create the transaction table, insert transactions, update return dates,
+ * and search transactions based on various criteria.
+ */
 public class TransactionsTable {
     public static void createTransactionTable() throws SQLException {
         Connection conn = connect();
@@ -58,7 +63,12 @@ public class TransactionsTable {
         }
     }
 
-
+    /**
+     * Inserts a new transaction record into the TransactionDocument table.
+     *
+     * @param transaction the transaction object containing details to be inserted.
+     * @throws SQLException if any SQL error occurs during the insertion.
+     */
     public static void insertTransaction(Transaction transaction) throws SQLException {
         Connection conn = connect();
 
@@ -119,6 +129,14 @@ public class TransactionsTable {
         }
     }
 
+    /**
+     * Updates the return date of a transaction based on the transaction ID.
+     * Only updates if the return date is not already set.
+     *
+     * @param transactionId the ID of the transaction to update.
+     * @param returnDate    the return date to set.
+     * @throws SQLException if any SQL error occurs during the update.
+     */
     public static void updateReturnDate(String transactionId, String returnDate) throws SQLException {
         Connection conn = connect();
 
@@ -154,6 +172,17 @@ public class TransactionsTable {
         }
     }
 
+
+    /**
+     * Updates the rating, review, and review date for a transaction.
+     * The update is only made if rating, review, and review date are not already set.
+     *
+     * @param transactionId the ID of the transaction to update.
+     * @param rating        the rating to set.
+     * @param review        the review text to set.
+     * @param dateReview    the date of the review.
+     * @throws SQLException if any SQL error occurs during the update.
+     */
     public static void updateRatingReviewDateReview(String transactionId, String rating, String review, String dateReview) throws SQLException {
         Connection conn = connect();
 
@@ -191,6 +220,12 @@ public class TransactionsTable {
     }
 
 
+    /**
+     * Searches for transactions based on the student ID.
+     *
+     * @param id_student the student ID to search by.
+     * @return an ObservableList of transactions associated with the student.
+     */
     public static ObservableList<Transaction> searchTransByStudent_id(String id_student) {
         String query = "SELECT * FROM TransactionDocument WHERE id_student = ?";
         ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
@@ -267,6 +302,17 @@ public class TransactionsTable {
         return transactionList;
     }
 
+    /**
+     * Searches for transactions based on various fields, such as student ID, document ID, borrow date, etc.
+     *
+     * @param idStudent   the student ID to search by (optional).
+     * @param idDocument  the document ID to search by (optional).
+     * @param returned    the return status of the transaction (optional).
+     * @param dueDate     the due date of the transaction (optional).
+     * @param starRating  the rating of the transaction (optional).
+     * @param reviewed    whether the transaction has been reviewed (optional).
+     * @return an ObservableList of transactions that match the search criteria.
+     */
     public static ObservableList<Transaction> searchTransByField(
             String idStudent, String idDocument, boolean careAboutReturning, boolean returned,
             boolean dueDate, String starRating, boolean reviewed) {

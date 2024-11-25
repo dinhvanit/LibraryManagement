@@ -9,28 +9,40 @@ import uet.librarymanagementsystem.util.WindowUtil;
 
 public class LMSApplication extends Application {
 
+    /**
+     * Main method to launch the JavaFX application.
+     * Registers a shutdown hook to ensure the TaskService is properly shut down when the application exits.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
-        // Đăng ký hook để đảm bảo TaskService được tắt khi ứng dụng thoát
+        // Register a shutdown hook to ensure TaskService is shut down when the application exits
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutting down TaskService...");
-            TaskService.getInstance().shutdown(); // Đóng TaskService qua Singleton
+            TaskService.getInstance().shutdown(); // Shut down TaskService via Singleton
         }));
 
-        // Khởi chạy JavaFX Application
+        // Launch the JavaFX application
         launch(args);
     }
 
+    /**
+     * This method is called when the JavaFX application is started.
+     * It sets up the primary stage, runs background tasks, and loads the initial page.
+     *
+     * @param primaryStage the main window (stage) of the application
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Cấu hình cửa sổ chính
+            // Configure the main window
             WindowUtil.setStage(primaryStage);
 
-            // Chạy một tác vụ nền để thực hiện các thiết lập ban đầu
+            // Run a background task to perform initial setup
             TaskService.getInstance().runTask(() -> {
                 System.out.println("Performing initial setup task in background...");
                 try {
-                    Thread.sleep(2000); // Mô phỏng thời gian thiết lập
+                    Thread.sleep(2000); // Simulate setup time
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     System.err.println("Setup task interrupted: " + e.getMessage());
@@ -38,16 +50,16 @@ public class LMSApplication extends Application {
                 System.out.println("Setup completed!");
             });
 
-            // Load trang khởi đầu
+            // Load the initial login page
             WindowUtil.setPage(Page.LOGIN, "Library Management System");
 
-            // Hiển thị cửa sổ chính
+            // Display the main window
             primaryStage.show();
 
-            // Đăng ký hành động thoát ứng dụng
+            // Register the exit action for the application
             primaryStage.setOnCloseRequest(event -> {
                 System.out.println("Application is closing...");
-                Platform.exit(); // Dừng ứng dụng JavaFX
+                Platform.exit(); // Exit the JavaFX application
             });
 
         } catch (Exception e) {
@@ -56,8 +68,12 @@ public class LMSApplication extends Application {
         }
     }
 
-    // Phương thức truy xuất TaskService toàn cục
+    /**
+     * Provides access to the global TaskService instance.
+     *
+     * @return the TaskService instance
+     */
     public static TaskService getTaskService() {
-        return TaskService.getInstance(); // Truy xuất từ Singleton
+        return TaskService.getInstance(); // Access via Singleton
     }
 }

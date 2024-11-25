@@ -256,7 +256,7 @@
                                     <Image url="@../../image/gmailImage.png" />
                                  </image>
                               </ImageView>
-                              <AnchorPane fx:id="notionArchorPaneImage" layoutX="38.400001525878906" layoutY="-4.0" visible="false" AnchorPane.bottomAnchor="27.92727203369141" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-4.0">
+                              <AnchorPane fx:id="notionAnchorPaneImage" layoutX="38.400001525878906" layoutY="-4.0" visible="false" AnchorPane.bottomAnchor="27.92727203369141" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-4.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
