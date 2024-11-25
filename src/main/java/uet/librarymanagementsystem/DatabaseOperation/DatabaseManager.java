@@ -20,7 +20,7 @@ public class DatabaseManager {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
+            //System.out.println("QLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

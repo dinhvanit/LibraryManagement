@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
 public class ValidationLabelUtil {
 
     /**
-     * Kiểm tra xem trường nhập liệu có trống không, nếu trống sẽ trả về thông báo lỗi
-     * @param field: Trường cần kiểm tra
-     * @param errorMessage: Thông báo lỗi khi trường trống
-     * @return Thông báo lỗi nếu có, trả về chuỗi rỗng nếu không có lỗi
+     * Checks if the input field is empty. If it is empty, returns the error message.
+     * @param field: The field to check
+     * @param errorMessage: The error message to return if the field is empty
+     * @return Error message if the field is empty, otherwise returns an empty string
      */
     public String validateEmptyField(String field, String errorMessage) {
         if (field == null || field.trim().isEmpty()) {
@@ -21,38 +20,36 @@ public class ValidationLabelUtil {
     }
 
     /**
-     * Kiểm tra định dạng email hợp lệ
-     * @param field: Trường email cần kiểm tra
-     * @return Thông báo lỗi nếu có, trả về chuỗi rỗng nếu không có lỗi
+     * Validates the email format.
+     * @param field: The email field to check
+     * @return Error message if the email is not valid, otherwise returns an empty string
      */
     public String validateEmailFormat(String field) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com)$";;
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(gmail\\.com)$";
         if (!field.matches(emailRegex)) {
-            return "Email cần có đuôi @gmail.com";
+            return "Email must have the domain @gmail.com";
         }
         return "";
     }
 
-    // Kiểm tra định dạng số điện thoại
+    /**
+     * Validates the phone number format.
+     * @param field: The phone number field to check
+     * @return Error message if the phone number is not valid, otherwise returns an empty string
+     */
     public String validatePhoneNumberFormat(String field) {
         String phoneRegex = "^([0-9]{10})$";
         if (!field.matches(phoneRegex)) {
-            return "Số điện thoại phải gồm 10 chữ số";
+            return "Phone number must consist of 10 digits";
         }
         return "";
     }
 
-    /*// Kiểm tra định dạng ngày sinh
-    public static void validateBirthdayFormat(String dateText, Label label) {
-        String birthdayRegex = "^(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$";
-        label.setText(dateText.matches(birthdayRegex) ? "" : "Cần định dạng đúng kiểu dd/mm/yyyy");
-    }*/
-
     /**
-     * Kiểm tra trường thông tin là một số hợp lệ
-     * @param field: Trường số cần kiểm tra
-     * @param errorMessage: Thông báo lỗi khi không phải là số hợp lệ
-     * @return Thông báo lỗi nếu có, trả về chuỗi rỗng nếu không có lỗi
+     * Validates if the field contains a valid number.
+     * @param field: The number field to check
+     * @param errorMessage: The error message to return if the field is not a valid number
+     * @return Error message if the field is not a valid number, otherwise returns an empty string
      */
     public String validateNumericField(String field, String errorMessage) {
         try {
@@ -64,47 +61,57 @@ public class ValidationLabelUtil {
     }
 
     /**
-     * Kiểm tra định dạng ngày tháng hợp lệ (dd/MM/yyyy)
-     * @param field: Trường ngày tháng cần kiểm tra
-     * @return Thông báo lỗi nếu có, trả về chuỗi rỗng nếu không có lỗi
+     * Validates the date format (dd/MM/yyyy).
+     * @param field: The date field to check
+     * @return Error message if the date is not valid, otherwise returns an empty string
      */
     public String validateDateFormat(String field) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate date = LocalDate.parse(field.trim(), formatter);
         } catch (DateTimeParseException e) {
-            return "Định dạng ngày tháng không hợp lệ (dd/MM/yyyy)";
+            return "Date format is invalid. It should be in dd/MM/yyyy format.";
         }
         return "";
     }
 
+    /**
+     * Validates the password format.
+     * @param field: The password field to check
+     * @return Error message if the password is not valid, otherwise returns an empty string
+     */
     public String validatePasswordFormat(String field) {
         if (field.length() < 6) {
-            return "Mật khẩu phải có ít nhất 6 ký tự";
+            return "Password must be at least 6 characters long";
         }
         if (!field.matches(".*[A-Z].*")) {
-            return "Mật khẩu cần ít nhất một ký tự viết hoa";
+            return "Password must contain at least one uppercase letter";
         }
         if (!field.matches(".*\\d.*")) {
-            return "Mật khẩu cần ít nhất một chữ số";
+            return "Password must contain at least one digit";
         }
         if (!field.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
-            return "Mật khẩu cần ít nhất một ký tự đặc biệt (!@#$%^&*)";
+            return "Password must contain at least one special character (!@#$%^&*)";
         }
         return "";
     }
 
-    // Cập nhật phương thức validateField để hỗ trợ kiểm tra ngày tháng
+    /**
+     * Validates the input field based on the specified validation type.
+     * @param field: The field to validate
+     * @param validationType: The type of validation to perform
+     * @return Error message based on the validation type, otherwise returns an empty string
+     */
     public String validateField(String field, ValidationType validationType) {
         switch (validationType) {
             case EMPTY:
-                return validateEmptyField(field, "Trường này không được bỏ trống");
+                return validateEmptyField(field, "This field cannot be empty");
             case EMAIL:
                 return validateEmailFormat(field);
             case PHONE:
                 return validatePhoneNumberFormat(field);
             case NUMERIC:
-                return validateNumericField(field, "Trường này phải là số");
+                return validateNumericField(field, "This field must be a number");
             case DATE:
                 return validateDateFormat(field);
             case PASSWORD:
@@ -114,7 +121,7 @@ public class ValidationLabelUtil {
         }
     }
 
-    // Enum định nghĩa các loại kiểm tra
+    // Enum defining the types of validation
     public enum ValidationType {
         EMPTY, EMAIL, PHONE, NUMERIC, DATE, PASSWORD
     }

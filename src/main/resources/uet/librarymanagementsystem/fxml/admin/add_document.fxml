@@ -60,7 +60,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="materialValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="materialValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -86,7 +86,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="categoryValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="categoryValidLabel" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -112,7 +112,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="titleValidLabel" layoutX="140.0" layoutY="149.0" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="titleValidLabel" layoutX="140.0" layoutY="149.0" prefHeight="18.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -138,7 +138,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <Label fx:id="authorValidLabel" layoutX="10.0" layoutY="282.0" prefHeight="11.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Trường này không được bỏ trống" textFill="#ff0404">
+                        <Label fx:id="authorValidLabel" layoutX="10.0" layoutY="282.0" prefHeight="11.0" prefWidth="290.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="#ff0404">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="130.0" />
                             </VBox.margin>
@@ -195,7 +195,7 @@
                         </Button>
                             </children>
                         </HBox>
-                  <Label fx:id="isbnValidLabel" layoutX="140.0" layoutY="312.0" prefHeight="18.0" prefWidth="290.0" text="Vui lòng nhập đủ thông tin" textFill="#ff0404" visible="false">
+                  <Label fx:id="isbnValidLabel" layoutX="140.0" layoutY="312.0" prefHeight="18.0" prefWidth="290.0" text="This field cannot be empty" textFill="#ff0404" visible="false">
                      <VBox.margin>
                         <Insets bottom="10.0" left="130.0" />
                      </VBox.margin>

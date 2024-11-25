@@ -1,4 +1,4 @@
-# EnglishApp
+# Library Management System
 
 Project for OOP UET: Library Management System
 <hr>
