@@ -18,12 +18,12 @@ public class GetBooksByCategory {
         ObservableList<Document> books = FXCollections.observableArrayList();
 
         String queryPrimarySQL = """
-            SELECT id, title, author, material, category, isbn
-            FROM Document
-            WHERE material = 'BOOK' AND category = ?
-            GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
-            LIMIT 18;
-        """;
+        SELECT MIN(id) AS id, title, author, material, category, isbn
+        FROM Document
+        WHERE material = 'BOOK' AND category = ?
+        GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
+        LIMIT 18;
+    """;
 
         try (PreparedStatement stmtPrimary = con.prepareStatement(queryPrimarySQL)) {
             stmtPrimary.setString(1, category);
@@ -41,7 +41,42 @@ public class GetBooksByCategory {
             }
         }
 
+        int currentCount = books.size();
+        if (currentCount < 18) {
+            int additionalCount = 18 - currentCount;
+            String queryFallbackSQL = """
+            SELECT MIN(id) AS id, title, author, material, category, isbn
+            FROM Document
+            WHERE material = 'BOOK'
+            GROUP BY SUBSTRING(id, 1, 12), title, author, material, category, isbn
+            HAVING SUBSTRING(id, 1, 12) NOT IN (
+                SELECT DISTINCT SUBSTRING(id, 1, 12)
+                FROM Document
+                WHERE material = 'BOOK' AND category = ?
+            )
+            LIMIT ?;
+        """;
+
+            try (PreparedStatement stmtFallback = con.prepareStatement(queryFallbackSQL)) {
+                stmtFallback.setString(1, category);
+                stmtFallback.setInt(2, additionalCount);
+                ResultSet rsFallback = stmtFallback.executeQuery();
+
+                while (rsFallback.next()) {
+                    books.add(DocumentFactory.createDocument(
+                            rsFallback.getString("id"),
+                            rsFallback.getString("title"),
+                            rsFallback.getString("author"),
+                            rsFallback.getString("material"),
+                            rsFallback.getString("category"),
+                            rsFallback.getString("isbn")
+                    ));
+                }
+            }
+        }
+
         con.close();
         return books;
     }
+
 }

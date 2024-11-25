@@ -22,10 +22,13 @@ public class CheckOverDateTrans {
 
     public ObservableList<Transaction> getOverdueTransactions() {
         ObservableList<Transaction> overdueTransactions = FXCollections.observableArrayList();
+
+        // Truy vấn SQLite sử dụng strftime để định dạng ngày hiện tại
         String query = """
-            SELECT * FROM TransactionDocument
-            WHERE return_date IS NULL
-            """;
+        SELECT * 
+        FROM TransactionDocument
+        WHERE return_date IS NULL AND due_date < strftime('%Y/%m/%d', 'now')
+    """;
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -61,6 +64,8 @@ public class CheckOverDateTrans {
 
         return overdueTransactions;
     }
+
+
 
 
     public void closeConnection() {
