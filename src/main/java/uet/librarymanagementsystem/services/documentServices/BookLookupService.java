@@ -20,6 +20,10 @@ import java.util.HashMap;
 
 public class BookLookupService {
     private static final String API_KEY = "AIzaSyAQoo72W_7jjfm95oTukuLCa4Y8SqRrNGc";
+    // key du phong
+    // key1: AIzaSyB3XjZWZfnQbDdZ1f4HOtnfoebe0HQ-JD8
+    // key2: AIzaSyAIjS9fiavDgdjrYG9ePatAs8tOOE3VK5Y
+    // key3: AIzaSyC4zneS0O_o98El3X90MkDfmL_x0uvKm9U
     private static final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
     // Cache để lưu trữ thông tin sách đã tìm kiếm
