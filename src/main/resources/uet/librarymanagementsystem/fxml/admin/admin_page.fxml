@@ -18,7 +18,7 @@
       <HBox prefHeight="70.0" prefWidth="1200.0" styleClass="card-form" stylesheets="@../../cssDesign/adminPage.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="72.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" />
-            <Label prefHeight="78.0" prefWidth="394.0" styleClass="label-title" stylesheets="@../../cssDesign/adminPage.css" text="Library Management System" HBox.hgrow="ALWAYS">
+            <Label prefHeight="72.0" prefWidth="586.0" styleClass="label-title" stylesheets="@../../cssDesign/adminPage.css" text="Library Management System" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="30.0" />
                </font>

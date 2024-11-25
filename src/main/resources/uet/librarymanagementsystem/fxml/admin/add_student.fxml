@@ -58,7 +58,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="idValidLabel" prefHeight="18.0" prefWidth="329.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="idValidLabel" prefHeight="18.0" prefWidth="329.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -90,7 +90,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="nameValidLabel" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="nameValidLabel" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -122,7 +122,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="birthValidLabel" prefHeight="28.0" prefWidth="306.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="birthValidLabel" prefHeight="28.0" prefWidth="306.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -154,7 +154,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="phoneValidLabel" prefHeight="28.0" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="phoneValidLabel" prefHeight="28.0" prefWidth="297.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
@@ -186,7 +186,7 @@
                                 </HBox>
                             </children>
                         </HBox>
-                  <Label fx:id="emailValidLabel" prefHeight="28.0" prefWidth="303.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="Vui lòng nhập đầy đủ thông tin" textFill="RED">
+                  <Label fx:id="emailValidLabel" prefHeight="28.0" prefWidth="303.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="This field cannot be empty" textFill="RED">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>

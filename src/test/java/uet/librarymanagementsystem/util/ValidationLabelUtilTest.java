@@ -1,8 +1,6 @@
 package uet.librarymanagementsystem.util;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationLabelUtilTest {
@@ -10,84 +8,81 @@ class ValidationLabelUtilTest {
 
     @Test
     void testValidateEmptyField() {
-        // Kiểm tra trường hợp trống
-        assertEquals("Trường này không được bỏ trống", validator.validateEmptyField("   ", "Trường này không được bỏ trống"));
+        // Test for empty field
+        assertEquals("This field cannot be empty", validator.validateEmptyField("   ", "This field cannot be empty"));
 
-        // Kiểm tra trường hợp không trống
-        assertEquals("", validator.validateEmptyField("Test", "Trường này không được bỏ trống"));
+        // Test for non-empty field
+        assertEquals("", validator.validateEmptyField("Test", "This field cannot be empty"));
 
-        // Kiểm tra trường hợp null
-        assertEquals("Trường này không được bỏ trống", validator.validateEmptyField(null, "Trường này không được bỏ trống"));
+        // Test for null field
+        assertEquals("This field cannot be empty", validator.validateEmptyField(null, "This field cannot be empty"));
     }
 
     @Test
     void testValidateEmailFormat() {
-        // Kiểm tra email hợp lệ
+        // Test for valid email
         assertEquals("", validator.validateEmailFormat("test@gmail.com"));
 
-        // Kiểm tra email không hợp lệ
-        assertEquals("Email cần có đuôi @gmail.com", validator.validateEmailFormat("user@example.com"));
+        // Test for invalid email
+        assertEquals("Email must have the domain @gmail.com", validator.validateEmailFormat("user@example.com"));
     }
 
     @Test
     void testValidatePhoneNumberFormat() {
-        // Kiểm tra số điện thoại hợp lệ
+        // Test for valid phone number
         assertEquals("", validator.validatePhoneNumberFormat("0123456789"));
 
-        // Kiểm tra số điện thoại không hợp lệ
-        assertEquals("Số điện thoại phải gồm 10 chữ số", validator.validatePhoneNumberFormat("12345"));
-        assertEquals("Số điện thoại phải gồm 10 chữ số", validator.validatePhoneNumberFormat("abcdefghij"));
+        // Test for invalid phone number (too short, non-numeric)
+        assertEquals("Phone number must consist of 10 digits", validator.validatePhoneNumberFormat("12345"));
+        assertEquals("Phone number must consist of 10 digits", validator.validatePhoneNumberFormat("abcdefghij"));
     }
 
     @Test
     void testValidateNumericField() {
-        // Kiểm tra số hợp lệ
-        assertEquals("", validator.validateNumericField("123", "Trường này phải là số"));
+        // Test for valid numeric field
+        assertEquals("", validator.validateNumericField("123", "This field must be a number"));
 
-        // Kiểm tra không phải số
-        assertEquals("Trường này phải là số", validator.validateNumericField("abc", "Trường này phải là số"));
-        assertEquals("Trường này phải là số", validator.validateNumericField("12.3", "Trường này phải là số"));
+        // Test for invalid numeric field (non-numeric input)
+        assertEquals("This field must be a number", validator.validateNumericField("abc", "This field must be a number"));
+        assertEquals("This field must be a number", validator.validateNumericField("12.3", "This field must be a number"));
     }
 
     @Test
     void testValidateDateFormat() {
-        // Kiểm tra định dạng ngày hợp lệ
+        // Test for valid date format
         assertEquals("", validator.validateDateFormat("12/05/2024"));
 
-        // Kiểm tra định dạng ngày không hợp lệ
-        assertEquals("Định dạng ngày tháng không hợp lệ (dd/MM/yyyy)", validator.validateDateFormat("2024/05/12"));
-        assertEquals("Định dạng ngày tháng không hợp lệ (dd/MM/yyyy)", validator.validateDateFormat("32/13/2024"));
+        // Test for invalid date format (wrong delimiter, invalid date)
+        assertEquals("Date format is invalid. It should be in dd/MM/yyyy format.", validator.validateDateFormat("2024/05/12"));
+        assertEquals("Date format is invalid. It should be in dd/MM/yyyy format.", validator.validateDateFormat("32/13/2024"));
     }
 
     @Test
     void testValidateField() {
-        // Kiểm tra các loại kiểm tra
-        assertEquals("Trường này không được bỏ trống", validator.validateField("   ", ValidationLabelUtil.ValidationType.EMPTY));
+        // Test for various validation types
+        assertEquals("This field cannot be empty", validator.validateField("   ", ValidationLabelUtil.ValidationType.EMPTY));
         assertEquals("", validator.validateField("test@gmail.com", ValidationLabelUtil.ValidationType.EMAIL));
-        assertEquals("Số điện thoại phải gồm 10 chữ số", validator.validateField("12345", ValidationLabelUtil.ValidationType.PHONE));
+        assertEquals("Phone number must consist of 10 digits", validator.validateField("12345", ValidationLabelUtil.ValidationType.PHONE));
         assertEquals("", validator.validateField("123", ValidationLabelUtil.ValidationType.NUMERIC));
-        assertEquals("Định dạng ngày tháng không hợp lệ (dd/MM/yyyy)", validator.validateField("2024/05/12", ValidationLabelUtil.ValidationType.DATE));
+        assertEquals("Date format is invalid. It should be in dd/MM/yyyy format.", validator.validateField("2024/05/12", ValidationLabelUtil.ValidationType.DATE));
     }
 
-    // Thêm test kiểm tra mật khẩu mạnh
     @Test
     void testValidatePasswordFormat() {
-        // mật khẩu hợp lệ
+        // Test for valid password
         assertEquals("", validator.validatePasswordFormat("vanDinh1@"));
         assertEquals("", validator.validatePasswordFormat("Dinhvan123!"));
 
-        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu chữ hoa
-        assertEquals("Mật khẩu cần ít nhất một ký tự viết hoa", validator.validatePasswordFormat("dinhvan1@"));
+        // Test for password without uppercase letter
+        assertEquals("Password must contain at least one uppercase letter", validator.validatePasswordFormat("dinhvan1@"));
 
-        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu số
-        assertEquals("Mật khẩu cần ít nhất một chữ số", validator.validatePasswordFormat("DinhVan@"));
+        // Test for password without number
+        assertEquals("Password must contain at least one digit", validator.validatePasswordFormat("DinhVan@"));
 
-        // Kiểm tra mật khẩu dài hơn 6 ký tự nhưng thiếu ký tự đặc biệt
-        assertEquals("Mật khẩu cần ít nhất một ký tự đặc biệt (!@#$%^&*)", validator.validatePasswordFormat("DinhVan123"));
+        // Test for password without special character
+        assertEquals("Password must contain at least one special character (!@#$%^&*)", validator.validatePasswordFormat("DinhVan123"));
 
-        // Kiểm tra mật khẩu quá ngắn
-        assertEquals("Mật khẩu phải có ít nhất 6 ký tự", validator.validatePasswordFormat("Dv1!"));
-
-        // Có thể viết thêm test nếu thích
+        // Test for password too short
+        assertEquals("Password must be at least 6 characters long", validator.validatePasswordFormat("Dv1!"));
     }
 }
