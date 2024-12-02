@@ -32,23 +32,69 @@ Project for OOP UET: Library Management System
 
 # Chức năng
 Các tính năng mà ứng dụng sẽ hỗ trợ.
+
+2 trang đăng nhập riêng biệt :
+![](./preview/prevLogin.png)
 ## Admin
+
+![](./preview/prevHomeAdmin.png)
+
 ### Quản lý tài liệu
-- Tìm kiếm, thêm, xóa, xem thông tin tài liệu tài liệu.
+- Tìm kiếm and Delete:
+
+![](./preview/prevSearchDeleteStudent.png)
+- Thêm:
+
+![](./preview/prevAddDoc.png)
+
+- Xem thông tin: sử dụng google API
+
+![](./preview/prevInfoDoc.png)
+
 - Nhập liệu tự động bằng isbn đối với book.
+
+![](./preview/prevAddBookAPI.png)
+
 ### Quản lý sinh viên
-- Tìm kiếm, thêm, xóa, sửa (mật khẩu), xem thông tin người dùng.
+- Tìm kiếm và xóa, chỉnh sửa học sinh: 
+
+![](./preview/prevSearchDeleteStudent.png)
+
+- Thêm:
+
+![](./preview/prevAddStudent.png)
+
+- Xem thông tin người dùng:
+
+![](./preview/prevInfoStudent.png)
+
 ### Quản lý giao dịch của sinh viên
 - Tìm kiếm, xem thông tin giao dịch, xuất PDF, xuất QR code.
+
+![](./preview/prevTransAdmin.png)
+
 - Gửi gmail đến những sinh viên đã quá hạn trả sách.
+
+![](./preview/prevMailAdmin.png)
 
 ## Student
 ### Mượn, trả tài liệu
-- Gợi ý tài liệu.
-- Tìm kiếm, xem thông tin, mượn, trả tài liệu.
+- Gợi ý tài liệu.(recommend theo category và theo sách mới trong thư viện)
+
+![](./preview/prevHomeStudent.png)
+
+- Tìm kiếm, xem thông tin, mượn tài liệu:
+![](./preview/prevSearchDocStudent.png)
+
 ### Quản lý giao dịch của mình
-- Xem, xuất QR code, xuất PDF của giao dịch.
-- Đánh giá tài liệu.
+- Đang mượn:
+![](./preview/prevReadingDoc.png)
+
+- Trả tài liệu:
+![](./preview/prevTransDoc.png)
+
+- Đánh giá tài liệu:
+![](./preview/prevRating.png)
 
 # Công nghệ sử dụng
 Các kĩ thuật, công nghệ sử dụng để xây dựng ứng dụng.
@@ -59,8 +105,15 @@ Các kĩ thuật, công nghệ sử dụng để xây dựng ứng dụng.
 - Sử dụng Google Books API để lấy thông tin và điền tự động.
 ## Google Gmail API
 - Sử dụng Google Gmail API để gửi mail cho những sinh viên đã đến hạn nhưng chưa trả sách.
+## QR
+- Tạo QR cho giao dịch
 ## PDF 
 - Xuất file PDF.
 ## SQLite
 - Truy vấn và quản lí tài nguyên.
-
+# Kiến thức sử dụng
+- Sử dụng các quy tắc lập trình hướng đối tượng
+- Có cài đặt Junit Test
+- Đặt tên đúng quy tắc lập trình
+- Sử dụng đa luồng, cache để tối ưu tốc độ xử lý và trải nghiệm người dùng
+- Sử dụng Design Pattern (Factory, ...), quản lý source, package, chia các class, file dễ dàng đọc, chỉnh sửa và mở rộng

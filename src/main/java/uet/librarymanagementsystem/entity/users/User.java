@@ -71,17 +71,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
-    public String printInfo() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

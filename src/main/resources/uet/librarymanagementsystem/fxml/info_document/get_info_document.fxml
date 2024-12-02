@@ -18,7 +18,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.librarymanagementsystem.controllers.info_document.GetInfoDocumentController">
    <children>
-      <BorderPane layoutX="186.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="186.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" styleClass="border-pane" stylesheets="@../../cssDesign/studentPage.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox prefHeight="69.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>

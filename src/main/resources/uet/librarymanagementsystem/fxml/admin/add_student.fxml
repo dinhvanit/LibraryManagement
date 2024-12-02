@@ -253,7 +253,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforId" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforId" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -270,7 +270,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforName" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforName" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -286,7 +286,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforBirthday" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforBirthday" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -302,7 +302,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforPhone" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforPhone" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -318,7 +318,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforEmail" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforEmail" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -335,7 +335,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="checkInforPassword" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="chưa có thông tin gì">
+                                    <Label fx:id="checkInforPassword" alignment="TOP_LEFT" prefHeight="24.0" prefWidth="230.0" styleClass="label-alert" stylesheets="@../../cssDesign/adminPage.css" text="no information">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
